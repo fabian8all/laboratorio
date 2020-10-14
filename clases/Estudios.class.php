@@ -18,6 +18,50 @@
 
         }
 
+        public function BSTableData($data){
+            $search = (array_key_exists('search',$data))? $data['search']:"";
+            $limit = (array_key_exists('limit',$data))?$data['limit']:0;
+            $offset = (array_key_exists('offset',$data))?$data['offset']:0;
+            $sort = (array_key_exists('sort',$data))?$data['sort']:"id";
+            $order = (array_key_exists('order',$data))?$data['order']:"asc";
+
+            $andWhere = ($search != "")? "AND (nombre LIKE ('%$search%') OR codigo = '$search' )":"";
+
+
+            $sql = "SELECT * 
+                        FROM estudios 
+                        WHERE eliminado IS NULL
+                            $andWhere
+                        ORDER BY $sort $order
+                        LIMIT $limit
+                        OFFSET $offset
+                        ;";
+
+            $rows = self::query_object($sql);
+
+            $sqlCount= "SELECT count(*) as total
+                        FROM estudios 
+                        WHERE eliminado IS NULL
+                            $andWhere
+                        ;";
+
+
+            $count = self::query_single_object($sqlCount);
+
+
+            $estudios = array(
+                'rows'  => $rows,
+                'count' => $count->total
+            );
+
+            if ($count->total > 0){
+                return $estudios;
+            }else{
+                return false;
+            }
+
+        }
+
         public function get($id){
             $param = array(
                 ":eid"=>$id

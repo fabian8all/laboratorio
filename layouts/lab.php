@@ -80,14 +80,18 @@ require_once('includes/PageTemplate.php');
     </div>
 
     <?php if(isset($TPL->Modales)) { include "modales/".$TPL->Modales; } ?>
-
-    <?php if(isset($TPL->Scripts)) {
-        foreach ( $TPL->Scripts as $script ){
-            echo "<script src='$script'></script>";
-        }
-    }?>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
+    <?php if(isset($TPL->Scripts)) {
+        foreach ( $TPL->Scripts as $script ){
+            if (is_array($script)){
+                echo "<script type='".$script["type"]."' src='".$script["js"]."'></script>";
+            }else{
+                echo "<script src='$script'></script>";
+            }
+        }
+    }?>
 
 </body>
 </html>

@@ -15,6 +15,9 @@
 		case 'getAll':
 			echo json_encode($Paciente->getAll());
 			break;
+		case 'BSTableData':
+			echo json_encode($Paciente->BSTableData($info));
+			break;
 		case 'get':
 			echo json_encode($Paciente->get($info));
 			break;

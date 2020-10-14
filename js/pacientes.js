@@ -1,52 +1,63 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
     $(document).ready(function(){
-        load_pacientes_data();
+        $('#bstablePacientes').bootstrapTable({
+            queryParams: function (p) {
+                return {
+                    search          : p.search,
+                    limit           : p.limit,
+                    offset          : p.offset,
+                    sort            : p.sort,
+                    order           : p.order,
+                };
+            },
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' pacientes';
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' pacientes por página';
+            },
+            formatNoMatches: function () {
+                return 'No se encontraron pacientes registradas';
+            },
+            formatLoadingMessage: function(){
+                return 'Cargando lista de pacientes';
+            }
+        });
     });
 
-    function load_pacientes_data(){
-        $.post("routes/routePacientes.php",{info:{},action:'getAll'})
-            .done(function(data){
-                if(data != null){
-                    data = $.parseJSON(data);
-                    if (!data){
-                        $("#tablePacientes").html("<tr><td colspan='6'> -- No hay pacientes para mostrar --</td></tr>");
-                        customAlert("Error!", "No hay pacientes");
-                    }else{
-                        load_tabla_pacientes(data);
-                    }
-                } else{
-                    customAlert("Error!", ajaxError);
-                }
-            })
-            .fail(function(error){
-                customAlert("Error!", ajaxError);
-            });
+    function formatPacientesOptions(value, row, index){
+        var options = "\
+                <div class='btn-group dropup'> \
+                    <button class='btn btn-outline-warning btnPacientesEdit' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fa fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                    <button class='btn btn-outline-danger btnPacientesDel' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fa fa-trash-o fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                </div>";
+
+        return options;
     }
 
-    function load_tabla_pacientes(data) {
-        table = "";
-        $(data).each(function (key, val) {
-            table += "<tr>\
-                    <td>" + val.id + "</td>\
-                    <td>" + val.nombre + "</td>\
-                    <td>" + val.direccion + "</td>\
-                    <td>" + val.telefono + "</td>\
-                    <td>" + val.email + "</td>\
-                    <td>\
-                        <div class='form-inline'>\
-                            <button class='btn btn-outline-warning btnPacientesEdit' data-idpaciente='" + val.id + "' data-toggle='tooltip' title='Editar'>\
-                                <span class='fa fa-edit'></span>\
-                            </button>\
-                            <button class='btn btn-outline-danger btnPacientesDel' data-idpaciente='" + val.id + "' data-toggle='tooltip' title='Eliminar'>\
-                                <span class='fa fa-trash-o'></span>\
-                            </button>\
-                        </div>\
-                    </td>\
-                 </tr>";
-        });
+    function ajaxGetPacientes(params){
 
-        $("#tablePacientes").html(table);
+        $.ajax({
+            type: "POST",
+            url: "routes/routePacientes.php",
+            data: {info:params.data,action:'BSTableData'},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                params.success({
+                    "total": data.count,
+                    "rows" : data.rows
+                })
+            },
+            error: function (er) {
+                params.error(er);
+            }
+        });
     }
 
     $("#btnPacientesAdd").click(function(){

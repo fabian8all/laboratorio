@@ -18,19 +18,29 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <table class="table table-striped">
+    <div class="table-responsive">
+        <table
+                id="bstableClientes"
+                class="table table-striped"
+
+                data-ajax="ajaxGetClientes"
+                data-search="true"
+                data-side-pagination="server"
+                data-pagination="true"
+                data-page-size="5"
+                data-page-list="[5, 10, 20, 50, 100]"
+                data-row-style="clientesRowStyle"
+        >
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Perfil</th>
-                    <th>Descuento</th>
-                    <th style="width: 20%;">Opciones</th>
-                </tr>
+            <tr>
+                <th data-field="id"  data-sortable="true" data-align="left">Id</th>
+                <th data-field="nombre"  data-sortable="true" data-align="left">Nombre</th>
+                <th data-field="email" data-sortable="true">Email</th>
+                <th data-field="perfil"  data-sortable="false">Perfil</th>
+                <th data-field="descuento" data-formatter="formatClientesDescuento" data-sortable="false">Descuento</th>
+                <th data-field="id"  data-formatter="formatClientesOptions" data-align="center" data-sortable="false">Opciones</th>
+            </tr>
             </thead>
-            <tbody id="tableClientes"></tbody>
         </table>
     </div>
 </div>

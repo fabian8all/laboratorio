@@ -1,33 +1,75 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
     $(document).ready(function(){
-        load_estudios_data();
+        $('#bstableEstudios').bootstrapTable({
+            queryParams: function (p) {
+                return {
+                    search          : p.search,
+                    limit           : p.limit,
+                    offset          : p.offset,
+                    sort            : p.sort,
+                    order           : p.order,
+                };
+            },
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' estudios';
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' estudios por página';
+            },
+            formatNoMatches: function () {
+                return 'No se encontraron estudios registradas';
+            },
+            formatLoadingMessage: function(){
+                return 'Cargando lista de estudios';
+            }
+        });
     });
 
-    function load_estudios_data(){
-        $.post("routes/routeEstudios.php",{info:{},action:'getAll'})
-            .done(function(data){
-                if(data != null){
-                    data = $.parseJSON(data);
-                    if (!data){
-                        $("#tableEstudios").html("<tr><td colspan='5'> -- No hay estudios para mostrar --</td></tr>");
-                        customAlert("Error!", "No hay estudios");
-                    }else{
-                        load_tabla_estudios(data);
-                    }
-                } else{
-                    customAlert("Error!", ajaxError);
-                }
-            })
-            .fail(function(error){
-                customAlert("Error!", ajaxError);
-            });
+    function formatEstudiosOptions(value, row, index){
+        var options = "\
+            <div class='btn-group dropup'> \
+                <button class='btn btn-outline-warning btnEstudiosEdit' data-idestudio='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fa fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-outline-danger btnEstudiosDel' data-idestudio='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fa fa-trash-o fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+            </div>";
+
+        return options;
     }
 
-    function load_tabla_estudios(data) {
-        table = "";
-        $(data).each(function (key, val) {
-            table += "<tr>\
+    function formatEstudiosPrecio(value, row, index){
+        var formatted = "$"+parseFloat(value).toFixed(2);
+
+        return formatted;
+    }
+
+    function ajaxGetEstudios(params){
+
+        $.ajax({
+            type: "POST",
+            url: "routes/routeEstudios.php",
+            data: {info:params.data,action:'BSTableData'},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                params.success({
+                    "total": data.count,
+                    "rows" : data.rows
+                })
+            },
+            error: function (er) {
+                params.error(er);
+            }
+        });
+    }
+
+function load_tabla_estudios(data) {
+    table = "";
+    $(data).each(function (key, val) {
+        table += "<tr>\
                     <td>" + val.codigo + "</td>\
                     <td>" + val.nombre + "</td>\
                     <td> -- </td>\
@@ -43,9 +85,9 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                         </div>\
                     </td>\
                  </tr>";
-        });
-        $("#tableEstudios").html(table);
-    }
+    });
+    $("#tableEstudios").html(table);
+}
 
     $("#btnEstudiosAdd").click(function(){
         $("#frmEstudios").trigger('reset');

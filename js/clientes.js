@@ -1,52 +1,69 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
     $(document).ready(function(){
-        load_clientes_data();
+        $('#bstableClientes').bootstrapTable({
+            queryParams: function (p) {
+                return {
+                    search          : p.search,
+                    limit           : p.limit,
+                    offset          : p.offset,
+                    sort            : p.sort,
+                    order           : p.order,
+                };
+            },
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' clientes';
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' clientes por página';
+            },
+            formatNoMatches: function () {
+                return 'No se encontraron clientes registradas';
+            },
+            formatLoadingMessage: function(){
+                return 'Cargando lista de clientes';
+            }
+        });
     });
 
-    function load_clientes_data(){
-        $.post("routes/routeClientes.php",{info:{},action:'getAll'})
-            .done(function(data){
-                if(data != null){
-                    data = $.parseJSON(data);
-                    if (!data){
-                        $("#tableClientes").html("<tr><td colspan='6'> -- No hay clientes para mostrar --</td></tr>");
-                        customAlert("Error!", "No hay clientes");
-                    }else{
-                        load_tabla_clientes(data);
-                    }
-                } else{
-                    customAlert("Error!", ajaxError);
-                }
-            })
-            .fail(function(error){
-                customAlert("Error!", ajaxError);
-            });
+    function formatClientesOptions(value, row, index){
+        var options = "\
+                <div class='btn-group dropup'> \
+                    <button class='btn btn-outline-warning btnClientesEdit' data-idcliente='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fa fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                    <button class='btn btn-outline-danger btnClientesDel' data-idcliente='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fa fa-trash-o fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                </div>";
+
+        return options;
     }
 
-    function load_tabla_clientes(data) {
-        table = "";
-        $(data).each(function (key, val) {
-            table += "<tr>\
-                    <td>" + val.id + "</td>\
-                    <td>" + val.nombre + "</td>\
-                    <td>" + val.email + "</td>\
-                    <td>" + val.perfil + "</td>\
-                    <td>" + val.descuento + "</td>\
-                    <td>\
-                        <div class='form-inline'>\
-                            <button class='btn btn-outline-warning btnClientesEdit' data-idcliente='" + val.id + "' data-toggle='tooltip' title='Editar'>\
-                                <span class='fa fa-edit'></span>\
-                            </button>\
-                            <button class='btn btn-outline-danger btnClientesDel' data-idcliente='" + val.id + "' data-toggle='tooltip' title='Eliminar'>\
-                                <span class='fa fa-trash-o'></span>\
-                            </button>\
-                        </div>\
-                    </td>\
-                 </tr>";
-        });
+    function formatClientesDescuento(value, row, index){
+        var formatted = "%"+parseFloat(value).toFixed(2);
 
-        $("#tableClientes").html(table);
+        return formatted;
+    }
+
+    function ajaxGetClientes(params){
+
+        $.ajax({
+            type: "POST",
+            url: "routes/routeClientes.php",
+            data: {info:params.data,action:'BSTableData'},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                params.success({
+                    "total": data.count,
+                    "rows" : data.rows
+                })
+            },
+            error: function (er) {
+                params.error(er);
+            }
+        });
     }
 
     $("#btnClientesAdd").click(function(){

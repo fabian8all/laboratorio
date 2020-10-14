@@ -15,6 +15,9 @@
 		case 'getAll':
 			echo json_encode($Estudio->getAll());
 			break;
+		case 'BSTableData':
+			echo json_encode($Estudio->BSTableData($info));
+			break;
 		case 'get':
 			echo json_encode($Estudio->get($info));
 			break;
