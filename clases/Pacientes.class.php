@@ -68,7 +68,13 @@
                 ":eid"=>$id
             );
 
-            $sql = "SELECT * FROM pacientes WHERE id = :eid;";
+            $sql = "SELECT 
+                        P.*,
+                        IF (P.referente = 0, 0.0, U.descuento) AS descuento 
+                    FROM pacientes P 
+                        LEFT JOIN usuarios U 
+                            ON U.id = P.referente    
+                    WHERE P.id = :eid;";
 
             $paciente = self::query_single_object($sql,$param);
 

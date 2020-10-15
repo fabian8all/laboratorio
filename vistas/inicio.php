@@ -1,3 +1,7 @@
+<script>
+    var estudiosSelected = [];
+    var descuento = 0.0;
+</script>
 <div class="container">
     <div id="console">
         <div class="title">
@@ -24,16 +28,16 @@
                         </select>
                         <div class="container">
                             <div>
-                                <strong>Nombre:</strong><div id="lblREPacienteNom"></div>
+                                <strong>Nombre:</strong> <div class="dataLabel" id="lblREPacienteNom"></div>
                             </div>
                             <div>
-                                <strong>Teléfono:</strong><div id="lblREPacienteTel"></div>
+                                <strong>Teléfono:</strong> <div class="dataLabel" id="lblREPacienteTel"></div>
                             </div>
                             <div>
-                                <strong>Email:</strong><div id="lblREPacienteEmail"></div>
+                                <strong>Email:</strong> <div class="dataLabel" id="lblREPacienteEmail"></div>
                             </div>
                             <div>
-                                <strong>Dirección:</strong><div id="lblREPacienteDir"></div>
+                                <strong>Dirección:</strong> <div class="dataLabel" id="lblREPacienteDir"></div>
                             </div>
                         </div>
                     </div>
@@ -51,7 +55,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-6 float-right">
-                                    <button class="btn btn-info">
+                                    <button class="btn btn-info" id="btnREAddEstudio">
                                         <span class="fa fa-plus-circle"></span>
                                         Agregar estudio
                                     </button>
@@ -59,12 +63,29 @@
                             </div>
                         </div>
                         <div class="container" id="divREListaEstudios"></div>
+                        <hr>
+                        <div class="contaier">
+                            <div class="row">
+                                <div class="col-8">
+                                    <strong>Subtotal:</strong>
+                                </div>
+                                <div clasS="col-4" id="subTotalRE"></div>
+                            </div>
+                        </div>
+                        <div id="descuentoRE"></div>
+                        <hr>
+                        <div class="contaier">
+                            <div class="row">
+                                <div class="col-8">
+                                    <strong>Total:</strong>
+                                </div>
+                                <div clasS="col-4" id="totalRE"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <div id="divEstudiosCards" class="row"></div>
-</div>
+

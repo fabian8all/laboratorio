@@ -42,7 +42,14 @@ require_once('includes/PageTemplate.php');
             echo "<script src='$preScript'></script>";
         }
     }?>
-
+    <script>
+        userData = {
+            id          : <?=$_SESSION['id']?>,
+            perfil      : <?=$_SESSION['perfil']?>,
+            username    : "<?=$_SESSION['username']?>",
+            nombre      : "<?=$_SESSION['nombre']?>"
+        }
+    </script>
     <style>
         <?php if(isset($TPL->Style)) { echo $TPL->Style; } ?>
     </style>

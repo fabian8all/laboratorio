@@ -120,6 +120,19 @@ form{
     color: #FFF;
 
 }
+.dataLabel {
+    margin-left: 25px;
+}
+
+.cardEstudio .card-header {
+    height: 120px;
+    padding-top: 22px;
+}
+
+.cardEstudio {
+    margin-top: 16px;
+    height: 330px;
+}
 
 .table-striped>tbody>tr:nth-of-type(odd).selected{
     background: rgba(0, 94, 152, 0.88);
