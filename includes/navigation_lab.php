@@ -2,9 +2,10 @@
     <div class="left_col scroll-view">
 
         <div class="navbar nav_title" >
-            <div class="site_title">
-                <!-- <i class="fa fa-truck"></i>  -->
-                <img id="appLogo" src="resources/logo.png" alt="Healthy labs" >
+            <div>
+                <img id="appLogo" src="resources/logo.png" height="50" alt="Healthy labs" >
+                <span id="appTitle">Laboratorio DML</span>
+
             </div>
         </div>
         <div class="clearfix"></div>

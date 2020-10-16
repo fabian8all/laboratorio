@@ -146,8 +146,8 @@ function load_data_estudios(){
 function load_estudios(data){
     cards = "";
     $(data).each(function(key,val){
-       cards += "<div class='col-4'>\
-                    <div class='card  cardEstudio'>\
+       cards += "<div class='col-md-4 col-sm-12'>\
+                    <div class='card cardEstudio'>\
                         <div class='card-header card-info'>\
                             <div class='card-title'>\
                                 <h6>\

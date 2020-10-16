@@ -2,7 +2,9 @@
     <section class="login_content">
         <form>
             <h1>
-                <img src="resources/logo.png" alt="" width="195" height="60">
+                <img src="resources/logo.png" alt="">
+                <br/>
+                Laboratorio DML
             </h1>
             <div>
                 <input type="text" class="form-control" id="user" placeholder="Usuario" required="" />

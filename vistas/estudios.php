@@ -9,13 +9,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <div class="col-3 float-left">
-                <button class="btn btn-success" id="btnEstudiosAdd">
-                    <span class="fa fa-plus-circle"></span>
-                    Agregar estudio
-                </button>
-            </div>
+        <div class="col-md-3 col-sm-12 float-left">
+            <button class="btn btn-success" id="btnEstudiosAdd">
+                <span class="fa fa-plus-circle"></span>
+                Agregar estudio
+            </button>
         </div>
     </div>
     <div class="row">

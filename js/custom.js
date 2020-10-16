@@ -30,7 +30,7 @@ $(function () {
 
     $('#menu_toggle').click(function () {
         if ($('body').hasClass('nav-md')) {
-            $('#appLogo').css('width',"106px");
+            $('#appTitle').hide();
             $('body').removeClass('nav-md').addClass('nav-sm');
             $('.left_col').removeClass('scroll-view').removeAttr('style');
             $('.sidebar-footer').hide();
@@ -40,7 +40,7 @@ $(function () {
             }
         } else {
             $('body').removeClass('nav-sm').addClass('nav-md');
-            $('#appLogo').css('width',"190px");
+            $('#appTitle').show();
             $('.sidebar-footer').show();
 
             if ($('#sidebar-menu li').hasClass('active-sm')) {

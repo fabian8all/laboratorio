@@ -12,7 +12,7 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4 col-sm-12">
                 <div class="card" id="cardREpaciente">
                     <div class="card-header card-info">
                         <div class="card-title">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-md-8 col-sm-12">
                 <div clasS="card" id="cardREEstudio">
                     <div class="card-header card-info">
                         <div class="card-title">
@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <div class="col-6 float-right">
+                                <div class="col-md-6 col-sm-12 float-right">
                                     <button class="btn btn-info" id="btnREAddEstudio">
                                         <span class="fa fa-plus-circle"></span>
                                         Agregar estudio

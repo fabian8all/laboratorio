@@ -9,13 +9,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <div class="col-3 float-right">
-                <button title="Agregar cliente" class="btn btn-success" id="btnClientesAdd">
-                    <span class="fa fa-user-md"></span>
-                    Nuevo Cliente
-                </button>
-            </div>
+        <div class="col-md-3 col-sm-12 float-left">
+            <button title="Agregar cliente" class="btn btn-success" id="btnClientesAdd">
+                <span class="fa fa-user-md"></span>
+                Nuevo Cliente
+            </button>
         </div>
     </div>
     <div class="table-responsive">
