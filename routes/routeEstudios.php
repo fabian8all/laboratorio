@@ -13,7 +13,7 @@
 
 	switch ($action) {
 		case 'getAll':
-			echo json_encode($Estudio->getAll());
+			echo json_encode($Estudio->getAll($info));
 			break;
 		case 'BSTableData':
 			echo json_encode($Estudio->BSTableData($info));

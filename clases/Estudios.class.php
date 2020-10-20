@@ -4,9 +4,11 @@
 
 	Class Estudio extends DBConnection {
 
-        public function getAll(){
+        public function getAll($data){
+            $search = (array_key_exists('search',$data))? $data['search']:"";
+            $andWhere = ($search != "")? "AND (nombre LIKE ('%$search%') OR codigo = '$search' )":"";
 
-            $sql = "SELECT * FROM estudios WHERE eliminado IS NULL;";
+            $sql = "SELECT * FROM estudios WHERE eliminado IS NULL $andWhere;";
 
             $estudios = self::query_object($sql);
 

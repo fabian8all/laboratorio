@@ -120,12 +120,18 @@ function load_estudios_selected(){
 }
 
 $("#btnREAddEstudio").click(function(){
-    load_data_estudios();
+    $("#txtREAddSearch").val("");
+    load_data_estudios("");
     $("#modalREAddEstudio").modal('show');
 });
 
-function load_data_estudios(){
-    $.post("routes/routeEstudios.php",{info:{},action:'getAll'})
+function load_data_estudios(busca){
+    info = {search:busca}
+    loading = true;
+    $("#divREAddLoader").html("\
+        <span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span> \
+        Cargando...");
+    $.post("routes/routeEstudios.php",{info:info,action:'getAll'})
         .done(function(data){
             if(data != null){
                 data = $.parseJSON(data);
@@ -140,13 +146,23 @@ function load_data_estudios(){
         })
         .fail(function(error){
             customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $("#divREAddLoader").html("");
+            loading = false;
         });
 }
 
 function load_estudios(data){
-    cards = "";
+
+    cards = [];
+    if(detectMob()){
+        cardNumber = 1;
+    }else{
+        cardNumber = 6;
+    }
     $(data).each(function(key,val){
-       cards += "<div class='col-md-4 col-sm-12'>\
+       card =  "<div class='col-md-4 col-sm-12'>\
                     <div class='card cardEstudio'>\
                         <div class='card-header card-info'>\
                             <div class='card-title'>\
@@ -167,8 +183,70 @@ function load_estudios(data){
                         </div>\
                     </div>\
                 </div>";
+       cards.push(card);
     });
-    $("#divEstudiosCards").html(cards);
+
+
+    carousel = "<div class='container'>\
+                    <div id='carouselEstudios' class='carousel slide' data-interval='false'>\
+                        <ol class='carousel-indicators'>\
+                        </ol>\
+                        <div class='carousel-inner'>";
+    count = 0;
+    indicators = "";
+    $(cards).each(function(key,card){
+        active = (count == 0) ? "active": "";
+
+        if ((count % cardNumber)==0){
+            if (count !=0){
+                carousel += "</div>";
+            }
+            carousel += "<div class='carousel-item "+active+"'>";
+
+            indicators += "<li data-target='#carouselEstudios' data-slide-to='"+(count/6)+"' class='"+active+" carouselControl'></li>"
+        }
+        carousel += card;
+        count++;
+
+    });
+    if (count == 0){
+        carousel += "<div class='carousel-item active'> -- No hay estudios para mostrar -- </div>";
+    }else{
+        carousel +="</div>";
+    }
+
+        carousel += "</div>\
+                        <a class='carousel-control-prev carouselControl' href='#carouselEstudios' role='button' data-slide='prev'>\
+                        <span class='carousel-control-prev-icon' aria-hidden='true'></span>\
+                        <span class='sr-only'>Previous</span>\
+                      </a>\
+                      <a class='carousel-control-next carouselControl' href='#carouselEstudios' role='button' data-slide='next'>\
+                        <span class='carousel-control-next-icon' aria-hidden='true'></span>\
+                        <span class='sr-only'>Next</span>\
+                      </a>\
+                </div>\
+            </div>";
+    $("#divEstudiosCards").html(carousel);
+    $("#carouselEstudios").find(".carousel-indicators").html(indicators);
+}
+
+function detectMob() {
+    return ( ( window.innerWidth <= 800 ));
+}
+
+var loading = false;
+$("#txtREAddSearch").keyup(function(e){
+   if(!loading) {
+       if ($(this).val().length >= 3) {
+           load_data_estudios($(this).val());
+       } else if ($(this).val().length == 0) {
+           load_data_estudios("");
+       }
+   }
+});
+
+function buscarEstudio(busca){
+
 }
 
 $(document).on('click',".cardEstudio",function (){

@@ -9,14 +9,18 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div id="divEstudiosCards" class="row"></div>
+                    <div class="row">
+                        <div clas="col-12">
+                            <input type="text" class="form-control" id="txtREAddSearch" placeholder="buscar">
+                            <div id="divREAddLoader"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="divEstudiosCards" class="col-12"></div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnClientesSave" class="btn btn-success">
-                    <span class="fa fa-save"></span>
-                    Guardar
-                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
