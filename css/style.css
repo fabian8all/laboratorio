@@ -132,7 +132,9 @@ form{
 .cardEstudio {
     margin-top: 16px;
     height: 330px;
+    cursor: pointer;
 }
+
 
  .carouselControl{
     background: black;
@@ -160,7 +162,7 @@ form{
 }
 
 .table-striped>thead>tr{
-    background: rgb(0 145 62);;
+    background: rgb(173 50 151);
     color:#FFF;
     font-weight: bolder;
 }
@@ -218,8 +220,29 @@ footer{
     color: #FFF;
 }
 
+.card-primary{
+    background: #b03295;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #FFF;
+}
+
 .card-info{
-    background: #17b81f;
+    background: #bf93b6;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #FFF;
+}
+
+.card-warning{
+    background: #efc41d;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #FFF;
+}
+
+.card-success{
+    background: #1acd15;
     font-weight: bold;
     font-size: 12pt;
     color: #FFF;

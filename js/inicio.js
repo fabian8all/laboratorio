@@ -5,7 +5,7 @@ $(document).ready(function(){
     load_estudios_selected();
 });
 
-function load_sel_pacientes(){
+function load_sel_pacientes(selId = 0){
     if (userData.perfil == 1) {
         action = "getAll";
         info = {};
@@ -21,11 +21,14 @@ function load_sel_pacientes(){
                 if (!data){
                     customAlert("Error!","No hay pacientes")
                 }else{
-                    selData="<option selected disabled value='0'>--Seleccione paciente--</option>";
+                    selected = (selId == 0 )?"selected":"";
+                    selData="<option "+selected+" disabled value='0'>--Seleccione paciente--</option>";
                     $(data).each(function(key,val){
-                        selData += "<option value='"+val.id+"'>"+val.nombre+"</option>";
+                        selected = (selId == val.id )?"selected":"";
+                        selData += "<option "+selected+" value='"+val.id+"'>"+val.nombre+"</option>";
                     });
-                    $("#selREPacienteData").html(selData)
+                    $("#selREPacienteData").html(selData);
+                    $("#selREPacienteData").trigger("change");
                 }
             } else{
                 customAlert("Error!",ajaxError);
@@ -38,6 +41,7 @@ function load_sel_pacientes(){
 
 $("#selREPacienteData").change(function(){
     id = $(this).val();
+    if(id)
     $.post("routes/routePacientes.php",{info:id,action:"get"})
         .done(function(data){
             if(data != null){
@@ -60,64 +64,6 @@ $("#selREPacienteData").change(function(){
             customAlert("Error!",error);
         });
 });
-
-function load_estudios_selected(){
-    var tablaRE = ""
-    var subTotal = 0;
-    $(estudiosSelected).each(function(key,val){
-        tablaRE += "<div class='row'> \
-                        <div class='col-8'>\
-                            <span class='fa fa-check-circle-o'></span>\
-                            "+val.nombre+"\
-                        </div>\
-                        <div class='col-4'>\
-                            $"+parseFloat(val.costo).toFixed(2)+"\
-                        </div>\
-                    </div>";
-        subTotal += parseFloat(val.costo);
-    });
-    if (tablaRE == ""){
-        tablaRE =  "<div class='container'>\
-                        <div class='row'>\
-                            <div class='col-12'>\
-                                -- No hay estudios seleccionados --\
-                            </div>\
-                        </div>\
-                    </div>";
-    }else{
-        tablaRE = "<div class='container'>\
-                        <div class='row'>\
-                            <div class='col-12'>\
-                                "+tablaRE+"\
-                            </div>\
-                        </div>\
-                    </div>"
-    }
-    $("#divREListaEstudios").html(tablaRE);
-    $("#subTotalRE").html("$"+parseFloat(subTotal).toFixed(2));
-    if (descuento > 0 ){
-        descVal =  subTotal * (descuento/100);
-        descuentoRE = "<hr>\
-                        <div class='container'>\
-                            <div class='row'>\
-                                <div class='col-8'>\
-                                    <strong>Descuento (%"+parseFloat(descuento).toFixed(2)+"):</strong>\
-                                </div>\
-                                <div class='col-4'>\
-                                    <red>-$"+parseFloat(descVal).toFixed(2)+"</red>\
-                                </div>\
-                            </div>\
-                        </div>";
-
-    }else{
-        descVal = 0;
-        descuentoRE = "";
-    }
-    $("#descuentoRE").html(descuentoRE);
-    total = subTotal - descVal;
-    $("#totalRE").html("$"+parseFloat(total).toFixed(2));
-
-}
 
 $("#btnREAddEstudio").click(function(){
     $("#txtREAddSearch").val("");
@@ -245,9 +191,43 @@ $("#txtREAddSearch").keyup(function(e){
    }
 });
 
-function buscarEstudio(busca){
+$("#btnREAddPaciente").click(function(){
+    $("#frmPacientes").trigger('reset');
+    $("#modalPacientes").modal('show');
+});
 
-}
+$("#btnPacientesSave").click(function(){
+    info =  {
+        nombre: $("#txtPacientesNombre").val(),
+        direccion: $("#txtPacientesDireccion").val(),
+        telefono: $("#txtPacientesTelefono").val(),
+        email: $("#txtPacientesEmail").val(),
+    }
+    $('#btnPacientesSave').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+    ).prop('disabled',true);
+    $.post("routes/routePacientes.php",{info:info,action:"Add"})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            if(data){
+                customAlert("Exito!", "La información se ha guardado con exito");
+                $("#modalPacientes").modal('hide');
+                load_sel_pacientes(data.id);
+            } else{
+                customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $('#btnPacientesSave').html( '\
+                <span class="fa fa-save"></span>\
+                Guardar\
+            ').prop('disabled',false);
+        });
+});
 
 $(document).on('click',".cardEstudio",function (){
     card = $(this).find(".card-body");
@@ -265,6 +245,118 @@ $(document).on('click',".cardEstudio",function (){
         confirm: function(){
             estudiosSelected.push(estudio);
             load_estudios_selected();
+        },
+        cancel: function(){
+            console.log('false');
+        }
+    });
+});
+
+function load_estudios_selected(){
+    var tablaRE = ""
+    var subTotal = 0;
+    $(estudiosSelected).each(function(key,val){
+        tablaRE += "<div class='row'> \
+                        <div class='col-8'>\
+                            <span class='fa fa-check-circle-o'></span>\
+                            "+val.nombre+"\
+                        </div>\
+                        <div class='col-4'>\
+                            $"+parseFloat(val.costo).toFixed(2)+"\
+                        </div>\
+                    </div>";
+        subTotal += parseFloat(val.costo);
+    });
+    if (tablaRE == ""){
+        tablaRE =  "<div class='container'>\
+                        <div class='row'>\
+                            <div class='col-12'>\
+                                -- No hay estudios seleccionados --\
+                            </div>\
+                        </div>\
+                    </div>";
+    }else{
+        tablaRE = "<div class='container'>\
+                        <div class='row'>\
+                            <div class='col-12'>\
+                                "+tablaRE+"\
+                            </div>\
+                        </div>\
+                    </div>"
+    }
+    $("#divREListaEstudios").html(tablaRE);
+    $("#subTotalRE").html("$"+parseFloat(subTotal).toFixed(2));
+    if (descuento > 0 ){
+        descVal =  subTotal * (descuento/100);
+        descuentoRE = "<hr>\
+                        <div class='container'>\
+                            <div class='row'>\
+                                <div class='col-8'>\
+                                    <strong>Descuento (%"+parseFloat(descuento).toFixed(2)+"):</strong>\
+                                </div>\
+                                <div class='col-4'>\
+                                    <red>-$"+parseFloat(descVal).toFixed(2)+"</red>\
+                                </div>\
+                            </div>\
+                        </div>";
+
+    }else{
+        descVal = 0;
+        descuentoRE = "";
+    }
+    $("#descuentoRE").html(descuentoRE);
+    total = subTotal - descVal;
+    $("#totalRE").html("$"+parseFloat(total).toFixed(2));
+
+}
+
+$("#btnRESolicitar").click(function(){
+    pacienteId = $("#selREPacienteData").val();
+    if (pacienteId==0){
+        customAlert("Error!", "No se ha seleccionado paciente");
+        return false;
+    }
+    if (!estudiosSelected){
+        customAlert("Error!", "No se han seleccionado estudios a realizar");
+        return false;
+    }
+    info = {
+        pacienteId  : $("#selREPacienteData").val(),
+        descuento   : descuento,
+        estudios    : estudiosSelected
+    }
+    $.confirm({
+        title: 'Atencion!',
+        content: '¿Solicitar estudios?',
+        confirm: function(){
+            $('#btnRESolicitar').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+            ).prop('disabled',true);
+
+            $.post("routes/routeEstudios.php",{info:info,action:"Solicitar"})
+            .done(function(data){
+                data =  $.parseJSON(data);
+                if(data){
+                    customAlert("Exito!", "Se han solicitado los estudios a realizar");
+                    $("#selREPacienteData").val(0);
+                    $("#selREPacienteData").trigger('change');
+                    estudiosSelected = [];
+                    descuento = 0.00;
+                    load_estudios_selected();
+                } else{
+                    customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                }
+            })
+            .fail(function(error){
+                customAlert("Error!", ajaxError);
+            })
+            .always(function(){
+                $('#btnRESolicitar').html( '\
+                    <span class="fa fa-tasks"></span>\
+                    Solicitar Estudios\
+                ').prop('disabled',false);
+            });
         },
         cancel: function(){
             console.log('false');

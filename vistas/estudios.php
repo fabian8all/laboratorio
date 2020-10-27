@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-12 float-left">
-            <button class="btn btn-success" id="btnEstudiosAdd">
+            <button class="btn btn-info" id="btnEstudiosAdd">
                 <span class="fa fa-plus-circle"></span>
                 Agregar estudio
             </button>

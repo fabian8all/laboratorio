@@ -326,3 +326,23 @@ if (typeof NProgress != 'undefined') {
     });
 }
 /** ******  NProgress  *********************** **/
+
+$(document).on('show.bs.collapse','.collapse',function(){
+    span =$(this).closest('.card').find('.card-title span');
+    header = $(this).closest('.card').find('.card-header');
+
+    span.removeClass('fa-chevron-circle-right');
+    span.addClass('fa-chevron-circle-down');
+
+    header.css('border-radius','20px 20px 0 0');
+});
+
+$(document).on('hide.bs.collapse','.collapse',function(){
+    span =$(this).closest('.card').find('.card-title span');
+    header = $(this).closest('.card').find('.card-header');
+
+    span.removeClass('fa-chevron-circle-down');
+    span.addClass('fa-chevron-circle-right');
+
+    header.css('border-radius','20px 20px 20px 20px');
+});

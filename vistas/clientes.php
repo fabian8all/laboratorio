@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-12 float-left">
-            <button title="Agregar cliente" class="btn btn-success" id="btnClientesAdd">
+            <button title="Agregar cliente" class="btn btn-info" id="btnClientesAdd">
                 <span class="fa fa-user-md"></span>
                 Nuevo Cliente
             </button>

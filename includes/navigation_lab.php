@@ -28,6 +28,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="resultados.php">
+                            <i class="fa fa-check-circle-o"></i> Resultados
+                        </a>
+                    </li>
+                    <li>
                         <a href="pacientes.php">
                             <i class="fa fa-user"></i> Pacientes
                         </a>

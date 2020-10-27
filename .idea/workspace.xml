@@ -2,12 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resultados.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vistas/resultados.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/navigation_lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/navigation_lab.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/navigation_top.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/navigation_top.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/estudios.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routeEstudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeEstudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/estudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/pacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/pacientes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +52,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/plugins/bootstrap-table" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/clases" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laboratorio\plugins\bootstrap-table" />
-      <recent name="C:\xampp\htdocs\laboratorio\plugins" />
       <recent name="C:\xampp\htdocs\laboratorio\clases" />
       <recent name="C:\xampp\htdocs\laboratorio\routes" />
-      <recent name="C:\xampp\htdocs\laboratorio\modales" />
+      <recent name="C:\xampp\htdocs\laboratorio" />
+      <recent name="C:\xampp\htdocs\laboratorio\plugins\bootstrap-table" />
+      <recent name="C:\xampp\htdocs\laboratorio\plugins" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -64,7 +81,8 @@
       <workItem from="1602711948802" duration="4415000" />
       <workItem from="1602783751974" duration="303000" />
       <workItem from="1602784959750" duration="12811000" />
-      <workItem from="1603134904658" duration="10689000" />
+      <workItem from="1603134904658" duration="34617000" />
+      <workItem from="1603745736186" duration="10470000" />
     </task>
     <servers />
   </component>
@@ -72,21 +90,21 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1602791481011">
+    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1603487507112">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1602791481011" />
+    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1603487507112" />
     <state x="404" y="109" width="540" height="524" key="StructurePopup" timestamp="1602197897009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="404" y="109" width="540" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1602197897009" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1603137007648">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1603755781371">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1603137007648" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602108160720">
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1603755781371" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603746505614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602108160720" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603746505614" />
   </component>
 </project>

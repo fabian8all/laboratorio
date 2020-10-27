@@ -14,18 +14,28 @@
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <div class="card" id="cardREpaciente">
-                    <div class="card-header card-info">
+                    <div class="card-header card-primary">
                         <div class="card-title">
                             <span class="fa fa-user"></span>
                             Paciente
                         </div>
                     </div>
                     <div class="card-body">
-                        <label for="selREPaciente" class="col-form-label">
-                            Seleccionar paciente:
-                        </label>
-                        <select id="selREPacienteData" class="form-control">
-                        </select>
+                        <div class="row">
+                            <label for="selREPaciente" class="col-form-label">
+                                Seleccionar paciente:
+                            </label>
+                            <div class="input-group">
+                                <select id="selREPacienteData" class="form-control">
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" id="btnREAddPaciente">
+                                        <span class="fa fa-plus-circle"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="container">
                             <div>
                                 <strong>Nombre:</strong> <div class="dataLabel" id="lblREPacienteNom"></div>
@@ -45,7 +55,7 @@
             </div>
             <div class="col-md-8 col-sm-12">
                 <div clasS="card" id="cardREEstudio">
-                    <div class="card-header card-info">
+                    <div class="card-header card-primary">
                         <div class="card-title">
                             <span class="fa fa-tasks"></span>
                             Estudios a realizar
@@ -81,6 +91,14 @@
                                 </div>
                                 <div clasS="col-4" id="totalRE"></div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-right">
+                            <button class="btn btn-success" id="btnRESolicitar">
+                                <span class="fa fa-tasks"></span>
+                                Solicitar Estudios
+                            </button>
                         </div>
                     </div>
                 </div>

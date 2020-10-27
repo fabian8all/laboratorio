@@ -30,6 +30,9 @@
 		case 'Delete':
 			echo json_encode($Estudio->Delete($info));
 			break;
+		case 'Solicitar':
+			echo json_encode($Estudio->Solicitar($info));
+			break;
 	}
 
 ?>

@@ -88,12 +88,13 @@
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
                 ':mue'=>$data['muestra'],
+                ':tst'=>$data['pruebas'],
                 ':crt'=>date('Y-m-d H:i:s')
             );
             $sql = "INSERT INTO estudios 
-                        (codigo,nombre,tiempo,costo,muestra,creado) 
+                        (codigo,nombre,tiempo,costo,muestra,pruebas,creado) 
                     VALUES
-                        (:cod,:nom,:tim,:cos,:mue,:crt)";
+                        (:cod,:nom,:tim,:cos,:mue,:tst,:crt)";
             $query = self::query($sql,$params);
             if ($query){
                 return true;
@@ -111,7 +112,8 @@
 //                ':cat'=>$data['categoria'],
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
-                ':mue'=>$data['muestra']
+                ':mue'=>$data['muestra'],
+                ':tst'=>$data['pruebas']
             );
             $sql = "UPDATE estudios 
                         SET 
@@ -120,6 +122,7 @@
                             tiempo = :tim,
                             costo = :cos,
                             muestra = :mue,
+                            pruebas = :tst,
                             eliminado = null 
                         WHERE 
                             id = :eid";
@@ -147,6 +150,47 @@
             }else{
                 return false;
             }
+        }
+
+        public function Solicitar($data){
+            $pacienteId = $data['pacienteId'];
+            $descuento  = $data['descuento'];
+
+            $ok=true;
+            foreach ($data['estudios'] as $key=>$estudio){
+                if ($key == 0){
+                    $paquete = 0;
+                }else if($paquete == 0){
+                    $sqlGetLast = "SELECT MAX(id) as id FROM estudios_paciente;";
+                    $query = self::query_single_object($sqlGetLast);
+                    $paquete = $query->id;
+                }
+                $param = array(
+                    ':eid'=>$estudio['id'],
+                    ':pid'=>$pacienteId,
+                    ':sol'=>date('Y-m-d H:i:s'),
+                    ':sta'=>1,
+                    ':cst'=>$estudio['costo'],
+                    ':des'=>$descuento,
+                    ':paq'=>$paquete
+                );
+                $sql = "INSERT INTO estudios_paciente
+                            (id_estudio,id_paciente,solicitud,estado,costo,descuento,paquete)
+                        VALUES
+                            (:eid,:pid,:sol,:sta,:cst,:des,:paq)";
+                $query = self::query($sql,$param);
+                if(!$query){
+                    $ok=false;
+                    break;
+                }
+            }
+
+            if($ok){
+                return true;
+            }else{
+                return false;
+            }
+
         }
 
 

@@ -6,7 +6,7 @@
 	    </div>
 	    <div class="navbar navbar-dark float-right">
 	      <div class="dropdown">
-	        <button class="user-profile btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	        <button class="user-profile btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 	            <?php echo strtoupper($_SESSION['nombre']); ?>
 	        </button>
 	        <div class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">

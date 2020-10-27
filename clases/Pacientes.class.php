@@ -100,7 +100,9 @@
                         (:nom,:dir,:tel,:eml,:rfr,:crt)";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                $sel = "SELECT MAX(id) as id FROM pacientes;";
+                $id = self::query_single_object($sel);
+                return $id;
             }else{
                 return false;
             }
