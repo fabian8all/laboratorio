@@ -68,16 +68,14 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="container" id="accordion" role="tablist" aria-multiselectable="true">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
                                     <button class="btn btn-outline-info" id="btnEstudiosModalClassPrueba">
                                         <span class="fa fa-tasks"></span>
                                         Agregar Clasificación
                                     </button>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="container" id="accordion" role="tablist" aria-multiselectable="true">
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

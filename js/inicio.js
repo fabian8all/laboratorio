@@ -257,7 +257,12 @@ function load_estudios_selected(){
     var subTotal = 0;
     $(estudiosSelected).each(function(key,val){
         tablaRE += "<div class='row'> \
-                        <div class='col-8'>\
+                        <div class='col-2'>\
+                            <button class='btn btn-sm btn-danger btnREEstudiosUnsel' data-selectedestudiokey='"+key+"' >\
+                                <span class='fa fa-minus-circle'></span>\
+                            </button>\
+                        </div>\
+                        <div class='col-6'>\
                             <span class='fa fa-check-circle-o'></span>\
                             "+val.nombre+"\
                         </div>\
@@ -310,13 +315,19 @@ function load_estudios_selected(){
 
 }
 
+$(document).on('click',".btnREEstudiosUnsel",function(){
+   key = $(this).data("selectedestudiokey");
+   estudiosSelected.splice(key,1);
+   load_estudios_selected();
+});
+
 $("#btnRESolicitar").click(function(){
     pacienteId = $("#selREPacienteData").val();
-    if (pacienteId==0){
+    if (!pacienteId){
         customAlert("Error!", "No se ha seleccionado paciente");
         return false;
     }
-    if (!estudiosSelected){
+    if (!estudiosSelected.length){
         customAlert("Error!", "No se han seleccionado estudios a realizar");
         return false;
     }

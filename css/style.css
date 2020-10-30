@@ -248,6 +248,13 @@ footer{
     color: #FFF;
 }
 
+.divEstudiosClasifConsole {
+    background: #9ee0e591;
+    width: 100%;
+    margin: -20px 0 20px 0px;
+    padding: 20px;
+}
+
 .btn-color{
     padding: 3px;
 }
@@ -279,3 +286,7 @@ label{
     display: none;
 }
 
+.card{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

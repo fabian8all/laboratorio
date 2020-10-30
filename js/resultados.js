@@ -80,6 +80,7 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                 <hr>\
                             ";
                         }
+
                         $(clasif.pruebas).each(function(k3,prueba){
                             divResultados += "\
                                 <div class='row'>\
@@ -88,11 +89,32 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                             <strong>"+prueba.nombre+":</strong>\
                                         </label>\
                                     </div>\
-                                    <div class='col-md-6 col-sm-12'>\
-                                        <input type='text' class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
+                                    ";
+                            if (clasif.tipo == 1){
+                                divResultados+="\
+                                        <div class='col-md-6 col-sm-12'>\
+                                            <input type='text' class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
+                                        </div>\
                                     </div>\
-                                </div>\
-                            ";
+                                ";
+                            }else if(clasif.tipo == 2){
+                                divResultados+="\
+                                        <div class='col-md-6 col-sm-12'>\
+                                            <select class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
+                                                <option value='' selected disabled>--Seleccionar Interpretación</option>\
+                                ";
+                                $(clasif.interps).each(function(k,interp){
+                                    divResultados+="\
+                                                <option value='"+interp.valor+"'>"+interp.nombre+"</option>'\
+                                    ";
+                                });
+                                divResultados+="\
+                                            </select>\
+                                        </div>\
+                                    </div>\
+                                ";
+                            }
+
                         });
                     });
                     divResultados += "\
@@ -139,44 +161,68 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                 <hr>\
                             ";
                         }
+                        col = (clasif.tipo == '1')?'col-4':'col-6'
                         divResultados += "\
                                 <div class='row'>\
-                                    <div class='col-4'>\
+                                    <div class='"+col+"'>\
                                         <label>\
                                             <strong>PRUEBA</strong>\
                                         </label>\
                                     </div>\
-                                    <div class='col-4'>\
+                                    <div class='"+col+"'>\
                                         <label>\
                                             <strong>RESULTADO</strong>\
                                         </label>\
                                     </div>\
+                                    ";
+                        divResultados += (clasif.tipo == '1')?"\
                                     <div class='col-4'>\
                                         <label>\
                                             <strong>REFERENCIA</strong>\
                                         </label>\
                                     </div>\
                                 </div>\
-                            ";
+                            ":"</div>";
                         $(clasif.pruebas).each(function(k3,prueba){
                             divResultados += "\
                                 <div class='row'>\
-                                    <div class='col-4'>\
+                                    <div class='"+col+"'>\
                                         <label>\
                                             <strong>"+prueba.nombre+":</strong>\
                                         </label>\
                                     </div>\
-                                    <div class='col-4'>\
+                                    <div class='"+col+"'>\
                                         "+resultados[k2][k3]+"\
                                     </div>\
+                                    ";
+                            divResultados += (clasif.tipo == '1')?"\
                                     <div class='col-4'>\
                                         <label>\
                                             <strong>"+prueba.referencia+":</strong>\
                                         </label>\
                                     </div>\
                                 </div>\
-                            ";
+                            ":"</div>";
                         });
+                        if (clasif.tipo == 2){
+                            divResultados += "\
+                                <hr>\
+                                <div class='row'>\
+                                    <div class='col-12'>\
+                                        <strong>Interpretación:</strong>\
+                                    </div>\
+                                    <div class='col-12'>\
+                            ";
+                            $(clasif.interps).each(function(k,interp){
+                                divResultados += "\
+                                        "+interp.valor+"="+interp.nombre+"&nbsp;\
+                            ";
+                            });
+                            divResultados += "\
+                                    </div>\
+                                </div>\
+                            ";
+                        }
                     });
                     divResultados += "\
                         <hr>\

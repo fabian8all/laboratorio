@@ -93,7 +93,7 @@ function load_tabla_estudios(data) {
         $("#frmEstudios").trigger('reset');
         $("#hidEstudiosMode").val("new");
         $("#divCardEstudiosPruebas").html("");
-        addClassPrueba('',0,0);
+        addClassPrueba('',0,0,1);
         $("#modalEstudios").modal('show');
     });
 
@@ -114,11 +114,19 @@ function load_tabla_estudios(data) {
                     if (data.pruebas){
                         pruebas = $.parseJSON(data.pruebas);
                         $(pruebas).each(function(k,v){
-                           addClassPrueba(v.nombre,0,v.pruebas)
+                            if (v.tipo == 1) {
+                                data = v.pruebas
+                            }else if (v.tipo == 2){
+                                data = {interps:v.interps,pruebas:v.pruebas};
+                            }else {
+                                v.tipo = 1;
+                                data = v.pruebas
+                            }
+                           addClassPrueba(v.nombre,0,data,v.tipo)
                         });
 
                     }else{
-                        addClassPrueba('',0,0);
+                        addClassPrueba('',0,0,1);
                     }
 
                     $("#modalEstudios").modal('show');
@@ -159,6 +167,26 @@ function load_tabla_estudios(data) {
             ok = 1;
             nomClasif = $(v).val();
             panelClasif = $(v).closest('.card');
+
+            tipoClasif = $(panelClasif).find('.selEstudiosTipoClasif').val();
+
+
+            if (tipoClasif == '2'){
+                interps = [];
+                noHayInterpretaciones = true;
+                interpretaciones = $(panelClasif).find('.divInterpretacion');
+                $(interpretaciones).each(function(k,interp){
+                    noHayInterpretaciones = false;
+                    interpVal = $(interp).find('.txtClasifInterpretacionValor').val();
+                    interpNom = $(interp).find('.txtClasifInterpretacionNombre').val();
+                    interpObj = {valor: interpVal, nombre: interpNom };
+                    interps.push(interpObj);
+                });
+                if (noHayInterpretaciones){
+                    ok = 5;
+                }
+            }
+
             pruebas = [];
             noHayPruebas = true;
             $(panelClasif).find('.divPrueba').each(function(key,divPrueba){
@@ -171,17 +199,26 @@ function load_tabla_estudios(data) {
                 }
                 prueba = {
                     nombre: nomPrueba,
-                    referencia: $(divPrueba).find('.txtEstudiosRefPrueba').val(),
+                }
+                if (tipoClasif =='1'){
+                    prueba.referencia = $(divPrueba).find('.txtEstudiosRefPrueba').val();
                 }
                 pruebas.push(prueba);
             });
             if (noHayPruebas){
                 ok=3;
             }
+
             clasif = {
                 nombre: nomClasif,
+                tipo: tipoClasif,
                 pruebas: pruebas
+            };
+
+            if (tipoClasif == '2'){
+                clasif.interps = interps;
             }
+
             clasifs.push(clasif);
         });
     if (ok == 1){
@@ -235,6 +272,9 @@ function load_tabla_estudios(data) {
     }else if(ok==3){
         customAlert("Error!", "No hay pruebas en alguna de las clasificaciones");
         return false;
+    }else if(ok==4){
+        customAlert("Error!", "El tipo de la clasificación requiere interpretaciones");
+        return false;
     }else{
         customAlert("Error!", "Ocurrió un error");
         return false;
@@ -251,7 +291,7 @@ function load_tabla_estudios(data) {
 
     $("#btnEstudiosAddClassPrueba").click(function(e) {
         e.preventDefault();
-        addClassPrueba($('#txtEstudiosNomClassPrueba').val(),0,0);
+        addClassPrueba($('#txtEstudiosNomClassPrueba').val(),0,0,1);
         $("#modalEstudiosClassPrueba").modal('hide');
     });
 
@@ -265,11 +305,12 @@ $(document).on('click',".btnModalEditClasif",function(e) {
     $("#btnEditClasif").data('divclasif',divClasif);
     $("#modalEditClasif").modal('show');
 });
+
 $(document).on('click',"#btnEditClasif",function(e) {
     e.preventDefault();
     divClasif = $(this).data('divclasif');
     clasif = $('#txtEditNomClasif').val();
-    nomClasif = (clasif != "")?clasif:"Platillos sin clasificación";
+    nomClasif = (clasif != "")?clasif:"sin clasificación";
     valClasif = clasif;
     noSpaces = clasif.replace(/\s/g,"_");
     card = $('#'+divClasif).closest('.card');
@@ -283,10 +324,17 @@ $(document).on('click',"#btnEditClasif",function(e) {
     $("#modalEditClasif").modal('hide');
 });
 
-function addClassPrueba(clasif,sin,clasifData){
+function addClassPrueba(clasif,sin,clasifData,tipo){
     nomClasif = (clasif != "")?clasif:"sin clasificación";
     valClasif = clasif;
     noSpaces = clasif.replace(/\s/g,"_");
+
+    interps = [];
+    if (tipo == 2){
+        interps = clasifData.interps;
+        clasifData = clasifData.pruebas;
+    }
+
     if (!($("#divClasif_"+noSpaces).length)){
         panel = $("#accordion");
 
@@ -314,26 +362,73 @@ function addClassPrueba(clasif,sin,clasifData){
                             </div>\
                             <div id="divClasif_'+noSpaces+'" class="collapse '+((sin==0)?'show':'')+'" role="tabpanel" >\
                                 <div class="card-body">\
-                                    <div class="row">\
-                                        <div class="col-sm-12" >\
-                                            <div class="float-right">\
-                                                <button class="btn btn-info btnEstudiosAddPrueba">\
-                                                    <span class="fa fa-plus-square-o"></span>\
-                                                    Agregar prueba\
-                                                </button>\
+                                    <div class="row divEstudiosClasifConsole">\
+                                        <div class="col-12" >\
+                                            <div class="col-6">\
+                                                <label class="col-form-label">\
+                                                    <strog>Tipo:</strog>\
+                                                </label>\
+                                                <select class="form-control selEstudiosTipoClasif">\
+                                                    <option '+((tipo==1)?'selected':'')+' value="1">Resultado</option>\
+                                                    <option '+((tipo==2)?'selected':'')+' value="2">Interpretación</option>\
+                                                </select>\
                                             </div>\
                                         </div>\
-                                    </div>';
-        if (clasifData == 0){
-            frmClasif += addPrueba(0,true)
+                                        <div class="col-12 divEstudiosInterpretaciones" '+((tipo!=2)?'style="display: none;"':'')+' >\
+                                            <hr>\
+                                            <div class="row">\
+                                                <div class="col-12">\
+                                                    <div class="float-left">\
+                                                        <h3>Interpretaciones</h3>\
+                                                    </div>\
+                                                    <div class="float-right">\
+                                                        <br/>\
+                                                        <button class="btn btn-success btnAddInterpretacion">\
+                                                            <span class="fa fa-plus-square-o"></span>\
+                                                            Agregar\
+                                                        </button>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <hr>\
+                                            <div class="divInterpretaciones">\
+        ';
+
+        if (!interps){
+            frmClasif += addInterpretacion(0,true)
         }else{
-            $(clasifData).each(function(k,platillo){
+            $(interps).each(function(k,interpretacion){
                 first = (k==0)?true:false;
-                frmClasif += addPrueba(platillo,first);
+                frmClasif += addInterpretacion(interpretacion,first);
             });
         }
 
-        frmClasif +=           '</div>\
+        frmClasif += '\
+                                            </div>\
+                                        </div>\
+                                    </div>\
+        ';
+
+        if (clasifData == 0){
+            frmClasif += addPrueba(0,true,tipo)
+        }else{
+            $(clasifData).each(function(k,prueba){
+                first = (k==0)?true:false;
+                frmClasif += addPrueba(prueba,first,tipo);
+            });
+        }
+        frmClasif += '\
+                                </div>\
+                                <div class="card-footer">\
+                                    <div class="row">\
+                                        <div class="col-6 float-right">\
+                                            <button class="btn btn-info btnEstudiosAddPrueba">\
+                                                <span class="fa fa-plus-square-o"></span>\
+                                                Agregar prueba\
+                                            </button>\
+                                        </div>\
+                                    </div>\
+                                </div>\
                             </div>\
                         </div>\
                     </div>\
@@ -345,6 +440,60 @@ function addClassPrueba(clasif,sin,clasifData){
 
 }
 
+$(document).on('change','.selEstudiosTipoClasif',function(){
+    sel = $(this);
+    panel = sel.closest('.divEstudiosClasifConsole');
+    divClasif = panel.closest('.card-body')
+    if (sel.val()=='2'){
+        panel.find(".divEstudiosInterpretaciones").show();
+        divClasif.find(".divReferencia").hide();
+    }else{
+        panel.find(".divEstudiosInterpretaciones").hide();
+        divClasif.find(".divReferencia").show();
+    }
+
+});
+
+$(document).on('click',".btnAddInterpretacion",function(e){
+   e.preventDefault();
+   div = $(this).closest(".divEstudiosInterpretaciones").find(".divInterpretaciones");
+    $(div).append(addInterpretacion(0,false));
+});
+
+function addInterpretacion(data,first){
+    interp = '\
+                <div class="divInterpretacion row">\
+            ';
+    interp += (!first)?'<hr>':'';
+    interp += '\
+                    <div class="col-2">\
+                        <br/>\
+                        <button class="btn btn-danger btn-sm btnDelInterpretacion">\
+                            <span class="fa fa-trash"></span>\
+                        </button>\
+                    </div>\
+                    <div class="col-5">\
+                        <label class="">\
+                            Valor\
+                        </label>\
+                        <input type="text" class="txtClasifInterpretacionValor form-control" value="'+data.valor+'">\
+                    </div>\
+                    <div class="col-5">\
+                        <label class="">\
+                            Interpretación\
+                        </label>\
+                        <input type="text" class="txtClasifInterpretacionNombre form-control" value="'+data.nombre+'">\
+                    </div>\
+                </div>\
+            ';
+    return interp;
+}
+
+$(document).on('click','.btnDelInterpretacion',function(e){
+   e.preventDefault();
+   $(this).closest(".divInterpretacion").remove();
+});
+
 $(document).on('click',".btnDelClasif",function(e) {
     e.preventDefault();
     $(this).closest('.card').remove();
@@ -352,13 +501,14 @@ $(document).on('click',".btnDelClasif",function(e) {
 
 $(document).on('click',".btnEstudiosAddPrueba",function(e){
     e.preventDefault();
-    panel = $(this).closest('.card-body');
-    frmPrueba = addPrueba(0, false);
+    panel = $(this).closest('.card').find('.card-body');
+    tipo = panel.find('.selEstudiosTipoClasif').val();
+    frmPrueba = addPrueba(0, false,tipo);
     $(panel).append(frmPrueba);
 
 });
 
-function addPrueba(data,first){
+function addPrueba(data,first,tipo){
     if(data == 0){
         nombre = "";
         referencia = "";
@@ -366,20 +516,27 @@ function addPrueba(data,first){
         nombre = data.nombre;
         referencia = data.referencia;
     }
+    hideRef = (tipo == '2') ? 'style="display:none;"':"";
+    valRef = (tipo == '1') ? referencia:'';
     frmPrueba =  '<div class="divPrueba">';
-    frmPrueba += (!first)?'<div class="navbar navbar-dark bg-blue-sky"></div>':'';
-    frmPrueba +=      '<div class="form-group">\
-                            <label class="col-form-label"> \
-                                Prueba:\
-                                <input type="text" class="txtEstudiosNomPrueba form-control" value="'+nombre+'" />\
-                            </label>\
-                            <label class="col-form-label">\
-                                Referencia:\
-                                <input type="text" class="txtEstudiosRefPrueba form-control" value="'+referencia+'"/>\
-                            </label>\
-                            <div class="float-right"> \
-                                <button class="btn btn-danger btnDelPrueba">\
-                                    <span class="fa fa-minus-circle"></span>\
+    frmPrueba += (!first)?'<hr>':'';
+    frmPrueba +=      '<div class="row">\
+                            <div class="col-5">\
+                                <label class="col-form-label"> \
+                                    Prueba:\
+                                    <input type="text" class="txtEstudiosNomPrueba form-control" value="'+nombre+'" />\
+                                </label>\
+                            </div>\
+                            <div class="col-5 divReferencia" '+hideRef+'>\
+                                <label class="col-form-label">\
+                                    Referencia:\
+                                    <input type="text" class="txtEstudiosRefPrueba form-control" value="'+valRef+'"/>\
+                                </label>\
+                            </div>\
+                            <div class="col-2"> \
+                                <br/>\
+                                <button class="btn btn-sm btn-danger btnDelPrueba">\
+                                    <span class="fa fa-trash-o"></span>\
                                 </button>\
                             </div>\
                         </div>\
