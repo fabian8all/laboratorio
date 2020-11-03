@@ -60,7 +60,6 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
     $.post("routes/routeResultados.php",{info:id,action:"get"})
         .done(function(data){
             data = $.parseJSON(data);
-
             $(data).each(function(k,estudio){
                 divResultados += "\
                     <div class='card'>\
@@ -80,6 +79,7 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                 <hr>\
                             ";
                         }
+                        tipo = ('tipo' in clasif) ? parseInt(clasif.tipo):1;
 
                         $(clasif.pruebas).each(function(k3,prueba){
                             divResultados += "\
@@ -90,14 +90,14 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                         </label>\
                                     </div>\
                                     ";
-                            if (clasif.tipo == 1){
+                            if (tipo == 1){
                                 divResultados+="\
                                         <div class='col-md-6 col-sm-12'>\
                                             <input type='text' class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
                                         </div>\
                                     </div>\
                                 ";
-                            }else if(clasif.tipo == 2){
+                            }else if(tipo == 2){
                                 divResultados+="\
                                         <div class='col-md-6 col-sm-12'>\
                                             <select class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
@@ -161,7 +161,8 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                 <hr>\
                             ";
                         }
-                        col = (clasif.tipo == '1')?'col-4':'col-6'
+                        tipo = ('tipo' in clasif) ? parseInt(clasif.tipo):1;
+                        col = (tipo == 1)?'col-4':'col-6';
                         divResultados += "\
                                 <div class='row'>\
                                     <div class='"+col+"'>\
@@ -175,7 +176,7 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                         </label>\
                                     </div>\
                                     ";
-                        divResultados += (clasif.tipo == '1')?"\
+                        divResultados += (tipo == 1)?"\
                                     <div class='col-4'>\
                                         <label>\
                                             <strong>REFERENCIA</strong>\
@@ -195,16 +196,16 @@ $(document).on('show.bs.collapse',".divSolicitud",function(){
                                         "+resultados[k2][k3]+"\
                                     </div>\
                                     ";
-                            divResultados += (clasif.tipo == '1')?"\
+                            divResultados += (tipo == 1)?"\
                                     <div class='col-4'>\
                                         <label>\
-                                            <strong>"+prueba.referencia+":</strong>\
+                                            <strong>"+prueba.referencia+"</strong>\
                                         </label>\
                                     </div>\
                                 </div>\
                             ":"</div>";
                         });
-                        if (clasif.tipo == 2){
+                        if (tipo == 2){
                             divResultados += "\
                                 <hr>\
                                 <div class='row'>\
