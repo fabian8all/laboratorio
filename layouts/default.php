@@ -67,7 +67,7 @@ require_once('includes/PageTemplate.php');
 
 
                 <!-- footer content -->
-                <?php include("includes/footer.html"); ?>
+                <?php include("includes/footer_old.html"); ?>
                 <!-- /footer content -->
 
             </div>
