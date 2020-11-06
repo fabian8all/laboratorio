@@ -1,7 +1,7 @@
 <?php 
 session_start();
 ?>
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
   <!--<div class="position-fixed"> REGRESARLO CUANDO SE TERMINEN LAS PRUEBAS -->
   <div class="content-wrapper">
     <!-- Sidebar - Brand -->

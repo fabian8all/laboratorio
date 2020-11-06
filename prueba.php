@@ -7,7 +7,7 @@
 
 <head>
   <?php include 'includes/links.html'; ?>
-  <title>Clientes | COSITEC</title>
+  <title>COTIZACION | LABORATORIO</title>
   
 </head>
 

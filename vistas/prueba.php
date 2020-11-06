@@ -1,39 +1,145 @@
-
-<h1 class="h3 mb-2 text-gray-800">Clientes</h1>
-<div class="row" style="margin: 10px 0">
+<h1 class="h3 mb-2 text-gray-800">Cotización</h1>
+<div class="row">
   <div class="col-lg-4 col-md-4 col-12">
-    <button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#modAgregarCliente">Agregar cliente</button>
-  </div>
-  <div class="col-lg-4 col-md-4 col-12 smallMargin">
-    <select name="" id="select_status" class="form-control">
-      <option value="1">ACTIVOS</option>
-      <option value="0">INACTIVOS</option>
-      <option value="3">ELIMINADOS</option>
-      <option value="2">TODOS</option>
-    </select>
-  </div>
-  <div class="col-lg-4 col-md-4 col-12 smallMargin">
-    <form>
-      <div class="input-group">
-        <input type="text" id="txt_busqueda" class="form-control bg-light border-0 small" style="background-color: white !important" placeholder="Buscar cliente..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search fa-sm"></i>
-          </button>
+    <!-- Collapsable Card Example -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#ClienteCard" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="ClienteCard">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Paciente</h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="ClienteCard">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <p><b>Seleccionar paciente:</b></p>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <select name="" id="select_status" class="form-control selectpicker" data-live-search="true">
+                    <option value="" disabled selected>Seleccione paciente</option>
+                    <option value="1">ACTIVOS</option>
+                    <option value="0">INACTIVOS</option>
+                    <option value="3">ELIMINADOS</option>
+                    <option value="2">TODOS</option>
+                  </select>
+                  <div class="input-group-append">
+                    <button class="btn btn-info" type="button">
+                      <i class="fas fa-plus fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <label><b>Nombre:</b></label>
+              <label>Jose Ramon Diaz Ortega</label>
+            </div>
+            <div class="col-lg-12">
+              <label><b>Genero:</b></label>
+              <label>Masculino</label>
+            </div>
+            <div class="col-lg-12">
+              <label><b>Edad:</b></label>
+              <label>24</label>
+            </div>
+            <div class="col-lg-12">
+              <label><b>Teléfono:</b></label>
+              <label>3121078034</label>
+            </div>
+            <div class="col-lg-12">
+              <label><b>Email:</b></label>
+              <label style="word-wrap: break-word;">jramondiaz96@gmail.com</label>
+            </div>
+          </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-<div class="card shadow mb-4">
-  <div class="card-body">
-    <div id="tableContainer" class="table-responsive">
-      <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead id="thead">
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-      </table>
+  <div class="col-lg-8 col-md-8 col-12">
+    <!-- Collapsable Card Example -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#TotalCard" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="TotalCard">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> Estudios a realizar</h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="TotalCard">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-9 col-md-9 col-12">
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+              <div class="form-group">
+                <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar cliente</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-3  col-3">
+              <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6">
+              <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+            </div>
+            <div class="col-lg-3 col-md-3  col-3">
+              <label>$256.00</label>
+            </div>
+            <div class="col-lg-3 col-md-3  col-3">
+              <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6">
+              <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+            </div>
+            <div class="col-lg-3 col-md-3  col-3">
+              <label>$256.00</label>
+            </div>
+            <div class="col-lg-3 col-md-3  col-3">
+              <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6">
+              <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+            </div>
+            <div class="col-lg-3 col-md-3  col-3">
+              <label>$256.00</label>
+            </div>
+          </div>
+          <div class="row">
+            <hr style="width: 90%; margin:.6rem 0">
+            <div class="col-lg-3 col-md-3 col-3">
+              <label><b>Subtotal</b></label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+            </div>
+            <div class="col-lg-3 col-md-3 col-3">
+              <label>$256.00</label>
+            </div>
+            <hr style="width: 90%; margin:.6rem 0">
+            <div class="col-lg-3 col-md-3 col-3">
+              <label><b>Total</b></label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+            </div>
+            <div class="col-lg-3 col-md-3 col-3">
+              <label>$256.00</label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-lg-9 col-md-9 col-12">
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+              <div class="form-group">
+                <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#"><i class="fas fa-clipboard-list"></i> Solicitar Estudios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -101,7 +207,6 @@
                 <input type="date" class="form-control form-control-user" id="txtFechaRegistro*" placeholder="Fecha de registro">
               </div>-->
           </div>
-        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -194,218 +299,12 @@
                 <input type="date" class="form-control form-control-user " id="txtFechaRegistroE" placeholder="Fecha de registro">
               </div>-->
           </div>
-        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button id="btnguardarEdit" type="submit" class="btn btn-success">Aceptar</button>
       </div>
       </form>
-    </div>
-  </div>
-</div>
-<!-- Modal DETALLES-->
-<div class="modal fade" id="modDetalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="max-width: 850px;" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Información clientes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="card shadow mb-4 col-lg-12">
-              <div class="card-header py-3">
-                <h6 id="txtIdD" style="display: none"></h6>
-                <h6 id="txtIdUD" style="display: none"></h6>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <h6 style="display: inline-block;" class="m-0 font-weight-bold text-primary">Cliente: </h6>
-                    <h6 style="display: inline-block;" id="txtNombresD"></h6>
-                    <h6 style="display: inline-block;" id="txtPrimerApD"></h6>
-                    <h6 style="display: inline-block;" id="txtSegundoApD"></h6>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <h6 style="display: inline-block;" class="m-0 font-weight-bold text-primary">Usuario dio de alta: </h6>
-                    <h6 style="display: inline-block;" id="txtUsuarioD"></h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <!--<div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                          <label><b>Primer apellido:</b></label>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                          <label for="" id="txtPrimerApD"></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                          <label><b>Segundo apellido:</b></label>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                          <label for="" id="txtSegundoApD"></label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>-->
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Calle:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtCalleD"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>No. Exterior:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtNoExtD"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>No. Interior:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtNoIntD"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Colonia:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtColoniaD"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Entre calle:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtEntreCalle1D"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Entre calle:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtEntreCalle2D"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Estado:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtEstadoD"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Municipio:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtMunicipioD"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Teléfono:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtTelefonoD"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Correo Electrónico:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtCorreoElecD"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Fecha de registro:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtFechaRegistroD"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label><b>Fecha de actualización:</b></label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-12">
-                        <label for="" id="txtFechaActualizacionD"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--<div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                      <label><b>Fecha de registro:</b></label>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                      <label for="" id="txtFechaRegistroD"></label>
-                    </div>
-                  </div>-->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-        <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
-      </div>
     </div>
   </div>
 </div>
