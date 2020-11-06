@@ -68,71 +68,71 @@
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="TotalCard">
-        <div class="card-body">
+        <div class="card-body" style="overflow-x: scroll">
           <div class="row">
-            <div class="col-lg-9 col-md-9 col-12">
+            <div class="col-lg-8 col-md-8 col-12">
             </div>
-            <div class="col-lg-3 col-md-3 col-12">
+            <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
                 <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar cliente</button>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-2">
               <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
             </div>
-            <div class="col-lg-6 col-md-6 col-6">
+            <div class="col-lg-8 col-md-8 col-7">
               <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
             </div>
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-3">
               <label>$256.00</label>
             </div>
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-2">
               <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
             </div>
-            <div class="col-lg-6 col-md-6 col-6">
+            <div class="col-lg-8 col-md-8 col-7">
               <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
             </div>
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-3">
               <label>$256.00</label>
             </div>
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-2">
               <button type="" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></button>
             </div>
-            <div class="col-lg-6 col-md-6 col-6">
+            <div class="col-lg-8 col-md-8 col-7">
               <label><i class="far fa-check-circle"></i> 17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
             </div>
-            <div class="col-lg-3 col-md-3  col-3">
+            <div class="col-lg-2 col-md-2  col-3">
               <label>$256.00</label>
             </div>
           </div>
           <div class="row">
             <hr style="width: 90%; margin:.6rem 0">
-            <div class="col-lg-3 col-md-3 col-3">
+            <div class="col-lg-2 col-md-2 col-2">
               <label><b>Subtotal</b></label>
             </div>
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-8 col-md-8 col-7">
             </div>
-            <div class="col-lg-3 col-md-3 col-3">
+            <div class="col-lg-2 col-md-2 col-3">
               <label>$256.00</label>
             </div>
             <hr style="width: 90%; margin:.6rem 0">
-            <div class="col-lg-3 col-md-3 col-3">
+            <div class="col-lg-2 col-md-2 col-2">
               <label><b>Total</b></label>
             </div>
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-8 col-md-8 col-7">
             </div>
-            <div class="col-lg-3 col-md-3 col-3">
+            <div class="col-lg-2 col-md-2 col-3">
               <label>$256.00</label>
             </div>
           </div>
         </div>
         <div class="card-footer">
           <div class="row">
-            <div class="col-lg-9 col-md-9 col-12">
+            <div class="col-lg-8 col-md-8 col-12">
             </div>
-            <div class="col-lg-3 col-md-3 col-12">
+            <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
                 <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#"><i class="fas fa-clipboard-list"></i> Solicitar Estudios</button>
               </div>
