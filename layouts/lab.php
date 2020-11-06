@@ -17,7 +17,7 @@ require_once('includes/PageTemplate.php');
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/animate.min.css" rel="stylesheet">
-        
+
         <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
         <link href="fonts/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -80,7 +80,7 @@ require_once('includes/PageTemplate.php');
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-                <?php include("includes/footer_old.html"); ?>
+                <?php include("includes/footer.php"); ?>
                 <!-- End of Footer -->
 
             </div>
@@ -93,26 +93,6 @@ require_once('includes/PageTemplate.php');
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--    Page Modals-->
         <?php if(isset($TPL->Modales)) { include "modales/".$TPL->Modales; } ?>
         <!--    /Page Modals-->
