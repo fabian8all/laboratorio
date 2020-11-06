@@ -74,7 +74,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
-                <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar cliente</button>
+                <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar estudio</button>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
-                <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#"><i class="fas fa-clipboard-list"></i> Solicitar Estudios</button>
+                <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#"><i class="fas fa-clipboard-list"></i> Solicitar estudios</button>
               </div>
             </div>
           </div>
