@@ -26,7 +26,7 @@
 
             echo "<div class='container-fluid'>";
 
-            include 'vistas/prueba.php';
+            include 'vistas/cotizacion.php';
             //include 'views/clientes.php';
           ?>
           
