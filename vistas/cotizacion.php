@@ -68,7 +68,7 @@
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="TotalCard">
-        <div class="card-body" style="overflow-x: scroll">
+        <div class="card-body" >
           <div class="row">
             <div class="col-lg-8 col-md-8 col-12">
             </div>
