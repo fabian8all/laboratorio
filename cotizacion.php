@@ -7,7 +7,7 @@
 
 <head>
   <?php include 'includes/links.html'; ?>
-  <title>Clientes | COSITEC</title>
+  <title>COTIZACION | LABORATORIO</title>
   
 </head>
 
@@ -26,7 +26,7 @@
 
             echo "<div class='container-fluid'>";
 
-            include 'vistas/prueba.php';
+            include 'vistas/cotizacion.php';
             //include 'views/clientes.php';
           ?>
           

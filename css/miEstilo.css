@@ -1,0 +1,25 @@
+.modal-content {
+  background-color: #efefef;
+}
+
+#modAgregarEstudio .modal-body {
+  max-width: 900px;
+  padding: 1rem 50px;
+  overflow-x: hidden;
+}
+
+#modAgregarEstudio .carousel-control-next,
+#modAgregarEstudio .carousel-control-prev {
+  right: -40px;
+  background-color: #224abc !important;
+  border-radius: 100px;
+  width: 30px;
+}
+
+#modAgregarEstudio .carousel-control-prev {
+  left: -40px;
+}
+
+#modAgregarEstudio .card {
+  margin: 5px 0;
+}
