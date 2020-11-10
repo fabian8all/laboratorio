@@ -1,4 +1,6 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
+var estudiosSelected = [];
+var descuento = 0.0;
 
 $(document).ready(function(){
     load_sel_pacientes();

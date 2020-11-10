@@ -24,7 +24,8 @@
 
     <li class="nav-item">
         <a class="nav-link" href="resultados.php">
-            <i class="fas fa-fw fa-check-circle"></i> Resultados
+            <i class="fas fa-fw fa-check-circle"></i>
+            <span>Resultados</span>
         </a>
     </li>
 

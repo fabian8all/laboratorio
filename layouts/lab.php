@@ -1,6 +1,5 @@
 <?php
 include_once('includes/loginProtect.php');
-require_once('includes/PageTemplate.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +24,10 @@ require_once('includes/PageTemplate.php');
 
         <!-- Page CSSs -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+        <link href="css/miEstilo.css" rel="stylesheet">
+        <link href="css/responsive.css" rel="stylesheet">
+
 
         <?php if(isset($TPL->CSSs)) {
             foreach ( $TPL->CSSs as $CSS ){
