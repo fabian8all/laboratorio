@@ -74,8 +74,24 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
-                <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar estudio</button>
+                <div class="input-group">
+                  <select name="" id="select_status" class="form-control selectpicker" data-live-search="true">
+                    <option value="" disabled selected>Seleccione estudios</option>
+                    <option value="1">ACTIVOS</option>
+                    <option value="0">INACTIVOS</option>
+                    <option value="3">ELIMINADOS</option>
+                    <option value="2">TODOS</option>
+                  </select>
+                  <div class="input-group-append">
+                    <button class="btn btn-info" type="button" data-toggle="" data-target="#">
+                      <i class="fas fa-plus fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
+              <!--<div class="form-group">
+                <button class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#modAgregarEstudio"><i class="fas fa-plus fa-sm"></i> Agregar estudio</button>
+              </div>-->
             </div>
           </div>
           <div class="row">
