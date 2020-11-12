@@ -24,13 +24,15 @@ function load_sel_pacientes(selId = 0){
                     customAlert("Error!","No hay pacientes")
                 }else{
                     selected = (selId == 0 )?"selected":"";
-                    selData="<option "+selected+" disabled value='0'>--Seleccione paciente--</option>";
+                    selData="<option "+selected+" disabled value=''>Seleccione paciente</option>";
                     $(data).each(function(key,val){
                         selected = (selId == val.id )?"selected":"";
                         selData += "<option "+selected+" value='"+val.id+"'>"+val.nombre+"</option>";
                     });
                     $("#selREPacienteData").html(selData);
                     $("#selREPacienteData").trigger("change");
+                    $("#selREPacienteData").addClass("selectpicker").selectpicker();
+
                 }
             } else{
                 customAlert("Error!",ajaxError);
@@ -52,8 +54,9 @@ $("#selREPacienteData").change(function(){
                     customAlert("Error!","No se encuentra la información del paciente")
                 }else{
                     $("#lblREPacienteNom").html(data.nombre);
+                    $("#lblREPacienteGen").html(data.genero);
+                    $("#lblREPacienteAge").html(data.edad);
                     $("#lblREPacienteTel").html(data.telefono);
-                    $("#lblREPacienteDir").html(data.direccion);
                     $("#lblREPacienteEmail").html(data.email);
                     descuento = data.descuento;
                     load_estudios_selected();

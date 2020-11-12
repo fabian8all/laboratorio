@@ -19,7 +19,7 @@
             <div class="col-lg-12">
               <div class="form-group">
                 <div class="input-group">
-                  <select name="" id="selREPacienteData" class="form-control selectpicker" data-live-search="true">
+                  <select name="" id="selREPacienteData" class="form-control" data-live-search="true">
                   </select>
                   <div class="input-group-append">
                     <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modAgregarCliente">
