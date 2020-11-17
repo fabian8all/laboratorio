@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/customAlerts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/cotizacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cotizacion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/getfull.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/maps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pacientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pacientes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/lab.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/pacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/pacientes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/pacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/pacientes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,14 +43,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/webapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laboratorio\js" />
       <recent name="C:\xampp\htdocs\laboratorio\vistas" />
       <recent name="C:\xampp\htdocs\laboratorio\fonts" />
-      <recent name="C:\xampp\htdocs\laboratorio\js" />
       <recent name="C:\xampp\htdocs\laboratorio\plugins" />
       <recent name="C:\xampp\htdocs\laboratorio\layouts" />
     </key>
@@ -67,6 +76,8 @@
       <workItem from="1603745736186" duration="10470000" />
       <workItem from="1603828784349" duration="22739000" />
       <workItem from="1605048018119" duration="4161000" />
+      <workItem from="1605216411516" duration="12218000" />
+      <workItem from="1605367730705" duration="9329000" />
     </task>
     <servers />
   </component>
@@ -82,14 +93,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1604961007812" />
-    <state x="404" y="109" width="540" height="524" key="StructurePopup" timestamp="1602197897009">
+    <state x="404" y="109" width="570" height="524" key="StructurePopup" timestamp="1605400141716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="404" y="109" width="540" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1602197897009" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1605050015383">
+    <state x="404" y="109" width="570" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1605400141716" />
+    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1605400134551">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1605050015383" />
+    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1605400134551" />
+    <state x="339" y="164" key="run.anything.popup" timestamp="1605415577522">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1605415577522" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605051663825">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

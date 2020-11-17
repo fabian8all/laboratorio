@@ -48,7 +48,6 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             data: {info:params.data,action:'BSTableData'},
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 params.success({
                     "total": data.count,
                     "rows" : data.rows
@@ -75,6 +74,8 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                     $('#hidPacientesMode').val('update');
                     $('#hidPacientesId').val(data.id);
                     $('#txtPacientesNombre').val(data.nombre);
+                    $('#selPacientesGenero').val(data.genero);
+                    $('#txtPacientesFechaNac').val(data.fechaNacInput);
                     $('#txtPacientesDireccion').val(data.direccion);
                     $('#txtPacientesTelefono').val(data.telefono);
                     $('#txtPacientesEmail').val(data.email);
@@ -99,7 +100,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                         customAlert("Exito!", "El paciente ha sido eliminado");
                     else
                         customAlert("Error!", "Error al intentar eliminar al paciente");
-                    load_pacientes_data()
+                    $('#bstablePacientes').bootstrapTable("refresh");
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
                 });
@@ -113,6 +114,8 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
     $("#btnPacientesSave").click(function(){
         info =  {
             nombre: $("#txtPacientesNombre").val(),
+            genero: $("#selPacientesGenero").val(),
+            fechaNac: $("#txtPacientesFechaNac").val(),
             direccion: $("#txtPacientesDireccion").val(),
             telefono: $("#txtPacientesTelefono").val(),
             email: $("#txtPacientesEmail").val(),
@@ -132,7 +135,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             if(data){
                 customAlert("Exito!", "La información se ha guardado con exito");
                 $("#modalPacientes").modal('hide');
-                load_pacientes_data();
+                $('#bstablePacientes').bootstrapTable("refresh");
             } else{
                 customAlert("Error!", "Ocurrió un error al intentar guardar la información");
             }

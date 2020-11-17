@@ -1,55 +1,58 @@
-<div id="modalPacientes" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="modalPacientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Información del paciente</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar paciente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="frmPacientes">
+                <form id="frmPacientes" class="user">
                     <input type="hidden" id="hidPacientesMode" value="">
                     <input type="hidden" id="hidPacientesId" value="">
                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user necesary" id="txtPacientesNombre" placeholder="Nombres*">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select id="selPacientesGenero" class="form-control form-control-user necesary" style="padding: 0rem 1rem;height: 3.2rem;" >
+                                    <option value="" selected disabled>Género</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input type="date" id="txtPacientesFechaNac" class="form-control form-control-user necesary" name="" value="" placeholder="Fecha de nacimiento*">
+                            </div>
+                        </div>
                         <div class="col-12">
-                            <label for="txtPacientesNombre" class="col-form-label">
-                                <strong>Nombre:</strong>
-                            </label>
-                            <input type="text" class="form-control" id="txtPacientesNombre">
+                            <div class="form-group">
+                                <input type="text" id="txtPacientesDireccion" class="form-control form-control-user" name="" value="" placeholder="Dirección">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input type="tel" id="txtPacientesTelefono" class="form-control form-control-user" name="" value="" placeholder="Teléfono">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input type="email" id="txtPacientesEmail" class="form-control form-control-user" name="" value="" placeholder="Correo electrónico">
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="txtPacientesDireccion" class="col-form-label">
-                                <strong>Dirección:</strong>
-                            </label>
-                            <input type="text" class="form-control" id="txtPacientesDireccion">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label for="txtPacientesTelefono" class="col-form-label">
-                                <strong>Telefono:</strong>
-                            </label>
-                            <input type="text" class="form-control" id="txtPacientesTelefono">
-                        </div>
-                        <div class="col-8">
-                            <label for="txtPacientesEmail" class="col-form-label">
-                                <strong>Email:</strong>
-                            </label>
-                            <input type="email" class="form-control" id="txtPacientesEmail">
-                        </div>
-                    </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnPacientesSave" class="btn btn-success">
-                    <span class="fa fa-save"></span>
-                    Guardar
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button id="btnPacientesSave" type="button" class="btn btn-success">Agregar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

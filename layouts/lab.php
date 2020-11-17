@@ -24,6 +24,7 @@ include_once('includes/loginProtect.php');
 
         <!-- Page CSSs -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="plugins/CustomAlerts/css/jquery-confirm.css" rel="stylesheet">
 
         <link href="css/miEstilo.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
@@ -108,6 +109,8 @@ include_once('includes/loginProtect.php');
         <script src="plugins/jquery-easing/jquery.easing.min.js"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+        <script src="plugins/CustomAlerts/js/jquery-confirm.js"></script>
+        <script src="js/customAlerts.js"></script>
 
         <!-- Page Scripts-->
         <?php if(isset($TPL->Scripts)) {

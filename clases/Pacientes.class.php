@@ -70,6 +70,7 @@
 
             $sql = "SELECT 
                         P.*,
+                        DATE_FORMAT(P.fechaNac,'%Y-%m-%d') AS fechaNacInput,
                         IF (P.referente = 0, 0.0, U.descuento) AS descuento 
                     FROM pacientes P 
                         LEFT JOIN usuarios U 
@@ -88,6 +89,8 @@
         public function Add($data){
             $params = array(
                 ':nom'=>$data['nombre'],
+                ':gen'=>$data['genero'],
+                ':fna'=>$data['fechaNac'],
                 ':dir'=>$data['direccion'],
                 ':tel'=>$data['telefono'],
                 ':eml'=>$data['email'],
@@ -95,9 +98,9 @@
                 ':crt'=>date('Y-m-d H:i:s')
             );
             $sql = "INSERT INTO pacientes 
-                        (nombre,direccion,telefono,email,referente,creado) 
+                        (nombre,genero,fechaNac,direccion,telefono,email,referente,creado) 
                     VALUES
-                        (:nom,:dir,:tel,:eml,:rfr,:crt)";
+                        (:nom,:gen,:fna,:dir,:tel,:eml,:rfr,:crt)";
             $query = self::query($sql,$params);
             if ($query){
                 $sel = "SELECT MAX(id) as id FROM pacientes;";
@@ -113,6 +116,8 @@
             $params = array(
                 ':pid'=>$data['id'],
                 ':nom'=>$data['nombre'],
+                ':gen'=>$data['genero'],
+                ':fna'=>$data['fechaNac'],
                 ':dir'=>$data['direccion'],
                 ':tel'=>$data['telefono'],
                 ':eml'=>$data['email'],
@@ -120,6 +125,8 @@
             $sql = "UPDATE pacientes 
                         SET 
                             nombre = :nom,
+                            genero = :gen,
+                            fechaNac = :fna,
                             direccion = :dir,
                             telefono = :tel,
                             email = :eml,
