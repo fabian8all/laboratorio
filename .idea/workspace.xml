@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/clases/Perfiles.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/perfiles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/perfiles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/routePerfiles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usuarios.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vistas/perfiles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vistas/usuarios.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Usuarios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Usuarios.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/usuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/usuarios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/usuarios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/resultsFiles/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/resources/resultsFiles/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeUsuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeUsuarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/lab_topbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_topbar.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +72,7 @@
       <workItem from="1605902961386" duration="1301000" />
       <workItem from="1605905742954" duration="7261000" />
       <workItem from="1606059546193" duration="2204000" />
-      <workItem from="1606063478676" duration="12996000" />
+      <workItem from="1606063478676" duration="13427000" />
     </task>
     <servers />
   </component>

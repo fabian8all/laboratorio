@@ -23,15 +23,28 @@
                 <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersFin"></span>
             </div>
         </div>
+        <div class="dropdown onlySmall">
+            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Estatus
+                <span class="btn btn-danger btn-sm">1</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item">Pendiente de muestra <span class="btn btn-danger btn-sm">1</span></a>
+                <a class="dropdown-item">En proceso <span class="btn btn-danger btn-sm">0</span></a>
+                <a class="dropdown-item">Pendiente de pago <span class="btn btn-danger btn-sm">0</span></a>
+                <a class="dropdown-item">Finalizado <span class="btn btn-danger btn-sm">0</span></a>
+            </div>
+        </div>
     </form>
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-        <li class="nav-item dropdown no-arrow d-sm-none">
+<!--        <li class="nav-item dropdown no-arrow d-sm-none">
             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
             </a>
-            <!-- Dropdown - Messages -->
+-->            <!-- Dropdown - Messages -->
+<!--
             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                     <div class="input-group">
@@ -47,8 +60,8 @@
         </li>
         <span class="badge badge-danger badge-counter" id=""></span>
         </a>
+-->
         <div class="topbar-divider d-none d-sm-block"></div>
-        <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
@@ -66,9 +79,5 @@
                 </a>
             </div>
         </li>
-
     </ul>
-
 </nav>
-<!-- End of Topbar -->
-
