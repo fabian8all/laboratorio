@@ -66,51 +66,6 @@
 
         }
 
-        public function Save($data){
-            $params = array(
-                ":eid"  => $data['idEstudio'],
-                ":res"  => $data['resultados'],
-                ":obs"  => $data['observaciones'],
-                ":ana"  => $data['analista']
-            );
-            $sql = "UPDATE estudios_paciente 
-                        SET resultados = :res, 
-                            observaciones = :obs,
-                            analista = :ana,
-                            estado = 2
-                        WHERE id = :eid;";
-            $query = self::query($sql,$params);
-
-            $selpaq = "SELECT paquete FROM estudios_paciente WHERE id = ".$data['idEstudio'].";";
-
-            $querypaq = self::query_single_object($selpaq);
-
-            $idPaq = ($querypaq->paquete == 0)?$data['idEstudio']:$querypaq->paquete;
-
-            $selStat = "SELECT estado FROM estudios_paciente WHERE paquete = $idPaq OR id = $idPaq";
-
-            $queryStat = self::query_object($selStat);
-
-            $completo = true;
-            foreach ($queryStat as $estados){
-                if ($estados->estado == 1){
-                    $completo = false;
-                    break;
-                }
-            }
-            if ($completo){
-                $sql = "UPDATE estudios_paciente 
-                            SET estado = 3
-                            WHERE id = $idPaq;";
-                $query = self::query($sql);
-                if ($query){
-                    return array("success"=>true,"full"=>true);
-                }
-            }else{
-                return array("success"=>true,"full"=>false);
-            }
-        }
-
         public function BSTableData($data){
             $search = (array_key_exists('search',$data))? $data['search']:"";
             $limit = (array_key_exists('limit',$data))?$data['limit']:0;
@@ -126,7 +81,8 @@
                             S.id as id,
                             S.solicitud as fecha,
                             P.nombre as paciente,
-                            U.nombre as levanto 
+                            U.nombre as levanto, 
+                            S.resultados as resultados
                     FROM solicitudes S 
                         INNER JOIN pacientes P
                             ON S.id_paciente = P.id
@@ -165,13 +121,27 @@
 
         function uploadFile($data){
             $params = array(
-                ':ent' => date()
+                ':sid'  => $data['id'],
+                ':ent'  => date('Y-m-d H:i:s'),
+                ':fil'  => $data['file']
             );
 
             $sql = "
                 UPDATE solicitudes 
-                    SET entregado =
+                    SET entrega = :ent,
+                        resultados = :fil,
+                        estado = 2
+                    WHERE id = :sid;
             ";
+            $query = self::query($sql,$params);
+            if ($query){
+                $res = true;
+            }else{
+                $res = false;
+            }
+
+            return $res;
+
         }
 
     }

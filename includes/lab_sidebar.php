@@ -42,10 +42,16 @@
                     <i class="fa fa-tasks"></i> Estudios
                 </a>
                 <a class="collapse-item" href="pacientes.php">
-                    <i class="fa fa-user"></i> Pacientes
+                    <i class="fa fa-book-medical"></i> Pacientes
                 </a>
                 <a class="collapse-item" href="clientes.php">
                     <i class="fa fa-briefcase"></i> Clientes
+                </a>
+                <a class="collapse-item" href="usuarios.php">
+                    <i class="fa fa-user"></i> Usuarios
+                </a>
+                <a class="collapse-item" href="perfiles.php">
+                    <i class="fa fa-user-tag"></i> Perfiles
                 </a>
             </div>
         </div>

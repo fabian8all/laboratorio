@@ -15,23 +15,20 @@
 		case 'auth':
 			echo json_encode($Usuario->login($info));
 			break;
-        case 'registrar':
-            echo json_encode($Usuario->registrar($info));
-            break;
-		case 'read':
-			echo json_encode($Usuario->read($info));
+		case 'BSTableData':
+			echo json_encode($Usuario->BSTableData($info));
 			break;
-		case 'activarUser':
-			echo json_encode($Usuario->activa($info));
+		case 'get':
+			echo json_encode($Usuario->get($info));
 			break;
-		case 'desactivarUser':
-			echo json_encode($Usuario->desactiva($info));
+		case 'Add':
+			echo json_encode($Usuario->Add($info));
 			break;
-		case 'getFull':
-			echo json_encode($Usuario->getFull($info));
+		case 'Update':
+			echo json_encode($Usuario->Update($info));
 			break;
-		case 'requestFull':
-			echo json_encode($Usuario->requestFull($info));
+		case 'Delete':
+			echo json_encode($Usuario->Delete($info));
 			break;
 	}
 

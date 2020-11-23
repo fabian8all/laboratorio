@@ -1,113 +1,72 @@
-<!-- MODAL -->
-<div class="modal fade bs-example-modal-lg" id="modalUser" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div id="modalUsuarios" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-
             <div class="modal-header">
-                <h4 class="modal-title" id="modal_title">Registrar restaurante</h4>
+                <h5 class="modal-title">Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
-            <div class="modal-body" id="modal_body">
-
-
-
-
-                <div class="row">
-                    <form class="form-horizontal form-label-left input_mask" id="formUser">
-                        <input type="hidden" value="user" name="action" id="action" >
-                        <input type="hidden" value="" name="id" id="id" >
-
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_nombre">
-                                Nombre del responsable
-                                <span class="fa fa-user" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left required" id="txt_nombre" name="txt_nombre" placeholder="Ej. Juan Perez" type="text">
-                            </label>
+            <div class="modal-body">
+                <form id="frmUsuarios" class="user">
+                    <input type="hidden" id="hidUsuariosMode" value="">
+                    <input type="hidden" id="hidUsuariosId" value="">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="txtUsuariosNombre" placeholder="Nombre">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_username">
-                                Usuario
-                                <span class="fa fa-id-badge" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left required" id="txt_username" name="txt_username" placeholder="Ej. Juanpe123" type="text">
-                            </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="txtUsuariosUser" placeholder="Nombre de Usuario">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_email">
-                                Email
-                                <span class="fa fa-envelope" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left required" id="txt_email" name="txt_email" placeholder="Ej. Juanpe123@gmail.com" type="text">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="txtUsuariosEmail" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <select class="form-control form-control-user" id="selUsuariosPerfil"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="divUsuariosChkPass">
+                        <div class="col-6">
+                            <label for="chkUsuariosChgPass" class="col-form-label">
+                                <strong>Cambiar contraseña</strong>
+                                <input type="checkbox" class="form-control form-check" id="chkUsuariosChgPass" value=1>
                             </label>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_pass">
-                                Contraseña
-                                <span class="fa fa-lock" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left required" id="txt_pass" name="txt_pass" type="password">
-                            </label>
+                    <div class="row" id="divUsuariosChgPass">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" id="txtUsuariosPass1" placeholder="Contraseña">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_pass2">
-                                Repetir contraseña
-                                <span class="fa fa-lock" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left" id="txt_pass2" name="txt_pass2" type="password">
-                            </label>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" id="txtUsuariosPass2" placeholder="Repetir contraseña">
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <h3>Datos del restaurante</h3>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_restaurante">
-                                Nombre del restaurante
-                                <span class="fa fa-home" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left required" id="txt_restaurante" name="txt_restaurante" type="text">
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_facebook">
-                                Facebook
-                                <span class="fa fa-facebook" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left" id="txt_facebook" name="txt_facebook" type="text">
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_telefono">
-                                Telefono
-                                <span class="fa fa-phone" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left" id="txt_telefono" name="txt_telefono" type="text">
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <label class="col-form-label" for="txt_horarios">
-                                Horarios
-                                <span class="fa fa-clock-o" aria-hidden="true"></span>
-                                <input class="form-control has-feedback-left" id="txt_horarios" name="txt_horarios" type="text">
-                            </label>
-                        </div>
-                    </form>
-<!--                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">-->
-<!--                        <label class="col-form-label" for="file_logo">-->
-<!--                            Logo-->
-<!--                            <span class="fa fa-image" aria-hidden="true"></span>-->
-<!--                            <form id="logoFileForm" method="post" action="upload.php" enctype="multipart/form-data" target="upload_target">-->
-<!--                                <input class="form-control dataInput" id="file_logo" name="file_logo" type="file">-->
-<!--                                <input type="hidden" id="hidFileLogoName" name="hidFileLogoName" value="">-->
-<!--                            </form>-->
-<!--                        </label>-->
-<!--                    </div>-->
-                </div>
-
+                </form>
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnRegistrar" class="btn btn-success btnModal">Registrar</button>
+                <button type="button" id="btnUsuariosSave" class="btn btn-success">
+                    <span class="fa fa-save"></span>
+                    Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

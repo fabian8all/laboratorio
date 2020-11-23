@@ -1,218 +1,166 @@
-var ajaxError = "Ocurrió un error, intentelo mas tarde o pongase en contacto con el administrador";
-var success   = "Acción realizada con exito";
+var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
-
-
-	$(document).ready(function(){
-		$('#select_ac_in').val(1);
-		$('#buscar').val("");
-		load_tabla();
+$(document).ready(function(){
+	$('#bstableUsuarios').bootstrapTable({
+		queryParams: function (p) {
+			return {
+				search          : p.search,
+				limit           : p.limit,
+				offset          : p.offset,
+				sort            : p.sort,
+				order           : p.order,
+			};
+		},
+		formatShowingRows: function (pageFrom, pageTo, totalRows) {
+			return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' usuarios';
+		},
+		formatRecordsPerPage: function (pageNumber) {
+			return pageNumber + ' usuarios por página';
+		},
+		formatNoMatches: function () {
+			return 'No se encontraron usuarios registradas';
+		},
+		formatLoadingMessage: function(){
+			return 'Cargando lista de usuarios';
+		}
 	});
+});
+
+function formatUsuariosOptions(value, row, index){
+	var options = "\
+                <div class='dropup'> \
+                    <button class='btn btn-circle btn-sm btn-outline-warning btnUsuariosEdit' data-idusuario='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fas fa-fw fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                    <button class='btn btn-circle btn-sm btn-outline-danger btnUsuariosDel' data-idusuario='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fas fa-fw fa-trash fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
+                </div>";
+
+	return options;
+}
 
 
-	$(document).on('change', '#select_ac_in', function(){
-		load_tabla();
-	});
 
+function ajaxGetUsuarios(params){
 
-	$(document).on('keyup', '#buscar', function(){
-		load_tabla();
-	});
-
-
-	$(document).on('click', '#btn_nuevo', function(){
-        resetForm('formUser');
-        $('#modalUser .modal-title').html("Nuevo usurio");
-        $('.btnModal').attr('id','btnAdd');
-        $('#check_pass').parent().hide();
-        $('#pass_cambio_fila').show();
-        $('#modalUser').modal('show');
-        load_perfiles();
-        $('#div_alerta').slideUp();
-        $('#action').val('create');
-	});
-
-	$(document).on('click', '#btnAdd', function(){
-		if(	$('#txt_username').val() != "" &&	$('#txt_pass').val() != "" &&	$('#sel_perfil').val() != null){
-			$.post('routes/routeUsuarios.php',serializeForm('formUser'),function(data){
-				if(data == 'true'){
-					customAlert("Felicidades!", success);
-					$('#modalUser').modal('hide');
-				}
-				else
-					if (data == 'false')
-						customAlert("Atención!", 'El nombre de usuario ya esta en uso');
-					else if (data == 0)
-                    		customAlert("Atención!", 'Las contraseñas no coinciden');
-						else
-							customAlert("Error!", ajaxError);
-				
-				load_tabla();
+	$.ajax({
+		type: "POST",
+		url: "routes/routeUsuarios.php",
+		data: {info:params.data,action:'BSTableData'},
+		dataType: "json",
+		success: function (data) {
+			console.log(data);
+			params.success({
+				"total": data.count,
+				"rows" : data.rows
 			})
-			.fail(function(error){
-                customAlert("Error!", ajaxError);
-            });
-		}else{
-			customAlert('Atención!', 'Debe llenar "Nombre de usuario", "Perfil" y "Contraseña" para poder guardar');
+		},
+		error: function (er) {
+			params.error(er);
 		}
 	});
+}
 
+$("#btnUsuariosAdd").click(function(){
+	$("#frmUsuarios").trigger('reset');
+	$("#hidUsuariosMode").val("new");
+	$("#divUsuariosChkPass").hide();
+	$('#divUsuariosChgPass').show();
+	$("#modalUsuarios").modal('show');
+});
 
-	$(document).on('click', '#btnEdit', function(){
-        if(	$('#txt_username').val() != "" ){
-            if ($('#check_pass').is(':checked')){
-                $('#check_pass').val('cambiar');
-            }else{
-                $('#check_pass').val('no_cambiar');
-            }
-			$.post('routes/routeUsuarios.php', serializeForm('formUser'),function(data){
-                if(data == 'true'){
-                    customAlert("Felicidades!", success);
-                    $('#modalUser').modal('hide');
-                }else if (data == 0)
-						customAlert("Atención!", 'Ocurrió un error al intentar cambiar la contraseña');
-					else if (data == 1)
-							customAlert("Atención!", 'Las contraseñas no coinciden');
-						else if (data == 2)
-								customAlert("Atención!", 'El campo de contraseña está vacío');
-							else if (data == 3)
-									customAlert("Atención!", 'El nombre de usuario ya está ocupado')
-								else
-									customAlert("Error!", ajaxError);
-
-                load_tabla();
-			})
-			.fail(function(error){
-                customAlert("Error!", ajaxError);
-			});
-		}else{
-			customAlert('Atención!', 'El nombre de usuario es requerido');
-		}
-	});
-
-
-
-	$('#check_pass').on('change',function(){
-		if ($(this).is(':checked')){
-            $('#pass_cambio_fila').show();
-		}else{
-            $('#pass_cambio_fila').hide();
-		}
-    });
-
-
-	function editUser(id){
-		resetForm('formUser');
-		$('.btnModal').attr('id','btnEdit');
-        $('#modalUser .modal-title').html("Editar usuario");
-        $('#check_pass').parent().show();
-        $('#pass_cambio_fila').hide();
-		$('#modalUser').modal('show');
-        load_perfiles();
-		$('#action').val('update');
-
-		$.post('routes/routeUsuarios.php',{info: id, action: 'get'},function(data){
-            data = $.parseJSON(data);
-            if(data != ""){
-                $('#id').val(data.id);
-                $('#txt_nombre').val(data.nombre);
-                $('#txt_username').val(data.username);
-                $('#sel_perfil').val(data.rol);
-            }
+$(document).on('click','.btnUsuariosEdit',function(){
+	id = $(this).data('idusuario');
+	$.post('routes/routeUsuarios.php',{info:id,action:'get'})
+		.done(function(data){
+			if(data != null){
+				data =  $.parseJSON(data);
+				$('#hidUsuariosMode').val('update');
+				$('#hidUsuariosId').val(data.id);
+				$('#txtUsuariosNombre').val(data.nombre);
+				$('#txtUsuariosUser').val(data.username).prop('disabled',true);
+				$('#txtUsuariosEmail').val(data.email);
+				$('#selUsuariosPerfil').val(data.perfil);
+				$('#chkUsuariosChgPass').prop('checked',false);
+				$('#divUsuariosChgPass').hide();
+				$('#txtUsuariosPass1').val('');
+				$('#txtUsuariosPass2').val('');
+				$("#modalUsuarios").modal('show');
+			}else{
+				customAlert("Error!", "No se encuentra la información del usuario");
+			}
 		})
 		.fail(function(error){
+			customAlert("Error!", ajaxError);
+		})
+});
+
+$(document).on('click','.btnUsuariosDel',function(){
+	id= $(this).data('idusuario');
+	$.confirm({
+		title: 'Atencion!',
+		content: '¿Esta seguro que desea eliminar este usuario?',
+		confirm: function(){
+			$.post('routes/routeUsuarios.php',{info: id,action: "Delete"},function(data){
+				if(data == 'true')
+					customAlert("Exito!", "El usuario ha sido eliminado");
+				else
+					customAlert("Error!", "Error al intentar eliminar al usuario");
+				$('#bstableUsuarios').bootstrapTable('refresh');
+			}).fail(function(error){
 				customAlert("Error!", ajaxError);
-		});
+			});
+		},
+		cancel: function(){
+			console.log('false');
+		}
+	});
+});
+
+$("#btnUsuariosSave").click(function(){
+	info =  {
+		nombre: $("#txtUsuariosNombre").val(),
+		username: $("#txtUsuariosUser").val(),
+		email: $("#txtUsuariosEmail").val(),
+		perfil: $("#selUsuariosPerfil").val(),
+		chkpass: $("#chkUsuariosChgPass").val(),
+		pass1: $("#txtUsuariosPass1").val(),
+		pass2: $("#txtUsuariosPass2").val(),
 	}
-
-
-	function reactivaUser(id){
-		$.confirm({
-            title: 'Atencion!',
-            content: '¿Esta seguro que desea reactivar este cliente?',
-            confirm: function(){
-                $.post('routes/routeUsuarios.php',{info: id, action: 'reactiva'},function(data){
-                    if(data == 'true')
-                        customAlert("Felicidades!", success);
-                    else
-                        customAlert("Error!", ajaxError);
-
-                    load_tabla();
-                })
-				.fail(function(error){
-						customAlert("Error!", ajaxError);
-				});
-            },
-            cancel: function(){
-                console.log('false');
-            }
-        });
+	if ($('#hidUsuariosMode').val() == "new"){
+		action="Add";
+	}else if($('#hidUsuariosMode').val() == "update"){
+		action="Update";
+		info.id = $("#hidUsuariosId").val();
 	}
-
-	function bajaUser(id){
-		$.confirm({
-            title: 'Atencion!',
-            content: '¿Esta seguro que desea dar de baja a este usuario?',
-            confirm: function(){
-                $.post('routes/routeUsuarios.php',{info: id, action: 'desactiva'},function(data){
-                    if(data == 'true')
-                        customAlert("Felicidades!", success);
-                    else
-                        customAlert("Error!", ajaxError);
-
-                    $('#select_ac_in').val(2);
-                    load_tabla();
-				})
-				.fail(function(error){
-					customAlert("Error!", ajaxError);
-				});
-            },
-            cancel: function(){
-                console.log('false');
-            }
-        });
-	}
-
-
-	function load_tabla(){
-		var option = $('#select_ac_in').val();
-		var busca = $('#buscar').val();
-		$.post('routes/routeUsuarios.php',{info: {status:option,busca:busca},action: "read"},function(data){
-			if(data != ""){
+	$('#btnUsuariosSave').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+	).prop('disabled',true);
+	$.post("routes/routeUsuarios.php",{info:info,action:action})
+		.done(function(data){
+			if(data){
 				data = $.parseJSON(data);
-				jQueryTable("tableContainer", data, 5, 800);
+				if(data.success){
+					customAlert("Exito!", data.msg);
+					$("#modalUsuarios").modal('hide');
+					$('#bstableUsuarios').bootstrapTable('refresh');
+				}else{
+					customAlert("Error!", data.msg);
+				}
+			} else{
+				customAlert("Error!", "Ocurrió un error al intentar guardar la información");
 			}
-			else{
-				$('tbody').empty();
-				customAlert("Atencion!", "No hay clientes para mostrar");
-			}
-		}).fail(function(error){
+		})
+		.fail(function(error){
 			customAlert("Error!", ajaxError);
+		})
+		.always(function(){
+			$('#btnUsuariosSave').html( '\
+                <span class="fa fa-save"></span>\
+                Guardar\
+            ').prop('disabled',false);
 		});
-	}
-
-	function load_perfiles(){
-		$.post('routes/routeUsuarios.php',{action: "load_perfiles"},function(data){
-			if(data != ""){
-				data=$.parseJSON(data);
-                $('#sel_perfil').empty()
-                $('#sel_perfil').append('<option value="0" selected disabled>Seleccione un perfil</option>')
-
-                $.each(data,function(value,perfil){
-					$('#sel_perfil').append('<option value="'+value+'">'+perfil+'</option>')
-				});
-			}
-			else{
-				$('tbody').empty();
-				customAlert("Atencion!", "Error al cargar los perfiles");
-			}
-		}).fail(function(error){
-			customAlert("Error!", ajaxError);
-		});
-	}
-
-
-	validaCampoLength("txt_nombre", 50);
-	validaCampoLength("txt_username", 50);
-	validaCampoLength("txt_pass", 30);
+});
 

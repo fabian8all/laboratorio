@@ -112,7 +112,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                         customAlert("Exito!", "El cliente ha sido eliminado");
                     else
                         customAlert("Error!", "Error al intentar eliminar al cliente");
-                    load_clientes_data()
+                    $('#bstableClientes').bootstrapTable('refresh');
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
                 });
@@ -151,7 +151,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                 if(data.success){
                     customAlert("Exito!", data.msg);
                     $("#modalClientes").modal('hide');
-                    load_clientes_data();
+                    $('#bstableClientes').bootstrapTable('refresh')
                 }else{
                     customAlert("Error!", data.msg);
                 }
