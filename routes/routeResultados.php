@@ -21,6 +21,13 @@
 		case 'Save':
 			echo json_encode($Resultados->Save($info));
 			break;
+		case 'BSTableData':
+			echo json_encode($Resultados->BSTableData($info));
+			break;
+		case 'uploadFile':
+			echo json_encode($Resultados->uploadFile($info));
+			break;
+
 	}
 
 ?>

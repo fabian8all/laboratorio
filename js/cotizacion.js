@@ -254,10 +254,13 @@ $("#btnRESolicitar").click(function(){
         customAlert("Error!", "No se han seleccionado estudios a realizar");
         return false;
     }
+    total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));
     info = {
         pacienteId  : $("#selREPacienteData").val(),
         descuento   : descuento,
-        estudios    : estudiosSelected
+        analistaId  : userData.id,
+        estudios    : estudiosSelected,
+        total       : total
     }
     $.confirm({
         title: 'Atencion!',
