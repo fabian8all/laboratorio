@@ -2,9 +2,14 @@
 
 	session_start();
 
-	require('../clases/Resultados.class.php');
+	require_once ('../clases/Resultados.class.php');
+	require_once ('../includes/permisos.php');
+
 
 	$Resultados = new Resultados();
+	$permisos = new Permisos(2);
+	$sin_permisos = "Lo sentimos, usted no cuenta con los permisos necesarios para llevar a cabo esta operación";
+
 
 	$action = $_POST['action'];
 

@@ -10,4 +10,5 @@ class PageTemplate {
     public $Scripts;
     public $Vista;
     public $Modales;
+    public $Permisos;
 }

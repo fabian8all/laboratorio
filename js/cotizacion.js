@@ -134,13 +134,13 @@ $("#btnREAddPaciente").click(function(){
         $.post("routes/routePacientes.php",{info:info,action:"Add"})
             .done(function(data){
                 data =  $.parseJSON(data);
-                if(data){
-                    customAlert("Exito!", "La información se ha guardado con exito");
+                if(data.success){
+                    customAlert("Exito!", data.msg);
                     $("#modalPacientes").modal('hide');
                     load_sel_pacientes(data.id);
                     $("#selREPacienteData").trigger("change");
                 } else{
-                    customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                    customAlert("Error!", data.msg);
                 }
             })
             .fail(function(error){
@@ -274,15 +274,15 @@ $("#btnRESolicitar").click(function(){
             $.post("routes/routeEstudios.php",{info:info,action:"Solicitar"})
             .done(function(data){
                 data =  $.parseJSON(data);
-                if(data){
-                    customAlert("Exito!", "Se han solicitado los estudios a realizar");
+                if(data.success){
+                    customAlert("Exito!", data.msg);
                     $("#selREPacienteData").val(0);
                     $("#selREPacienteData").trigger('change');
                     estudiosSelected = [];
                     descuento = 0.00;
                     load_estudios_selected();
                 } else{
-                    customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                    customAlert("Error!", data.msg);
                 }
             })
             .fail(function(error){

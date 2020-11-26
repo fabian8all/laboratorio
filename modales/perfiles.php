@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -32,20 +32,13 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>SOLICITAR ESTUDIOS</th>
+                                                    <th>VER</th>
+                                                    <th>SOLICITAR ESTUDIOS</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
                                                 <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
+                                                    <td><input type="checkbox"  class="chkPermisosCotizacion" value="1"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCotizacion" value="2"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -54,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -67,30 +60,20 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>TOMAR MUESTRA</th>
-                                                <th>SUBIR RESULTADOS</th>
-                                                <th>DESCARGAR RESULTADOS</th>
-                                                <th>GUARDAR PAGO</th>
+                                                    <th>VER</th>
+                                                    <th>TOMAR MUESTRA</th>
+                                                    <th>SUBIR RESULTADOS</th>
+                                                    <th>DESCARGAR RESULTADOS</th>
+                                                    <th>GUARDAR PAGO</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="8"></td>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="16"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -98,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -111,27 +94,18 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>CREAR</th>
-                                                <th>ACTUALIZAR</th>
-                                                <th>BORRAR</th>
+                                                    <th>VER</th>
+                                                    <th>CREAR</th>
+                                                    <th>ACTUALIZAR</th>
+                                                    <th>BORRAR</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosEstudios" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosEstudios" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosEstudios" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosEstudios" value="8"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -139,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -152,27 +126,18 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>CREAR</th>
-                                                <th>ACTUALIZAR</th>
-                                                <th>BORRAR</th>
+                                                    <th>VER</th>
+                                                    <th>CREAR</th>
+                                                    <th>ACTUALIZAR</th>
+                                                    <th>BORRAR</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosPacientes" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPacientes" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPacientes" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPacientes" value="8"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -180,7 +145,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -193,27 +158,18 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>CREAR</th>
-                                                <th>ACTUALIZAR</th>
-                                                <th>BORRAR</th>
+                                                    <th>VER</th>
+                                                    <th>CREAR</th>
+                                                    <th>ACTUALIZAR</th>
+                                                    <th>BORRAR</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosClientes" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosClientes" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosClientes" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosClientes" value="8"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -221,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -234,27 +190,18 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>CREAR</th>
-                                                <th>ACTUALIZAR</th>
-                                                <th>BORRAR</th>
+                                                    <th>VER</th>
+                                                    <th>CREAR</th>
+                                                    <th>ACTUALIZAR</th>
+                                                    <th>BORRAR</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosUsuarios" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosUsuarios" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosUsuarios" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosUsuarios" value="8"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -262,7 +209,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
@@ -275,27 +222,18 @@
                                         <div id="tableContainer" class="table-responsive">
                                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                                 <thead id="thead" class="text-center">
-                                                <th>PERFIL</th>
-                                                <th>VER</th>
-                                                <th>CREAR</th>
-                                                <th>ACTUALIZAR</th>
-                                                <th>BORRAR</th>
+                                                    <th>VER</th>
+                                                    <th>CREAR</th>
+                                                    <th>ACTUALIZAR</th>
+                                                    <th>BORRAR</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
-                                                <tr>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PACIENTE</td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="chkPermisosPerfiles" value="1"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPerfiles" value="2"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPerfiles" value="4"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPerfiles" value="8"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -48,6 +48,26 @@
 
         }
 
+        public function getAll(){
+            $sql = "
+                SELECT * 
+                FROM perfiles
+                WHERE 
+                    id != 1 
+                    AND id != 2 
+                    AND id!=3 
+                    AND eliminado IS NULL;
+            ";
+
+            $query = self::query_object($sql);
+
+            if ($query){
+                return $query;
+            }else{
+                return false;
+            }
+        }
+
 
         public function get($id){
             $param = array(
@@ -66,9 +86,17 @@
         }
 
         public function Add($data){
-                $params = array(
+            $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
+            $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
+            $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);
+            $pEst = str_pad(dechex($data['permisos']['estudios']),2,'0',STR_PAD_LEFT);
+            $pCli = str_pad(dechex($data['permisos']['clientes']),2,'0',STR_PAD_LEFT);
+            $pUsr = str_pad(dechex($data['permisos']['usuarios']),2,'0',STR_PAD_LEFT);
+            $pPrf = str_pad(dechex($data['permisos']['perfiles']),2,'0',STR_PAD_LEFT);
+
+            $params = array(
                     ':nom'=>$data['nombre'],
-                    ':prm'=>0,
+                    ':prm'=>$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot,
                     ':crt'=>date('Y-m-d H:i:s')
                 );
                 $sql = "INSERT INTO perfiles 
@@ -92,11 +120,20 @@
         }
 
         public function Update($data){
+            $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
+            $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
+            $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);
+            $pEst = str_pad(dechex($data['permisos']['estudios']),2,'0',STR_PAD_LEFT);
+            $pCli = str_pad(dechex($data['permisos']['clientes']),2,'0',STR_PAD_LEFT);
+            $pUsr = str_pad(dechex($data['permisos']['usuarios']),2,'0',STR_PAD_LEFT);
+            $pPrf = str_pad(dechex($data['permisos']['perfiles']),2,'0',STR_PAD_LEFT);
+
             $params = array(
                 ':pid'=>$data['id'],
                 ':nom'=>$data['nombre'],
-                ':prm'=>0
+                ':prm'=>$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot
             );
+
             $sql = "UPDATE perfiles
                         SET 
                             perfil = :nom,
@@ -129,9 +166,15 @@
                     WHERE id = :pid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array(
+                    "success" =>true,
+                    "msg"=>"El perfil ha sido eliminado"
+                );
             }else{
-                return false;
+                return array(
+                    "success" =>false,
+                    "msg"=>"Ocurrió un error al intentar eliminar el perfil"
+                );
             }
         }
 

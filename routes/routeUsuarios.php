@@ -2,9 +2,13 @@
 
 	session_start();
 
-	require('../clases/Usuarios.class.php');
+	require_once ('../clases/Usuarios.class.php');
+	require_once ('../includes/permisos.php');
+
 
 	$Usuario = new Usuario();
+	$permisos = new Permisos(6);
+	$sin_permisos = "Lo sentimos, usted no cuenta con los permisos necesarios para llevar a cabo esta operación";
 
 	$action = $_POST['action'];
 
@@ -22,13 +26,31 @@
 			echo json_encode($Usuario->get($info));
 			break;
 		case 'Add':
-			echo json_encode($Usuario->Add($info));
+			if ($permisos->crear()) {
+				echo json_encode($Usuario->Add($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'Update':
-			echo json_encode($Usuario->Update($info));
+			if ($permisos->actualizar()) {
+				echo json_encode($Usuario->Update($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'Delete':
-			echo json_encode($Usuario->Delete($info));
+			if ($permisos->borrar()){
+				echo json_encode($Usuario->Delete($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 	}
 

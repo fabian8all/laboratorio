@@ -13,6 +13,7 @@ if (!isset($TPL)) {
     );
     $TPL->Vista = "perfiles.php";
     $TPL->Modales = "perfiles.php";
+    $TPL->Permisos = 7;
 
 
     include "layouts/lab.php";

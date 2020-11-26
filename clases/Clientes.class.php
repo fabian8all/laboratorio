@@ -174,9 +174,9 @@
                     WHERE id = :cid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array('success' => true, 'msg' => "El registro del cliente ha sido eliminado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar eliminar el registro del cliente");
             }
         }
 

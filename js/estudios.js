@@ -106,10 +106,11 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             content: '¿Esta seguro que desea eliminar este estudio?',
             confirm: function(){
                 $.post('routes/routeEstudios.php',{info: id,action: "Delete"},function(data){
-                    if(data == 'true')
-                        customAlert("Exito!", "El estudio ha sido eliminado");
+                    data = $.parseJSON(data);
+                    if(data.success)
+                        customAlert("Exito!", data.msg);
                     else
-                        customAlert("Error!", "Error al intentar eliminar el estudio");
+                        customAlert("Error!", data.msg);
                     load_estudios_data()
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
@@ -143,12 +144,13 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
         ).prop('disabled',true);
         $.post("routes/routeEstudios.php",{info:info,action:action})
             .done(function(data){
-                if(data){
-                    customAlert("Exito!", "La información se ha guardado con exito");
+                data = $.parseJSON(data);
+                if(data.success){
+                    customAlert("Exito!", data.msg);
                     $("#modalEstudios").modal('hide');
                     $('#bstableEstudios').bootstrapTable('refresh');
                 } else{
-                    customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                    customAlert("Error!", data.msg);
                 }
             })
             .fail(function(error){

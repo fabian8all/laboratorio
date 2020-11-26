@@ -50,7 +50,6 @@ function ajaxGetPerfiles(params){
 		data: {info:params.data,action:'BSTableData'},
 		dataType: "json",
 		success: function (data) {
-			console.log(data);
 			params.success({
 				"total": data.count,
 				"rows" : data.rows
@@ -74,6 +73,58 @@ $(document).on('click','.btnPerfilesEdit',function(){
 		.done(function(data){
 			if(data != null){
 				data =  $.parseJSON(data);
+				permisos = [];
+				for (i = 6;i>=0;i--){
+					permisos[i] = data.permisos.substr((i*2),2);
+				}
+				Pcotizacion  = hex2bin(permisos[6]).split("").reverse().join("");
+				Presultados  = hex2bin(permisos[5]).split("").reverse().join("");
+				Ppacientes 	= hex2bin(permisos[4]).split("").reverse().join("");
+				Pestudios	= hex2bin(permisos[3]).split("").reverse().join("");
+				Pclientes 	= hex2bin(permisos[2]).split("").reverse().join("");
+				Pusuarios 	= hex2bin(permisos[1]).split("").reverse().join("");
+				Pperfiles 	= hex2bin(permisos[0]).split("").reverse().join("");
+
+				for (i=7; i>=0; i--){
+					val = Math.pow(2,i);
+
+					if (Pcotizacion[i]=='1'){
+						$('.chkPermisosCotizacion[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosCotizacion[value="'+val+'"]').prop('checked',false);
+					}
+					if (Presultados[i]=='1'){
+						$('.chkPermisosResultados[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosResultados[value="'+val+'"]').prop('checked',false);
+					}
+					if (Ppacientes[i]=='1'){
+						$('.chkPermisosPacientes[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosPacientes[value="'+val+'"]').prop('checked',false);
+					}
+					if (Pestudios[i]=='1'){
+						$('.chkPermisosEstudios[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosEstudios[value="'+val+'"]').prop('checked',false);
+					}
+					if (Pclientes[i]=='1'){
+						$('.chkPermisosClientes[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosClientes[value="'+val+'"]').prop('checked',false);
+					}
+					if (Pusuarios[i]=='1'){
+						$('.chkPermisosUsuarios[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosUsuarios[value="'+val+'"]').prop('checked',false);
+					}
+					if (Pperfiles[i]=='1'){
+						$('.chkPermisosPerfiles[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosPerfiles[value="'+val+'"]').prop('checked',false);
+					}
+				}
+
 				$('#hidPerfilesMode').val('update');
 				$('#hidPerfilesId').val(data.id);
 				$('#txtPerfilesNombre').val(data.perfil);
@@ -87,6 +138,11 @@ $(document).on('click','.btnPerfilesEdit',function(){
 		})
 });
 
+function hex2bin(hex){
+	return ("00000000" + (parseInt(hex, 16)).toString(2)).substr(-8);
+
+}
+
 $(document).on('click','.btnPerfilesDel',function(){
 	id= $(this).data('idperfil');
 	$.confirm({
@@ -94,10 +150,11 @@ $(document).on('click','.btnPerfilesDel',function(){
 		content: '¿Esta seguro que desea eliminar este perfil?',
 		confirm: function(){
 			$.post('routes/routePerfiles.php',{info: id,action: "Delete"},function(data){
-				if(data == 'true')
-					customAlert("Exito!", "El perfil ha sido eliminado");
+				data = $.parseJSON(data);
+				if(data.success)
+					customAlert("Exito!", data.msg);
 				else
-					customAlert("Error!", "Error al intentar eliminar el perfil");
+					customAlert("Error!", data.msg);
 				$('#bstablePerfiles').bootstrapTable('refresh');
 			}).fail(function(error){
 				customAlert("Error!", ajaxError);
@@ -110,8 +167,47 @@ $(document).on('click','.btnPerfilesDel',function(){
 });
 
 $("#btnPerfilesSave").click(function(){
+    permisosCotizacion  = 0;
+    permisosResultados  = 0;
+    permisosPacientes   = 0;
+    permisosEstudios    = 0;
+    permisosClientes    = 0;
+    permisosUsuarios    = 0;
+    permisosPerfiles    = 0;
+
+    $('.chkPermisosCotizacion').each(function(k,v){
+        permisosCotizacion += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosResultados').each(function(k,v){
+        permisosResultados += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosPacientes').each(function(k,v){
+        permisosPacientes += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosEstudios').each(function(k,v){
+        permisosEstudios += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosClientes').each(function(k,v){
+        permisosClientes += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosUsuarios').each(function(k,v){
+        permisosUsuarios += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+    $('.chkPermisosPerfiles').each(function(k,v){
+        permisosPerfiles += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+    });
+
 	info =  {
 		nombre: $("#txtPerfilesNombre").val(),
+        permisos: {
+		    cotizacion  : permisosCotizacion,
+            resultados  : permisosResultados,
+            pacientes   : permisosPacientes,
+            estudios    : permisosEstudios,
+            clientes    : permisosClientes,
+            usuarios    : permisosUsuarios,
+            perfiles    : permisosPerfiles
+        }
 	}
 	if ($('#hidPerfilesMode').val() == "new"){
 		action="Add";
@@ -123,6 +219,7 @@ $("#btnPerfilesSave").click(function(){
                 <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
                Guardando...'
 	).prop('disabled',true);
+
 	$.post("routes/routePerfiles.php",{info:info,action:action})
 		.done(function(data){
 			if(data){

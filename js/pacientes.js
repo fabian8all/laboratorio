@@ -96,11 +96,13 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             content: '¿Esta seguro que desea eliminar este paciente?',
             confirm: function(){
                 $.post('routes/routePacientes.php',{info: id,action: "Delete"},function(data){
-                    if(data == 'true')
-                        customAlert("Exito!", "El paciente ha sido eliminado");
+                    data = $.parseJSON(data);
+                    if(data.success){
+                        customAlert("Exito!", data.msg);
+                        $('#bstablePacientes').bootstrapTable("refresh");
+                    }
                     else
-                        customAlert("Error!", "Error al intentar eliminar al paciente");
-                    $('#bstablePacientes').bootstrapTable("refresh");
+                        customAlert("Error!", data.msg);
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
                 });
@@ -132,12 +134,13 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
         ).prop('disabled',true);
         $.post("routes/routePacientes.php",{info:info,action:action})
         .done(function(data){
-            if(data){
-                customAlert("Exito!", "La información se ha guardado con exito");
+            data = $.parseJSON(data)
+            if(data.success){
+                customAlert("Exito!", data.msg);
                 $("#modalPacientes").modal('hide');
                 $('#bstablePacientes').bootstrapTable("refresh");
             } else{
-                customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                customAlert("Error!", data.msg);
             }
         })
         .fail(function(error){

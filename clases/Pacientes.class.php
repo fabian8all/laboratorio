@@ -105,9 +105,9 @@
             if ($query){
                 $sel = "SELECT MAX(id) as id FROM pacientes;";
                 $id = self::query_single_object($sel);
-                return $id;
+                return array('success' => true, 'id' => $id, 'msg' => "El registro del paciente ha sido creado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -135,9 +135,9 @@
                             id = :pid";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                return array('success' => true, 'msg' => "La información del paciente ha sido actualizada");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -153,9 +153,9 @@
                     WHERE id = :pid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array('success' => true, 'msg' => "El registro del paciente ha sido eliminado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar eliminar el registro del paciente");
             }
         }
 

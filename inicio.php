@@ -15,7 +15,7 @@ if (!isset($TPL)) {
     );
     $TPL->Vista = "inicio.php";
     $TPL->Modales = "inicio.php";
-
+    $TPL->Permisos = 1;
 
     include "layouts/lab.php";
     exit;

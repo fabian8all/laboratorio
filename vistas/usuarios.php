@@ -33,7 +33,7 @@
                     <tr>
                         <th data-field="id"  data-sortable="true" data-align="left">Id</th>
                         <th data-field="username"  data-sortable="true" data-align="left">USERNAME</th>
-                        <th data-field="perfil" data-sortable="true">PERFIL</th>
+                        <th data-field="nomPerfil" data-sortable="true">PERFIL</th>
                         <th data-field="nombre"  data-sortable="false">NOMBRE</th>
                         <th data-field="email"  data-sortable="false">EMAIL</th>
                         <th data-field="id"  data-formatter="formatUsuariosOptions" data-align="center" data-sortable="false">Opciones</th>

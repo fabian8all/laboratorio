@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <select class="form-control form-control-user" id="selUsuariosPerfil"></select>
+                                <select class="form-control form-control-user" id="selUsuariosPerfil" style="padding: 0rem 1rem;height: 3.2rem;"></select>
                             </div>
                         </div>
                     </div>

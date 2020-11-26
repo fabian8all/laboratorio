@@ -24,6 +24,19 @@ $(document).ready(function(){
 			return 'Cargando lista de usuarios';
 		}
 	});
+
+	$.post('routes/routePerfiles.php',{info: {},action:'getAll'})
+		.done(function(data) {
+			if (data) {
+				data = $.parseJSON(data);
+				options = "<option value='' selected disabled>Seleccionar perfil</option>";
+				$(data).each(function(k,v){
+					options+="<option value='"+v.id+"'>"+v.perfil+"</option>";
+				});
+				$('#selUsuariosPerfil').html(options);
+			}
+		});
+
 });
 
 function formatUsuariosOptions(value, row, index){
@@ -76,6 +89,7 @@ $(document).on('click','.btnUsuariosEdit',function(){
 		.done(function(data){
 			if(data != null){
 				data =  $.parseJSON(data);
+				console.log(data);
 				$('#hidUsuariosMode').val('update');
 				$('#hidUsuariosId').val(data.id);
 				$('#txtUsuariosNombre').val(data.nombre);
@@ -96,6 +110,7 @@ $(document).on('click','.btnUsuariosEdit',function(){
 		})
 });
 
+
 $(document).on('click','.btnUsuariosDel',function(){
 	id= $(this).data('idusuario');
 	$.confirm({
@@ -103,10 +118,11 @@ $(document).on('click','.btnUsuariosDel',function(){
 		content: '¿Esta seguro que desea eliminar este usuario?',
 		confirm: function(){
 			$.post('routes/routeUsuarios.php',{info: id,action: "Delete"},function(data){
-				if(data == 'true')
-					customAlert("Exito!", "El usuario ha sido eliminado");
+				data = $.parseJSON(data);
+				if(data.success)
+					customAlert("Exito!", data.msg);
 				else
-					customAlert("Error!", "Error al intentar eliminar al usuario");
+					customAlert("Error!", data.msg);
 				$('#bstableUsuarios').bootstrapTable('refresh');
 			}).fail(function(error){
 				customAlert("Error!", ajaxError);

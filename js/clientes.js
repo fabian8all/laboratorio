@@ -108,10 +108,11 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             content: '¿Esta seguro que desea eliminar este cliente?',
             confirm: function(){
                 $.post('routes/routeClientes.php',{info: id,action: "Delete"},function(data){
-                    if(data == 'true')
-                        customAlert("Exito!", "El cliente ha sido eliminado");
+                    data =$.parseJSON(data);
+                    if(data.success)
+                        customAlert("Exito!", data.msg);
                     else
-                        customAlert("Error!", "Error al intentar eliminar al cliente");
+                        customAlert("Error!", data.msg);
                     $('#bstableClientes').bootstrapTable('refresh');
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);

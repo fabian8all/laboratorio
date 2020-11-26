@@ -1,5 +1,8 @@
 <?php
-include_once('includes/loginProtect.php');
+require_once ('includes/loginProtect.php');
+require_once ('includes/permisos.php');
+
+$permisos = new Permisos((isset($TPL->Permisos)?$TPL->Permisos:0));
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,7 +79,19 @@ include_once('includes/loginProtect.php');
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <?php if(isset($TPL->Vista)) { include "vistas/".$TPL->Vista; } ?>
+                        <?php
+                            if($permisos->ver()) {
+                                if (isset($TPL->Vista)) {
+                                    include "vistas/" . $TPL->Vista;
+                                }
+                            }else{
+                        ?>
+                                <div class="alert alert-danger" role="alert">
+                                    Lo sentimos, no cuenta con los permisos necesarios para ingresar a este módulo.
+                                </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                     <!-- /.container-fluid -->
 
@@ -98,7 +113,13 @@ include_once('includes/loginProtect.php');
             <i class="fas fa-angle-up"></i>
         </a>
         <!--    Page Modals-->
-        <?php if(isset($TPL->Modales)) { include "modales/".$TPL->Modales; } ?>
+        <?php
+            if($permisos->ver()) {
+                if (isset($TPL->Modales)) {
+                    include "modales/" . $TPL->Modales;
+                }
+            }
+        ?>
         <!--    /Page Modals-->
 
         <!-- Bootstrap core JavaScript-->
@@ -113,15 +134,19 @@ include_once('includes/loginProtect.php');
         <script src="js/customAlerts.js"></script>
 
         <!-- Page Scripts-->
-        <?php if(isset($TPL->Scripts)) {
-            foreach ( $TPL->Scripts as $script ){
-                if (is_array($script)){
-                    echo "<script type='".$script["type"]."' src='".$script["js"]."'></script>";
-                }else{
-                    echo "<script src='$script'></script>";
+        <?php
+            if($permisos->ver()) {
+                if (isset($TPL->Scripts)) {
+                    foreach ($TPL->Scripts as $script) {
+                        if (is_array($script)) {
+                            echo "<script type='" . $script["type"] . "' src='" . $script["js"] . "'></script>";
+                        } else {
+                            echo "<script src='$script'></script>";
+                        }
+                    }
                 }
             }
-        }?>
+        ?>
         <!-- /Page Scripts-->
 
     </body>

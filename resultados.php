@@ -12,6 +12,7 @@ if (!isset($TPL)) {
     );
     $TPL->Vista = "resultados.php";
     $TPL->Modales = "resultados.php";
+    $TPL->Permisos = 2;
 
 
     include "layouts/lab.php";

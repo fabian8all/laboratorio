@@ -2,9 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/includes/permisos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Perfiles.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Perfiles.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Usuarios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Usuarios.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_topbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_topbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/estudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/PageTemplate.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/PageTemplate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pacientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pacientes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/perfiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/perfiles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/usuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/usuarios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/lab.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/usuarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/pacientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/perfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeClientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeClientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeEstudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeEstudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routePacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routePacientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routePerfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routePerfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeUsuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeUsuarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/usuarios.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +101,12 @@
       <workItem from="1605902961386" duration="1301000" />
       <workItem from="1605905742954" duration="7261000" />
       <workItem from="1606059546193" duration="2204000" />
-      <workItem from="1606063478676" duration="13427000" />
+      <workItem from="1606063478676" duration="14026000" />
+      <workItem from="1606172477580" duration="1527000" />
+      <workItem from="1606258367286" duration="4360000" />
+      <workItem from="1606286724508" duration="10540000" />
+      <workItem from="1606338861411" duration="727000" />
+      <workItem from="1606372866349" duration="7268000" />
     </task>
     <servers />
   </component>
@@ -84,10 +118,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605131483837" />
-    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1605910702742">
+    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1606262307477">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1605910702742" />
+    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1606262307477" />
     <state x="404" y="109" width="570" height="524" key="StructurePopup" timestamp="1605400141716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -100,9 +134,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1606119373009" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605051663825">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606259864248">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1605051663825" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1606259864248" />
   </component>
 </project>

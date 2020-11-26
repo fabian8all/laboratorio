@@ -1,6 +1,8 @@
 <?php
 
-	require_once('DBConnection.class.php');
+	require_once ('DBConnection.class.php');
+    require_once ('../includes/permisos.php');
+
 
 	Class Estudio extends DBConnection {
 
@@ -96,9 +98,9 @@
                         (:cod,:nom,:tim,:cos,:mue,:crt)";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                return array('success' => true, 'msg' => "El registro de estudio ha sido creado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -124,9 +126,9 @@
                             id = :eid";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                return array('success' => true, 'msg' => "La información de estudio ha sido actualizada");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -142,63 +144,63 @@
                     WHERE id = :eid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array('success' => true, 'msg' => "El estudio ha sido eliminado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
         }
 
         public function Solicitar($data){
-            $analistaId = $data['analistaId'];
-            $pacienteId = $data['pacienteId'];
-            $descuento  = $data['descuento'];
-            $total      = $data['total'];
 
-            $param = array(
-                ':pid'=>$pacienteId,
-                ':sol'=>date('Y-m-d H:i:s'),
-                ':sta'=>1,
-                ':cst'=>$total,
-                ':des'=>$descuento,
-                ':ana'=>$analistaId,
-            );
+                $analistaId = $data['analistaId'];
+                $pacienteId = $data['pacienteId'];
+                $descuento  = $data['descuento'];
+                $total      = $data['total'];
+
+                $param = array(
+                    ':pid'=>$pacienteId,
+                    ':sol'=>date('Y-m-d H:i:s'),
+                    ':sta'=>1,
+                    ':cst'=>$total,
+                    ':des'=>$descuento,
+                    ':ana'=>$analistaId,
+                );
 
 
-            $sql = "INSERT INTO solicitudes
+                $sql = "INSERT INTO solicitudes
                             (id_paciente,solicitud,estado,costo,descuento,analista)
                         VALUES
                             (:pid,:sol,:sta,:cst,:des,:ana)";
-            $query = self::query($sql,$param);
-            if ($query){
-                $sqlGetLast = "SELECT MAX(id) as id FROM solicitudes;";
-                $queryLast = self::query_single_object($sqlGetLast);
-                $solicitud = $queryLast->id;
+                $query = self::query($sql,$param);
+                if ($query){
+                    $sqlGetLast = "SELECT MAX(id) as id FROM solicitudes;";
+                    $queryLast = self::query_single_object($sqlGetLast);
+                    $solicitud = $queryLast->id;
 
-            }
-            $ok = true;
-            foreach ($data['estudios'] as $key=>$estudio){
-                $param = array(
-                    ':eid'=>$estudio['id'],
-                    ':cst'=>$estudio['costo'],
-                    ':sid'=>$solicitud
-                );
-                $sql = "INSERT INTO estudios_paciente
+                }
+                $ok = true;
+                foreach ($data['estudios'] as $key=>$estudio){
+                    $param = array(
+                        ':eid'=>$estudio['id'],
+                        ':cst'=>$estudio['costo'],
+                        ':sid'=>$solicitud
+                    );
+                    $sql = "INSERT INTO estudios_paciente
                             (id_estudio,id_solicitud,costo)
                         VALUES
                             (:eid,:sid,:cst)";
-                $query = self::query($sql,$param);
-                if(!$query){
-                    $ok=false;
-                    break;
+                    $query = self::query($sql,$param);
+                    if(!$query){
+                        $ok=false;
+                        break;
+                    }
                 }
-            }
 
-            if($ok){
-                return true;
-            }else{
-                return false;
-            }
-
+                if($ok){
+                    return array('success' => true, 'msg' => "Se han solicitado los estudios a realizar");
+                }else{
+                    return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
+                }
         }
 
 

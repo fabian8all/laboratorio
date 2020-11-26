@@ -11,15 +11,25 @@
                 ':pwd' => sha1(md5('-t3CN01oG1a5%C0s173c!' . $info['password']))
             );
 
-            $fn_username = "SELECT * FROM usuarios U WHERE username = :usn AND password = :pwd ;";
+            $fn_username = "
+                            SELECT 
+                                    U.*,
+                                    P.perfil as nomPerfil,
+                                    P.permisos as permisos 
+                            FROM usuarios U 
+                                INNER JOIN perfiles P
+                                    ON U.perfil = P.id
+                            WHERE username = :usn AND password = :pwd ;";
 
             $usr = self::query_single_object($fn_username,$array);
             if (!empty($usr)) {
 
                 $_SESSION["id"]        = $usr->id;
                 $_SESSION["perfil"]       = $usr->perfil;
+                $_SESSION["nomPerfil"]       = $usr->nomPerfil;
                 $_SESSION["username"]      = $usr->username;
                 $_SESSION["nombre"]      = $usr->nombre;
+                $_SESSION["permisos"]   = $usr->permisos;
 
                 return array('logged'=>true,'perfil'=>$usr->perfil,'msg'=>"Sesión iniciada");
 
@@ -39,15 +49,19 @@
             $andWhere = ($search != "")? "AND (nombre LIKE ('%$search%') OR email LIKE ('%$search%') )":"";
 
 
-            $sql = "SELECT * 
-                        FROM usuarios 
-                        WHERE (perfil != 1 AND perfil != 2 AND perfil !=3) AND eliminado IS NULL
+            $sql = "
+                        SELECT 
+                            U.*,
+                            P.perfil as nomPerfil 
+                        FROM usuarios U
+                            INNER JOIN perfiles P
+                                ON U.perfil = P.id   
+                        WHERE (U.perfil != 1 AND U.perfil != 2 AND U.perfil !=3) AND U.eliminado IS NULL
                             $andWhere
                         ORDER BY $sort $order
                         LIMIT $limit
                         OFFSET $offset
                         ;";
-
             $rows = self::query_object($sql);
 
             $sqlCount= "SELECT count(*) as total
@@ -152,7 +166,7 @@
                         SET 
                             nombre = :nom,
                             email = :eml,
-                            perfil = :prf,
+                            perfil = :prf
                         WHERE 
                             id = :uid";
             $query = self::query($sql,$params);
@@ -181,9 +195,15 @@
                     WHERE id = :uid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array(
+                    "success" =>true,
+                    "msg"=>"El registro del usuario ha sido eliminado"
+                );
             }else{
-                return false;
+                return array(
+                    "success" =>false,
+                    "msg"=>"Ocurrió un error al intentar eliminar el registro del usuario"
+                );
             }
         }
 
