@@ -150,7 +150,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12">
               <div class="form-group">
-                <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#"><i class="fas fa-clipboard-list"></i> Solicitar estudios</button>
+                <button class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#modAgregarAnticipo"><i class="fas fa-clipboard-list"></i> Solicitar estudios</button>
               </div>
             </div>
           </div>
@@ -344,6 +344,40 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button id="btnguardarEdit" type="submit" class="btn btn-success">Aceptar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- MODAL Anticipo -->
+<div class="modal fade" id="modAgregarAnticipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">¿Desea agregar anticipo?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formAgregar" class="user">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label><b>Total:</b></label>
+              <label>$100.00</label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <input type="number" class="form-control" name="" value="" placeholder="">
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button id="btnAgregarNew" type="submit" class="btn btn-success">Agregar</button>
       </div>
       </form>
     </div>
