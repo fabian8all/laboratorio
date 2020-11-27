@@ -55,3 +55,37 @@
         </div>
     </div>
 </div>
+<!-- MODAL Anticipo -->
+<div class="modal fade" id="modAgregarAnticipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">¿Desea agregar anticipo?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAnticipo" class="user">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><b>Total:</b></label>
+                                <label id="lblAnticipoTotal"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="txtAnticipo" value="" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button id="btnAnticipoSubmit" type="button" class="btn btn-success">Agregar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

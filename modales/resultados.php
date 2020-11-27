@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-6">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <b>Muestra tomada:</b>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-6">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <b>Entregado:</b>
@@ -65,10 +65,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-4"></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-3">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <b>Costo:</b>
@@ -78,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-3">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <b>Descuento:</b>
@@ -88,25 +87,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-6">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <b>Pagado:</b>
                                 </div>
                                 <div class="card-body" >
-                                    <span id="lblPagado"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <b>Resultados:</b>
-                                </div>
-                                <div class="card-body" >
-                                    <span id="lblResultados"></span>
+                                    <div id="lblPagado"></div>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +135,61 @@
                     Subir Resultados
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL TERMINAR PAGO -->
+<div class="modal fade" id="modAgregarPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div id="tableContainer" class="table-responsive">
+                                        <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                                            <thead id="thead" class="text-center">
+                                            <th>COSTO TOTAL</th>
+                                            <th>ANTICIPO</th>
+                                            <th>TOTAL A PAGAR</th>
+                                            </thead>
+                                            <tbody id="tbody" class="text-center">
+                                            <tr>
+                                                <td id="lblCostoTotal"></td>
+                                                <td id="lblAnticipo"></td>
+                                                <td id="lblTotalAPagar"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="txtPago" value="" placeholder="Agregar pago">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="hidPagoIdSolicitud" value="">
+                                    <button type="button" class="btn btn-success w-100" id="btnPagoSubmit">
+                                        <span class="fa fa-money"></span>
+                                        Guardar pago
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

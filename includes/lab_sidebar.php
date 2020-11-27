@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-            <img class="cositecImage" src="resources/logo.png" alt="" style="width: 100%; height: 100%; background: white;">
+            <img class="cositecImage rounded-circle" src="resources/logo.png" alt="" style="width: 100%; height: 100%; background: white;">
         </div>
         <div class="sidebar-brand-text mx-3">Laboratorio DML</div>
     </a>

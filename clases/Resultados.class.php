@@ -120,17 +120,32 @@
         }
 
         function uploadFile($data){
+            $id =$data['id'];
+
+            $param = array(':sid'=>$id);
+
+            $sqlSelect = "
+                SELECT pagado FROM solicitudes WHERE id= :sid;
+            ";
+
+            $solicitud = self::query_single_object($sqlSelect,$param);
+
+            $pagado = json_decode($solicitud->pagado);
+
+            $status = ($pagado->completo)?3:2;
+
             $params = array(
                 ':sid'  => $data['id'],
                 ':ent'  => date('Y-m-d H:i:s'),
-                ':fil'  => $data['file']
+                ':fil'  => $data['file'],
+                ':sta'  => $status
             );
 
             $sql = "
                 UPDATE solicitudes 
                     SET entrega = :ent,
                         resultados = :fil,
-                        estado = 2
+                        estado = :sta
                     WHERE id = :sid;
             ";
             $query = self::query($sql,$params);
@@ -144,6 +159,55 @@
 
         }
 
+        function Pagar($data)
+        {
+            $id =$data['id'];
+
+            $param = array(':sid'=>$id);
+
+            $sqlSelect = "
+                SELECT * FROM solicitudes WHERE id= :sid;
+            ";
+
+            $solicitud = self::query_single_object($sqlSelect,$param);
+
+            $pagado = json_decode($solicitud->pagado);
+
+            $pago = floatval($data['pago']);
+            $totalAnticipo = 0;
+            foreach ($pagado->pagos as $anticipo){
+                $cantidad = $anticipo->cantidad;
+                $totalAnticipo += floatval($cantidad);
+            }
+            $completo = (($pago + $totalAnticipo + 0.01)>=floatval($solicitud->costo))?true:false;
+            $status = ($completo)?3:2;
+
+            array_push($pagado->pagos,array('cantidad'=>$pago,'fecha'=>date('Y-m-d H:i:s')));
+
+            $pagado->completo = $completo;
+            $pagadoNew = json_encode($pagado);
+
+            $params =array(
+              ":sid" => $id,
+              ":pay" => $pagadoNew,
+              ":sta" => $status
+            );
+            $sql = "
+                UPDATE 
+                    solicitudes
+                SET
+                    estado = :sta,
+                    pagado = :pay
+                WHERE id = :sid;
+            ";
+            $query = self::query($sql,$params);
+            if ($query) {
+                return array('success' => true, 'msg' => 'El pago ha sido registrado');
+            }else{
+                return array('success' => false, 'msg' => 'Ocurrió un error al intentar guardar el pago');
+            }
+
+        }
     }
 
 

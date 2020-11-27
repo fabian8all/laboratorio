@@ -254,51 +254,69 @@ $("#btnRESolicitar").click(function(){
         customAlert("Error!", "No se han seleccionado estudios a realizar");
         return false;
     }
-    total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));
-    info = {
-        pacienteId  : $("#selREPacienteData").val(),
-        descuento   : descuento,
-        analistaId  : userData.id,
-        estudios    : estudiosSelected,
-        total       : total
-    }
     $.confirm({
         title: 'Atencion!',
         content: '¿Solicitar estudios?',
         confirm: function(){
-            $('#btnRESolicitar').html( '\
-                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
-               Guardando...'
-            ).prop('disabled',true);
-
-            $.post("routes/routeEstudios.php",{info:info,action:"Solicitar"})
-            .done(function(data){
-                data =  $.parseJSON(data);
-                if(data.success){
-                    customAlert("Exito!", data.msg);
-                    $("#selREPacienteData").val(0);
-                    $("#selREPacienteData").trigger('change');
-                    estudiosSelected = [];
-                    descuento = 0.00;
-                    load_estudios_selected();
-                } else{
-                    customAlert("Error!", data.msg);
-                }
-            })
-            .fail(function(error){
-                customAlert("Error!", ajaxError);
-            })
-            .always(function(){
-                $('#btnRESolicitar').html( '\
-                    <span class="fa fa-tasks"></span>\
-                    Solicitar Estudios\
-                ').prop('disabled',false);
-            });
+            $('#txtAnticipo').val('0.00');
+            $('#hidAnticipo').val('0.00');
+            $('#lblAnticipoTotal').html($('#totalRE').html());
+            $('#modAgregarAnticipo').modal('show');
         },
         cancel: function(){
             console.log('false');
         }
     });
 });
+
+$('#modAgregarAnticipo').on('hide.bs.modal',function(){
+    solicitarEstudios();
+});
+
+$('#btnAnticipoSubmit').click(function(){
+    $('#hidAnticipo').val($('#txtAnticipo').val());
+    $('#modAgregarAnticipo').modal('hide');
+});
+
+function solicitarEstudios(){
+    total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));
+    info = {
+        pacienteId  : $("#selREPacienteData").val(),
+        descuento   : descuento,
+        analistaId  : userData.id,
+        estudios    : estudiosSelected,
+        total       : total,
+        anticipo    : $('#hidAnticipo').val()
+    }
+
+    $('#btnRESolicitar').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+    ).prop('disabled',true);
+
+    $.post("routes/routeEstudios.php",{info:info,action:"Solicitar"})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            if(data.success){
+                customAlert("Exito!", data.msg);
+                $("#selREPacienteData").val(0);
+                $("#selREPacienteData").trigger('change');
+                estudiosSelected = [];
+                descuento = 0.00;
+                load_estudios_selected();
+            } else{
+                customAlert("Error!", data.msg);
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $('#btnRESolicitar').html( '\
+                    <span class="fa fa-tasks"></span>\
+                    Solicitar Estudios\
+                ').prop('disabled',false);
+        });
+}
 
 

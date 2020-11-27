@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/cotizacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cotizacion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/resultadosNuevos.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/resultadosNuevos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +86,9 @@
       <workItem from="1606286724508" duration="10540000" />
       <workItem from="1606338861411" duration="727000" />
       <workItem from="1606372866349" duration="7443000" />
-      <workItem from="1606446608807" duration="1192000" />
+      <workItem from="1606446608807" duration="2829000" />
+      <workItem from="1606452907392" duration="7421000" />
+      <workItem from="1606461957286" duration="5359000" />
     </task>
     <servers />
   </component>
@@ -109,9 +116,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1606119373009" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606259864248">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606462365830">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1606259864248" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1606462365830" />
   </component>
 </project>

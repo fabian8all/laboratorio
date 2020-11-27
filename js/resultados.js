@@ -135,7 +135,7 @@ function formatResultsPPOptions(value, row, index){
                 <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
-                <button class='btn btn-success btn-sm btnGuardarPago' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Guardar pago' aria-haspopup='true' aria-expanded='false'>\
+                <button class='btn btn-warning btn-sm btnGuardarPago' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Guardar pago' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-cash-register fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
                 <button class='btn btn-primary btn-sm btnDescargarResultados' data-filename='" + row.resultados + "' data-toggle='tooltip' data-placement='top' title='Descargar resultados' aria-haspopup='true' aria-expanded='false'>\
@@ -146,7 +146,7 @@ function formatResultsPPOptions(value, row, index){
     return options;
 }
 
-function formatResultsPPOptions(value, row, index){
+function formatResultsFOptions(value, row, index){
     console.log(row);
     var options = "\
             <div class='dropup'> \
@@ -194,19 +194,53 @@ $(document).on('click','.btnDetalles',function(){
                 });
                 $('#listaEstudios').html(estudios);
 
-                $('#lblCosto').html(data.costo);
-                $('#lblDescuento').html(data.descuento);
+                pagado = $.parseJSON(data.pagado);
+                lblPagado = "\
+                    <div class='row'>\
+                        <div class='col-12'>";
+                lblPagado+=(pagado.completo)
+                                ?"<span class='badge badge-success'>pagado</span>"
+                                :"<span class='badge badge-warning'>pendiente</span>";
+                lblPagado +="\
+                        </div>\
+                        <div class='col-12'>\
+                            <table class='table table-borderless table-responsive table-striped'>\
+                                <thead>\
+                                    <tr>\
+                                        <th>PAGOS</th>\
+                                        <th>FECHA</th>\
+                                    </tr>\
+                                </thead>\
+                                <tbody>";
+                                $(pagado.pagos).each(function(k,v){
+                                    if(parseFloat(v.cantidad) > 0){
+                                        lblPagado += "\
+                                            <tr>\
+                                                <td>$"+parseFloat(v.cantidad).toFixed(2)+"</td>\
+                                                <td>"+v.fecha+"</td>\
+                                            </tr>\
+                                        ";
+                                    }
+                                });
+                    lblPagado += "\
+                                </tbody>\
+                            </table>\
+                        </div>\
+                    </div>\
+                ";
+
+                $('#lblCosto').html("$"+parseFloat(data.costo).toFixed(2));
+                $('#lblDescuento').html("%"+parseFloat(data.descuento).toFixed(2));
                 $('#lblFechaSol').html(data.fechaSolicitud);
                 $('#lblFechaMuestra').html(data.fechaMuestra);
-                $('#lblPagado').html(data.pagado);
+                $('#lblPagado').html(lblPagado);
                 $('#lblFechaEntrega').html(data.fechaEntrega);
-                $('#lblResultado').html(data.resultados);
                 $('#lblAnalista').html(data.analista);
 
                 $('#modalDetalles').modal('show');
 
             } else{
-                customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                customAlert("Error!", "Ocurrió un error al intentar obtener la información");
             }
         })
         .fail(function(error){
@@ -267,4 +301,67 @@ $(document).on('click','.btnDescargarResultados',function(){
     file = $(this).data('filename');
 
         window.open('resources/resultsFiles/'+file);
+});
+
+$(document).on('click','.btnGuardarPago',function(){
+    id=$(this).data('idresult');
+    $.post("routes/routeResultados.php",{info:id,action:'get'})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            pagado = $.parseJSON(data.pagado);
+            anticipo = 0;
+            $(pagado.pagos).each(function(k,v){
+                anticipo+=v.cantidad;
+            });
+            APagar = data.costo - anticipo;
+            if(data){
+                $('#lblCostoTotal').html("$"+parseFloat(data.costo).toFixed(2));
+                $('#lblAnticipo').html("$"+parseFloat(anticipo).toFixed(2));
+                $('#lblTotalAPagar').html("$"+parseFloat(APagar).toFixed(2));
+                $('#txtPago').val('');
+                $('#hidPagoIdSolicitud').val(id);
+                $('#modAgregarPago').modal('show');
+            } else{
+                customAlert("Error!", "Ocurrió un error al intentar obtener la información");
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+});
+
+$('#btnPagoSubmit').click(function(){
+    info = {
+        id      : $("#hidPagoIdSolicitud").val(),
+        pago    : $("#txtPago").val()
+    }
+
+    $('#btnPagoSubmit').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+    ).prop('disabled',true);
+
+    $.post("routes/routeResultados.php",{info:info,action:"Pagar"})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            if(data.success){
+                customAlert("Exito!", data.msg);
+                $("#txtPago").val('');
+                $("#hidPagoIdSolicitud").val('');
+                $('#modAgregarPago').modal('hide');
+                $('#bstableResultsPP').bootstrapTable('refresh');
+            } else{
+                customAlert("Error!", data.msg);
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $('#btnPagoSubmit').html( '\
+                    <span class="fa fa-money"></span>\
+                    Guardar pago\
+                ').prop('disabled',false);
+        });
+
 });

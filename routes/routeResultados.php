@@ -30,9 +30,23 @@
 			echo json_encode($Resultados->BSTableData($info));
 			break;
 		case 'uploadFile':
-			echo json_encode($Resultados->uploadFile($info));
+			if ($permisos->bin[5]=='1') {
+				echo json_encode($Resultados->uploadFile($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
-
+		case 'Pagar':
+			if ($permisos->bin[3]=='1') {
+				echo json_encode($Resultados->Pagar($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
+			break;
 	}
 
 ?>
