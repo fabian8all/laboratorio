@@ -2,38 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/includes/permisos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Perfiles.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Perfiles.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Usuarios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Usuarios.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/clientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/estudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/PageTemplate.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/PageTemplate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/pacientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pacientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/perfiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/perfiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/usuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/usuarios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/lab.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/usuarios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/pacientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/perfiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/resultados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeClientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeClientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeEstudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeEstudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routePacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routePacientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routePerfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routePerfiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeUsuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeUsuarios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/usuarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/usuarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/cotizacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cotizacion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/resultadosNuevos.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/resultadosNuevos.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +80,8 @@
       <workItem from="1606258367286" duration="4360000" />
       <workItem from="1606286724508" duration="10540000" />
       <workItem from="1606338861411" duration="727000" />
-      <workItem from="1606372866349" duration="7268000" />
+      <workItem from="1606372866349" duration="7443000" />
+      <workItem from="1606446608807" duration="1192000" />
     </task>
     <servers />
   </component>
