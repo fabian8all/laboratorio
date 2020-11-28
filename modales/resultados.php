@@ -17,7 +17,9 @@
                                     Estudios solicitados:
                                 </div>
                                 <div class="card-body">
-                                    <ul class="list-group list-group-flush" id="listaEstudios"></ul>
+                                    <table class="table table-striped table-responsive">
+                                        <tbody id="listaEstudios"></tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

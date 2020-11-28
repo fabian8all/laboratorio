@@ -29,6 +29,15 @@
 		case 'BSTableData':
 			echo json_encode($Resultados->BSTableData($info));
 			break;
+		case 'tomarMuestra':
+			if ($permisos->bin[6]=='1') {
+				echo json_encode($Resultados->tomarMuestra($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
+			break;
 		case 'uploadFile':
 			if ($permisos->bin[5]=='1') {
 				echo json_encode($Resultados->uploadFile($info));

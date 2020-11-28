@@ -189,7 +189,7 @@ $(document).on('click','.btnDetalles',function(){
                 costo = 0;
                 $(data.estudios).each(function(k,v){
                     estudios += "\
-                        <li class='list-group-item'>"+v.estudio+"</li>\
+                        <tr><td>"+v.estudio+"</td></tr>\
                     ";
                 });
                 $('#listaEstudios').html(estudios);
@@ -212,7 +212,9 @@ $(document).on('click','.btnDetalles',function(){
                                     </tr>\
                                 </thead>\
                                 <tbody>";
+                                c = 0;
                                 $(pagado.pagos).each(function(k,v){
+                                    c++;
                                     if(parseFloat(v.cantidad) > 0){
                                         lblPagado += "\
                                             <tr>\
@@ -222,6 +224,8 @@ $(document).on('click','.btnDetalles',function(){
                                         ";
                                     }
                                 });
+                                console.log(c);
+                                lblPagado += (c == 0)?"<tr><td colspan='2'>No hay pagos registrados</td></tr>":"";
                     lblPagado += "\
                                 </tbody>\
                             </table>\
@@ -232,9 +236,9 @@ $(document).on('click','.btnDetalles',function(){
                 $('#lblCosto').html("$"+parseFloat(data.costo).toFixed(2));
                 $('#lblDescuento').html("%"+parseFloat(data.descuento).toFixed(2));
                 $('#lblFechaSol').html(data.fechaSolicitud);
-                $('#lblFechaMuestra').html(data.fechaMuestra);
+                $('#lblFechaMuestra').html((data.fechaMuestra)?data.fechaMuestra:"--");
                 $('#lblPagado').html(lblPagado);
-                $('#lblFechaEntrega').html(data.fechaEntrega);
+                $('#lblFechaEntrega').html((data.fechaEntrega)?data.fechaEntrega:"--");
                 $('#lblAnalista').html(data.analista);
 
                 $('#modalDetalles').modal('show');
@@ -246,6 +250,34 @@ $(document).on('click','.btnDetalles',function(){
         .fail(function(error){
             customAlert("Error!", ajaxError);
         })
+});
+
+$(document).on('click','.btnTomarMuestra',function(){
+    id=$(this).data('idresult');
+    $.confirm({
+        title: 'Atencion!',
+        content: '¿Muestra tomada?',
+        confirm: function(){
+            $.post("routes/routeResultados.php",{info:id,action:'tomarMuestra'})
+                .done(function(data){
+                    data =  $.parseJSON(data);
+                    if(data.success){
+                        customAlert("Exito!", data.msg);
+                        $('#bstableResultsPM').bootstrapTable('refresh');
+
+                    } else{
+                        customAlert("Error!", data.msg);
+                    }
+                })
+                .fail(function(error){
+                    customAlert("Error!", ajaxError);
+                })
+
+        },
+        cancel: function(){
+            console.log('false');
+        }
+    });
 });
 
 $(document).on('click','.btnSubirResultados',function(){

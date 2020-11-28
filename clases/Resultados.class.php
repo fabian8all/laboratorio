@@ -119,6 +119,26 @@
 
         }
 
+        function tomarMuestra($id){
+            $param = array(':sid'=>$id);
+            $fecha = date('Y-m-d H:i:s');
+            $sql ="
+                UPDATE 
+                    solicitudes
+                SET 
+                    estado = 1,
+                    muestra = '$fecha'
+                WHERE
+                    id = :sid
+            ";
+            $query = self::query($sql,$param);
+            if($query){
+                return array('success'=>true,'msg'=>'La toma de muestra ha sido registrada');
+            }else{
+                return array('success'=>false,'msg'=>'Ha ocurrido un error al intentar registrar la toma dela muestra');
+            }
+        }
+
         function uploadFile($data){
             $id =$data['id'];
 

@@ -113,6 +113,12 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-12">
+                            <div class="form-group">
+                                <label class="form-check-label form-check-inline">
+                                    <input type="checkbox" class="form-check" id="chkADomicilio">
+                                    <b>&nbsp;Tomar muestra a domicilio</b>
+                                </label>
+                            </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-12">
                             <div class="form-group">

@@ -286,7 +286,8 @@ function solicitarEstudios(){
         analistaId  : userData.id,
         estudios    : estudiosSelected,
         total       : total,
-        anticipo    : $('#hidAnticipo').val()
+        anticipo    : $('#hidAnticipo').val(),
+        aDomicilio  : $('#chkADomicilio').prop('checked')
     }
 
     $('#btnRESolicitar').html( '\

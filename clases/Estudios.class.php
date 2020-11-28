@@ -157,7 +157,11 @@
                 $descuento  = $data['descuento'];
                 $total      = $data['total'];
                 $anticipo   = $data['anticipo'];
+                $aDomicilio =  strtolower($data['aDomicilio']) == 'true' ? true : false;
+
+
                 $pago_completo = ($anticipo>=$total)?true:false;
+
 
                 $pagado = json_encode(
                     array(
@@ -171,21 +175,25 @@
                     )
                 );
 
+                $muestra = ($aDomicilio)?NULL:date('Y-m-d H:i:s');
+                $status = ($aDomicilio)?0:1;
                 $param = array(
                     ':pid'=>$pacienteId,
                     ':sol'=>date('Y-m-d H:i:s'),
-                    ':sta'=>1,
+                    ':sta'=>$status,
                     ':cst'=>$total,
                     ':des'=>$descuento,
                     ':ana'=>$analistaId,
-                    ':pay'=>$pagado
+                    ':pay'=>$pagado,
+                    ':mue'=>$muestra,
+                    ':dom'=>$aDomicilio
                 );
 
 
                 $sql = "INSERT INTO solicitudes
-                            (id_paciente,solicitud,estado,costo,descuento,analista,pagado)
+                            (id_paciente,solicitud,estado,costo,descuento,analista,pagado,muestra,aDomicilio)
                         VALUES
-                            (:pid,:sol,:sta,:cst,:des,:ana,:pay)";
+                            (:pid,:sol,:sta,:cst,:des,:ana,:pay,:mue,:dom)";
                 $query = self::query($sql,$param);
                 if ($query){
                     $sqlGetLast = "SELECT MAX(id) as id FROM solicitudes;";

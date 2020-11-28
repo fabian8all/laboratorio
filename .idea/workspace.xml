@@ -6,10 +6,8 @@
       <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
@@ -88,7 +86,9 @@
       <workItem from="1606372866349" duration="7443000" />
       <workItem from="1606446608807" duration="2829000" />
       <workItem from="1606452907392" duration="7421000" />
-      <workItem from="1606461957286" duration="5359000" />
+      <workItem from="1606461957286" duration="5599000" />
+      <workItem from="1606513757484" duration="3939000" />
+      <workItem from="1606519990094" duration="959000" />
     </task>
     <servers />
   </component>
