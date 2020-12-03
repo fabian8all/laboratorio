@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group">
-                                <input type="date" id="txtPacientesFechaNac" class="form-control form-control-user necesary" name="" value="" placeholder="Fecha de nacimiento*">
+                                <input onfocus="(this. type='date')" onblur="(this. type='text')" id="txtPacientesFechaNac" class="form-control form-control-user necesary" name="" value="" placeholder="Fecha de nacimiento*">
                             </div>
                         </div>
                         <div class="col-12">

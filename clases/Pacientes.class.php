@@ -18,6 +18,21 @@
 
         }
 
+        public function getMy($idCliente){
+
+            $param = array(':cid'=>$idCliente);
+            $sql = "SELECT * FROM pacientes WHERE referente = :cid AND eliminado IS NULL;";
+
+            $pacientes = self::query_object($sql,$param);
+
+            if ($pacientes){
+                return $pacientes;
+            }else{
+                return false;
+            }
+
+        }
+
         public function BSTableData($data){
             $search = (array_key_exists('search',$data))? $data['search']:"";
             $limit = (array_key_exists('limit',$data))?$data['limit']:0;

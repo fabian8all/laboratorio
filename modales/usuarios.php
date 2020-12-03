@@ -41,11 +41,11 @@
                     </div>
                     <div class="row" id="divUsuariosChkPass">
                         <div class="col-6">
-                            <label for="chkUsuariosChgPass" class="col-form-label">
+<!--                            <label for="chkUsuariosChgPass" class="col-form-label">
                                 <strong>Cambiar contraseña</strong>
                                 <input type="checkbox" class="form-control form-check" id="chkUsuariosChgPass" value=1>
                             </label>
-                        </div>
+-->                        </div>
                     </div>
                     <div class="row" id="divUsuariosChgPass">
                         <div class="col-6">

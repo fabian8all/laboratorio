@@ -22,6 +22,9 @@ $(document).ready(function(){
 		},
 		formatLoadingMessage: function(){
 			return 'Cargando lista de usuarios';
+		},
+		formatSearch: function(){
+			return 'Buscar';
 		}
 	});
 

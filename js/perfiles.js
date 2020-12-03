@@ -22,6 +22,9 @@ $(document).ready(function(){
 		},
 		formatLoadingMessage: function(){
 			return 'Cargando lista de perfiles';
+		},
+		formatSearch: function(){
+			return 'Buscar';
 		}
 	});
 });

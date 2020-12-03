@@ -22,6 +22,9 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             },
             formatLoadingMessage: function(){
                 return 'Cargando lista de estudios';
+            },
+            formatSearch: function(){
+                return 'Buscar';
             }
         });
     });
@@ -70,8 +73,6 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
     $("#btnEstudiosAdd").click(function(){
         $("#frmEstudios").trigger('reset');
         $("#hidEstudiosMode").val("new");
-        $("#divCardEstudiosPruebas").html("");
-        addClassPrueba('',0,0,1);
         $("#modalEstudios").modal('show');
     });
 

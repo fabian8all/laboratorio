@@ -8,69 +8,62 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="frmClientes">
+                <form id="frmClientes" class="user">
                     <input type="hidden" id="hidClientesMode" value="">
                     <input type="hidden" id="hidClientesId" value="">
                     <div class="row">
                         <div class="col-12">
-                            <label for="txtClientesNombre" class="col-form-label">
-                                <strong>Nombre:</strong>
-                            </label>
-                            <input type="text" class="form-control" id="txtClientesNombre">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="txtClientesNombre" placeholder="Nombre">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <label for="txtClientesUser" class="col-form-label">
-                                <strong>Nombre de usuario:</strong>
-                            </label>
-                            <input type="text" class="form-control" id="txtClientesUser">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="txtClientesUser" placeholder="Nombre de usuario">
+                            </div>
                         </div>
                         <div class="col-8">
-                            <label for="txtClientesEmail" class="col-form-label">
-                                <strong>Email:</strong>
-                            </label>
-                            <input type="email" class="form-control" id="txtClientesEmail">
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="txtClientesEmail" placeholder="Email">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label for="selClientesPerfil" class="col-form-label">
-                                <strong>Perfil:</strong>
-                            </label>
-                            <select class="form-control" id="selClientesPerfil">
-                                <option value="0" selected disabled> -- Seleccione perfil --</option>
-                                <option value="2"> Medico </option>
-                                <option value="3"> Empresa </option>
-                            </select>
+                            <div class="form-group">
+                                <select class="form-control form-control-user" id="selClientesPerfil" style="padding: 0rem 1rem;height: 3.2rem;">
+                                    <option value="0" selected disabled> Perfil </option>
+                                    <option value="2"> Medico </option>
+                                    <option value="3"> Empresa </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-6">
-                            <label for="txtClientesDescuento" class="col-form-label">
-                                <strong>Descuento:</strong>
-                            </label>
-                            <input type="number" step="0.01" class="form-control" id="txtClientesDescuento">
+                            <div class="form-group">
+                                <input type="number" min="0" step="0.01" class="form-control form-control-user" id="txtClientesDescuento" placeholder="Descuento" >
+                            </div>
                         </div>
                     </div>
                     <div class="row" id="divClientesChkPass">
                         <div class="col-6">
-                            <label for="chkClientesChgPass" class="col-form-label">
+<!--                            <label for="chkClientesChgPass" class="col-form-label">
                                 <strong>Cambiar contraseña</strong>
                                 <input type="checkbox" class="form-control form-check" id="chkClientesChgPass" value=1>
                             </label>
-                        </div>
+-->                        </div>
                     </div>
                     <div class="row" id="divClientesChgPass">
                         <div class="col-6">
-                            <label for="txtClientesPass1" class="col-form-label">
-                                <strong>Contraseña:</strong>
-                            </label>
-                            <input type="password" class="form-control" id="txtClientesPass1">
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" id="txtClientesPass1" placeholder="Contraseña">
+                            </div>
                         </div>
                         <div class="col-6">
-                            <label for="txtClientesPass2" class="col-form-label">
-                                <strong>Repetir contraseña:</strong>
-                            </label>
-                            <input type="password" class="form-control" id="txtClientesPass2">
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" id="txtClientesPass2" placeholder="Repetir contraseña">
+                            </div>
                         </div>
                     </div>
                 </form>

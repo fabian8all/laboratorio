@@ -1,8 +1,16 @@
-<h1 class="h3 mb-2 text-gray-800">Perfiles</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="title text-center">
+            <h1 class="h3 mb-2 text-gray-800">
+                Perfiles
+            </h1>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-12">
         <div class="form-group">
-            <button title="Agregar perfil" class="btn btn-info w-100 btn-icon-split" id="btnPerfilesAdd">
+            <button title="Agregar perfil" class="btn btn-info btn-icon-split" id="btnPerfilesAdd">
                 <span class="icon text-white-50">
                     <i class="fa fa-user-tag"></i>
                 </span>

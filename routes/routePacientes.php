@@ -20,6 +20,9 @@ $action = $_POST['action'];
 		case 'getAll':
 			echo json_encode($Paciente->getAll());
 			break;
+		case 'getMy':
+			echo json_encode($Paciente->getMy($info));
+			break;
 		case 'BSTableData':
 			echo json_encode($Paciente->BSTableData($info));
 			break;

@@ -22,6 +22,9 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             },
             formatLoadingMessage: function(){
                 return 'Cargando lista de pacientes';
+            },
+            formatSearch: function(){
+                return 'Buscar';
             }
         });
     });
