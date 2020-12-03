@@ -30,7 +30,7 @@
 
             $sql = "SELECT * 
                         FROM usuarios 
-                        WHERE perfil != 1 AND eliminado IS NULL
+                        WHERE (perfil = 2 OR perfil = 3) AND eliminado IS NULL
                             $andWhere
                         ORDER BY $sort $order
                         LIMIT $limit
@@ -41,7 +41,7 @@
 
             $sqlCount= "SELECT count(*) as total
                         FROM usuarios 
-                        WHERE perfil != 1 AND eliminado IS NULL
+                        WHERE (perfil = 2 OR perfil = 3) AND eliminado IS NULL
                             $andWhere
                         ;";
 
@@ -174,9 +174,9 @@
                     WHERE id = :cid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array('success' => true, 'msg' => "El registro del cliente ha sido eliminado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar eliminar el registro del cliente");
             }
         }
 

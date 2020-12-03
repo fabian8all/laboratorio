@@ -2,11 +2,16 @@
 
 	session_start();
 
-	require('../clases/Clientes.class.php');
+	require_once ('../clases/Clientes.class.php');
+	require_once ('../includes/permisos.php');
+
 
 	$Cliente = new Cliente();
+	$permisos = new Permisos(5);
+	$sin_permisos = "Lo sentimos, usted no cuenta con los permisos necesarios para llevar a cabo esta operación";
 
-	$action = $_POST['action'];
+
+$action = $_POST['action'];
 
 	if(isset($_POST['info']))
 		$info = $_POST['info'];
@@ -22,13 +27,31 @@
 			echo json_encode($Cliente->get($info));
 			break;
 		case 'Add':
-			echo json_encode($Cliente->Add($info));
+			if ($permisos->crear()) {
+				echo json_encode($Cliente->Add($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'Update':
-			echo json_encode($Cliente->Update($info));
+			if ($permisos->actualizar()) {
+				echo json_encode($Cliente->Update($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'Delete':
-			echo json_encode($Cliente->Delete($info));
+			if ($permisos->borrar()){
+				echo json_encode($Cliente->Delete($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 	}
 

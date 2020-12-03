@@ -1,322 +1,399 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
 $(document).ready(function(){
-    load_resultados_data();
+    $('#bstableResultsPM').bootstrapTable({
+        queryParams: function (p) {
+            return {
+                search          : p.search,
+                limit           : p.limit,
+                offset          : p.offset,
+                sort            : p.sort,
+                order           : p.order,
+                status          : 0
+            };
+        },
+        formatShowingRows: function (pageFrom, pageTo, totalRows) {
+            return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' solicitudes';
+        },
+        formatRecordsPerPage: function (pageNumber) {
+            return pageNumber + ' solicitudes por página';
+        },
+        formatNoMatches: function () {
+            return 'No se encontraron solicitudes registradas';
+        }
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        switch (e.target.id){
+            case 'nav-pendienteMuestra-tab':
+                $('#bstableResultsPM').bootstrapTable('refresh');
+                break;
+            case 'nav-enProceso-tab':
+                $('#bstableResultsEP').bootstrapTable({
+                    queryParams: function (p) {
+                        return {
+                            search          : p.search,
+                            limit           : p.limit,
+                            offset          : p.offset,
+                            sort            : p.sort,
+                            order           : p.order,
+                            status          : 1
+                        };
+                    },
+                    formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                        return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' solicitudes';
+                    },
+                    formatRecordsPerPage: function (pageNumber) {
+                        return pageNumber + ' solicitudes por página';
+                    },
+                    formatNoMatches: function () {
+                        return 'No se encontraron solicitudes registradas';
+                    }
+                }).bootstrapTable('refresh');
+                break;
+            case 'nav-pendientePago-tab':
+                $('#bstableResultsPP').bootstrapTable({
+                    queryParams: function (p) {
+                        return {
+                            search          : p.search,
+                            limit           : p.limit,
+                            offset          : p.offset,
+                            sort            : p.sort,
+                            order           : p.order,
+                            status          : 2
+                        };
+                    },
+                    formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                        return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' solicitudes';
+                    },
+                    formatRecordsPerPage: function (pageNumber) {
+                        return pageNumber + ' solicitudes por página';
+                    },
+                    formatNoMatches: function () {
+                        return 'No se encontraron solicitudes registradas';
+                    }
+                }).bootstrapTable('refresh');
+                break;
+            case 'nav-finalizado-tab':
+                $('#bstableResultsF').bootstrapTable({
+                    queryParams: function (p) {
+                        return {
+                            search          : p.search,
+                            limit           : p.limit,
+                            offset          : p.offset,
+                            sort            : p.sort,
+                            order           : p.order,
+                            status          : 3
+                        };
+                    },
+                    formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                        return 'Mostrando ' + pageFrom + ' a ' + pageTo + ' de un total de ' + totalRows + ' solicitudes';
+                    },
+                    formatRecordsPerPage: function (pageNumber) {
+                        return pageNumber + ' solicitudes por página';
+                    },
+                    formatNoMatches: function () {
+                        return 'No se encontraron solicitudes registradas';
+                    }
+                }).bootstrapTable('refresh');
+                break;
+        }
+    });
 });
 
-function load_resultados_data(){
-    divSolicitudes = "";
-    $.post("routes/routeResultados.php",{info: {},action:"getAll"})
-        .done(function(data){
-            data = $.parseJSON(data);
-            $(data).each(function(k,solicitud){
-                clase = "card-secondary";
-                switch (solicitud.estado){
-                    case '1':
-                        clase = "card-warning";
-                        break;
-                    case '2':
-                        clase = "card-warning";
-                        break;
-                    case '3':
-                        clase = "card-success";
-                        break;
+function formatResultsPMOptions(value, row, index){
+    var options = "\
+            <div class='dropup'> \
+                <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-success btn-sm btnTomarMuestra' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Tomar muestra' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-eye-dropper fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+            </div>";
 
-                }
-                divSolicitudes += '<div class="row">   \
-                    <div class="col-sm-12">   \
-                        <div class="card" >\
-                            <div class="card-header '+clase+'" style="border-radius:20px;">\
-                                <div class="card-title">\
-                                    <div class="col-sm-6">\
-                                        <span class="fa fa-chevron-circle-right">\
-                                        <a class="hrefCollapse" role="button" data-toggle="collapse" data-parent="#divSolicitudes" data-target="#divSolicitud_'+k+'" aria-expanded="true" aria-controls="collapseOne">\
-                                            '+solicitud.paciente+" - "+solicitud.fecha+'\
-                                        </a>\
-                                    </div>\
-                                </div>\
-                            </div>\
-                            <div id="divSolicitud_'+k+'" class="collapse divSolicitud" data-idpaquete="'+solicitud.id+'" role="tabpanel" >\
-                            </div>\
+    return options;
+}
+
+function formatResultsEPOptions(value, row, index){
+    var options = "\
+            <div class='dropup'> \
+                <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-success btn-sm btnSubirResultados' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Subir resultados' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-upload fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+            </div>";
+
+    return options;
+}
+
+function formatResultsPPOptions(value, row, index){
+    var options = "\
+            <div class='dropup'> \
+                <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-warning btn-sm btnGuardarPago' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Guardar pago' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-cash-register fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-primary btn-sm btnDescargarResultados' data-filename='" + row.resultados + "' data-toggle='tooltip' data-placement='top' title='Descargar resultados' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-download fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+            </div>";
+
+    return options;
+}
+
+function formatResultsFOptions(value, row, index){
+    console.log(row);
+    var options = "\
+            <div class='dropup'> \
+                <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-primary btn-sm btnDescargarResultados' data-filename='" + row.resultados + "' data-toggle='tooltip' data-placement='top' title='Descargar resultados' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-download fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+            </div>";
+
+    return options;
+}
+
+function ajaxGetResults(params){
+    $.ajax({
+        type: "POST",
+        url: "routes/routeResultados.php",
+        data: {info:params.data,action:'BSTableData'},
+        dataType: "json",
+        success: function (data) {
+            params.success({
+                "total": data.count,
+                "rows" : data.rows
+            })
+        },
+        error: function (er) {
+            params.error(er);
+        }
+    });
+}
+
+$(document).on('click','.btnDetalles',function(){
+    id=$(this).data('idresult');
+    $.post("routes/routeResultados.php",{info:id,action:'get'})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            if(data){
+                estudios = "";
+                costo = 0;
+                $(data.estudios).each(function(k,v){
+                    estudios += "\
+                        <tr><td>"+v.estudio+"</td></tr>\
+                    ";
+                });
+                $('#listaEstudios').html(estudios);
+
+                pagado = $.parseJSON(data.pagado);
+                lblPagado = "\
+                    <div class='row'>\
+                        <div class='col-12'>";
+                lblPagado+=(pagado.completo)
+                                ?"<span class='badge badge-success'>pagado</span>"
+                                :"<span class='badge badge-warning'>pendiente</span>";
+                lblPagado +="\
+                        </div>\
+                        <div class='col-12'>\
+                            <table class='table table-borderless table-responsive table-striped'>\
+                                <thead>\
+                                    <tr>\
+                                        <th>PAGOS</th>\
+                                        <th>FECHA</th>\
+                                    </tr>\
+                                </thead>\
+                                <tbody>";
+                                c = 0;
+                                $(pagado.pagos).each(function(k,v){
+                                    c++;
+                                    if(parseFloat(v.cantidad) > 0){
+                                        lblPagado += "\
+                                            <tr>\
+                                                <td>$"+parseFloat(v.cantidad).toFixed(2)+"</td>\
+                                                <td>"+v.fecha+"</td>\
+                                            </tr>\
+                                        ";
+                                    }
+                                });
+                                console.log(c);
+                                lblPagado += (c == 0)?"<tr><td colspan='2'>No hay pagos registrados</td></tr>":"";
+                    lblPagado += "\
+                                </tbody>\
+                            </table>\
                         </div>\
                     </div>\
-                </div>';
-            });
-            $("#divSolicitudes").html(divSolicitudes);
+                ";
+
+                $('#lblCosto').html("$"+parseFloat(data.costo).toFixed(2));
+                $('#lblDescuento').html("%"+parseFloat(data.descuento).toFixed(2));
+                $('#lblFechaSol').html(data.fechaSolicitud);
+                $('#lblFechaMuestra').html((data.fechaMuestra)?data.fechaMuestra:"--");
+                $('#lblPagado').html(lblPagado);
+                $('#lblFechaEntrega').html((data.fechaEntrega)?data.fechaEntrega:"--");
+                $('#lblAnalista').html(data.analista);
+
+                $('#modalDetalles').modal('show');
+
+            } else{
+                customAlert("Error!", "Ocurrió un error al intentar obtener la información");
+            }
         })
         .fail(function(error){
             customAlert("Error!", ajaxError);
         })
-
-}
-
-$(document).on('show.bs.collapse',".divSolicitud",function(){
-   id=$(this).data("idpaquete");
-   div = $(this).prop("id");
-
-    divResultados = '<div class="card-body">\
-                        <div class="row">\
-                            <div class="col-12">';
-    $.post("routes/routeResultados.php",{info:id,action:"get"})
-        .done(function(data){
-            data = $.parseJSON(data);
-            $(data).each(function(k,estudio){
-                divResultados += "\
-                    <div class='card'>\
-                        <div class='card-header card-primary'>\
-                            <div class='card-title'>\
-                                "+estudio.estudio+"\
-                            </div>\
-                        </div>\
-                        <div class='card-body' style='overflow-x: scroll;'>\
-                ";
-                if (estudio.estado == "1"){
-                    pruebas = $.parseJSON(estudio.pruebas);
-                    $(pruebas).each(function(k2,clasif){
-                        if(clasif.nombre != ""){
-                            divResultados += "\
-                                <h3>"+clasif.nombre+"</h3>\
-                                <hr>\
-                            ";
-                        }
-                        tipo = ('tipo' in clasif) ? parseInt(clasif.tipo):1;
-
-                        $(clasif.pruebas).each(function(k3,prueba){
-                            divResultados += "\
-                                <div class='row'>\
-                                    <div class='col-md-6 col-sm-12'>\
-                                        <label>\
-                                            <strong>"+prueba.nombre+":</strong>\
-                                        </label>\
-                                    </div>\
-                                    ";
-                            if (tipo == 1){
-                                divResultados+="\
-                                        <div class='col-md-6 col-sm-12'>\
-                                            <input type='text' class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
-                                        </div>\
-                                    </div>\
-                                ";
-                            }else if(tipo == 2){
-                                divResultados+="\
-                                        <div class='col-md-6 col-sm-12'>\
-                                            <select class='form-control txtResultadosPrueba' data-prueba='"+k3+"' data-clasif='"+k2+"'>\
-                                                <option value='' selected disabled>--Seleccionar Interpretación</option>\
-                                ";
-                                $(clasif.interps).each(function(k,interp){
-                                    divResultados+="\
-                                                <option value='"+interp.valor+"'>"+interp.nombre+"</option>'\
-                                    ";
-                                });
-                                divResultados+="\
-                                            </select>\
-                                        </div>\
-                                    </div>\
-                                ";
-                            }
-
-                        });
-                    });
-                    divResultados += "\
-                        <hr>\
-                        <div class='row'>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <label>\
-                                    <strong>Observaciones:</strong>\
-                                </label>\
-                            </div>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <textarea class='form-control txtResultadosObservaciones' cols='60' rows='5'></textarea>\
-                            </div>\
-                        </div>\
-                        <hr>\
-                        <div class='row'>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <label>\
-                                    <strong>Analista:</strong>\
-                                </label>\
-                            </div>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <textarea class='form-control txtResultadosAnalista' cols='60' rows='5'></textarea>\
-                            </div>\
-                        </div>\
-                        <hr>\
-                        <div class='row'>\
-                            <div class='float-right'>\
-                                <button class='btn btn-success btnResultadosSave' data-idestudio='"+estudio.id+"'>\
-                                    <span class='fa fa-save'></span>\
-                                    Guardar Resultados\
-                                </button>\
-                            </div>\
-                        </div>\
-                    ";
-                }
-                if (estudio.estado == "2" || estudio.estado == "3"){
-                    pruebas = $.parseJSON(estudio.pruebas);
-                    resultados = $.parseJSON(estudio.resultados);
-                    $(pruebas).each(function(k2,clasif){
-                        if(clasif.nombre != ""){
-                            divResultados += "\
-                                <h3>"+clasif.nombre+"</h3>\
-                                <hr>\
-                            ";
-                        }
-                        tipo = ('tipo' in clasif) ? parseInt(clasif.tipo):1;
-                        col = (tipo == 1)?'col-4':'col-6';
-                        divResultados += "\
-                                <div class='row'>\
-                                    <div class='"+col+"'>\
-                                        <label>\
-                                            <strong>PRUEBA</strong>\
-                                        </label>\
-                                    </div>\
-                                    <div class='"+col+"'>\
-                                        <label>\
-                                            <strong>RESULTADO</strong>\
-                                        </label>\
-                                    </div>\
-                                    ";
-                        divResultados += (tipo == 1)?"\
-                                    <div class='col-4'>\
-                                        <label>\
-                                            <strong>REFERENCIA</strong>\
-                                        </label>\
-                                    </div>\
-                                </div>\
-                            ":"</div>";
-                        $(clasif.pruebas).each(function(k3,prueba){
-                            divResultados += "\
-                                <div class='row'>\
-                                    <div class='"+col+"'>\
-                                        <label>\
-                                            <strong>"+prueba.nombre+":</strong>\
-                                        </label>\
-                                    </div>\
-                                    <div class='"+col+"'>\
-                                        "+resultados[k2][k3]+"\
-                                    </div>\
-                                    ";
-                            divResultados += (tipo == 1)?"\
-                                    <div class='col-4'>\
-                                        <label>\
-                                            <strong>"+prueba.referencia+"</strong>\
-                                        </label>\
-                                    </div>\
-                                </div>\
-                            ":"</div>";
-                        });
-                        if (tipo == 2){
-                            divResultados += "\
-                                <hr>\
-                                <div class='row'>\
-                                    <div class='col-12'>\
-                                        <strong>Interpretación:</strong>\
-                                    </div>\
-                                    <div class='col-12'>\
-                            ";
-                            $(clasif.interps).each(function(k,interp){
-                                divResultados += "\
-                                        "+interp.valor+"="+interp.nombre+"&nbsp;\
-                            ";
-                            });
-                            divResultados += "\
-                                    </div>\
-                                </div>\
-                            ";
-                        }
-                    });
-                    divResultados += "\
-                        <hr>\
-                        <div class='row'>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <label>\
-                                    <strong>Observaciones:</strong>\
-                                </label>\
-                            </div>\
-                            <div class='col-md-6 col-sm-12'>\
-                                "+estudio.observaciones+"\
-                            </div>\
-                        </div>\
-                        <hr>\
-                        <div class='row'>\
-                            <div class='col-md-6 col-sm-12'>\
-                                <label>\
-                                    <strong>Analista:</strong>\
-                                </label>\
-                            </div>\
-                            <div class='col-md-6 col-sm-12'>\
-                                "+estudio.analista+"\
-                            </div>\
-                        </div>\
-                    ";
-                }
-                divResultados += "\
-                        </div>\
-                    </div>\
-                ";
-            });
-            $("#"+div).html(divResultados);
-        })
-        .fail(function(error){
-           customAlert("Error!",ajaxError);
-        });
 });
 
-$(document).on('click','.btnResultadosSave',function() {
-    btn =  this;
-    estudio = $(btn).closest('.card-body');
-    idEstudio = $(btn).data('idestudio');
+$(document).on('click','.btnTomarMuestra',function(){
+    id=$(this).data('idresult');
     $.confirm({
         title: 'Atencion!',
-        content: '¿Guardar resultados del estudio?',
-        confirm: function () {
-            resultados = [];
-            pruebas = estudio.find(".txtResultadosPrueba");
-            observaciones = estudio.find(".txtResultadosObservaciones").val();
-            analista = estudio.find(".txtResultadosAnalista").val();
-            $(pruebas).each(function (k, prueba) {
-                clasif = $(prueba).data("clasif");
-                key = $(prueba).data("prueba");
-                if (!(clasif in resultados)){
-                    resultados[clasif]=[];
-                }
-                resultados[clasif][key]=$(prueba).val();
-            });
-            resultados = JSON.stringify(resultados);
-            info = {
-                idEstudio : idEstudio,
-                resultados : resultados,
-                observaciones : observaciones,
-                analista : analista
-            }
-            $(btn).html( '\
-                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
-               Guardando...'
-            ).prop('disabled',true);
+        content: '¿Muestra tomada?',
+        confirm: function(){
+            $.post("routes/routeResultados.php",{info:id,action:'tomarMuestra'})
+                .done(function(data){
+                    data =  $.parseJSON(data);
+                    if(data.success){
+                        customAlert("Exito!", data.msg);
+                        $('#bstableResultsPM').bootstrapTable('refresh');
 
-            $.post('routes/routeResultados.php', {info: info, action: "Save"}, function (data) {
-                data = $.parseJSON(data);
-                if (data.success) {
-                    customAlert("Exito!", "Los resutados han sido guardados");
-                    if(data.full){
-                        load_resultados_data();
-                    }else{
-                        $(estudio).closest(".divSolicitud").trigger('show');
+                    } else{
+                        customAlert("Error!", data.msg);
                     }
-                }else {
-                    customAlert("Error!", "Error al intentar guardar los resultados");
-                }
-            }).fail(function (error) {
-                customAlert("Error!", ajaxError);
-            }).always(function(){
-                $(btn).html( '\
-                    <span class="fa fa-save"></span>\
-                    Guardar Resultados\
-                ').prop('disabled',false);
-            });
+                })
+                .fail(function(error){
+                    customAlert("Error!", ajaxError);
+                })
+
         },
-        cancel: function () {
+        cancel: function(){
             console.log('false');
         }
     });
+});
+
+$(document).on('click','.btnSubirResultados',function(){
+    $('#resultsFileForm').trigger('reset');
+    $('#hidSRSolicitudId').val($(this).data('idresult'));
+    $('#modalSubirResultados').modal('show');
+});
+
+$('#btnUploadResults').click(function(){
+    $(this).html( '\
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+            Guardando...'
+    ).prop('disabled',true);
+    if ($('#fileResultados').val() != ""){
+        $('body').append('\
+            <div id="divIframeUpload">\
+                <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe> \
+            </div>\
+        ');
+
+        $("#resultsFileForm").submit();
+    }
+});
+
+function UploadResults(success){
+    if (success != 0){
+        $('#hidSRFileName').val(success);
+    }
+    else {
+        customAlert("Error!", "Ocurrió un error al subir el archivo");
+    }
+
+
+    info = {
+        id: $('#hidSRSolicitudId').val(),
+        file: success,
+    }
+    $.post("routes/routeResultados.php",{info,action:'uploadFile'}, function (data) {
+        if(data!='false'){
+            $('#modalSubirResultados').modal('hide');
+            $('#bstableResultsEP').bootstrapTable('refresh');
+            customAlert("Exito!", "Los resultados han sido cargados");
+        }else{
+
+        }
+    });
+
+    $('#divIframeUpload').remove();
+    return true;
+}
+
+$(document).on('click','.btnDescargarResultados',function(){
+    file = $(this).data('filename');
+
+        window.open('resources/resultsFiles/'+file);
+});
+
+$(document).on('click','.btnGuardarPago',function(){
+    id=$(this).data('idresult');
+    $.post("routes/routeResultados.php",{info:id,action:'get'})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            pagado = $.parseJSON(data.pagado);
+            anticipo = 0;
+            $(pagado.pagos).each(function(k,v){
+                anticipo+=v.cantidad;
+            });
+            APagar = data.costo - anticipo;
+            if(data){
+                $('#lblCostoTotal').html("$"+parseFloat(data.costo).toFixed(2));
+                $('#lblAnticipo').html("$"+parseFloat(anticipo).toFixed(2));
+                $('#lblTotalAPagar').html("$"+parseFloat(APagar).toFixed(2));
+                $('#txtPago').val('');
+                $('#hidPagoIdSolicitud').val(id);
+                $('#modAgregarPago').modal('show');
+            } else{
+                customAlert("Error!", "Ocurrió un error al intentar obtener la información");
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+});
+
+$('#btnPagoSubmit').click(function(){
+    info = {
+        id      : $("#hidPagoIdSolicitud").val(),
+        pago    : $("#txtPago").val()
+    }
+
+    $('#btnPagoSubmit').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Guardando...'
+    ).prop('disabled',true);
+
+    $.post("routes/routeResultados.php",{info:info,action:"Pagar"})
+        .done(function(data){
+            data =  $.parseJSON(data);
+            if(data.success){
+                customAlert("Exito!", data.msg);
+                $("#txtPago").val('');
+                $("#hidPagoIdSolicitud").val('');
+                $('#modAgregarPago').modal('hide');
+                $('#bstableResultsPP').bootstrapTable('refresh');
+            } else{
+                customAlert("Error!", data.msg);
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $('#btnPagoSubmit').html( '\
+                    <span class="fa fa-money"></span>\
+                    Guardar pago\
+                ').prop('disabled',false);
+        });
+
 });

@@ -1,6 +1,8 @@
 <?php
 
-	require_once('DBConnection.class.php');
+	require_once ('DBConnection.class.php');
+    require_once ('../includes/permisos.php');
+
 
 	Class Estudio extends DBConnection {
 
@@ -88,18 +90,17 @@
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
                 ':mue'=>$data['muestra'],
-                ':tst'=>$data['pruebas'],
                 ':crt'=>date('Y-m-d H:i:s')
             );
             $sql = "INSERT INTO estudios 
-                        (codigo,nombre,tiempo,costo,muestra,pruebas,creado) 
+                        (codigo,nombre,tiempo,costo,muestra,creado) 
                     VALUES
-                        (:cod,:nom,:tim,:cos,:mue,:tst,:crt)";
+                        (:cod,:nom,:tim,:cos,:mue,:crt)";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                return array('success' => true, 'msg' => "El registro de estudio ha sido creado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -113,7 +114,6 @@
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
                 ':mue'=>$data['muestra'],
-                ':tst'=>$data['pruebas']
             );
             $sql = "UPDATE estudios 
                         SET 
@@ -121,16 +121,14 @@
                             nombre = :nom,
                             tiempo = :tim,
                             costo = :cos,
-                            muestra = :mue,
-                            pruebas = :tst,
-                            eliminado = null 
+                            muestra = :mue
                         WHERE 
                             id = :eid";
             $query = self::query($sql,$params);
             if ($query){
-                return true;
+                return array('success' => true, 'msg' => "La información de estudio ha sido actualizada");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
 
         }
@@ -146,51 +144,86 @@
                     WHERE id = :eid;";
             $query = self::query($sql,$param);
             if($query){
-                return true;
+                return array('success' => true, 'msg' => "El estudio ha sido eliminado");
             }else{
-                return false;
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
             }
         }
 
         public function Solicitar($data){
-            $pacienteId = $data['pacienteId'];
-            $descuento  = $data['descuento'];
 
-            $ok=true;
-            foreach ($data['estudios'] as $key=>$estudio){
-                if ($key == 0){
-                    $paquete = 0;
-                }else if($paquete == 0){
-                    $sqlGetLast = "SELECT MAX(id) as id FROM estudios_paciente;";
-                    $query = self::query_single_object($sqlGetLast);
-                    $paquete = $query->id;
-                }
+                $analistaId = $data['analistaId'];
+                $pacienteId = $data['pacienteId'];
+                $descuento  = $data['descuento'];
+                $total      = $data['total'];
+                $anticipo   = $data['anticipo'];
+                $aDomicilio =  strtolower($data['aDomicilio']) == 'true' ? true : false;
+
+
+                $pago_completo = ($anticipo>=$total)?true:false;
+
+
+                $pagado = json_encode(
+                    array(
+                        'completo'  => $pago_completo,
+                        'pagos'     => array(
+                            array(
+                                'cantidad'  => $anticipo,
+                                'fecha'     => date('Y-m-d H:i:s')
+                            )
+                        )
+                    )
+                );
+
+                $muestra = ($aDomicilio)?NULL:date('Y-m-d H:i:s');
+                $status = ($aDomicilio)?0:1;
                 $param = array(
-                    ':eid'=>$estudio['id'],
                     ':pid'=>$pacienteId,
                     ':sol'=>date('Y-m-d H:i:s'),
-                    ':sta'=>1,
-                    ':cst'=>$estudio['costo'],
+                    ':sta'=>$status,
+                    ':cst'=>$total,
                     ':des'=>$descuento,
-                    ':paq'=>$paquete
+                    ':ana'=>$analistaId,
+                    ':pay'=>$pagado,
+                    ':mue'=>$muestra,
+                    ':dom'=>$aDomicilio
                 );
-                $sql = "INSERT INTO estudios_paciente
-                            (id_estudio,id_paciente,solicitud,estado,costo,descuento,paquete)
+
+
+                $sql = "INSERT INTO solicitudes
+                            (id_paciente,solicitud,estado,costo,descuento,analista,pagado,muestra,aDomicilio)
                         VALUES
-                            (:eid,:pid,:sol,:sta,:cst,:des,:paq)";
+                            (:pid,:sol,:sta,:cst,:des,:ana,:pay,:mue,:dom)";
                 $query = self::query($sql,$param);
-                if(!$query){
-                    $ok=false;
-                    break;
+                if ($query){
+                    $sqlGetLast = "SELECT MAX(id) as id FROM solicitudes;";
+                    $queryLast = self::query_single_object($sqlGetLast);
+                    $solicitud = $queryLast->id;
+
                 }
-            }
+                $ok = true;
+                foreach ($data['estudios'] as $key=>$estudio){
+                    $param = array(
+                        ':eid'=>$estudio['id'],
+                        ':cst'=>$estudio['costo'],
+                        ':sid'=>$solicitud
+                    );
+                    $sql = "INSERT INTO estudios_paciente
+                            (id_estudio,id_solicitud,costo)
+                        VALUES
+                            (:eid,:sid,:cst)";
+                    $query = self::query($sql,$param);
+                    if(!$query){
+                        $ok=false;
+                        break;
+                    }
+                }
 
-            if($ok){
-                return true;
-            }else{
-                return false;
-            }
-
+                if($ok){
+                    return array('success' => true, 'msg' => "Se han solicitado los estudios a realizar");
+                }else{
+                    return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
+                }
         }
 
 

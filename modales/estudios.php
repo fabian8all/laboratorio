@@ -59,27 +59,6 @@
                             <textarea class="form-control" id="txtEstudiosMuestra"></textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header card-warning">
-                                    <div class="card-title">
-                                        Pruebas
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="container" id="accordion" role="tablist" aria-multiselectable="true">
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-outline-info" id="btnEstudiosModalClassPrueba">
-                                        <span class="fa fa-tasks"></span>
-                                        Agregar Clasificación
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -88,33 +67,6 @@
                     Guardar
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="modalEstudiosClassPrueba" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal_title">Agregar clasificación</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modal_body">
-
-                <form class="form-horizontal form-label-left input_mask" id="formUser">
-                    <label class="form-control-label">
-                        Nombre de la clasificación
-                        <input type="text" class="form-control" id="txtEstudiosNomClassPrueba" tabindex="1">
-                    </label>
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-cancel" data-dismiss="modal" tabindex="3">Cerrar</button>
-                <button type="button" id="btnEstudiosAddClassPrueba" class="btn btn-accept btnModal" tabindex="2">Aceptar</button>
             </div>
         </div>
     </div>

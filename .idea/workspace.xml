@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,16 +38,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/clases" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/modales" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laboratorio\modales" />
       <recent name="C:\xampp\htdocs\laboratorio\clases" />
       <recent name="C:\xampp\htdocs\laboratorio\routes" />
-      <recent name="C:\xampp\htdocs\laboratorio" />
-      <recent name="C:\xampp\htdocs\laboratorio\plugins\bootstrap-table" />
-      <recent name="C:\xampp\htdocs\laboratorio\plugins" />
+      <recent name="C:\xampp\htdocs\laboratorio\js" />
+      <recent name="C:\xampp\htdocs\laboratorio\vistas" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -62,7 +69,26 @@
       <workItem from="1602784959750" duration="12811000" />
       <workItem from="1603134904658" duration="34617000" />
       <workItem from="1603745736186" duration="10470000" />
-      <workItem from="1603828784349" duration="18983000" />
+      <workItem from="1603828784349" duration="22739000" />
+      <workItem from="1605048018119" duration="4161000" />
+      <workItem from="1605216411516" duration="12218000" />
+      <workItem from="1605367730705" duration="9329000" />
+      <workItem from="1605651514304" duration="6057000" />
+      <workItem from="1605659538372" duration="2358000" />
+      <workItem from="1605902961386" duration="1301000" />
+      <workItem from="1605905742954" duration="7261000" />
+      <workItem from="1606059546193" duration="2204000" />
+      <workItem from="1606063478676" duration="14026000" />
+      <workItem from="1606172477580" duration="1527000" />
+      <workItem from="1606258367286" duration="4360000" />
+      <workItem from="1606286724508" duration="10540000" />
+      <workItem from="1606338861411" duration="727000" />
+      <workItem from="1606372866349" duration="7443000" />
+      <workItem from="1606446608807" duration="2829000" />
+      <workItem from="1606452907392" duration="7421000" />
+      <workItem from="1606461957286" duration="5599000" />
+      <workItem from="1606513757484" duration="3939000" />
+      <workItem from="1606519990094" duration="959000" />
     </task>
     <servers />
   </component>
@@ -70,21 +96,29 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1603487507112">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605131483837">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1603487507112" />
-    <state x="404" y="109" width="540" height="524" key="StructurePopup" timestamp="1602197897009">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605131483837" />
+    <state x="518" y="287" key="NewPhpFileDialog" timestamp="1606262307477">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="404" y="109" width="540" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1602197897009" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1604008928389">
+    <state x="518" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1606262307477" />
+    <state x="404" y="109" width="570" height="524" key="StructurePopup" timestamp="1605400141716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1604008928389" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603746505614">
+    <state x="404" y="109" width="570" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1605400141716" />
+    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1605400134551">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603746505614" />
+    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1605400134551" />
+    <state x="339" y="164" key="run.anything.popup" timestamp="1606119373009">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1606119373009" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606462365830">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1606462365830" />
   </component>
 </project>

@@ -2,9 +2,13 @@
 
 	session_start();
 
-	require('../clases/Usuarios.class.php');
+	require_once ('../clases/Usuarios.class.php');
+	require_once ('../includes/permisos.php');
+
 
 	$Usuario = new Usuario();
+	$permisos = new Permisos(6);
+	$sin_permisos = "Lo sentimos, usted no cuenta con los permisos necesarios para llevar a cabo esta operación";
 
 	$action = $_POST['action'];
 
@@ -15,23 +19,38 @@
 		case 'auth':
 			echo json_encode($Usuario->login($info));
 			break;
-        case 'registrar':
-            echo json_encode($Usuario->registrar($info));
-            break;
-		case 'read':
-			echo json_encode($Usuario->read($info));
+		case 'BSTableData':
+			echo json_encode($Usuario->BSTableData($info));
 			break;
-		case 'activarUser':
-			echo json_encode($Usuario->activa($info));
+		case 'get':
+			echo json_encode($Usuario->get($info));
 			break;
-		case 'desactivarUser':
-			echo json_encode($Usuario->desactiva($info));
+		case 'Add':
+			if ($permisos->crear()) {
+				echo json_encode($Usuario->Add($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
-		case 'getFull':
-			echo json_encode($Usuario->getFull($info));
+		case 'Update':
+			if ($permisos->actualizar()) {
+				echo json_encode($Usuario->Update($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
-		case 'requestFull':
-			echo json_encode($Usuario->requestFull($info));
+		case 'Delete':
+			if ($permisos->borrar()){
+				echo json_encode($Usuario->Delete($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 	}
 

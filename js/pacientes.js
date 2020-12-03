@@ -28,12 +28,12 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
 
     function formatPacientesOptions(value, row, index){
         var options = "\
-                <div class='btn-group dropup'> \
-                    <button class='btn btn-outline-warning btnPacientesEdit' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
-                        <span class='fa fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                <div class='dropup'> \
+                    <button class='btn btn-circle btn-sm btn-outline-warning btnPacientesEdit' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fas fa-fw fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                     </button>\
-                    <button class='btn btn-outline-danger btnPacientesDel' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
-                        <span class='fa fa-trash-o fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    <button class='btn btn-circle btn-sm btn-outline-danger btnPacientesDel' data-idpaciente='" + value + "' data-toggle='tooltip' data-placement='top' title='Eliminar' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fas fa-fw fa-trash fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                     </button>\
                 </div>";
 
@@ -48,7 +48,6 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             data: {info:params.data,action:'BSTableData'},
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 params.success({
                     "total": data.count,
                     "rows" : data.rows
@@ -75,6 +74,8 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                     $('#hidPacientesMode').val('update');
                     $('#hidPacientesId').val(data.id);
                     $('#txtPacientesNombre').val(data.nombre);
+                    $('#selPacientesGenero').val(data.genero);
+                    $('#txtPacientesFechaNac').val(data.fechaNacInput);
                     $('#txtPacientesDireccion').val(data.direccion);
                     $('#txtPacientesTelefono').val(data.telefono);
                     $('#txtPacientesEmail').val(data.email);
@@ -95,11 +96,13 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             content: '¿Esta seguro que desea eliminar este paciente?',
             confirm: function(){
                 $.post('routes/routePacientes.php',{info: id,action: "Delete"},function(data){
-                    if(data == 'true')
-                        customAlert("Exito!", "El paciente ha sido eliminado");
+                    data = $.parseJSON(data);
+                    if(data.success){
+                        customAlert("Exito!", data.msg);
+                        $('#bstablePacientes').bootstrapTable("refresh");
+                    }
                     else
-                        customAlert("Error!", "Error al intentar eliminar al paciente");
-                    load_pacientes_data()
+                        customAlert("Error!", data.msg);
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
                 });
@@ -113,6 +116,8 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
     $("#btnPacientesSave").click(function(){
         info =  {
             nombre: $("#txtPacientesNombre").val(),
+            genero: $("#selPacientesGenero").val(),
+            fechaNac: $("#txtPacientesFechaNac").val(),
             direccion: $("#txtPacientesDireccion").val(),
             telefono: $("#txtPacientesTelefono").val(),
             email: $("#txtPacientesEmail").val(),
@@ -129,12 +134,13 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
         ).prop('disabled',true);
         $.post("routes/routePacientes.php",{info:info,action:action})
         .done(function(data){
-            if(data){
-                customAlert("Exito!", "La información se ha guardado con exito");
+            data = $.parseJSON(data)
+            if(data.success){
+                customAlert("Exito!", data.msg);
                 $("#modalPacientes").modal('hide');
-                load_pacientes_data();
+                $('#bstablePacientes').bootstrapTable("refresh");
             } else{
-                customAlert("Error!", "Ocurrió un error al intentar guardar la información");
+                customAlert("Error!", data.msg);
             }
         })
         .fail(function(error){
