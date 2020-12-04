@@ -18,10 +18,10 @@
 //-----------------SERVER mycositec.ddns.net---------------------------------
 
 
-    define("NOMBRE_HOST", "mycositec.ddns.net");// Nombre del host
-    define("BASE_DE_DATOS", "laboratorio"); // Nombre de la base de modelos
-    define("USUARIO", "angel"); // Nombre del usuario
-    define("CONTRASENA", "sEj75u7iXin2jOM81uGAlIhIS8D7ba"); // Constraseña
+    define("NOMBRE_HOST", "cositec.com.mx");// Nombre del host
+    define("BASE_DE_DATOS", "laboratorio_dev"); // Nombre de la base de modelos
+    define("USUARIO", "fabian2"); // Nombre del usuario
+    define("CONTRASENA", "YZwuTlUzf.bT"); // Constraseña
 
     define("PATH","http://".$_SERVER['SERVER_NAME']."proyectos/fabian/laboratorio");
 

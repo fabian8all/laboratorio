@@ -13,7 +13,7 @@
                 <input type="password" class="form-control" id="pass" placeholder="Contraseña" required="" />
             </div>
             <div>
-                <button class="btn btn-default submit btnLogin-mio" type="button" id="btn_login">Iniciar sesión</button>
+                <button class="btn btn-default submit btnLogin-mio" type="submit" id="btn_login">Iniciar sesión</button>
             </div>
             <div class="clearfix"></div>
             <div class="separator">
