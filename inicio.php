@@ -9,7 +9,7 @@ if (!isset($TPL)) {
         "css/bootstrap-select.min.css"
     );
     $TPL->Scripts =   array(
-        "js/cotizacion.js",
+        "js/inicio.js",
         "js/bootstrap-select.min.js",
         "js/defaults-es_ES.min.js"
     );

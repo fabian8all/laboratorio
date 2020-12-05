@@ -179,79 +179,6 @@ function ajaxGetResults(params){
     });
 }
 
-$(document).on('click','.btnDetalles',function(){
-    id=$(this).data('idresult');
-    $.post("routes/routeResultados.php",{info:id,action:'get'})
-        .done(function(data){
-            data =  $.parseJSON(data);
-            if(data){
-                estudios = "";
-                costo = 0;
-                $(data.estudios).each(function(k,v){
-                    estudios += "\
-                        <tr><td>"+v.estudio+"</td></tr>\
-                    ";
-                });
-                $('#listaEstudios').html(estudios);
-
-                pagado = $.parseJSON(data.pagado);
-                lblPagado = "\
-                    <div class='row'>\
-                        <div class='col-12'>";
-                lblPagado+=(pagado.completo)
-                                ?"<span class='badge badge-success'>pagado</span>"
-                                :"<span class='badge badge-warning'>pendiente</span>";
-                lblPagado +="\
-                        </div>\
-                        <div class='col-12'>\
-                            <table class='table table-borderless table-responsive table-striped'>\
-                                <thead>\
-                                    <tr>\
-                                        <th>PAGOS</th>\
-                                        <th>FECHA</th>\
-                                    </tr>\
-                                </thead>\
-                                <tbody>";
-                                c = 0;
-                                $(pagado.pagos).each(function(k,v){
-                                    c++;
-                                    if(parseFloat(v.cantidad) > 0){
-                                        lblPagado += "\
-                                            <tr>\
-                                                <td>$"+parseFloat(v.cantidad).toFixed(2)+"</td>\
-                                                <td>"+v.fecha+"</td>\
-                                            </tr>\
-                                        ";
-                                    }
-                                });
-                                console.log(c);
-                                lblPagado += (c == 0)?"<tr><td colspan='2'>No hay pagos registrados</td></tr>":"";
-                    lblPagado += "\
-                                </tbody>\
-                            </table>\
-                        </div>\
-                    </div>\
-                ";
-
-                $('#lblCosto').html("$"+parseFloat(data.costo).toFixed(2));
-                $('#lblDescuento').html("%"+parseFloat(data.descuento).toFixed(2));
-                $('#lblFechaSol').html(data.fechaSolicitud);
-                $('#lblFechaMuestra').html((data.fechaMuestra)?data.fechaMuestra:"--");
-                $('#lblPagado').html(lblPagado);
-                $('#lblFechaEntrega').html((data.fechaEntrega)?data.fechaEntrega:"--");
-                $('#lblAnalista').html(data.analista);
-
-                $('#modalDetalles').modal('show');
-
-            } else{
-                customAlert("Error!", "Ocurrió un error al intentar obtener la información");
-            }
-        })
-        .fail(function(error){
-            customAlert("Error!", ajaxError);
-        })
-});
-
 $(document).on('click','.btnTomarMuestra',function(){
     id=$(this).data('idresult');
     $.confirm({
@@ -300,6 +227,7 @@ $('#btnUploadResults').click(function(){
 
         $("#resultsFileForm").submit();
     }
+
 });
 
 function UploadResults(success){
@@ -315,15 +243,26 @@ function UploadResults(success){
         id: $('#hidSRSolicitudId').val(),
         file: success,
     }
-    $.post("routes/routeResultados.php",{info,action:'uploadFile'}, function (data) {
-        if(data!='false'){
-            $('#modalSubirResultados').modal('hide');
-            $('#bstableResultsEP').bootstrapTable('refresh');
-            customAlert("Exito!", "Los resultados han sido cargados");
-        }else{
+    $.post("routes/routeResultados.php",{info,action:'uploadFile'})
+        .done(function (data) {
+            if(data!='false'){
+                $('#modalSubirResultados').modal('hide');
+                $('#bstableResultsEP').bootstrapTable('refresh');
+                customAlert("Exito!", "Los resultados han sido cargados");
+            }else{
 
-        }
-    });
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+        .always(function(){
+            $('#btnUploadResults').html( '\
+                <span class="fa fa-save"  aria-hidden="true"></span> \
+                Subir Resultados'
+            ).prop('disabled',false);
+
+        })
 
     $('#divIframeUpload').remove();
     return true;
@@ -341,9 +280,9 @@ $(document).on('click','.btnGuardarPago',function(){
         .done(function(data){
             data =  $.parseJSON(data);
             pagado = $.parseJSON(data.pagado);
-            anticipo = 0;
+            anticipo = 0.0;
             $(pagado.pagos).each(function(k,v){
-                anticipo+=v.cantidad;
+                anticipo+=parseFloat(v.cantidad);
             });
             APagar = data.costo - anticipo;
             if(data){
@@ -364,36 +303,43 @@ $(document).on('click','.btnGuardarPago',function(){
 
 $('#btnPagoSubmit').click(function(){
     info = {
-        id      : $("#hidPagoIdSolicitud").val(),
-        pago    : $("#txtPago").val()
+        id          : $("#hidPagoIdSolicitud").val(),
+        pago        : $("#txtPago").val(),
+        formaPago   : $("#selFormaPago").val()
     }
 
-    $('#btnPagoSubmit').html( '\
-                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
-               Guardando...'
-    ).prop('disabled',true);
+    if(info.formaPago == "" || info.formaPago == null) {
+        customAlert('Error!','No se ha especificado la forma de pago');
+    }else {
 
-    $.post("routes/routeResultados.php",{info:info,action:"Pagar"})
-        .done(function(data){
-            data =  $.parseJSON(data);
-            if(data.success){
-                customAlert("Exito!", data.msg);
-                $("#txtPago").val('');
-                $("#hidPagoIdSolicitud").val('');
-                $('#modAgregarPago').modal('hide');
-                $('#bstableResultsPP').bootstrapTable('refresh');
-            } else{
-                customAlert("Error!", data.msg);
-            }
-        })
-        .fail(function(error){
-            customAlert("Error!", ajaxError);
-        })
-        .always(function(){
-            $('#btnPagoSubmit').html( '\
-                    <span class="fa fa-money"></span>\
-                    Guardar pago\
-                ').prop('disabled',false);
-        });
 
+        $('#btnPagoSubmit').html('\
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+            Guardando...'
+        ).prop('disabled', true);
+
+        $.post("routes/routeResultados.php", {info: info, action: "Pagar"})
+            .done(function (data) {
+                data = $.parseJSON(data);
+                if (data.success) {
+                    customAlert("Exito!", data.msg);
+                    $("#txtPago").val('');
+                    $("#hidPagoIdSolicitud").val('');
+                    $('#modAgregarPago').modal('hide');
+                    $('#bstableResultsPP').bootstrapTable('refresh');
+                } else {
+                    customAlert("Error!", data.msg);
+                }
+            })
+            .fail(function (error) {
+                customAlert("Error!", ajaxError);
+            })
+            .always(function () {
+                $('#btnPagoSubmit').html('\
+                        <span class="fa fa-money"></span>\
+                        Guardar pago\
+                    ').prop('disabled', false);
+                $('#selFormaPago').val('');
+            });
+    }
 });

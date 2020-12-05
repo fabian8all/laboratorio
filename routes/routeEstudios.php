@@ -13,7 +13,6 @@
 
 	if(isset($_POST['info']))
 		$info = $_POST['info'];
-
 	switch ($action) {
 		case 'getAll':
 			echo json_encode($Estudio->getAll($info));
@@ -61,6 +60,12 @@
 					array('success'=>false, 'msg' => $sin_permisos)
 				);
 			}
+			break;
+		case 'getListaPrecios':
+			echo ($Estudio->getListaPrecios());
+			break;
+		case 'importListaPrecios':
+			echo json_encode($Estudio->importListaPrecios($_FILES));
 			break;
 	}
 

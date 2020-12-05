@@ -63,3 +63,45 @@
         </div>
     </div>
 </div>
+
+<div id="modImportarPrecios" class="modal" tabindex="-1" role="dialog" style="overflow-y: auto">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Importar lista de precios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frmListaPrecios" class="user" action="importarPrecios.php" enctype="multipart/form-data" target="importarPrecios_target">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-icon-split" id="btnDescargarPlantilla">
+                                <span class="icon text-white-50">
+                                    <i class="fa fa-download"></i>
+                                </span>
+                                <span class="text">
+                                    Descargar Plantilla
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-8"></div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input type="file" id="fileListaCSV" name="fileListaCSV" class="form-control" accept=".csv" value="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnImportarListaCSV" class="btn btn-success">
+                    <span class="fa fa-upload"></span>
+                    Importar Lista
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

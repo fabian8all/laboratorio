@@ -6,7 +6,7 @@
 
         public function getAll(){
 
-            $sql = "SELECT * FROM usuarios WHERE perfil != 1 AND eliminado IS NULL;";
+            $sql = "SELECT * FROM usuarios WHERE (perfil = 2 OR perfil = 3) AND eliminado IS NULL;";
 
             $clientes = self::query_object($sql);
 

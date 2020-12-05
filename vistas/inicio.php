@@ -123,6 +123,7 @@
                         <div class="col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <input type="hidden" id="hidAnticipo" value="">
+                                <input type="hidden" id="hidFormaPago" value="">
                                 <button id="btnRESolicitar" class="btn btn-success" style="width: 100%;">
                                     <i class="fas fa-clipboard-list"></i>
                                     Solicitar estudios

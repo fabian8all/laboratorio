@@ -195,14 +195,19 @@
 
             $pago = floatval($data['pago']);
             $totalAnticipo = 0;
-            foreach ($pagado->pagos as $anticipo){
-                $cantidad = $anticipo->cantidad;
-                $totalAnticipo += floatval($cantidad);
+            if($pagado->pagos) {
+                foreach ($pagado->pagos as $anticipo) {
+                    $cantidad = $anticipo->cantidad;
+                    $totalAnticipo += floatval($cantidad);
+                }
             }
             $completo = (($pago + $totalAnticipo + 0.01)>=floatval($solicitud->costo))?true:false;
             $status = ($completo)?3:2;
 
-            array_push($pagado->pagos,array('cantidad'=>$pago,'fecha'=>date('Y-m-d H:i:s')));
+            if (!$pagado->pagos){
+                $pagado->pagos = array();
+            }
+            array_push($pagado->pagos,array('cantidad'=>$pago,'fecha'=>date('Y-m-d H:i:s'),'tipo'=>$data['formaPago']));
 
             $pagado->completo = $completo;
             $pagadoNew = json_encode($pagado);

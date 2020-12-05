@@ -1,7 +1,6 @@
 <?php
 
 	require_once ('DBConnection.class.php');
-    require_once ('../includes/permisos.php');
 
 
 	Class Estudio extends DBConnection {
@@ -157,21 +156,27 @@
                 $descuento  = $data['descuento'];
                 $total      = $data['total'];
                 $anticipo   = $data['anticipo'];
+                $formaPago  = $data['formaPago'];
                 $aDomicilio =  strtolower($data['aDomicilio']) == 'true' ? true : false;
 
 
                 $pago_completo = ($anticipo>=$total)?true:false;
+                $pago = (floatval($anticipo)>0)?
+                    array(
+                        array(
+                            'cantidad'  => $anticipo,
+                            'tipo'      => $formaPago,
+                            'fecha'     => date('Y-m-d H:i:s')
+                        )
+                    )
+                :
+                    NULL;
 
 
                 $pagado = json_encode(
                     array(
                         'completo'  => $pago_completo,
-                        'pagos'     => array(
-                            array(
-                                'cantidad'  => $anticipo,
-                                'fecha'     => date('Y-m-d H:i:s')
-                            )
-                        )
+                        'pagos'     => $pago
                     )
                 );
 
@@ -226,6 +231,126 @@
                 }
         }
 
+        public function getListaPrecios(){
+
+            $sql = "
+                SELECT 
+                    id,
+                    nombre,
+                    costo as l1,
+                    costo_medico as l2,
+                    costo_empresa as l3,
+                    costo_lista4 as l4
+                FROM estudios
+                WHERE eliminado IS NULL;
+            ";
+
+            $estudios = self::query_object($sql);
+            if ($estudios){
+                $csv = "Id,Estudio,Público General,Médico,Empresa,Lista 4\n";
+                foreach ($estudios as $estudio){
+                    $nombre = '"'.$estudio->nombre.'"';
+                    $csv .= $estudio->id.",".
+                            $nombre.",".
+                            $estudio->l1.",".
+                            $estudio->l2.",".
+                            $estudio->l3.",".
+                            $estudio->l4."\n";
+                }
+                return $csv;
+            }else{
+                return(false);
+            }
+
+
+        }
+        public function importListaPrecios($file){
+            $fileName = $file["listaCSV"]["tmp_name"];
+
+            if ($file["listaCSV"]["size"] > 0) {
+
+                $file = fopen($fileName, "r");
+
+                $headers=true;
+                $ok = true;
+                $errors = array();
+                while (($row = fgetcsv($file, 10000, ",")) !== FALSE) {
+                    if ($headers){
+                        $headers = false;
+                    }else {
+                        $id = "";
+                        if (isset($row[0])) {
+                            $id = $row[0];
+                        }
+                        $precioPG = "";
+                        if (isset($row[2])) {
+                            $precioPG = $row[2];
+                        }
+                        $precioMd = "";
+                        if (isset($row[3])) {
+                            $precioMd = $row[3];
+                        }
+                        $precioEm = "";
+                        if (isset($row[4])) {
+                            $precioEm = $row[4];
+                        }
+                        $precioL4 = "";
+                        if (isset($row[5])) {
+                            $precioL4 = $row[5];
+                        }
+
+                        $params = array(
+                            ':eid' => $id,
+                            ':pl1' => $precioPG,
+                            ':pl2' => $precioMd,
+                            ':pl3' => $precioEm,
+                            ':pl4' => $precioL4
+                        );
+
+                        $sql = "
+                            UPDATE estudios E
+                                SET costo = :pl1,
+                                    costo_medico = :pl2,
+                                    costo_empresa = :pl3,
+                                    costo_lista4 = :pl4 
+                            WHERE id = :eid;";
+
+                        $query = self::query($sql, $params);
+
+                        if (!$query) {
+                            $ok = false;
+                            array_push($errors,array(
+                                    'id'=>$id,
+                                    'PG'=>$precioPG,
+                                    'MD'=>$precioMd,
+                                    'EM'=>$precioEm,
+                                    'L4'=>$precioL4
+                                )
+                            );
+                        }
+                    }
+                }
+                if($ok){
+                    $results = array(
+                        'success'   => true,
+                        'msg'       => "La lista de precios ha sido importada con exito"
+                    );
+                }else{
+                    $results = array(
+                        'success'   => false,
+                        'msg'       => "La lista de precios se ha importado con errores",
+                        'errors'    => $errors
+                    );
+                }
+            }else{
+                $results = array(
+                    'success'   => false,
+                    'msg'       => "El archivo se encuentra vacío",
+                    'errors'    => $file['listaCSV']
+                );
+            }
+            return $results;
+        }
 
     }
 

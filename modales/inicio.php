@@ -79,6 +79,16 @@
                                 <input type="number" class="form-control" id="txtAnticipo" value="" placeholder="">
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <select class="form-control" id="selFormaPago" style="padding: 0rem 1rem;height: 3.2rem;">
+                                    <option selected disabled value="">Forma de pago</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
             </div>
             <div class="modal-footer">

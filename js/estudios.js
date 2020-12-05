@@ -165,3 +165,72 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             });
     });
 
+$('#btnImportarPrecios').click(function(){
+   $("#fileListaCSV").val('');
+   $("#modImportarPrecios").modal('show');
+});
+
+$("#btnDescargarPlantilla").click(function(e){
+    e.preventDefault();
+    $.post('routes/routeEstudios.php',{info:{},action:'getListaPrecios'})
+        .done(function(data)
+        {
+            var filename = 'listaPrecios.csv';
+            var uri = '' +
+                'data:text/csv;charset=UTF-8,%EF%BB%BF' + encodeURIComponent(data);
+            var downloadLink = document.createElement("a");
+            downloadLink.href = uri;
+            downloadLink.download = filename;
+
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        })
+        .fail(function(error){
+            customAlert("Error!", error);
+        });
+});
+
+$("#btnImportarListaCSV").click(function(e){
+   e.preventDefault();
+    $('#btnImportarListaCSV').html( '\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+               Cargando datos...'
+    ).prop('disabled',true);
+    if ($('#file_logo').val() != ""){
+
+        var formData = new FormData();
+        formData.append('action',"importListaPrecios");
+        formData.append('listaCSV',document.getElementById('fileListaCSV').files[0]);
+
+        $.ajax({
+            type: "POST",
+            dataType:"html",
+            data: formData,
+            url: "routes/routeEstudios.php",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                response = $.parseJSON(response);
+                if (response.success){
+                    customAlert("Exito!",response.msg);
+                }else{
+                    customAlert("Error!",response.msg);
+                    console.log(response.errors);
+                }
+            },
+            error: function(errors){
+                customAlert("Error!",error)
+            }
+        });
+
+    }else{
+        customAlert("Error!","No hay un archivo seleccionado");
+    }
+    $('#btnImportarListaCSV').html( '\
+            <span class="fa fa-save"></span>\
+            Importar Lista\
+        ').prop('disabled',false);
+
+});

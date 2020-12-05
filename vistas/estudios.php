@@ -18,6 +18,17 @@
             </span>
         </button>
     </div>
+    <div class="col-md-5 col-sm-12"></div>
+    <div class="col-md-4 col-sm-12 float-right">
+        <button class="btn btn-info btn-icon-split" id="btnImportarPrecios">
+            <span class="icon text-white-50">
+               <i class="fa fa-file-import"></i>
+            </span>
+            <span class="text">
+               Importar lista de precios
+            </span>
+        </button>
+    </div>
 </div>
 <div class="row">
     <div class="table-responsive">

@@ -28,6 +28,12 @@
             <span>Resultados</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="cortesCliente.php">
+            <i class="fas fa-fw fa-check-circle"></i>
+            <span>Cortes</span>
+        </a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">

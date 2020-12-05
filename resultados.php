@@ -8,7 +8,8 @@ if (!isset($TPL)) {
     $TPL->CSSs = array("plugins/bootstrap-table/bootstrap-table.min.css");
     $TPL->Scripts =   array(
         array("type"=>"module","js"=>"plugins/bootstrap-table/bootstrap-table.js"),
-        "js/resultados.js"
+        "js/resultados.js",
+        "js/detalles.js"
     );
     $TPL->Vista = "resultados.php";
     $TPL->Modales = "resultados.php";

@@ -13,13 +13,8 @@
             <div class="input-group">
                 <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
                     for="">Cliente:&nbsp; </label>
-                <select name="" id="select_status" style="display:inline-block;" class="form-control selectpicker"
+                <select name="" id="selClientes" style="display:inline-block;" class="form-control selectpicker"
                     data-live-search="true">
-                    <option value="" disabled selected>Seleccione paciente</option>
-                    <option value="1">ACTIVOS</option>
-                    <option value="0">INACTIVOS</option>
-                    <option value="3">ELIMINADOS</option>
-                    <option value="2">TODOS</option>
                 </select>
                 <div class="input-group-append">
                     <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modAgregarCliente">
@@ -34,7 +29,7 @@
             <div class="input-group">
                 <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
                     for="">Último corte:&nbsp; </label>
-                <label style="display:inline-block;display: flex;align-items: center;" for=""> 02/02/2020</label>
+                <label style="display:inline-block;display: flex;align-items: center;" id="lblUltimoCorte" for=""> 02/02/2020</label>
             </div>
         </div>
     </div>
@@ -44,7 +39,7 @@
                 <label for="" class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;">
                     Fecha Inicio &nbsp;
                 </label>
-                <input type="date" name="" class="form-control" id="">
+                <input type="date" name="" class="form-control" id="dateCorteInicio">
             </div>
         </div>
     </div>
@@ -54,7 +49,7 @@
                 <label for="" class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;">
                     Fecha Fin &nbsp;
                 </label>
-                <input type="date" name="" class="form-control" id="">
+                <input type="date" name="" class="form-control" id="dateCorteFin">
             </div>
         </div>
     </div>
@@ -70,47 +65,7 @@
                     <th>ESTADO</th>
                     <th>OPCIONES</th>
                 </thead>
-                <tbody id="tbody" class="text-center">
-                    <tr>
-                        <td>07/01/2020</td>
-                        <td>Jose Ramon Diaz Ortega</td>
-                        <td>$800.00</td>
-                        <td><span class="btn btn-warning btn-sm" style="color:white">Pendiente de muestra</span></td>
-                        <td>
-                            <button type="" class="btn btn-info btn-sm" title="Detalles"><i
-                                    class="fas fa-list"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>07/01/2020</td>
-                        <td>Jose Ramon Diaz Ortega</td>
-                        <td>$800.00</td>
-                        <td><span class="btn btn-primary btn-sm">En proceso</span></td>
-                        <td>
-                            <button type="" class="btn btn-info btn-sm" title="Detalles"><i
-                                    class="fas fa-list"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>07/01/2020</td>
-                        <td>Jose Ramon Diaz Ortega</td>
-                        <td>$800.00</td>
-                        <td><span class="btn btn-danger btn-sm">Pendiente de pago</span></td>
-                        <td>
-                            <button type="" class="btn btn-info btn-sm" title="Detalles"><i
-                                    class="fas fa-list"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>07/01/2020</td>
-                        <td>Jose Ramon Diaz Ortega</td>
-                        <td>$800.00</td>
-                        <td><span class="btn btn-success btn-sm">Finalizado</span></td>
-                        <td>
-                            <button type="" class="btn btn-info btn-sm" title="Detalles"><i
-                                    class="fas fa-list"></i></button>
-                        </td>
-                    </tr>
+                <tbody class="text-center" id="tablaSolicitudesCorte">
                 </tbody>
             </table>
         </div>
