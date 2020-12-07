@@ -1,6 +1,10 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
 $(document).ready(function(){
+    fecha = hoy();
+
+    $('#dateCorteInicio').val(fecha);
+    $('#dateCorteFin').val(fecha);
     $.post('routes/routeClientes.php',{info:{},action:'getAll'})
         .done(function(data){
             if (data != null)
@@ -27,8 +31,23 @@ $(document).ready(function(){
 
 $("#selClientes").change(function(){
     setUltimoCorte($(this).val());
-    loadTablaCortes($(this).val());
 });
+
+$('#dateCorteInicio').change(function(){
+   loadTablaCortes($('#selClientes').val());
+});
+$('#dateCorteFin').change(function(){
+    loadTablaCortes($('#selClientes').val());
+});
+
+function hoy(){
+    fecha = new Date();
+    dia = ("0" + fecha.getDate()).slice(-2);
+    mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+
+    fecha = fecha.getFullYear()+"-"+(mes)+"-"+(dia) ;
+    return fecha;
+}
 
 function setUltimoCorte(idCliente){
     $.post('routes/routeCortes.php',{info:idCliente,action:'getLast'})
@@ -36,11 +55,15 @@ function setUltimoCorte(idCliente){
             if (data != null)
             {
                 data = $.parseJSON(data);
+                console.log(data);
                 if (!data){
                     $('#lblUltimoCorte').html("__/__/____");
+                    $('#dateCorteInicio').val(hoy()).prop('disabled',false);
                 }else{
-                    $('#lblUltimoCorte').html(data.fechaCorte);
+                    $('#lblUltimoCorte').html(data.fechaFin);
+                    $('#dateCorteInicio').val(data.ultimoCorte).prop('disabled',true);
                 }
+                loadTablaCortes(idCliente);
             }else{
                 customAlert("Error!",ajaxError);
             }
@@ -51,6 +74,11 @@ function setUltimoCorte(idCliente){
 }
 
 function loadTablaCortes(idCliente){
+    fechaIni = $('#dateCorteInicio').val();
+    fechaFin = $('#dateCorteFin').val()
+    if (idCliente == "" || fechaIni == "" || fechaFin == "")
+        return false;
+
     info = {
         idCliente   : idCliente,
         fechaIni    : $('#dateCorteInicio').val(),
@@ -62,10 +90,14 @@ function loadTablaCortes(idCliente){
             if (data != null)
             {
                 data = $.parseJSON(data);
+                total = 0.00;
+                solicitudes = []
                 if (!data){
                     tabla += "<tr><td colspan='5'>No hay estudios realizados</td></tr>"
                 }else{
                     $(data).each(function(k,solicitud){
+                        solicitudes.push(solicitud.idSolicitud);
+                        total += parseFloat(solicitud.costo);
                         switch (parseInt(solicitud.estado)){
                             case 0:
                                 estado = '<span class="btn btn-warning btn-sm" style="color:white">Pendiente de muestra</span>';
@@ -81,6 +113,7 @@ function loadTablaCortes(idCliente){
                                 break;
 
                         }
+                        console.log(solicitud);
                        tabla+="\
                                 <tr>\
                                     <td>"+solicitud.fecha+"</td>\
@@ -88,7 +121,7 @@ function loadTablaCortes(idCliente){
                                     <td>"+solicitud.costo+"</td>\
                                     <td>"+estado+"</td>\
                                     <td>\
-                                        <button class='btn btn-info btn-sm btnDetalles' data-idsolicitud='" + solicitud.id + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
+                                        <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + solicitud.idSolicitud + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
                                             <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                                         </button>\
                                     </td>\
@@ -97,6 +130,9 @@ function loadTablaCortes(idCliente){
                     });
                 }
                 $('#tablaSolicitudesCorte').html(tabla);
+                $('#lblTotal').html('$'+total.toFixed(2));
+                $('#hidTotal').val(total);
+                $('#hidSolicitudes').val(JSON.stringify(solicitudes));
             }else{
                 customAlert("Error!",ajaxError);
             }
@@ -105,3 +141,29 @@ function loadTablaCortes(idCliente){
             customAlert("Error!",error);
         })
 }
+
+$('#btnRealizarCorte').click(function(){
+
+    info = {
+        idCliente    : $('#selClientes').val(),
+        fechaIni     : $('#dateCorteInicio').val(),
+        fechaFin     : $('#dateCorteFin').val(),
+        total        : $('#hidTotal').val(),
+        solicitudes  : $('#hidSolicitudes').val()
+    }
+    $.post('routes/routeCortes.php',{info:info,action:'create'})
+        .done(function(data){
+            data = $.parseJSON(data);
+            if (data.success){
+                customAlert('Exito!',data.msg);
+                $('#selClientes').trigger('change');
+            }else{
+                customAlert('Error!',data.msg)
+            }
+        })
+        .fail(function(error){
+            customAlert('Error!',error);
+        })
+
+
+});

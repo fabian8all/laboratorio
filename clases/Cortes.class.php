@@ -7,9 +7,17 @@
         public function getLast($idCliente){
 
             $param = array(':cid'=>$idCliente);
-            $sql = "SELECT * FROM cortes WHERE idCliente = :cid LIMIT 1 ORDER BY id DESC";
+            $sql = "
+                SELECT 
+                    *,
+                    DATE_FORMAT(fechaFin, '%Y-%m-%d') AS ultimoCorte
+                FROM cortes 
+                WHERE idCliente = :cid 
+                ORDER BY id DESC 
+                LIMIT 1 
+            ";
 
-            $corte = self::query_object($sql,$param);
+            $corte = self::query_single_object($sql,$param);
 
             if ($corte){
                 return $corte;
@@ -20,6 +28,9 @@
         }
 
         public function getSolicitudes($data){
+            if ($data['idCliente']==""){
+                return false;
+            }
             $params = array(
                 ':cid'  => $data['idCliente'],
                 ':fci'  => $data['fechaIni'],
@@ -48,6 +59,45 @@
                 return false;
             }
 
+        }
+
+        public function create($data){
+            if ($data['idCliente']){
+                $params = array(
+                    ':cid'  => $data['idCliente'],
+                    ':fci'  => $data['fechaIni'],
+                    ':fcf'  => $data['fechaFin'],
+                    ':tot'  => $data['total'],
+                    ':sol'  => $data['solicitudes'],
+                    ':crt'  => date('Y-m-d H:i:s')
+                );
+
+                $sql = "
+                    INSERT INTO cortes
+                        (idCliente,fechaIni,fechaFin,total,solicitudes,creado)
+                    VALUES
+                        (:cid,:fci,:fcf,:tot,:sol,:crt);
+                ";
+                $query = self::query($sql,$params);
+                if($query){
+                    $result = array(
+                        'success'   => true,
+                        'msg'       => 'El corte se ha realizado exitosamente'
+                    );
+                }else{
+                    $result = array(
+                        'success'   => false,
+                        'msg'       => 'Ocurrió un error al intentar realizar el corte'
+                    );
+                }
+
+            }else{
+                $result = array(
+                    'success'   =>false,
+                    'msg'       =>'No se ha seleccionado cliente'
+                );
+            }
+            return $result;
         }
 
     }

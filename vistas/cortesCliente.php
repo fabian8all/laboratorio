@@ -29,7 +29,7 @@
             <div class="input-group">
                 <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
                     for="">Último corte:&nbsp; </label>
-                <label style="display:inline-block;display: flex;align-items: center;" id="lblUltimoCorte" for=""> 02/02/2020</label>
+                <label style="display:inline-block;display: flex;align-items: center;" id="lblUltimoCorte" for=""> __/__/____</label>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-lg-3 col-md-5 col-12">
         <div class="form-group">
-            <div class="input-group">
+<!--            <div class="input-group">
                 <label for="" class="font-weight-bold"
                     style="display:inline-block;display: flex;align-items: center;">Subtotal: &nbsp;</label>
                 <label for="" class="" style="display:inline-block;display: flex;align-items: center;">$100.00</label>
@@ -85,20 +85,22 @@
                 <label for="" class="font-weight-bold"
                     style="display:inline-block;display: flex;align-items: center;">Descuento: &nbsp;</label>
                 <label for="" class="" style="display:inline-block;display: flex;align-items: center;">$100.00</label>
-            </div>
+            </div>-->
             <div class="input-group">
                 <label for="" class="font-weight-bold"
                     style="display:inline-block;display: flex;align-items: center;">Total:&nbsp; </label>
-                <label for="" class="" style="display:inline-block;display: flex;align-items: center;">$100.00</label>
+                <label for="" class="" id="lblTotal" style="display:inline-block;display: flex;align-items: center;"></label>
             </div>
         </div>
     </div>
     <div class="col-lg-2 col-md-5 col-12">
         <div class="form-group">
-            <button type="button" class="btn btn-primary w-100">Realizar corte</button>
+            <input type="hidden" id="hidSolicitudes" value="">
+            <input type="hidden" id="hidTotal" value="">
+            <button type="button" id="btnRealizarCorte" class="btn btn-primary w-100">Realizar corte</button>
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-success w-100">Imprimir</button>
+            <button type="button" id="btnImprimirCorte" class="btn btn-success w-100">Imprimir</button>
         </div>
     </div>
 </div>

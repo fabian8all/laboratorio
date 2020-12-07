@@ -2,32 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/detalles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modales/cortesCliente.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/routeCortes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/cortesCliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/miEstilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/miEstilo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/cotizacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cotizacion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/estudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/resultados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeEstudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeEstudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cortesCliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeCortes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeCortes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vistas/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cortesCliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/estudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +88,8 @@
       <workItem from="1606519990094" duration="959000" />
       <workItem from="1606779679561" duration="1734000" />
       <workItem from="1606860070501" duration="3782000" />
-      <workItem from="1607038235332" duration="27619000" />
+      <workItem from="1607038235332" duration="34048000" />
+      <workItem from="1607382349455" duration="473000" />
     </task>
     <servers />
   </component>
@@ -136,10 +117,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1605400134551" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1607117072931">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1607190112810">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1607117072931" />
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1607190112810" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1607126898851">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -23,6 +23,9 @@ $action = $_POST['action'];
 		case 'getSolicitudes':
 			echo json_encode($Corte->getSolicitudes($info));
 			break;
+		case 'create':
+			echo json_encode($Corte->create($info));
+			break;
 	}
 
 ?>
