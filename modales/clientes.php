@@ -12,7 +12,7 @@
                     <input type="hidden" id="hidClientesMode" value="">
                     <input type="hidden" id="hidClientesId" value="">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 col-lg-12 col-md-12">
                             <label for="txtClientesNombre" class="col-form-label">
                                 <strong>Nombre:</strong>
                             </label>
@@ -20,13 +20,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6 col-lg-4 col-md-6">
                             <label for="txtClientesUser" class="col-form-label">
                                 <strong>Nombre de usuario:</strong>
                             </label>
                             <input type="text" class="form-control" id="txtClientesUser">
                         </div>
-                        <div class="col-8">
+                        <div class="col-6 col-md-6 col-lg-8">
                             <label for="txtClientesEmail" class="col-form-label">
                                 <strong>Email:</strong>
                             </label>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="selClientesPerfil" class="col-form-label">
                                 <strong>Perfil:</strong>
                             </label>
@@ -44,7 +44,7 @@
                                 <option value="3"> Empresa </option>
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="txtClientesDescuento" class="col-form-label">
                                 <strong>Descuento:</strong>
                             </label>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row" id="divClientesChkPass">
-                        <div class="col-6">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="chkClientesChgPass" class="col-form-label">
                                 <strong>Cambiar contraseña</strong>
                                 <input type="checkbox" class="form-control form-check" id="chkClientesChgPass" value=1>
@@ -60,13 +60,13 @@
                         </div>
                     </div>
                     <div class="row" id="divClientesChgPass">
-                        <div class="col-6">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="txtClientesPass1" class="col-form-label">
                                 <strong>Contraseña:</strong>
                             </label>
                             <input type="password" class="form-control" id="txtClientesPass1">
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="txtClientesPass2" class="col-form-label">
                                 <strong>Repetir contraseña:</strong>
                             </label>
