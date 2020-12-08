@@ -20,13 +20,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 col-lg-4 col-md-6">
+                        <div class="col-6 col-lg-6 col-md-6">
                             <label for="txtClientesUser" class="col-form-label">
                                 <strong>Nombre de usuario:</strong>
                             </label>
                             <input type="text" class="form-control" id="txtClientesUser">
                         </div>
-                        <div class="col-6 col-md-6 col-lg-8">
+                        <div class="col-6 col-md-6 col-lg-6">
                             <label for="txtClientesEmail" class="col-form-label">
                                 <strong>Email:</strong>
                             </label>
