@@ -53,10 +53,12 @@
                     </div>
                     <div class="row" id="divClientesChkPass">
                         <div class="col-6 col-md-6 col-lg-6">
-                            <label for="chkClientesChgPass" class="col-form-label">
-                                <strong>Cambiar contraseña</strong>
-                                <input type="checkbox" class="form-control form-check" id="chkClientesChgPass" value=1>
-                            </label>
+
+                            <label for="chkClientesChgPass" class="col-form-label" style="display:inline-block">
+                                <strong>Cambiar contraseña</strong></label>
+                            <input type="checkbox" class=" form-check" style="display:inline-block;margin-left:10px;"
+                                id="chkClientesChgPass" value=1>
+
                         </div>
                     </div>
                     <div class="row" id="divClientesChgPass">
@@ -73,15 +75,15 @@
                             <input type="password" class="form-control" id="txtClientesPass2">
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnClientesSave" class="btn btn-success">
+                <button type="submit" id="btnClientesSave" class="btn btn-success">
                     <span class="fa fa-save"></span>
                     Guardar
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
