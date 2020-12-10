@@ -57,11 +57,7 @@
                 'count' => $count->total
             );
 
-            if ($count->total > 0){
-                return $estudios;
-            }else{
-                return false;
-            }
+            return $estudios;
 
         }
 

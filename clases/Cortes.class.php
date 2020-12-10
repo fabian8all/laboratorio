@@ -1,6 +1,10 @@
 <?php
 
 	require_once('DBConnection.class.php');
+    require_once ("../plugins/dompdf/autoload.inc.php");
+
+    use Dompdf\Dompdf;
+
 
 	Class Corte extends DBConnection {
 
@@ -98,6 +102,29 @@
                 );
             }
             return $result;
+        }
+
+        public function getPDF(){
+
+
+// instantiate and use the dompdf class
+            $dompdf = new Dompdf();
+            $html = "";
+            
+            $dompdf->loadHtml($html);
+
+// (Optional) Setup the paper size and orientation
+            $dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+            $dompdf->render();
+
+// Output the generated PDF to Browser
+            $dompdf->stream();
+
+            @file_put_contents("../resources/corte.pdf",$dompdf->output());
+            return true;
+
         }
 
     }

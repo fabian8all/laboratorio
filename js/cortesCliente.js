@@ -167,3 +167,17 @@ $('#btnRealizarCorte').click(function(){
 
 
 });
+
+$('#btnPDFCorte').click(function(e){
+    e.preventDefault();
+    $.post('routes/routeCortes.php',{info:{},action:'getPDF'})
+        .done(function(data)
+        {
+            if (data){
+                window.open('resources/corte.pdf',"_blank");
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", error);
+        });
+});

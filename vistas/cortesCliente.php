@@ -100,7 +100,7 @@
             <button type="button" id="btnRealizarCorte" class="btn btn-primary w-100">Realizar corte</button>
         </div>
         <div class="form-group">
-            <button type="button" id="btnImprimirCorte" class="btn btn-success w-100">Imprimir</button>
+            <button type="button" id="btnPDFCorte" class="btn btn-success w-100">Enviar a PDF</button>
         </div>
     </div>
 </div>

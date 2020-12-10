@@ -40,11 +40,7 @@
                 'count' => $count->total
             );
 
-            if ($count->total > 0){
-                return $perfiles;
-            }else{
-                return false;
-            }
+            return $perfiles;
 
         }
 

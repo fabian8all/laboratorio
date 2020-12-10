@@ -79,11 +79,7 @@
                 'count' => $count->total
             );
 
-            if ($count->total > 0){
-                return $usuarios;
-            }else{
-                return false;
-            }
+            return $usuarios;
 
         }
 

@@ -69,11 +69,7 @@
                 'count' => $count->total
             );
 
-            if ($count->total > 0){
-                return $pacientes;
-            }else{
-                return false;
-            }
+            return $pacientes;
 
         }
 
