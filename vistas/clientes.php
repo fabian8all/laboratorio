@@ -18,6 +18,17 @@
             </span>
         </button>
     </div>
+    <div class="col-lg-3 col-md-4 col-12">
+        <button data-toggle="modal" data-target="#modalHistorialCortes" title="Historial Cortes"
+            class="btn btn-info btn-icon-split w-100 position-relative" style="padding-left:10px" id="btnVerCortes">
+            <span class="icon text-white-50" style="position:absolute;left:0;">
+                <i class="fa fa-user-md"></i>
+            </span>
+            <span class="text">
+                Historial Cortes
+            </span>
+        </button>
+    </div>
 </div>
 <div class="table-responsive">
     <table
@@ -43,4 +54,73 @@
         </tr>
         </thead>
     </table>
+</div>
+
+<div id="modalHistorialCortes" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Historial De Cortes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Collapsable Card Example -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#historialCorteCard" class="d-block card-header py-3" data-toggle="collapse"
+                                role="button" aria-expanded="true" aria-controls="historialCorteCard">
+                                <h6 class="m-0 font-weight-bold text-primary">02/02/2020 - $100.00</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse" id="historialCorteCard">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card shadow mb-4">
+                                                <!-- Card Header - Accordion -->
+                                                <a href="#listaSolicitudesCard" class="d-block card-header py-3"
+                                                    data-toggle="collapse" role="button" aria-expanded="true"
+                                                    aria-controls="listaSolicitudesCard">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Jose Ramon Diaz Ortega - 20/20/20 - $100.00
+                                                    </h6>
+                                                </a>
+                                                <!-- Card Content - Collapse -->
+                                                <div class="collapse show" id="listaSolicitudesCard">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label><b>Estudios:</b></label>
+                                                                <label>17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+                                                                <label>17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+                                                                <label>17 ALFA HIDROXI PROGESTERONA (SUERO)</label>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <label><b>Costo:</b></label>
+                                                                <label>$100.00</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnClientesSave" class="btn btn-success">
+                    <span class="fa fa-save"></span>
+                    Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>

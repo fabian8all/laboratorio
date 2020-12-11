@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Perfiles.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Perfiles.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/estudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/cotizacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cotizacion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +89,7 @@
       <workItem from="1607038235332" duration="34048000" />
       <workItem from="1607382349455" duration="3567000" />
       <workItem from="1607640845994" duration="4442000" />
+      <workItem from="1607728741877" duration="1302000" />
     </task>
     <servers />
   </component>
@@ -106,10 +101,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="425" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1607123418323" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1606780002687">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1607729585429">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606780002687" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1607729585429" />
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1607729176805">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1607729176805" />
     <state x="518" y="287" key="NewPhpFileDialog" timestamp="1607115109652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

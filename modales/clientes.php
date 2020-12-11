@@ -7,8 +7,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="frmClientes" class="user">
+            <form id="frmClientes" class="user">
+                <div class="modal-body">
                     <input type="hidden" id="hidClientesMode" value="">
                     <input type="hidden" id="hidClientesId" value="">
                     <div class="row">
@@ -66,15 +66,15 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnClientesSave" class="btn btn-success">
-                    <span class="fa fa-save"></span>
-                    Guardar
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnClientesSave" class="btn btn-success">
+                        <span class="fa fa-save"></span>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
