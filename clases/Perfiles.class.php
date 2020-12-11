@@ -82,6 +82,10 @@
         }
 
         public function Add($data){
+            if($data['nombre'] == ""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
+
             $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
             $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
             $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);
@@ -116,6 +120,10 @@
         }
 
         public function Update($data){
+            if($data['nombre'] == ""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
+
             $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
             $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
             $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);

@@ -104,36 +104,41 @@ function ajaxGetClientes(params) {
 }
 
 $("#btnClientesAdd").click(function () {
-  $("#frmClientes").trigger("reset");
-  $("#hidClientesMode").val("new");
-  $("#divClientesChkPass").hide();
-  $("#divClientesChgPass").show();
-  $("#modalClientes").modal("show");
+    $("#frmClientes").trigger("reset");
+    $("#txtClientesUser").prop("disabled", false);
+    $("#hidClientesMode").val("new");
+    $("#divClientesChkPass").hide();
+    $("#divClientesChgPass").show();
+    $("#modalClientes").modal("show");
 });
 
 
-    $(document).on('click','.btnClientesDel',function(){
-       id= $(this).data('idcliente');
-        $.confirm({
-            title: 'Atencion!',
-            content: '¿Esta seguro que desea eliminar este cliente?',
-            confirm: function(){
-                $.post('routes/routeClientes.php',{info: id,action: "Delete"},function(data){
-                    data =$.parseJSON(data);
-                    if(data.success)
-                        customAlert("Exito!", data.msg);
-                    else
-                        customAlert("Error!", data.msg);
-                    $('#bstableClientes').bootstrapTable('refresh');
-                }).fail(function(error){
-                    customAlert("Error!", ajaxError);
-                });
-            },
-            cancel: function(){
-                console.log('false');
+$(document).on("click", ".btnClientesEdit", function () {
+    id = $(this).data("idcliente");
+    $.post("routes/routeClientes.php", { info: id, action: "get" })
+        .done(function (data) {
+            if (data != null) {
+                data = $.parseJSON(data);
+                $("#hidClientesMode").val("update");
+                $("#hidClientesId").val(data.id);
+                $("#txtClientesNombre").val(data.nombre);
+                $("#txtClientesUser").val(data.username).prop("disabled", true);
+                $("#txtClientesEmail").val(data.email);
+                $("#selClientesPerfil").val(data.perfil);
+                $("#chkClientesChgPass").prop("checked", false);
+                $("#divClientesChgPass").hide();
+                $("#txtClientesPass1").val("");
+                $("#txtClientesPass2").val("");
+                $("#txtClientesDescuento").val(data.descuento);
+                $("#modalClientes").modal("show");
+            } else {
+                customAlert("Error!", "No se encuentra la informaciÃ³n del cliente");
             }
+        })
+        .fail(function (error) {
+            customAlert("Error!", ajaxError);
         });
-    });
+});
 
 $(document).on("click", ".btnClientesDel", function () {
   id = $(this).data("idcliente");

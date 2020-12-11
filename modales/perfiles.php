@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-12">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="txtPerfilesNombre" placeholder="Nombre de perfil">
+                                <input type="text" class="form-control form-control-user" id="txtPerfilesNombre" placeholder="Nombre de perfil*">
                             </div>
                         </div>
                     </div>

@@ -214,11 +214,12 @@ $(document).on('click','.btnSubirResultados',function(){
 });
 
 $('#btnUploadResults').click(function(){
-    $(this).html( '\
+    if ($('#fileResultados').val() != ""){
+        $('#btnUploadResults').html( '\
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
             Guardando...'
-    ).prop('disabled',true);
-    if ($('#fileResultados').val() != ""){
+        ).prop('disabled',true);
+
         $('body').append('\
             <div id="divIframeUpload">\
                 <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe> \
@@ -226,6 +227,8 @@ $('#btnUploadResults').click(function(){
         ');
 
         $("#resultsFileForm").submit();
+    }else{
+        customAlert("Error!","No se ha seleccionado el archivo");
     }
 
 });

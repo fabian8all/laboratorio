@@ -98,6 +98,9 @@
         }
 
         public function Add($data){
+            if($data['nombre'] == "" || $data['fechaNac']==""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
             $params = array(
                 ':nom'=>$data['nombre'],
                 ':gen'=>$data['genero'],
@@ -124,6 +127,9 @@
         }
 
         public function Update($data){
+            if($data['nombre'] == "" || $data['fechaNac']==""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
             $params = array(
                 ':pid'=>$data['id'],
                 ':nom'=>$data['nombre'],

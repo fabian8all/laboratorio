@@ -78,6 +78,9 @@
         }
 
         public function Add($data){
+            if($data['nombre'] == "" || $data['tiempo']=="" || $data['costo']==""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
             $params = array(
                 ':cod'=>$data['codigo'],
                 ':nom'=>$data['nombre'],
@@ -101,6 +104,9 @@
         }
 
         public function Update($data){
+            if($data['nombre'] == "" || $data['tiempo']=="" || $data['costo']==""){
+                return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
+            }
             $params = array(
                 ':eid'=>$data['id'],
                 ':cod'=>$data['codigo'],

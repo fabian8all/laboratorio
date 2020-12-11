@@ -79,7 +79,12 @@
             $usrnmParam = array(":usr"=>$data['username']);
             $sqlFindUser = "SELECT * FROM usuarios WHERE username = :usr;";
             $user = self::query_single_object($sqlFindUser,$usrnmParam);
-            if($user){
+            if($usrnmParam == ""){
+                $result = array(
+                    "success" =>false,
+                    "msg"=>"El nombre de usuario es requerido"
+                );
+            }else if($user){
                 $result = array(
                     "success" =>false,
                     "msg"=>"El nombre de usuario ya existe en la base de datos"
