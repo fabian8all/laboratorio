@@ -27,7 +27,13 @@ $action = $_POST['action'];
 			echo json_encode($Corte->create($info));
 			break;
 		case 'getPDF':
-			echo $Corte->getPDF();
+			echo json_encode($Corte->getPDF($info));
+			break;
+		case 'getHistory':
+			echo json_encode($Corte->getHistory($info));
+			break;
+		case 'getInfoById':
+			echo json_encode($Corte->getInfoById($info));
 			break;
 	}
 

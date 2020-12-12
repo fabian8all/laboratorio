@@ -158,7 +158,7 @@ $('#btnRealizarCorte').click(function(){
                 customAlert('Exito!',data.msg);
                 $('#selClientes').trigger('change');
             }else{
-                customAlert('Error!',data.msg)
+                customAlert('Error!',data.msg);
             }
         })
         .fail(function(error){
@@ -170,11 +170,22 @@ $('#btnRealizarCorte').click(function(){
 
 $('#btnPDFCorte').click(function(e){
     e.preventDefault();
-    $.post('routes/routeCortes.php',{info:{},action:'getPDF'})
+    info = {
+        idCliente    : $('#selClientes').val(),
+        fechaIni     : $('#dateCorteInicio').val(),
+        fechaFin     : $('#dateCorteFin').val(),
+        total        : $('#hidTotal').val(),
+        solicitudes  : $('#hidSolicitudes').val()
+    }
+
+    $.post('routes/routeCortes.php',{info:info,action:'getPDF'})
         .done(function(data)
         {
-            if (data){
+            data = $.parseJSON(data);
+            if (data.success){
                 window.open('resources/corte.pdf',"_blank");
+            }else{
+                customAlert("Error!",data.msg);
             }
         })
         .fail(function(error){

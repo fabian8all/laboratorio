@@ -1,3 +1,4 @@
+<!--MODAL AGREGAR/ACTUALIZAR CLIENTE-->
 <div id="modalClientes" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -75,6 +76,34 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!--MODAL HISTORIAL DE CORTES -->
+<div id="modalHistorialCortes" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span id="titleNomCliente"></span> - Historial De Cortes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12" id="bodyHistorialCortes">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnClientesSave" class="btn btn-success">
+                    <span class="fa fa-save"></span>
+                    Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>

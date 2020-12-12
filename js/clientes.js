@@ -67,6 +67,9 @@ $(document).ready(function () {
     function formatClientesOptions(value, row, index){
         var options = "\
                 <div class='dropup'> \
+                    <button class='btn btn-circle btn-sm btn-outline-info btnClientesHistory' data-nombre='"+row.nombre+"' data-idcliente='" + value + "' data-toggle='tooltip' data-placement='top' title='Historial de cortes' aria-haspopup='true' aria-expanded='false'>\
+                        <span class='fas fa-fw fa-history fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                    </button>\
                     <button class='btn btn-circle btn-sm btn-outline-warning btnClientesEdit' data-idcliente='" + value + "' data-toggle='tooltip' data-placement='top' title='Editar' aria-haspopup='true' aria-expanded='false'>\
                         <span class='fas fa-fw fa-edit fa-lg' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                     </button>\
@@ -215,3 +218,111 @@ $("#btnClientesSave").click(function () {
         .prop("disabled", false);
     });
 });
+
+$(document).on('click','.btnClientesHistory',function(){
+    idCliente = $(this).data('idcliente');
+    nomCliente = $(this).data('nombre');
+    $.post('routes/routeCortes.php',{info:idCliente,action:'getHistory'})
+        .done(function(data){
+            data = $.parseJSON(data);
+            if (data){
+                html ='<div id="accordion">';
+                $(data).each(function(k,corte){
+                    html += '\
+                    <!-- Collapsable Card Example -->\
+                    <div class="card shadow mb-4">\
+                        <div class="card-header">\
+                            <!-- Card Header - Accordion -->\
+                            <a href="#" data-target="#historialCorteCard_'+k+'" class="d-block card-header py-3" data-toggle="collapse"\
+                               role="button" aria-expanded="true" aria-controls="historialCorteCard_'+k+'">\
+                                <h6 class="m-0 font-weight-bold text-primary">Fecha de corte: '+corte.fechaFin+' - Total: $'+parseFloat(corte.total).toFixed(2)+'</h6>\
+                            </a>\
+                        </div>\
+                        <!-- Card Content - Collapse -->\
+                        <div class="collapse histCardCollapse" data-idcorte="'+corte.id+'" id="historialCorteCard_'+k+'" data-parent="#accordion">\
+                            <div class="card-body" id="hCC_'+corte.id+'">\
+                            </div>\
+                        </div>\
+                    </div>\
+                ';
+                });
+                html +="</div>"
+                $('#bodyHistorialCortes').html(html);
+            }else{
+                $('#bodyHistorialCortes').html("\
+                <div class='alert alert-danger'>\
+                    No hay cortes registrados para este cliente\
+                </div> \
+                ");
+            }
+            $('#titleNomCliente').html(nomCliente);
+            $('#modalHistorialCortes').modal('show');
+        })
+        .fail(function(error){
+            customAlert("Error!", ajaxError);
+        })
+});
+
+$(document).on('show.bs.collapse','.histCardCollapse', function (e){
+    if ( e.target.id.search("historialCorteCard")!=-1) {
+
+        idCorte = $(this).data('idcorte');
+        card = $('#hCC_' + idCorte);
+        $.post('routes/routeCortes.php', {info: idCorte, action: 'getInfoById'})
+            .done(function (data) {
+                data = $.parseJSON(data);
+                if (data) {
+                    html = "";
+                    $(data).each(function (k, solicitud) {
+                        html += '\
+                                <div class="card shadow mb-4">\
+                                    <div class="card-header">\
+                                        <!-- Card Header - Accordion -->\
+                                        <a href="#" \
+                                            data-target="#listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '" \
+                                            class="d-block card-header py-3"\
+                                            data-toggle="collapse" \
+                                            role="button" \
+                                            aria-expanded="true"\
+                                            aria-controls="listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '">\
+                                            <h6 class="m-0 font-weight-bold text-primary color red">\
+                                                 ' + solicitud.paciente + ' - ' + solicitud.fecha + ' -  $' + solicitud.total + '\
+                                            </h6>\
+                                        </a>\
+                                    </div>\
+                                    <!-- Card Content - Collapse -->\
+                                    <div class="card-body collapse" data-parent="#hCC_' + idCorte + '" id="listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '">\
+                                        <div class="row">\
+                                            <div class="col-lg-8">\
+                                                <label><b>Estudios:</b></label>\
+                                            </div>\
+                                            <div class="col-lg-4">\
+                                                <label><b>Costo:</b></label>\
+                                            </div>\
+                                                ';
+                        $(solicitud.estudios).each(function (k2, estudio) {
+                            html += '\
+                                            <div class="col-lg-8">\
+                                                <label>' + estudio.nombre + '</label>\
+                                            </div>\
+                                            <div class="col-lg-4">\
+                                                <label>$' + parseFloat(estudio.costo).toFixed(2) + '</label>\
+                                            </div>';
+                        });
+
+                        html += '\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        ';
+                    });
+                    card.html(html);
+                } else {
+                    console.log('No hay datos');
+                }
+            })
+            .fail(function (error) {
+                customAlert("Error!", ajaxError);
+            })
+    }
+})
