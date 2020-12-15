@@ -1,4 +1,5 @@
 <h1 class="h3 mb-2 text-gray-800">Cortes</h1>
+<button type="button" class="btn btn-primary" data-target="#modPdfCortes" data-toggle="modal">Boton prueba formato PDF</button>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-12">
         <div class="form-group">
@@ -136,6 +137,56 @@
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-success w-100">Imprimir</button>
+        </div>
+    </div>
+</div>
+<div id="modPdfCortes" class="modal" tabindex="-1" role="dialog" style="overflow-y: auto">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Datos del estudio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="6">
+                                <img src="resources/logoFormato.jpeg" style="width:200px;" alt="">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;" colspan="2" rowspan="" headers="" scope="">LABORATORIO DE ANÁLISIS CLÍNICOS Y BACTERIOLÓGICOS</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" colspan="2" rowspan="" headers="">MATRIZ: BLVD. Camino Real No. 318 Int 5, Col, Las Viboras, Colima,Col.</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" colspan="2" rowspan="" headers="">Teléfono: (312) 16 06 333, 3121093341, 3121223644</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" colspan="2" rowspan="" headers="">Horario: Lunes a Viernes 7:00am-9:00pm y Sábado 7:00am-2:00pm</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" colspan="2" rowspan="" headers="">laboratoriodml@hotmail.com &nbsp;&nbsp;&nbsp;&nbsp;servicio de urgencia las 24hrs.</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnEstudiosSave" class="btn btn-success">
+                    <span class="fa fa-save"></span>
+                    Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
