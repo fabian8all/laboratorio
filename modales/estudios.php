@@ -51,15 +51,16 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnEstudiosSave" class="btn btn-success">
+                <button type="submit" id="btnEstudiosSave" class="btn btn-success">
                     <span class="fa fa-save"></span>
                     Guardar
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
