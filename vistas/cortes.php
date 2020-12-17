@@ -175,7 +175,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>data</td>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Cliente: </b> José Ramón Díaz Ortega</td>
+                        </tr>
+                        <tr>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Fecha de corte: </b> 12/12/2020</td>
+                        </tr>
+                        <tr>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Total a pagar: </b> $100.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Estado: </b> Pagado</td>
+                        </tr>
+                        <tr>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Estudios: </b> 17 ALFA HIDROXI PROGESTERONA (SUERO)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="" rowspan="" headers=""></td>
+                            <td style="text-align: left;" colspan="2" rowspan="" headers=""><b>Costo: </b> $100.00</td>
                         </tr>
                     </tbody>
                 </table>
