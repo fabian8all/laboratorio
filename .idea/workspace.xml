@@ -4,19 +4,10 @@
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/cortesCliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/detalles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/detalles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/pacientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pacientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/cortesCliente.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/corte.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/corte.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cortesCliente.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +95,7 @@
       <workItem from="1607757905835" duration="13510000" />
       <workItem from="1607791960131" duration="4613000" />
       <workItem from="1608244249218" duration="2384000" />
-      <workItem from="1608584060465" duration="11417000" />
+      <workItem from="1608584060465" duration="12788000" />
     </task>
     <servers />
   </component>

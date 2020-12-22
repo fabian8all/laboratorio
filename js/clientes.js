@@ -271,6 +271,7 @@ $(document).on('show.bs.collapse','.histCardCollapse', function (e){
         $.post('routes/routeCortes.php', {info: idCorte, action: 'getInfoById'})
             .done(function (data) {
                 data = $.parseJSON(data);
+                data = data.info.solicitudes;
                 if (data) {
                     html = "";
                     $(data).each(function (k, solicitud) {

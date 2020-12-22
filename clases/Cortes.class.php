@@ -230,22 +230,21 @@
                         WHEN C.pagado = 0 THEN 'PENDIENTE'
                         WHEN C.pagado = 1 THEN 'PAGADO'
                         ELSE 'NO GENERADO'
-                    ) as estado 
+                    END) as estado 
                 FROM cortes C 
                     INNER JOIN usuarios U
                         ON C.idCliente = U.id
-                WHERE id=:cid;
+                WHERE C.id=:cid;
             ";
 
             $data = self::query_single_object($sql,$param);
             $dataCorte = array(
-                'cliente'=>$data['nombre'],
-                'fechaCorte'=>$data['fechaFin'],
-                'estado'=>$data['estado']
+                'cliente'=>$data->nombre,
+                'fechaCorte'=>$data->fechaFin,
+                'estado'=>$data->estado
             );
 
             $solicitudes = json_decode($data->solicitudes);
-
             $info = $this->getInfo($solicitudes);
             $dataCorte['info'] = $info;
             return $dataCorte;
