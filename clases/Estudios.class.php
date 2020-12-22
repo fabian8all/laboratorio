@@ -159,6 +159,7 @@
                 $total      = $data['total'];
                 $anticipo   = $data['anticipo'];
                 $formaPago  = $data['formaPago'];
+                $refAnticipo = $data['refAnticipo'];
                 $aDomicilio =  strtolower($data['aDomicilio']) == 'true' ? true : false;
 
 
@@ -168,6 +169,7 @@
                         array(
                             'cantidad'  => $anticipo,
                             'tipo'      => $formaPago,
+                            'referencia'=> $refAnticipo,
                             'fecha'     => date('Y-m-d H:i:s')
                         )
                     )

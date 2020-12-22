@@ -16,11 +16,6 @@
                 <select name="" id="selClientes" style="display:inline-block;" class="form-control selectpicker"
                     data-live-search="true">
                 </select>
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modAgregarCliente">
-                        <i class="fas fa-plus fa-sm"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </div>

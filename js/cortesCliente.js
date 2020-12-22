@@ -34,11 +34,24 @@ $("#selClientes").change(function(){
 });
 
 $('#dateCorteInicio').change(function(){
-   loadTablaCortes($('#selClientes').val());
+    dateChange();
 });
 $('#dateCorteFin').change(function(){
-    loadTablaCortes($('#selClientes').val());
+    dateChange();
 });
+
+function dateChange(){
+    if (Date.parse($('#dateCorteFin').val()) < Date.parse($('#dateCorteInicio').val())){
+        customAlert('Error!','La fecha de corte es menor que la fecha inicial');
+        $('#btnRealizarCorte').prop('disabled',true);
+        $('#btnPDFCorte').prop('disabled',true);
+    }else{
+        $('#btnRealizarCorte').prop('disabled',false);
+        $('#btnPDFCorte').prop('disabled',false);
+    }
+    loadTablaCortes($('#selClientes').val());
+
+}
 
 function hoy(){
     fecha = new Date();
@@ -62,6 +75,7 @@ function setUltimoCorte(idCliente){
                 }else{
                     $('#lblUltimoCorte').html(data.fechaFin);
                     $('#dateCorteInicio').val(data.ultimoCorte).prop('disabled',true);
+                    $('#dateCorteInicio').trigger('change');
                 }
                 loadTablaCortes(idCliente);
             }else{

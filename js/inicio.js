@@ -114,11 +114,17 @@ function detectMob() {
 }
 
 $("#btnREAddPaciente").click(function(){
+
     $("#frmPacientes").trigger('reset');
     $("#modalPacientes").modal('show');
 });
 
     $("#btnPacientesSave").click(function(){
+        if (userData.perfil == 2 || userData.perfil == 3){
+            referente = userData.id;
+        }else{
+            referente = 0;
+        }
         info =  {
             nombre: $("#txtPacientesNombre").val(),
             genero: $("#selPacientesGenero").val(),
@@ -126,6 +132,7 @@ $("#btnREAddPaciente").click(function(){
             direccion: $("#txtPacientesDireccion").val(),
             telefono: $("#txtPacientesTelefono").val(),
             email: $("#txtPacientesEmail").val(),
+            referente: referente
         }
         $('#btnPacientesSave').html( '\
                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
@@ -261,6 +268,8 @@ $("#btnRESolicitar").click(function(){
             $('#txtAnticipo').val('0.00');
             $('#hidAnticipo').val('0.00');
             $('#lblAnticipoTotal').html($('#totalRE').html());
+            $('#selFormaPago').val(0);
+            $('#txtReferenciaAnticipo').val('');
             $('#modAgregarAnticipo').modal('show');
         },
         cancel: function(){
@@ -269,10 +278,9 @@ $("#btnRESolicitar").click(function(){
     });
 });
 
+
 $('#modAgregarAnticipo').on('hide.bs.modal',function(){
     solicitarEstudios();
-    $('#txtAnticipo').val('');
-    $('#selFormaPago').val('');
 });
 
 $('#btnAnticipoSubmit').click(function(){
@@ -302,6 +310,7 @@ function solicitarEstudios(){
         total       : total,
         anticipo    : $('#hidAnticipo').val(),
         formaPago   : $('#hidFormaPago').val(),
+        refAnticipo : $('#txtReferenciaAnticipo').val(),
         aDomicilio  : $('#chkADomicilio').prop('checked')
     }
 

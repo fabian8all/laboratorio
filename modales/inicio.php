@@ -76,7 +76,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <input type="number" class="form-control" id="txtAnticipo" value="" placeholder="">
+                                <input type="number" class="form-control" id="txtAnticipo" value="" placeholder="Anticipo">
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -87,6 +87,11 @@
                                     <option value="Tarjeta">Tarjeta</option>
                                     <option value="Transferencia">Transferencia</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtReferenciaAnticipo" value="" placeholder="Referencia">
                             </div>
                         </div>
                     </div>

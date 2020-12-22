@@ -202,7 +202,13 @@
             if (!$pagado->pagos){
                 $pagado->pagos = array();
             }
-            array_push($pagado->pagos,array('cantidad'=>$pago,'fecha'=>date('Y-m-d H:i:s'),'tipo'=>$data['formaPago']));
+            array_push($pagado->pagos,array(
+                    'cantidad'=>$pago,
+                    'fecha'=>date('Y-m-d H:i:s'),
+                    'tipo'=>$data['formaPago'],
+                    'referencia'=>$data['referencia']
+                )
+            );
 
             $pagado->completo = $completo;
             $pagadoNew = json_encode($pagado);

@@ -29,6 +29,7 @@ $(document).on('click','.btnDetalles',function(){
                                         <th>PAGO</th>\
                                         <th>TIPO</th>\
                                         <th>FECHA</th>\
+                                        <th>REFERENCIA</th>\
                                     </tr>\
                                 </thead>\
                                 <tbody>";
@@ -41,6 +42,7 @@ $(document).on('click','.btnDetalles',function(){
                                                 <td>$"+parseFloat(v.cantidad).toFixed(2)+"</td>\
                                                 <td>"+v.tipo+"</td>\
                                                 <td>"+v.fecha+"</td>\
+                                                <td>"+v.referencia+"</td>\
                                             </tr>\
                                         ";
                     }

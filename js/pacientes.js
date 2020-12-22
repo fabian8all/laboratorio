@@ -117,6 +117,12 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
     });
 
     $("#btnPacientesSave").click(function(){
+        if (userData.perfil == 2 || userData.perfil == 3){
+            referente = userData.id;
+        }else{
+            referente = 0;
+        }
+
         info =  {
             nombre: $("#txtPacientesNombre").val(),
             genero: $("#selPacientesGenero").val(),
@@ -124,6 +130,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             direccion: $("#txtPacientesDireccion").val(),
             telefono: $("#txtPacientesTelefono").val(),
             email: $("#txtPacientesEmail").val(),
+            referente : referente
         }
         if ($('#hidPacientesMode').val() == "new"){
             action="Add";

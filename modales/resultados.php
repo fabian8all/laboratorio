@@ -93,19 +93,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>Descuento:</b>
-                                    </div>
-                                    <div class="card-body">
-                                        <span id="lblDescuento"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
+<!--                        <div class="col-12 col-md-3 col-lg-3">-->
+<!--                            <div class="form-group">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-header">-->
+<!--                                        <b>Descuento:</b>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-body">-->
+<!--                                        <span id="lblDescuento"></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="col-12 col-md-9 col-lg-9">
                             <div class="form-group">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -212,6 +212,11 @@
                                         <option value="Tarjeta">Tarjeta</option>
                                         <option value="Transferencia">Transferencia</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="txtReferenciaAnticipo" value="" placeholder="Referencia">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-12">

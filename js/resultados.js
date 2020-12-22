@@ -293,6 +293,7 @@ $(document).on('click','.btnGuardarPago',function(){
                 $('#lblAnticipo').html("$"+parseFloat(anticipo).toFixed(2));
                 $('#lblTotalAPagar').html("$"+parseFloat(APagar).toFixed(2));
                 $('#txtPago').val('');
+                $('#txtReferenciaAnticipo').val('');
                 $('#hidPagoIdSolicitud').val(id);
                 $('#modAgregarPago').modal('show');
             } else{
@@ -304,11 +305,15 @@ $(document).on('click','.btnGuardarPago',function(){
         })
 });
 
+
+
+
 $('#btnPagoSubmit').click(function(){
     info = {
         id          : $("#hidPagoIdSolicitud").val(),
         pago        : $("#txtPago").val(),
-        formaPago   : $("#selFormaPago").val()
+        formaPago   : $("#selFormaPago").val(),
+        referencia  : $("#txtReferenciaAnticipo").val()
     }
 
     if(info.formaPago == "" || info.formaPago == null) {

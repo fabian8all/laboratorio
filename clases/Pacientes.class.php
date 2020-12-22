@@ -108,7 +108,7 @@
                 ':dir'=>$data['direccion'],
                 ':tel'=>$data['telefono'],
                 ':eml'=>$data['email'],
-                ':rfr'=>0,
+                ':rfr'=>$data['referente'],
                 ':crt'=>date('Y-m-d H:i:s')
             );
             $sql = "INSERT INTO pacientes 
