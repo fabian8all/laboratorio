@@ -76,6 +76,10 @@
 
             $andWhere = ($search != "")? "AND (P.nombre LIKE ('%$search%') OR U.nombre LIKE ('%$search%') )":"";
 
+            if ($data['mode']=="0"){
+                $idUser = $_SESSION['id'];
+                $andWhere.="AND referente = $idUser";
+            }
 
             $sql = "SELECT 
                             S.id as id,

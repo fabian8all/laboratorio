@@ -30,6 +30,7 @@ $action = $_POST['action'];
 			echo json_encode($Paciente->getMy($info));
 			break;
 		case 'BSTableData':
+			$info['mode']=$permisos->verPacientes();
 			echo json_encode($Paciente->BSTableData($info));
 			break;
 		case 'get':

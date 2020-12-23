@@ -27,6 +27,7 @@
 			echo json_encode($Resultados->Save($info));
 			break;
 		case 'BSTableData':
+			$info['mode']=$permisos->verPacientes();
 			echo json_encode($Resultados->BSTableData($info));
 			break;
 		case 'tomarMuestra':

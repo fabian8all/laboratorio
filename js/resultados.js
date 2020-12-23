@@ -233,40 +233,43 @@ $('#btnUploadResults').click(function(){
 
 });
 
-function UploadResults(success){
-    if (success != 0){
-        $('#hidSRFileName').val(success);
+function UploadResults(results){
+        results = $.parseJSON(results)
+    if (results.success){
+        $('#hidSRFileName').val(results.data);
+
+
+        info = {
+            id: $('#hidSRSolicitudId').val(),
+            file: results.data,
+        }
+        $.post("routes/routeResultados.php",{info,action:'uploadFile'})
+            .done(function (data) {
+                if(data!='false'){
+                    $('#modalSubirResultados').modal('hide');
+                    $('#bstableResultsEP').bootstrapTable('refresh');
+                    customAlert("Exito!", "Los resultados han sido cargados");
+                }else{
+
+                }
+            })
+            .fail(function(error){
+                customAlert("Error!", ajaxError);
+            })
+            .always(function(){
+                $('#btnUploadResults').html( '\
+                    <span class="fa fa-save"  aria-hidden="true"></span> \
+                    Subir Resultados'
+                ).prop('disabled',false);
+
+            })
+    }else {
+        $('#btnUploadResults').html( '\
+                    <span class="fa fa-save"  aria-hidden="true"></span> \
+                    Subir Resultados'
+        ).prop('disabled',false);
+        customAlert("Error!", results.msg);
     }
-    else {
-        customAlert("Error!", "Ocurrió un error al subir el archivo");
-    }
-
-
-    info = {
-        id: $('#hidSRSolicitudId').val(),
-        file: success,
-    }
-    $.post("routes/routeResultados.php",{info,action:'uploadFile'})
-        .done(function (data) {
-            if(data!='false'){
-                $('#modalSubirResultados').modal('hide');
-                $('#bstableResultsEP').bootstrapTable('refresh');
-                customAlert("Exito!", "Los resultados han sido cargados");
-            }else{
-
-            }
-        })
-        .fail(function(error){
-            customAlert("Error!", ajaxError);
-        })
-        .always(function(){
-            $('#btnUploadResults').html( '\
-                <span class="fa fa-save"  aria-hidden="true"></span> \
-                Subir Resultados'
-            ).prop('disabled',false);
-
-        })
-
     $('#divIframeUpload').remove();
     return true;
 }

@@ -40,9 +40,12 @@
             $sort = (array_key_exists('sort',$data))?$data['sort']:"id";
             $order = (array_key_exists('order',$data))?$data['order']:"asc";
 
-            $andWhere = ($search != "")? "AND (nombre LIKE ('%$search%') OR email LIKE ('%$search%') )":"";
+            $andWhere = ($search != "")? "AND (nombre LIKE ('%$search%') OR email LIKE ('%$search%') ) ":"";
 
-
+            if ($data['mode']=="0"){
+                $idUser = $_SESSION['id'];
+                $andWhere.="AND referente = $idUser";
+            }
             $sql = "SELECT * 
                         FROM pacientes 
                         WHERE eliminado IS NULL

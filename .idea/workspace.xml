@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/permisos.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/permisos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/lab.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/clientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routePacientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routePacientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/uploadFile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +97,7 @@
       <workItem from="1607757905835" duration="13510000" />
       <workItem from="1607791960131" duration="4613000" />
       <workItem from="1608244249218" duration="2384000" />
-      <workItem from="1608584060465" duration="19301000" />
+      <workItem from="1608584060465" duration="23411000" />
     </task>
     <servers />
   </component>
