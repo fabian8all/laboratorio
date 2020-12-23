@@ -42,8 +42,18 @@
                             </div>
                         </div>
                         <div class="col-6">
+<!--                            <div class="form-group">-->
+<!--                                <input type="number" min="0" step="0.01" class="form-control form-control-user" id="txtClientesDescuento" placeholder="Descuento" >-->
+<!--                            </div>-->
                             <div class="form-group">
-                                <input type="number" min="0" step="0.01" class="form-control form-control-user" id="txtClientesDescuento" placeholder="Descuento" >
+                                <select class="form-control form-control-user" id="selClientesLista" style="padding: 0rem 1rem;height: 3.2rem;">
+                                    <option value="0" selected disabled>Lista de precios</option>
+                                    <option value="1">Publico General</option>
+                                    <option value="2">Precios Médico</option>
+                                    <option value="3">Precios Empresa</option>
+                                    <option value="4">Precios Lista 4</option>
+                                    <option value="5">Precios Lista 5</option>
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -87,6 +87,29 @@ function formatClientesDescuento(value, row, index) {
   return formatted;
 }
 
+function formatClientesLista(value, row, index) {
+        switch (value){
+            case '1' : lista = "Público general"; break;
+            case '2' : lista = "Precio Médico"; break;
+            case '3' : lista = "Precio Empresa"; break;
+            case '4' : lista = "Precio Lista 4"; break;
+            case '5' : lista = "Precio Lista 5"; break;
+            default : lista = "Público general"; break;
+        }
+
+    return lista;
+}
+
+function formatClientesPerfil(value, row, index) {
+        switch (value){
+            case '2' : perfil = "Médico"; break;
+            case '3' : perfil = "Empresa"; break;
+            default : perfil = "--"; break;
+        }
+
+    return perfil;
+}
+
 function ajaxGetClientes(params) {
   $.ajax({
     type: "POST",
@@ -177,7 +200,7 @@ $("#btnClientesSave").click(function () {
     chkpass: $("#chkClientesChgPass").val(),
     pass1: $("#txtClientesPass1").val(),
     pass2: $("#txtClientesPass2").val(),
-    descuento: $("#txtClientesDescuento").val(),
+    lista: $("#selClientesLista").val(),
   };
   if ($("#hidClientesMode").val() == "new") {
     action = "Add";

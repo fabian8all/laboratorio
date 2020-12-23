@@ -9,12 +9,15 @@ $(document).ready(function(){
 });
 
 function load_sel_pacientes(selId = 0){
-    if (userData.perfil == 1) {
+    if (userData.verPacientes == 'All') {
         action = "getAll";
         info = {};
-    }else{
+    }else if (userData.verPacientes == 'My') {
         action = "getMy";
         info = userData.id;
+    }else{
+        customAlert("Error!","Error al intentar obtener la lista de pacientes");
+        return false;
     }
 
     $.post("routes/routePacientes.php",{info:info,action:action})
@@ -120,7 +123,7 @@ $("#btnREAddPaciente").click(function(){
 });
 
     $("#btnPacientesSave").click(function(){
-        if (userData.perfil == 2 || userData.perfil == 3){
+        if (userData.perfil != 1){
             referente = userData.id;
         }else{
             referente = 0;

@@ -117,7 +117,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
     });
 
     $("#btnPacientesSave").click(function(){
-        if (userData.perfil == 2 || userData.perfil == 3){
+        if (userData.perfil != 1){
             referente = userData.id;
         }else{
             referente = 0;

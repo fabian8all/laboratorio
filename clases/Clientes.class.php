@@ -76,13 +76,20 @@
         }
 
         public function Add($data){
-            $usrnmParam = array(":usr"=>$data['username']);
-            $sqlFindUser = "SELECT * FROM usuarios WHERE username = :usr;";
+            $usrnm = $data['username'];
+            $lista = $data['lista'];
+            $usrnmParam = array(":usr"=> $usrnm);
+                $sqlFindUser = "SELECT * FROM usuarios WHERE username = :usr;";
             $user = self::query_single_object($sqlFindUser,$usrnmParam);
-            if($usrnmParam == ""){
+            if($usrnm == ""){
                 $result = array(
                     "success" =>false,
                     "msg"=>"El nombre de usuario es requerido"
+                );
+            }else if($lista == ""){
+                $result = array(
+                    "success" =>false,
+                    "msg"=>"No se ha seleccionado lista de precios"
                 );
             }else if($user){
                 $result = array(
@@ -101,18 +108,18 @@
                 );
             }else{
                 $params = array(
-                    ':usr'=>$data['username'],
+                    ':usr'=>$usrnm,
                     ':prf'=>$data['perfil'],
                     ':nom'=>$data['nombre'],
                     ':eml'=>$data['email'],
                     ':pwd'=>sha1(md5('-t3CN01oG1a5%C0s173c!' . $data['pass1'])),
-                    ':dsc'=>$data['descuento'],
+                    ':lst'=>$lista,
                     ':crt'=>date('Y-m-d H:i:s')
                 );
                 $sql = "INSERT INTO usuarios 
-                        (username,perfil,nombre,email,descuento,password,creado) 
+                        (username,perfil,nombre,email,lista,password,creado) 
                     VALUES
-                        (:usr,:prf,:nom,:eml,:dsc,:pwd,:crt)";
+                        (:usr,:prf,:nom,:eml,:lst,:pwd,:crt)";
                 $query = self::query($sql,$params);
                 if ($query){
                     $result = array(
@@ -132,34 +139,42 @@
         }
 
         public function Update($data){
-            $params = array(
-                ':cid'=>$data['id'],
-                ':nom'=>$data['nombre'],
-                ':eml'=>$data['email'],
-                ':prf'=>$data['perfil'],
-                ':dsc'=>$data['descuento']
-            );
-
-            $sql = "UPDATE usuarios
-                        SET 
-                            nombre = :nom,
-                            email = :eml,
-                            perfil = :prf,
-                            descuento = :dsc,
-                            eliminado = null 
-                        WHERE 
-                            id = :cid";
-            $query = self::query($sql,$params);
-            if ($query){
-                $result = array(
-                    "success" =>true,
-                    "msg"=>"La información se ha guardado con éxito"
-                );
-            }else{
+            $lista = $data['lista'];
+            if($lista == ""){
                 $result = array(
                     "success" =>false,
-                    "msg"=>"Ocurrió un error al guardar la información"
+                    "msg"=>"No se ha seleccionado lista de precios"
                 );
+            }else {
+                $params = array(
+                    ':cid' => $data['id'],
+                    ':nom' => $data['nombre'],
+                    ':eml' => $data['email'],
+                    ':prf' => $data['perfil'],
+                    ':lst' => $data['lista']
+                );
+
+                $sql = "UPDATE usuarios
+                            SET 
+                                nombre = :nom,
+                                email = :eml,
+                                perfil = :prf,
+                                lista = :lst,
+                                eliminado = null 
+                            WHERE 
+                                id = :cid";
+                $query = self::query($sql, $params);
+                if ($query) {
+                    $result = array(
+                        "success" => true,
+                        "msg" => "La información se ha guardado con éxito"
+                    );
+                } else {
+                    $result = array(
+                        "success" => false,
+                        "msg" => "Ocurrió un error al guardar la información"
+                    );
+                }
             }
             return $result;
         }

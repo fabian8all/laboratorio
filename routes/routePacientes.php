@@ -18,7 +18,13 @@ $action = $_POST['action'];
 
 	switch ($action) {
 		case 'getAll':
-			echo json_encode($Paciente->getAll());
+			if ($permisos->verPacientes()) {
+				echo json_encode($Paciente->getAll());
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'getMy':
 			echo json_encode($Paciente->getMy($info));

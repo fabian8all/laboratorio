@@ -130,6 +130,7 @@
                                                     <th>CREAR</th>
                                                     <th>ACTUALIZAR</th>
                                                     <th>BORRAR</th>
+                                                    <th>VER TODOS</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
                                                     <tr>
@@ -137,6 +138,7 @@
                                                         <td><input type="checkbox" class="chkPermisosPacientes" value="2"></td>
                                                         <td><input type="checkbox" class="chkPermisosPacientes" value="4"></td>
                                                         <td><input type="checkbox" class="chkPermisosPacientes" value="8"></td>
+                                                        <td><input type="checkbox" class="chkPermisosPacientes" value="16"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

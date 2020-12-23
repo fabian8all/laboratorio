@@ -48,10 +48,11 @@ $permisos = new Permisos((isset($TPL->Permisos)?$TPL->Permisos:0));
         }?>
         <script>
             userData = {
-                id          : <?=$_SESSION['id']?>,
-                perfil      : <?=$_SESSION['perfil']?>,
-                username    : "<?=$_SESSION['username']?>",
-                nombre      : "<?=$_SESSION['nombre']?>"
+                id              : <?=$_SESSION['id']?>,
+                perfil          : <?=$_SESSION['perfil']?>,
+                username        : "<?=$_SESSION['username']?>",
+                nombre          : "<?=$_SESSION['nombre']?>",
+                verPacientes    : "<?=($permisos->verPacientes() == 1)?'All':'My'?>"
             }
         </script>
         <!-- /Page PreScripts-->

@@ -37,8 +37,8 @@
             <th data-field="id"  data-sortable="true" data-align="left">Id</th>
             <th data-field="nombre"  data-sortable="true" data-align="left">Nombre</th>
             <th data-field="email" data-sortable="true">Email</th>
-            <th data-field="perfil"  data-sortable="false">Perfil</th>
-            <th data-field="descuento" data-formatter="formatClientesDescuento" data-sortable="false">Descuento</th>
+            <th data-field="perfil" data-formatter="formatClientesPerfil"  data-sortable="false">Perfil</th>
+            <th data-field="lista" data-formatter="formatClientesLista" data-sortable="false">Lista de precios</th>
             <th data-field="id"  data-formatter="formatClientesOptions" data-align="center" data-sortable="false">Opciones</th>
         </tr>
         </thead>

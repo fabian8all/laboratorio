@@ -22,5 +22,9 @@
         public function borrar(){
             return ($this->bin[4] == '1')?true:false;
         }
+        public function verPacientes(){
+            $permisosPacientes = new permisos(3);
+            return ($permisosPacientes->bin[3]);
+        }
     }
 ?>
