@@ -8,12 +8,39 @@
 
 	Class Corte extends DBConnection {
 
+	    public function get($idCorte){
+	        $param = array(':cid'=>$idCorte);
+	        $sqlCorte = "
+	            SELECT
+	                *
+                FROM cortes
+                WHERE id = :cid;
+	        ";
+	        $corte = self::query_single_object($sqlCorte,$param);
+	        $sqlPagos = "
+	            SELECT 
+	                *
+                FROM pagos
+                WHERE 
+                    modulo = 'cortes' AND
+                    id_ref = :cid;              
+	        ";
+	        $pagos = self::query_object($sqlPagos,$param);
+	        $corte->pagos = $pagos;
+	        if ($corte){
+	            return $corte;
+            }else{
+	            return false;
+            }
+        }
+
         public function getLast($idCliente){
 
             $param = array(':cid'=>$idCliente);
             $sql = "
                 SELECT 
-                    *,
+                    id,
+                    pagado,
                     DATE_FORMAT(fechaFin, '%Y-%m-%d') AS ultimoCorte
                 FROM cortes 
                 WHERE idCliente = :cid 
@@ -326,6 +353,139 @@
                 'total'=>$total
             );
             return $response;
+        }
+
+        public function Pagar($data){
+	        $paramsPago = array(
+	            ":cid"=>$data['id'],
+                ":cnt"=>$data['pago'],
+                ":typ"=>$data['formaPago'],
+                ":rfr"=>$data['referencia'],
+                ":mod"=>'cortes',
+                ":crt"=>date('Y-m-d H:i:s')
+            );
+	        $sqlPago = "
+	            INSERT
+	                INTO pagos
+	                    (cantidad,tipo,referencia,modulo,id_ref,creado)
+                    VALUES
+                        (:cnt,:typ,:rfr,:mod,:cid,:crt); 
+	        ";
+
+	        $queryPagos = self::query($sqlPago,$paramsPago);
+
+	        if ($queryPagos){
+	            $param = array(
+	                ":cid"=>$data['id']
+                );
+	            $sqlCorte = "
+	                SELECT 
+	                    total,
+	                    solicitudes
+                    FROM cortes
+                    WHERE
+                        id = :cid;
+	            ";
+	            $sqlSelPagos = "
+	                SELECT 
+	                    cantidad
+                    FROM pagos
+                    WHERE
+                        modulo = 'cortes' AND 
+                        id_ref = :cid
+	            ";
+	            $corte = self::query_single_object($sqlCorte,$param);
+	            $pagos = self::query_object($sqlSelPagos,$param);
+
+	            $pagado = 0.00;
+	            foreach ($pagos as $pago){
+	                $pagado += floatval($pago->cantidad);
+                }
+	            $ok = true;
+	            $msg = "El pago ha sido guardado con exito";
+	            if($pagado + 0.01 >= $corte->total){
+	                $sqlUpdateCorte = "
+	                    UPDATE
+	                        cortes
+                        SET
+                            pagado = 1
+                        WHERE 
+                            id = :cid;
+	                ";
+	                $queryUpdateCorte = self::query($sqlUpdateCorte,$param);
+	                if($queryUpdateCorte){
+	                    $solicitudes = json_decode($corte->solicitudes);
+	                    foreach ($solicitudes as $solicitud){
+	                        $paramSolicitud = array(":sid"=>$solicitud);
+	                        $sqlUpdateSolicitud = "
+	                            UPDATE 
+	                                solicitudes
+                                SET statusPago = 1,
+                                    estado = 
+                                        CASE
+                                            WHEN estado = 2 THEN 3
+                                            ELSE estado
+                                        END 
+                                WHERE 
+                                    id = :sid; 
+	                        ";
+	                        $queryUpdateSolicitud = self::query($sqlUpdateSolicitud,$paramSolicitud);
+	                        if(!$queryUpdateSolicitud){
+	                            $ok = false;
+	                            $msg = "Error al intentar actualizar las solicitudes";
+	                            break;
+                            }
+                        }
+                    }else{
+	                    $ok = false;
+	                    $msg="Error al intentar actualizar el estado del corte";
+                    }
+                }
+	            if ($ok){
+	                return array("success"=>true,"msg"=>$msg);
+                }else{
+	                return array("success"=>false,"msg"=>$msg);
+                }
+
+            }else{
+	            return array('success'=>false,'msg'=>"Error al intentar guaardar el pago");
+            }
+	    }
+
+	    public function getPagos($data){
+	        $params = array(
+	            ":ini"=>$data['fechaIni'],
+                ":fin"=>$data['fechaFin']
+            );
+	        $sqlPagos = "
+	            SELECT 
+	                *
+                FROM pagos P
+                    LEFT JOIN (
+                        SELECT 
+                            S2.id as id,
+                            P.nombre as nombreS
+                        FROM solicitudes S2
+                            INNER JOIN pacientes P
+                                ON P.id = S2.id_paciente
+                    ) S
+                        ON (P.id_ref = S.id AND P.modulo = 'solicitudes')
+                    LEFT JOIN (
+                        SELECT 
+                            C2.id as id,
+                            U.nombre as nombreC
+                        FROM cortes C2
+                            INNER JOIN usuarios U
+                                ON U.id = C2.idCliente
+                    ) C
+                        ON (P.id_ref = C.id AND P.modulo = 'cortes') 
+                WHERE P.creado >= :ini AND P.creado <= :fin  
+	        ";
+	        $query = self::query_object($sqlPagos,$params);
+	        if ($query)
+	            return $query;
+            else
+                return false;
         }
     }
 

@@ -20,7 +20,11 @@ $(document).ready(function(){
         },
         formatNoMatches: function () {
             return 'No se encontraron solicitudes registradas';
+        },
+        formatSearch: function(){
+            return 'Buscar';
         }
+
     });
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -48,7 +52,11 @@ $(document).ready(function(){
                     },
                     formatNoMatches: function () {
                         return 'No se encontraron solicitudes registradas';
+                    },
+                    formatSearch: function(){
+                        return 'Buscar';
                     }
+
                 }).bootstrapTable('refresh');
                 break;
             case 'nav-pendientePago-tab':
@@ -71,6 +79,9 @@ $(document).ready(function(){
                     },
                     formatNoMatches: function () {
                         return 'No se encontraron solicitudes registradas';
+                    },
+                    formatSearch: function(){
+                        return 'Buscar';
                     }
                 }).bootstrapTable('refresh');
                 break;
@@ -94,7 +105,11 @@ $(document).ready(function(){
                     },
                     formatNoMatches: function () {
                         return 'No se encontraron solicitudes registradas';
+                    },
+                    formatSearch: function(){
+                        return 'Buscar';
                     }
+
                 }).bootstrapTable('refresh');
                 break;
         }
@@ -147,7 +162,6 @@ function formatResultsPPOptions(value, row, index){
 }
 
 function formatResultsFOptions(value, row, index){
-    console.log(row);
     var options = "\
             <div class='dropup'> \
                 <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
@@ -285,9 +299,8 @@ $(document).on('click','.btnGuardarPago',function(){
     $.post("routes/routeResultados.php",{info:id,action:'get'})
         .done(function(data){
             data =  $.parseJSON(data);
-            pagado = $.parseJSON(data.pagado);
             anticipo = 0.0;
-            $(pagado.pagos).each(function(k,v){
+            $(data.pagos).each(function(k,v){
                 anticipo+=parseFloat(v.cantidad);
             });
             APagar = data.costo - anticipo;
@@ -336,6 +349,7 @@ $('#btnPagoSubmit').click(function(){
                     customAlert("Exito!", data.msg);
                     $("#txtPago").val('');
                     $("#hidPagoIdSolicitud").val('');
+                    $('#selFormaPago').val('');
                     $('#modAgregarPago').modal('hide');
                     $('#bstableResultsPP').bootstrapTable('refresh');
                 } else {
@@ -350,7 +364,6 @@ $('#btnPagoSubmit').click(function(){
                         <span class="fa fa-money"></span>\
                         Guardar pago\
                     ').prop('disabled', false);
-                $('#selFormaPago').val('');
             });
     }
 });

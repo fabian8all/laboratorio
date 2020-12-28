@@ -13,11 +13,10 @@ $(document).on('click','.btnDetalles',function(){
                 });
                 $('#listaEstudios').html(estudios);
 
-                pagado = $.parseJSON(data.pagado);
                 lblPagado = "\
                     <div class='row'>\
                         <div class='col-12'>";
-                lblPagado+=(pagado.completo)
+                lblPagado+=(data.pagado==1)
                     ?"<span class='badge badge-success'>pagado</span>"
                     :"<span class='badge badge-warning'>pendiente</span>";
                 lblPagado +="\
@@ -34,20 +33,19 @@ $(document).on('click','.btnDetalles',function(){
                                 </thead>\
                                 <tbody>";
                 c = 0;
-                $(pagado.pagos).each(function(k,v){
+                $(data.pagos).each(function(k,v){
                     c++;
                     if(parseFloat(v.cantidad) > 0){
                         lblPagado += "\
                                             <tr>\
                                                 <td>$"+parseFloat(v.cantidad).toFixed(2)+"</td>\
                                                 <td>"+v.tipo+"</td>\
-                                                <td>"+v.fecha+"</td>\
+                                                <td>"+v.creado+"</td>\
                                                 <td>"+v.referencia+"</td>\
                                             </tr>\
                                         ";
                     }
                 });
-                console.log(c);
                 lblPagado += (c == 0)?"<tr><td colspan='3'>No hay pagos registrados</td></tr>":"";
                 lblPagado += "\
                                 </tbody>\

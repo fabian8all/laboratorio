@@ -164,25 +164,9 @@
 
 
                 $pago_completo = ($anticipo>=$total)?true:false;
-                $pago = (floatval($anticipo)>0)?
-                    array(
-                        array(
-                            'cantidad'  => $anticipo,
-                            'tipo'      => $formaPago,
-                            'referencia'=> $refAnticipo,
-                            'fecha'     => date('Y-m-d H:i:s')
-                        )
-                    )
-                :
-                    NULL;
 
 
-                $pagado = json_encode(
-                    array(
-                        'completo'  => $pago_completo,
-                        'pagos'     => $pago
-                    )
-                );
+
 
                 $muestra = ($aDomicilio)?NULL:date('Y-m-d H:i:s');
                 $status = ($aDomicilio)?0:1;
@@ -193,45 +177,73 @@
                     ':cst'=>$total,
                     ':des'=>$descuento,
                     ':ana'=>$analistaId,
-                    ':pay'=>$pagado,
+                    ':pay'=>$pago_completo,
                     ':mue'=>$muestra,
                     ':dom'=>$aDomicilio
                 );
 
 
                 $sql = "INSERT INTO solicitudes
-                            (id_paciente,solicitud,estado,costo,descuento,analista,pagado,muestra,aDomicilio)
+                            (id_paciente,solicitud,estado,costo,descuento,analista,statusPago,muestra,aDomicilio)
                         VALUES
                             (:pid,:sol,:sta,:cst,:des,:ana,:pay,:mue,:dom)";
                 $query = self::query($sql,$param);
+                $ok = true;
+                $msg = "";
                 if ($query){
                     $sqlGetLast = "SELECT MAX(id) as id FROM solicitudes;";
                     $queryLast = self::query_single_object($sqlGetLast);
                     $solicitud = $queryLast->id;
 
-                }
-                $ok = true;
-                foreach ($data['estudios'] as $key=>$estudio){
-                    $param = array(
-                        ':eid'=>$estudio['id'],
-                        ':cst'=>$estudio['costo'],
-                        ':sid'=>$solicitud
-                    );
-                    $sql = "INSERT INTO estudios_paciente
-                            (id_estudio,id_solicitud,costo)
-                        VALUES
-                            (:eid,:sid,:cst)";
-                    $query = self::query($sql,$param);
-                    if(!$query){
-                        $ok=false;
-                        break;
+
+                    foreach ($data['estudios'] as $key=>$estudio){
+                        $param = array(
+                            ':eid'=>$estudio['id'],
+                            ':cst'=>$estudio['costo'],
+                            ':sid'=>$solicitud
+                        );
+                        $sql = "INSERT INTO estudios_paciente
+                                (id_estudio,id_solicitud,costo)
+                            VALUES
+                                (:eid,:sid,:cst)";
+                        $query = self::query($sql,$param);
+                        if(!$query){
+                            $ok=false;
+                            $msg = "Ocurrió un error al intentar guardar los estudios a realizar.";
+                            break;
+                        }
                     }
+                    if (floatval($anticipo)>0) {
+                        $paramsPago = array(
+                            ':cnt' => $anticipo,
+                            ':typ' => $formaPago,
+                            ':rfr' => $refAnticipo,
+                            ':mod' => 'solicitudes',
+                            ':sid' => $solicitud,
+                            ':crt' => date('Y-m-d H:i:s')
+                        );
+                        $sqlPago = "
+                            INSERT INTO
+                                pagos
+                                    (cantidad,tipo,referencia,modulo,id_ref,creado)
+                            VALUES
+                               (:cnt,:typ,:rfr,:mod,:sid,:crt);
+                        ";
+                        $queryPago = self::query($sqlPago,$paramsPago);
+                        if (!$queryPago){
+                            $ok = false;
+                            $msg = "Ocurrió un error al intentar guardar el pago del anticipo.";
+                        }
+                    }
+                }else{
+                    $ok = false;
+                    $msg = "Ocurrió un error al intentar guardar la solicitud de estudios";
                 }
 
-                if($ok){
+            if($ok){
                     return array('success' => true, 'msg' => "Se han solicitado los estudios a realizar");
                 }else{
-                    return array('success' => false, 'msg'=> "Ocurrió un error al intentar guardar la información");
+                    return array('success' => false, 'msg'=> $msg);
                 }
         }
 

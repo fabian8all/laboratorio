@@ -17,8 +17,14 @@ $action = $_POST['action'];
 		$info = $_POST['info'];
 
 	switch ($action) {
+		case 'get':
+			echo json_encode($Corte->get($info));
+			break;
 		case 'getLast':
 			echo json_encode($Corte->getLast($info));
+			break;
+		case 'getPagos':
+			echo json_encode($Corte->getPagos($info));
 			break;
 		case 'getSolicitudes':
 			echo json_encode($Corte->getSolicitudes($info));
@@ -34,6 +40,9 @@ $action = $_POST['action'];
 			break;
 		case 'getInfoById':
 			echo json_encode($Corte->getInfoById($info));
+			break;
+		case 'Pagar':
+			echo json_encode($Corte->Pagar($info));
 			break;
 	}
 

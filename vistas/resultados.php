@@ -20,18 +20,6 @@
                     <option value="0">INACTIVOS</option>
                 </select>
 -->            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <form class="busquedaForm">
-                    <div class="input-group">
-                        <input type="text" id="txt_busqueda" class="form-control bg-light border-0 small" style="background-color: white !important" placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary onlyBig" id="btnBuscar" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
         <div class="card shadow mb-4">
             <div class="card-body">

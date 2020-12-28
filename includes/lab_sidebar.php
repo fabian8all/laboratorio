@@ -29,10 +29,22 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="cortesCliente.php">
-            <i class="fas fa-fw fa-check-circle"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCortes" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
             <span>Cortes</span>
         </a>
+        <div id="collapseCortes" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Cortes:</h6>
+
+                <a class="collapse-item" href="cortesCliente.php">
+                    <i class="fa fa-briefcase"></i> Clientes
+                </a>
+                <a class="collapse-item" href="cortePagos.php">
+                    <i class="fa fa-money"></i> Pagos
+                </a>
+            </div>
+        </div>
     </li>
 
     <li class="nav-item">

@@ -68,16 +68,25 @@ function setUltimoCorte(idCliente){
             if (data != null)
             {
                 data = $.parseJSON(data);
-                console.log(data);
                 if (!data){
                     $('#lblUltimoCorte').html("__/__/____");
+                    $('#lblEstadoCorte').removeClass().addClass('badge').addClass('badge-secondary').html('NO DISPONIBLE');
+                    $('#btnPagarCorte').hide();
                     $('#dateCorteInicio').val(hoy()).prop('disabled',false);
                 }else{
-                    $('#lblUltimoCorte').html(data.fechaFin);
+                    $('#lblUltimoCorte').html(data.ultimoCorte);
                     $('#dateCorteInicio').val(data.ultimoCorte).prop('disabled',true);
                     $('#dateCorteInicio').trigger('change');
+                    if (data.pagado == '0'){
+                        $('#lblEstadoCorte').removeClass().addClass('badge').addClass('badge-warning').html('PENDIENTE');
+                        $('#btnPagarCorte').data('idcorte',data.id).show();
+                        $('#btnRealizarCorte').prop('disabled',true);
+                    }else if (data.pagado == '1'){
+                        $('#lblEstadoCorte').removeClass().addClass('badge').addClass('badge-success').html('PAGADO');
+                        $('#btnPagarCorte').hide();
+                        $('#btnRealizarCorte').prop('disabled',false);
+                    }
                 }
-                loadTablaCortes(idCliente);
             }else{
                 customAlert("Error!",ajaxError);
             }
@@ -127,7 +136,6 @@ function loadTablaCortes(idCliente){
                                 break;
 
                         }
-                        console.log(solicitud);
                        tabla+="\
                                 <tr>\
                                     <td>"+solicitud.fecha+"</td>\
@@ -205,4 +213,71 @@ $('#btnPDFCorte').click(function(e){
         .fail(function(error){
             customAlert("Error!", error);
         });
+});
+
+$('#btnPagarCorte').click(function(){
+    idCorte = $(this).data('idcorte');
+    $.post('routes/routeCortes.php',{info:idCorte,action:'get'})
+        .done(function(data){
+            data = $.parseJSON(data);
+            total = data.total;
+            pagado = 0.00;
+            $(data.pagos).each(function(k,pago){
+                pagado += parseFloat(pago.cantidad);
+            });
+            aPagar = total - pagado;
+            $('#lblCostoTotal').html("$"+parseFloat(total).toFixed(2));
+            $('#lblUCortePagado').html("$"+pagado.toFixed(2));
+            $('#lblTotalAPagar').html("$"+parseFloat(aPagar).toFixed(2));
+            $('#hidPagoIdCorte').val(idCorte);
+            $('#modPagarCorte').modal('show');
+        })
+    .fail(function(error){
+        customAlert("Error!",error);
+    });
+});
+
+$('#btnPagoSubmit').click(function(){
+    info = {
+        id          : $("#hidPagoIdCorte").val(),
+        pago        : $("#txtPago").val(),
+        formaPago   : $("#selFormaPago").val(),
+        referencia  : $("#txtReferencia").val()
+    }
+
+    if(info.formaPago == "" || info.formaPago == null) {
+        customAlert('Error!','No se ha especificado la forma de pago');
+    }else {
+
+
+        $('#btnPagoSubmit').html('\
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+            Guardando...'
+        ).prop('disabled', true);
+
+        $.post("routes/routeCortes.php", {info: info, action: "Pagar"})
+            .done(function (data) {
+                data = $.parseJSON(data);
+                if (data.success) {
+                    customAlert("Exito!", data.msg);
+                    $("#txtPago").val('');
+                    $("#hidPagoIdCorte").val('');
+                    $('#selFormaPago').val('');
+                    $('#modPagarCorte').modal('hide');
+                    idCliente = $('#selClientes').val();
+                    setUltimoCorte(idCliente);
+                } else {
+                    customAlert("Error!", data.msg);
+                }
+            })
+            .fail(function (error) {
+                customAlert("Error!", ajaxError);
+            })
+            .always(function () {
+                $('#btnPagoSubmit').html('\
+                        <span class="fa fa-money"></span>\
+                        Guardar pago\
+                    ').prop('disabled', false);
+            });
+    }
 });

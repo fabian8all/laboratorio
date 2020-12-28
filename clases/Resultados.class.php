@@ -35,8 +35,8 @@
                     S.descuento as descuento,
                     S.solicitud as fechaSolicitud,
                     S.muestra as fechaMuestra,
-                    S.pagado as pagado,
                     S.entrega as fechaEntrega,
+                    S.statusPago as pagado,
                     S.resultados as resultados,
                     U.nombre as analista
                 FROM solicitudes S 
@@ -57,7 +57,15 @@
             ";
 
             $estudios = self::query_object($sqlEstudios);
+            $sqlPagos = "
+                SELECT 
+                    *
+                FROM pagos P 
+                WHERE (id_ref = $id AND modulo = 'solicitudes'); 
+            ";
+            $pagos = self::query_object($sqlPagos);
             $resultados->estudios = $estudios;
+            $resultados->pagos = $pagos;
             if ($resultados){
                 return $resultados;
             }else{
@@ -71,7 +79,7 @@
             $limit = (array_key_exists('limit',$data))?$data['limit']:0;
             $offset = (array_key_exists('offset',$data))?$data['offset']:0;
             $sort = (array_key_exists('sort',$data))?$data['sort']:"id";
-            $order = (array_key_exists('order',$data))?$data['order']:"asc";
+            $order = (array_key_exists('order',$data))?$data['order']:"desc";
             $status = $data['status'];
 
             $andWhere = ($search != "")? "AND (P.nombre LIKE ('%$search%') OR U.nombre LIKE ('%$search%') )":"";
@@ -144,14 +152,12 @@
             $param = array(':sid'=>$id);
 
             $sqlSelect = "
-                SELECT pagado FROM solicitudes WHERE id= :sid;
+                SELECT statusPago FROM solicitudes WHERE id= :sid;
             ";
 
             $solicitud = self::query_single_object($sqlSelect,$param);
 
-            $pagado = json_decode($solicitud->pagado);
-
-            $status = ($pagado->completo)?3:2;
+            $status = ($solicitud->statusPago)?3:2;
 
             $params = array(
                 ':sid'  => $data['id'],
@@ -190,12 +196,21 @@
 
             $solicitud = self::query_single_object($sqlSelect,$param);
 
-            $pagado = json_decode($solicitud->pagado);
+            $sqlPagos = "
+                SELECT * FROM pagos 
+                    WHERE 
+                        modulo = 'solicitudes' AND 
+                        id_ref = :sid;
+                        
+            ";
+
+
+            $pagos = self::query_object($sqlPagos,$param);
 
             $pago = floatval($data['pago']);
             $totalAnticipo = 0;
-            if($pagado->pagos) {
-                foreach ($pagado->pagos as $anticipo) {
+            if($pagos) {
+                foreach ($pagos as $anticipo) {
                     $cantidad = $anticipo->cantidad;
                     $totalAnticipo += floatval($cantidad);
                 }
@@ -203,38 +218,48 @@
             $completo = (($pago + $totalAnticipo + 0.01)>=floatval($solicitud->costo))?true:false;
             $status = ($completo)?3:2;
 
-            if (!$pagado->pagos){
-                $pagado->pagos = array();
-            }
-            array_push($pagado->pagos,array(
-                    'cantidad'=>$pago,
-                    'fecha'=>date('Y-m-d H:i:s'),
-                    'tipo'=>$data['formaPago'],
-                    'referencia'=>$data['referencia']
-                )
+            $paramsPago = array(
+                ':cnt'=>$pago,
+                ':crt'=>date('Y-m-d H:i:s'),
+                ':typ'=>$data['formaPago'],
+                ':rfr'=>$data['referencia'],
+                ':mod'=>'solicitudes',
+                ':sid'=>$id
             );
 
-            $pagado->completo = $completo;
-            $pagadoNew = json_encode($pagado);
-
-            $params =array(
-              ":sid" => $id,
-              ":pay" => $pagadoNew,
-              ":sta" => $status
-            );
-            $sql = "
-                UPDATE 
-                    solicitudes
-                SET
-                    estado = :sta,
-                    pagado = :pay
-                WHERE id = :sid;
+            $sqlPago = "
+                INSERT 
+                    INTO pagos
+                        (cantidad,tipo,referencia,modulo,id_ref,creado)
+                    VALUES
+                        (:cnt,:typ,:rfr,:mod,:sid,:crt);
+                
             ";
-            $query = self::query($sql,$params);
-            if ($query) {
-                return array('success' => true, 'msg' => 'El pago ha sido registrado');
+            $queryPago = self::query($sqlPago,$paramsPago);
+
+            if ($queryPago) {
+                $params = array(
+                    ":sid" => $id,
+                    ":pay" => $completo,
+                    ":sta" => $status
+                );
+                $sql = "
+                    UPDATE 
+                        solicitudes
+                    SET
+                        statusPago = :pay,
+                        estado = :sta
+                    WHERE id = :sid;
+                ";
+                $query = self::query($sql, $params);
+                if ($query) {
+                    return array('success' => true, 'msg' => 'El pago ha sido registrado');
+                } else {
+                    return array('success' => false, 'msg' => 'Ocurrió un error al cambiar el estado de la solicitud el pago');
+                }
             }else{
                 return array('success' => false, 'msg' => 'Ocurrió un error al intentar guardar el pago');
+
             }
 
         }

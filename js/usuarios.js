@@ -81,6 +81,7 @@ function ajaxGetUsuarios(params){
 $("#btnUsuariosAdd").click(function(){
 	$("#frmUsuarios").trigger('reset');
 	$("#hidUsuariosMode").val("new");
+	$("#txtUsuariosUser").prop("disabled",false);
 	$("#divUsuariosChkPass").hide();
 	$('#divUsuariosChgPass').show();
 	$("#modalUsuarios").modal('show');

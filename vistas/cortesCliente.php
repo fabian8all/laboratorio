@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="title text-center">
             <h1 class="h3 mb-2 text-gray-800">
-                Cortes
+                Corte de clientes
             </h1>
         </div>
     </div>
@@ -20,11 +20,33 @@
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-12">
-        <div class="form-group">
-            <div class="input-group">
-                <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
-                    for="">Último corte:&nbsp; </label>
-                <label style="display:inline-block;display: flex;align-items: center;" id="lblUltimoCorte" for=""> __/__/____</label>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
+                                   for="">Último corte:&nbsp; </label>
+                            <label style="display:inline-block;display: flex;align-items: center;" id="lblUltimoCorte" for=""> __/__/____</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="font-weight-bold" style="display:inline-block;display: flex;align-items: center;"
+                                   for="">Estado:&nbsp; </label>
+                            <label class="badge badge-secondary" style="display:inline-block;display: flex;align-items: center;" id="lblEstadoCorte" for=""> NO DISPONIBLE</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <button class="btn btn-primary w-100" id="btnPagarCorte" style="display: none;" >Pagar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -92,7 +114,7 @@
         <div class="form-group">
             <input type="hidden" id="hidSolicitudes" value="">
             <input type="hidden" id="hidTotal" value="">
-            <button type="button" id="btnRealizarCorte" class="btn btn-primary w-100">Realizar corte</button>
+            <button type="button" id="btnRealizarCorte" disabled="disabled" class="btn btn-primary w-100">Realizar corte</button>
         </div>
         <div class="form-group">
             <button type="button" id="btnPDFCorte" class="btn btn-success w-100">Enviar a PDF</button>
