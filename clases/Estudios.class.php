@@ -87,13 +87,16 @@
 //                ':cat'=>$data['categoria'],
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
+                ':cmd'=>$data['costom'],
+                ':cem'=>$data['costoe'],
+                ':cl4'=>$data['costol4'],
                 ':mue'=>$data['muestra'],
                 ':crt'=>date('Y-m-d H:i:s')
             );
             $sql = "INSERT INTO estudios 
-                        (codigo,nombre,tiempo,costo,muestra,creado) 
+                        (codigo,nombre,tiempo,costo,costo_medico,costo_empresa,costo_lista4,muestra,creado) 
                     VALUES
-                        (:cod,:nom,:tim,:cos,:mue,:crt)";
+                        (:cod,:nom,:tim,:cos,:cmd,:cem,:cl4,:mue,:crt)";
             $query = self::query($sql,$params);
             if ($query){
                 return array('success' => true, 'msg' => "El registro de estudio ha sido creado");
@@ -114,6 +117,9 @@
 //                ':cat'=>$data['categoria'],
                 ':tim'=>$data['tiempo'],
                 ':cos'=>$data['costo'],
+                ':cmd'=>$data['costom'],
+                ':cem'=>$data['costoe'],
+                ':cl4'=>$data['costol4'],
                 ':mue'=>$data['muestra'],
             );
             $sql = "UPDATE estudios 
@@ -122,6 +128,9 @@
                             nombre = :nom,
                             tiempo = :tim,
                             costo = :cos,
+                            costo_medico = :cmd,
+                            costo_empresa = :cem,
+                            costo_lista4 = :cl4,
                             muestra = :mue
                         WHERE 
                             id = :eid";
@@ -157,6 +166,7 @@
                 $pacienteId = $data['pacienteId'];
                 $descuento  = $data['descuento'];
                 $total      = $data['total'];
+                $totalCliente = $data['totalCliente'];
                 $anticipo   = $data['anticipo'];
                 $formaPago  = $data['formaPago'];
                 $refAnticipo = $data['refAnticipo'];
@@ -175,6 +185,7 @@
                     ':sol'=>date('Y-m-d H:i:s'),
                     ':sta'=>$status,
                     ':cst'=>$total,
+                    ':csc'=>$totalCliente,
                     ':des'=>$descuento,
                     ':ana'=>$analistaId,
                     ':pay'=>$pago_completo,
@@ -184,9 +195,9 @@
 
 
                 $sql = "INSERT INTO solicitudes
-                            (id_paciente,solicitud,estado,costo,descuento,analista,statusPago,muestra,aDomicilio)
+                            (id_paciente,solicitud,estado,costo,costoCliente,descuento,analista,statusPago,muestra,aDomicilio)
                         VALUES
-                            (:pid,:sol,:sta,:cst,:des,:ana,:pay,:mue,:dom)";
+                            (:pid,:sol,:sta,:cst,:csc,:des,:ana,:pay,:mue,:dom)";
                 $query = self::query($sql,$param);
                 $ok = true;
                 $msg = "";
@@ -197,15 +208,23 @@
 
 
                     foreach ($data['estudios'] as $key=>$estudio){
+                        switch ($data['lista']){
+                            case 0: $costoCliente = $estudio['costo'];break;
+                            case 1: $costoCliente = $estudio['costom'];break;
+                            case 2: $costoCliente = $estudio['costoe'];break;
+                            case 3: $costoCliente = $estudio['costol4'];break;
+
+                        }
                         $param = array(
                             ':eid'=>$estudio['id'],
                             ':cst'=>$estudio['costo'],
+                            ':csc'=>$costoCliente,
                             ':sid'=>$solicitud
                         );
                         $sql = "INSERT INTO estudios_paciente
-                                (id_estudio,id_solicitud,costo)
+                                (id_estudio,id_solicitud,costo,costoCliente)
                             VALUES
-                                (:eid,:sid,:cst)";
+                                (:eid,:sid,:cst,:csc)";
                         $query = self::query($sql,$param);
                         if(!$query){
                             $ok=false;

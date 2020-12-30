@@ -5,6 +5,7 @@ $(document).ready(function(){
 
     $('#dateCorteInicio').val(fecha);
     $('#dateCorteFin').val(fecha);
+    $('#dateCorteFin').prop('max',fecha);
     $.post('routes/routeClientes.php',{info:{},action:'getAll'})
         .done(function(data){
             if (data != null)

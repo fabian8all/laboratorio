@@ -85,6 +85,40 @@
                             <!-- Collapsable Card Example -->
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Accordion -->
+                                <a href="#cortesCard" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="resultadosCard">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> Cortes</h6>
+                                </a>
+                                <!-- Card Content - Collapse -->
+                                <div class="collapse" id="cortesCard">
+                                    <div class="card-body">
+                                        <div id="tableContainer" class="table-responsive">
+                                            <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                                                <thead id="thead" class="text-center">
+                                                <th>VER</th>
+                                                <th>REALIZAR CORTE</th>
+                                                <th>IMPRIMIR</th>
+                                                <th>PAGAR</th>
+                                                <th>VER CORTE INGRESOS</th>
+                                                </thead>
+                                                <tbody id="tbody" class="text-center">
+                                                <tr>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="1"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="2"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="4"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="8"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="16"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Collapsable Card Example -->
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Accordion -->
                                 <a href="#estudiosCard" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="estudiosCard">
                                     <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> Estudios</h6>
                                 </a>

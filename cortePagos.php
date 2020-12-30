@@ -11,7 +11,7 @@ if (!isset($TPL)) {
     );
     $TPL->Vista = "cortePagos.php";
     $TPL->Modales = "cortePagos.php";
-    $TPL->Permisos = 8;
+    $TPL->Permisos = 9;
 
 
 

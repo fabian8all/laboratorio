@@ -1,3 +1,59 @@
+<?php
+    require_once ('clases/Alerts.class.php');
+    $alertsObj = new Alerts();
+    if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3){
+        $alerts = $alertsObj->getClient($_SESSION['id']);
+        $divAlerts = '
+            <div class="col-lg-12">
+                <label>Estatus de las ordenes:</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="resultados.php#nav-pendienteMuestra">
+                    <label style="display: inline-block">Pendientes de muestra</label>
+                    <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrders">'.$alerts->pendienteMuestra.'</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="resultados.php#nav-enProceso">
+                    <label style="display: inline-block">En proceso</label>
+                    <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersPre">'.$alerts->enProceso.'</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="cortesCliente.php">
+                    <label style="display: inline-block">Ultimo corte: '.$alerts->fechaCorte.'</label>
+                    <span style="display: inline-block" class="badge badge-'.(($alerts->pagado == 1)?'success':'warning').' badge-counter" id="numOrdersFin">'.(($alerts->pagado == 1)?'PAGADO':'PENDIENTE').'</span>
+                </a>
+            </div>
+        
+        ';
+    }else{
+        $alerts = $alertsObj->getLab();
+        $divAlerts = '
+            <div class="col-lg-12">
+                <label>Estatus de las ordenes:</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="resultados.php#nav-pendienteMuestra">
+                    <label style="display: inline-block">Pendientes de muestra</label>
+                    <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrders">'.$alerts->pendienteMuestra.'</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="resultados.php#nav-enProceso">
+                    <label style="display: inline-block">En proceso</label>
+                    <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersPre">'.$alerts->enProceso.'</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <a href="resultados.php#nav-pendientePago">
+                    <label style="display: inline-block">Pendientes de pago</label>
+                    <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersFin">'.$alerts->pendientePago.'</span>
+                </a>
+            </div>
+        ';
+    }
+?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -6,22 +62,8 @@
     <!-- Topbar Search -->
     <!--<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">-->
     <form style="width: 70%;">
-        <div class="row onlyBig">
-            <div class="col-lg-12">
-                <label>Estatus de las ordenes:</label>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <label style="display: inline-block">Recepción a cliente</label>
-                <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrders"></span>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <label style="display: inline-block">Pre-diagnóstico</label>
-                <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersPre"></span>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <label style="display: inline-block">Por entregar</label>
-                <span style="display: inline-block" class="badge badge-danger badge-counter" id="numOrdersFin"></span>
-            </div>
+        <div class="row onlyBig" id="divAlerts">
+            <?=$divAlerts?>
         </div>
         <div class="dropdown onlySmall">
             <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

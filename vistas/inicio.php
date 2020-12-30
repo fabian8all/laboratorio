@@ -71,7 +71,7 @@
                                     <select name="" id="selREEstudioData" class="form-control" data-live-search="true" title="Seleccionar Estudio" data-size="5">
                                     </select>
                                     <div class="input-group-append">
-                                        <button class="btn btn-info" type="button" data-toggle="" data-target="#">
+                                        <button id="btnREEstudioData" class="btn btn-info" type="button" data-toggle="" data-target="#">
                                             <i class="fas fa-arrow-alt-circle-down fa-sm"></i>
                                         </button>
                                     </div>
@@ -88,26 +88,15 @@
                     <div class="row">
                         <hr style="width: 90%; margin:.6rem 0">
                         <div class="col-lg-2 col-md-2 col-2">
-                            <label><b>Subtotal</b></label>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-7">
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-3">
-                            <label id="subTotalRE"></label>
-                        </div>
-                    </div>
-                    <div id="descuentoRE" class="row">
-                    </div>
-                    <div class="row">
-                        <hr style="width: 90%; margin:.6rem 0">
-                        <div class="col-lg-2 col-md-2 col-2">
-                            <label><b>Total</b></label>
+                            <label><b>Costo total</b></label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-7">
                         </div>
                         <div class="col-lg-2 col-md-2 col-3">
                             <label id="totalRE"></label>
                         </div>
+                    </div>
+                    <div id="descuentoRE" class="row">
                     </div>
                 </div>
                 <div class="card-footer">

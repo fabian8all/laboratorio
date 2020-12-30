@@ -57,7 +57,6 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             data: {info:params.data,action:'BSTableData'},
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 params.success({
                     "total": data.count,
                     "rows" : data.rows
@@ -88,6 +87,9 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                     $('#txtEstudiosNombre').val(data.nombre);
                     $('#txtEstudiosTiempo').val(data.tiempo);
                     $('#txtEstudiosCosto').val(data.costo);
+                    $('#txtEstudiosCostoM').val(data.costo_medico);
+                    $('#txtEstudiosCostoE').val(data.costo_empresa);
+                    $('#txtEstudiosCostoL4').val(data.costo_lista4);
                     $('#txtEstudiosMuestra').val(data.muestra);
 
                     $("#modalEstudios").modal('show');
@@ -112,7 +114,7 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
                         customAlert("Exito!", data.msg);
                     else
                         customAlert("Error!", data.msg);
-                    load_estudios_data()
+                    $('#bstableEstudios').bootstrapTable('refresh');
                 }).fail(function(error){
                     customAlert("Error!", ajaxError);
                 });
@@ -131,6 +133,9 @@ var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase
             categoria: $("#selEstudiosCategoria").val(),
             tiempo: $("#txtEstudiosTiempo").val(),
             costo: $("#txtEstudiosCosto").val(),
+            costom: $("#txtEstudiosCostoM").val(),
+            costoe: $("#txtEstudiosCostoE").val(),
+            costol4: $("#txtEstudiosCostoL4").val(),
             muestra: $("#txtEstudiosMuestra").val(),
         }
         if ($('#hidEstudiosMode').val() == "new"){

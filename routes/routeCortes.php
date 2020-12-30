@@ -30,10 +30,22 @@ $action = $_POST['action'];
 			echo json_encode($Corte->getSolicitudes($info));
 			break;
 		case 'create':
-			echo json_encode($Corte->create($info));
+			if ($permisos->bin[6]){
+				echo json_encode($Corte->create($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'getPDF':
-			echo json_encode($Corte->getPDF($info));
+			if ($permisos->bin[5]){
+				echo json_encode($Corte->getPDF($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'getHistory':
 			echo json_encode($Corte->getHistory($info));
@@ -42,7 +54,13 @@ $action = $_POST['action'];
 			echo json_encode($Corte->getInfoById($info));
 			break;
 		case 'Pagar':
-			echo json_encode($Corte->Pagar($info));
+			if ($permisos->bin[5]){
+				echo json_encode($Corte->Pagar($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 	}
 

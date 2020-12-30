@@ -43,6 +43,21 @@
                                 <input type="number" step="0.05" class="form-control form-control-user necesary" id="txtEstudiosCosto" placeholder="Costo*">
                             </div>
                         </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="number" step="0.05" class="form-control form-control-user necesary" id="txtEstudiosCostoM" placeholder="Costo Medico*">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="number" step="0.05" class="form-control form-control-user necesary" id="txtEstudiosCostoE" placeholder="Costo Empresa*">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="number" step="0.05" class="form-control form-control-user necesary" id="txtEstudiosCostoL4" placeholder="Costo Lista4*">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -51,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="submit" id="btnEstudiosSave" class="btn btn-success">

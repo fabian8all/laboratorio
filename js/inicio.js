@@ -1,6 +1,7 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 var estudiosSelected = [];
 var descuento = 0.0;
+var lista =0;
 
 $(document).ready(function(){
     load_sel_pacientes();
@@ -65,7 +66,7 @@ $("#selREPacienteData").change(function(){
                     $("#lblREPacienteAge").html(edad+" año"+((edad>1)?"s":""));
                     $("#lblREPacienteTel").html(data.telefono);
                     $("#lblREPacienteEmail").html(data.email);
-                    descuento = data.descuento;
+                    lista = parseInt(data.lista);
                     load_estudios_selected();
                 }
             } else{
@@ -94,7 +95,7 @@ function load_data_estudios(){
                         }else{
                             nombre = (v.nombre.length > 80)?(v.nombre.substr(1,77)+"..."):v.nombre;
                         }
-                        options += "<option value='"+v.id+"' title='"+v.nombre+"' data-costo='"+v.costo+"' data-tiempo='"+v.tiempo+"'>"+v.codigo+" - "+nombre+"</option>";
+                        options += "<option value='"+v.id+"' title='"+v.nombre+"' data-costo='"+v.costo+"' data-costom='"+v.costo_medico+"' data-costoe='"+v.costo_empresa+"' data-costol4='"+v.costo_lista4+"' data-tiempo='"+v.tiempo+"'>"+v.codigo+" - "+nombre+"</option>";
                     });
                     $("#selREEstudioData").html(options)
                     $("#selREEstudioData").selectpicker('refresh')
@@ -163,7 +164,9 @@ $("#btnREAddPaciente").click(function(){
                 ').prop('disabled',false);
             });
     });
-
+$('#btnREEstudioData').click(function(){
+   $('#selREEstudioData').trigger('change');
+});
 $("#selREEstudioData").change(function (){
     option = $(this).children("option:selected");
 
@@ -171,6 +174,9 @@ $("#selREEstudioData").change(function (){
         id      : $(this).val(),
         nombre  : option.attr("title"),
         costo   : option.data("costo"),
+        costom  : option.data("costom"),
+        costoe  : option.data("costoe"),
+        costol4 : option.data("costol4"),
         tiempo  : option.data("tiempo")
     }
 
@@ -189,30 +195,45 @@ $("#selREEstudioData").change(function (){
 
 function load_estudios_selected(){
     var tablaRE = ""
-    var subTotal = 0;
-    $(estudiosSelected).each(function(key,val){
-        tablaRE +='\
+    var Total = 0;
+    var costoCliente = 0;
+    $(estudiosSelected).each(function(key,val) {
+        tablaRE += '\
             <div class="row">\
                 <div class="col-lg-2 col-md-2  col-2">\
-                    <button type="" class="btn btn-sm btn-danger btnREEstudiosUnsel" data-selectedestudiokey="'+key+'">\
+                    <button type="" class="btn btn-sm btn-danger btnREEstudiosUnsel" data-selectedestudiokey="' + key + '">\
                         <i class="fas fa-minus-circle"></i>\
                     </button>\
                 </div>\
                 <div class="col-lg-8 col-md-8 col-7">\
                     <label>\
                         <i class="far fa-check-circle"></i> \
-                        '+val.nombre+'\
+                        ' + val.nombre + '\
                     </label>\
                 </div>\
                 <div class="col-lg-2 col-md-2  col-3">\
                     <label>\
-                        $'+parseFloat(val.costo).toFixed(2)+'\
+                        $' + parseFloat(val.costo).toFixed(2) + '\
                     </label>\
                 </div>\
             </div>\
         ';
-        subTotal += parseFloat(val.costo);
+        Total += parseFloat(val.costo);
+        if (lista > 0 ) {
+            switch (lista) {
+                case 1:
+                    costoCliente += val.costom;
+                    break;
+                case 2:
+                    costoCliente += val.costoe;
+                    break;
+                case 3:
+                    costoCliente += val.costol4;
+                    break;
+            }
+        }
     });
+
     if (tablaRE == ""){
         tablaRE =  "\
                         <div class='row'>\
@@ -224,28 +245,24 @@ function load_estudios_selected(){
     }
 
     $("#divREListaEstudios").html(tablaRE);
-    $("#subTotalRE").html("$"+parseFloat(subTotal).toFixed(2));
-    if (descuento > 0 ){
-        descVal =  subTotal * (descuento/100);
-        descuentoRE = '\
+
+    if (costoCliente > 0){
+        lblCostoCliente = '\
                         <hr style="width: 90%; margin:.6rem 0">\
                         <div class="col-lg-2 col-md-2 col-2">\
-                            <label><b>Descuento (%'+parseFloat(descuento).toFixed(2)+'):</b></label>\
+                            <label><b>Costo Cliente:</b></label>\
                         </div>\
                         <div class="col-lg-8 col-md-8 col-7">\
                         </div>\
                         <div class="col-lg-2 col-md-2 col-3">\
-                            <label class="text-danger">-$'+parseFloat(descVal).toFixed(2)+'</label>\
+                            <label id="lblCostoCliente">$'+parseFloat(costoCliente).toFixed(2)+'</label>\
                         </div>\
                         ';
     }else{
-        descVal = 0;
-        descuentoRE = "";
+        lblCostoCliente =""
     }
-    $("#descuentoRE").html(descuentoRE);
-    total = subTotal - descVal;
-    $("#totalRE").html("$"+parseFloat(total).toFixed(2));
-
+    $("#descuentoRE").html(lblCostoCliente);
+    $("#totalRE").html("$"+parseFloat(Total).toFixed(2))
 }
 
 $(document).on('click',".btnREEstudiosUnsel",function(){
@@ -305,12 +322,15 @@ $('#btnAnticipoSubmit').click(function(){
 
 function solicitarEstudios(){
     total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));
+    totalCliente = Number($("#lblCostoCliente").html().replace(/[^0-9\.]+/g,""));
     info = {
         pacienteId  : $("#selREPacienteData").val(),
         descuento   : descuento,
         analistaId  : userData.id,
         estudios    : estudiosSelected,
         total       : total,
+        totalCliente: totalCliente,
+        lista       : lista,
         anticipo    : $('#hidAnticipo').val(),
         formaPago   : $('#hidFormaPago').val(),
         refAnticipo : $('#txtReferenciaAnticipo').val(),

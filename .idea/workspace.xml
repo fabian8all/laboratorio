@@ -5,25 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cortePagos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/importarpagos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/cortePagos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modales/cortePagos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vistas/cortePagos.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clases/Alerts.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Pacientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Pacientes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Perfiles.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Perfiles.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cortePagos.php" beforeDir="false" afterPath="$PROJECT_DIR$/cortePagos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/lab_topbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_topbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/permisos.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/permisos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/cortesCliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/detalles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/detalles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/usuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/usuarios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/cortesCliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/perfiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/perfiles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/estudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/corte.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/corte.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routeCortes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeCortes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cortesCliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vistas/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,16 +52,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/clases" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laboratorio\clases" />
       <recent name="C:\xampp\htdocs\laboratorio\js" />
       <recent name="C:\xampp\htdocs\laboratorio\modales" />
       <recent name="C:\xampp\htdocs\laboratorio\vistas" />
       <recent name="C:\xampp\htdocs\laboratorio" />
-      <recent name="C:\xampp\htdocs\laboratorio\clases" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -113,7 +114,7 @@
       <workItem from="1608244249218" duration="2384000" />
       <workItem from="1608584060465" duration="35213000" />
       <workItem from="1609026988462" duration="16011000" />
-      <workItem from="1609189993584" duration="8530000" />
+      <workItem from="1609189993584" duration="25926000" />
     </task>
     <servers />
   </component>
@@ -133,6 +134,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1607729176805" />
+    <state x="493" y="86" key="NewPhpClassDialog" timestamp="1609352634794">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="493" y="86" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1609352634794" />
     <state x="518" y="287" key="NewPhpFileDialog" timestamp="1608767962684">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -145,13 +150,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1608592171322" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1609136351929">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1609360185537">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609136351929" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1609191409332">
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609360185537" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1609348284284">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1609191409332" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1609348284284" />
   </component>
 </project>

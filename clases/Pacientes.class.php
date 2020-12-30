@@ -85,11 +85,12 @@
             $sql = "SELECT 
                         P.*,
                         DATE_FORMAT(P.fechaNac,'%Y-%m-%d') AS fechaNacInput,
-                        IF (P.referente = 0, 0.0, U.descuento) AS descuento 
+                        IF (P.referente = 0, 0, U.lista) AS lista 
                     FROM pacientes P 
                         LEFT JOIN usuarios U 
                             ON U.id = P.referente    
                     WHERE P.id = :eid;";
+
 
             $paciente = self::query_single_object($sql,$param);
 

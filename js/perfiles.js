@@ -77,20 +77,26 @@ $(document).on('click','.btnPerfilesEdit',function(){
 			if(data != null){
 				data =  $.parseJSON(data);
 				permisos = [];
-				for (i = 6;i>=0;i--){
+				for (i = 7;i>=0;i--){
 					permisos[i] = data.permisos.substr((i*2),2);
 				}
-				Pcotizacion  = hex2bin(permisos[6]).split("").reverse().join("");
-				Presultados  = hex2bin(permisos[5]).split("").reverse().join("");
-				Ppacientes 	= hex2bin(permisos[4]).split("").reverse().join("");
-				Pestudios	= hex2bin(permisos[3]).split("").reverse().join("");
-				Pclientes 	= hex2bin(permisos[2]).split("").reverse().join("");
-				Pusuarios 	= hex2bin(permisos[1]).split("").reverse().join("");
-				Pperfiles 	= hex2bin(permisos[0]).split("").reverse().join("");
+				Pcotizacion  = hex2bin(permisos[7]).split("").reverse().join("");
+				Presultados  = hex2bin(permisos[6]).split("").reverse().join("");
+				Ppacientes 	= hex2bin(permisos[5]).split("").reverse().join("");
+				Pestudios	= hex2bin(permisos[4]).split("").reverse().join("");
+				Pclientes 	= hex2bin(permisos[3]).split("").reverse().join("");
+				Pusuarios 	= hex2bin(permisos[2]).split("").reverse().join("");
+				Pperfiles 	= hex2bin(permisos[1]).split("").reverse().join("");
+				Pcortes 	= hex2bin(permisos[0]).split("").reverse().join("");
 
 				for (i=7; i>=0; i--){
 					val = Math.pow(2,i);
 
+					if (Pcortes[i]=='1'){
+						$('.chkPermisosCortes[value="'+val+'"]').prop('checked',true);
+					}else{
+						$('.chkPermisosCortes[value="'+val+'"]').prop('checked',false);
+					}
 					if (Pcotizacion[i]=='1'){
 						$('.chkPermisosCotizacion[value="'+val+'"]').prop('checked',true);
 					}else{
@@ -170,6 +176,7 @@ $(document).on('click','.btnPerfilesDel',function(){
 });
 
 $("#btnPerfilesSave").click(function(){
+	permisosCortes		= 0;
     permisosCotizacion  = 0;
     permisosResultados  = 0;
     permisosPacientes   = 0;
@@ -178,6 +185,9 @@ $("#btnPerfilesSave").click(function(){
     permisosUsuarios    = 0;
     permisosPerfiles    = 0;
 
+	$('.chkPermisosCortes').each(function(k,v){
+		permisosCortes += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
+	});
     $('.chkPermisosCotizacion').each(function(k,v){
         permisosCotizacion += ($(v).prop('checked')) ? parseInt($(v).val()) : 0;
     });
@@ -203,6 +213,7 @@ $("#btnPerfilesSave").click(function(){
 	info =  {
 		nombre: $("#txtPerfilesNombre").val(),
         permisos: {
+			cortes 		: permisosCortes,
 		    cotizacion  : permisosCotizacion,
             resultados  : permisosResultados,
             pacientes   : permisosPacientes,

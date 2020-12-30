@@ -86,6 +86,7 @@
                 return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
             }
 
+            $pCor = str_pad(dechex($data['permisos']['cortes']),2,'0',STR_PAD_LEFT);
             $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
             $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
             $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);
@@ -96,7 +97,7 @@
 
             $params = array(
                     ':nom'=>$data['nombre'],
-                    ':prm'=>$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot,
+                    ':prm'=>$pCor.$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot,
                     ':crt'=>date('Y-m-d H:i:s')
                 );
                 $sql = "INSERT INTO perfiles 
@@ -124,6 +125,7 @@
                 return array('success' => false, 'msg'=> "Falta alguno de los datos requeridos");
             }
 
+            $pCor = str_pad(dechex($data['permisos']['cortes']),2,'0',STR_PAD_LEFT);
             $pCot = str_pad(dechex($data['permisos']['cotizacion']),2,'0',STR_PAD_LEFT);
             $pRes = str_pad(dechex($data['permisos']['resultados']),2,'0',STR_PAD_LEFT);
             $pPac = str_pad(dechex($data['permisos']['pacientes']),2,'0',STR_PAD_LEFT);
@@ -135,7 +137,7 @@
             $params = array(
                 ':pid'=>$data['id'],
                 ':nom'=>$data['nombre'],
-                ':prm'=>$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot
+                ':prm'=>$pCor.$pPrf.$pUsr.$pCli.$pEst.$pPac.$pRes.$pCot
             );
 
             $sql = "UPDATE perfiles

@@ -64,15 +64,15 @@
             }
             $params = array(
                 ':cid'  => $data['idCliente'],
-                ':fci'  => $data['fechaIni'],
-                ':fcf'  => $data['fechaFin']
+                ':fci'  => $data['fechaIni']." 00:00:00",
+                ':fcf'  => $data['fechaFin']." 23:59:59"
                 );
             $sql = "
                 SELECT 
                     S.id as idSolicitud,
                     S.solicitud as fecha,
                     P.nombre as paciente,
-                    S.costo as costo,
+                    S.costoCliente as costo,
                     S.estado as estado 
                 FROM solicitudes S
                     INNER JOIN pacientes P
@@ -196,7 +196,7 @@
                                     <tr style='background: #AAAAAA; font-weight:bolder; ' >
                                         <td>".$solicitud['paciente']."</td>
                                         <td>".$solicitud['fecha']."</td>
-                                        <td>".$solicitud['total']."</td>
+                                        <td align='left'> $".number_format($solicitud['total'],2)."</td>
                                     </tr>
                 ";
                 foreach ($solicitud['estudios'] as $estudio) {
@@ -204,7 +204,7 @@
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>".$estudio['nombre']."</td>
-                                        <td>".$estudio['costo']."</td>
+                                        <td align='right'>$".number_format($estudio['costo'],2)."</td>
                                     </tr>
                 ";
 
@@ -314,9 +314,9 @@
                         S.id as id,
                         P.nombre as paciente,
                         DATE_FORMAT(S.solicitud, '%Y-%m-%d') as fecha,
-                        S.costo as total,
+                        S.costoCliente as total,
                         E.nombre as estudio,
-                        EP.costo as costoEstudio                    
+                        EP.costoCliente as costoEstudio                    
                     FROM solicitudes S
                         INNER JOIN pacientes P
                             ON P.id = S.id_paciente

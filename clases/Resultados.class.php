@@ -111,6 +111,8 @@
 
             $sqlCount= "SELECT count(*) as total
                         FROM solicitudes S
+                            INNER JOIN pacientes P
+                                ON S.id_paciente = P.id
                         WHERE S.estado = $status
                         $andWhere
                         ;";
