@@ -155,3 +155,80 @@ $('#btnPDFCorte').click(function(e){
             customAlert("Error!", error);
         });
 });
+
+$('#btnXLSCorte').click(function (e){
+    e.preventDefault();
+    if ($('#selTipo').val()=='dia'){
+        titulo = "Corte del día "+$('#dateCorteInicio').val();
+        nombre = "CortePagos"+$('#dateCorteInicio').val().replace(/-/g, '');
+    }else{
+        titulo = "Corte del día "+$('#dateCorteInicio').val()+" al día "+$('#dateCorteFin').val();
+        nombre = "CortePagos"+$('#dateCorteInicio').val().replace(/-/g, '')+"-"+$('#dateCorteFin').val().replace(/-/g, '');
+    }
+    data = "\
+            <table>\
+                <thead>\
+                <tr>\
+                    <th colspan='6'><h1>Corte de Pagos</h1></th>\
+                </tr>\
+                <tr></tr>\
+                </thead>\
+                <tbody>\
+                    <tr>\
+                        <td><b>"+titulo+"</b></td>\
+                    </tr>\
+                    <tr></tr>\
+                </tbody>\
+            </table>\
+            ";
+    data += $('#tableContainer').html();
+    data += "\
+            <table>\
+                <thead><tr></tr><tr></tr></thead>\
+                <tbody>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Pacientes:</b></td>\
+                        <td>"+$('#lblTotalPacientes').html()+"</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Clientes:</b></td>\
+                        <td>"+$('#lblTotalClientes').html()+"</td>\
+                    </tr>\
+                    <tr></tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Efectivo:</b></td>\
+                        <td>"+$('#lblTotalEfectivo').html()+"</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Tarjeta:</b></td>\
+                        <td>"+$('#lblTotalTarjeta').html()+"</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Transferencia:</b></td>\
+                        <td>"+$('#lblTotalTransfer').html()+"</td>\
+                    </tr>\
+                    <tr></tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Total:</b></td>\
+                        <td>"+$('#lblTotal').html()+"</td>\
+                    </tr>\
+                </tbody>\
+            </table>\
+    ";
+    var filename = nombre+'.xls';
+    var uri = '' +
+        'data:application/vnd.ms-excel;charset=UTF-8,%EF%BB%BF' + encodeURIComponent(data);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = uri;
+    downloadLink.download = filename;
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+});

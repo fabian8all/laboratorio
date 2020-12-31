@@ -52,7 +52,6 @@
                                     <option value="2">Precios Médico</option>
                                     <option value="3">Precios Empresa</option>
                                     <option value="4">Precios Lista 4</option>
-                                    <option value="5">Precios Lista 5</option>
                                 </select>
                             </div>
                         </div>

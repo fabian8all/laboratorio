@@ -180,16 +180,21 @@ $("#btnDescargarPlantilla").click(function(e){
     $.post('routes/routeEstudios.php',{info:{},action:'getListaPrecios'})
         .done(function(data)
         {
-            var filename = 'listaPrecios.csv';
-            var uri = '' +
-                'data:text/csv;charset=UTF-8,%EF%BB%BF' + encodeURIComponent(data);
-            var downloadLink = document.createElement("a");
-            downloadLink.href = uri;
-            downloadLink.download = filename;
+            data = $.parseJSON(data);
+            if (data.success){
+                var filename = 'listaPrecios.csv';
+                var uri = '' +
+                    'data:text/csv;charset=UTF-8,%EF%BB%BF' + encodeURIComponent(data.data);
+                var downloadLink = document.createElement("a");
+                downloadLink.href = uri;
+                downloadLink.download = filename;
 
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }else{
+                customAlert("Error!", data.msg);
+            }
         })
         .fail(function(error){
             customAlert("Error!", error);

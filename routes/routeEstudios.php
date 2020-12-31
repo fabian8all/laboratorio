@@ -62,10 +62,22 @@
 			}
 			break;
 		case 'getListaPrecios':
-			echo ($Estudio->getListaPrecios());
+			if ($permisos->bin[3]) {
+				echo json_encode($Estudio->getListaPrecios());
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 		case 'importListaPrecios':
-			echo json_encode($Estudio->importListaPrecios($_FILES));
+			if ($permisos->bin[3]) {
+				echo json_encode($Estudio->importListaPrecios($_FILES));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
 			break;
 	}
 

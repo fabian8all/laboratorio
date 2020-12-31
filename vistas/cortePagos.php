@@ -99,9 +99,9 @@
             </div>
         </div>
     </div>
-<!--    <div class="col-lg-3 col-md-3 col-12">-->
-<!--        <div class="form-group">-->
-<!--            <button type="button" id="btnPDFCorte" class="btn btn-success w-100">Enviar a PDF</button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+    <div class="col-lg-3 col-md-3 col-12">
+        <div class="form-group">
+            <button type="button" id="btnXLSCorte" class="btn btn-success w-100">Enviar a XLS</button>
+        </div>
+    </div>
+</div>

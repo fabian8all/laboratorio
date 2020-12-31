@@ -6,17 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Alerts.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Alerts.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Clientes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Clientes.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/permisos.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/permisos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/lab_topbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_topbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cortePagos.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortePagos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/estudios.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/estudios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/clientes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modales/perfiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/perfiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/corte.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/corte.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeClientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeClientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routeResultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeResultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeEstudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeEstudios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/cortePagos.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/cortePagos.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +105,7 @@
       <workItem from="1608244249218" duration="2384000" />
       <workItem from="1608584060465" duration="35213000" />
       <workItem from="1609026988462" duration="16011000" />
-      <workItem from="1609189993584" duration="31469000" />
+      <workItem from="1609189993584" duration="38105000" />
     </task>
     <servers />
   </component>
@@ -142,10 +141,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1609382619444" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1609381886437">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1609395500457">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609381886437" />
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609395500457" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1609348284284">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

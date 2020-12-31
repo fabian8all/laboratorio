@@ -134,6 +134,7 @@
                                                     <th>CREAR</th>
                                                     <th>ACTUALIZAR</th>
                                                     <th>BORRAR</th>
+                                                    <th>IMPORTAR LISTA DE PRECIOS</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
                                                     <tr>
@@ -141,6 +142,7 @@
                                                         <td><input type="checkbox" class="chkPermisosEstudios" value="2"></td>
                                                         <td><input type="checkbox" class="chkPermisosEstudios" value="4"></td>
                                                         <td><input type="checkbox" class="chkPermisosEstudios" value="8"></td>
+                                                        <td><input type="checkbox" class="chkPermisosEstudios" value="16"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

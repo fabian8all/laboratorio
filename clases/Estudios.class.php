@@ -292,9 +292,9 @@
                             $estudio->l3.",".
                             $estudio->l4."\n";
                 }
-                return $csv;
+                return array("success"=>true,"data"=>$csv);
             }else{
-                return(false);
+                return array("success"=>false,"msg"=>"Error al intentar obtener la lista de precios");
             }
 
 

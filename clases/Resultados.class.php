@@ -141,8 +141,7 @@
             ";
 
             $solicitud = self::query_single_object($sqlSelect,$param);
-
-            $status = ($solicitud->statusPago)?3:2;
+            $status = ($solicitud->statusPago=="1")?3:2;
 
             $params = array(
                 ':sid'  => $data['id'],

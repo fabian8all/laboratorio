@@ -21,7 +21,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12">
                 <a href="cortesCliente.php">
-                    <label style="display: inline-block">Ultimo corte: '.$alerts->fechaCorte.'</label>
+                    <label style="display: inline-block">Corte: '.$alerts->fechaCorte.'</label>
                     <span style="display: inline-block" class="badge badge-'.(($alerts->pagado == 1)?'success':'warning').' badge-counter" id="numOrdersFin">'.(($alerts->pagado == 1)?'PAGADO':'PENDIENTE').'</span>
                 </a>
             </div>
