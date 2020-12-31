@@ -125,6 +125,9 @@ function formatResultsPMOptions(value, row, index){
                 <button class='btn btn-success btn-sm btnTomarMuestra' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Tomar muestra' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-eye-dropper fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
+                <button class='btn btn-danger btn-sm btnCancelarSolicitud' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Cancelar Solicitud' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-times-circle fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
             </div>";
 
     return options;
@@ -138,6 +141,9 @@ function formatResultsEPOptions(value, row, index){
                 </button>\
                 <button class='btn btn-success btn-sm btnSubirResultados' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Subir resultados' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-upload fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
+                </button>\
+                <button class='btn btn-danger btn-sm btnCancelarSolicitud' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Cancelar Solicitud' aria-haspopup='true' aria-expanded='false'>\
+                    <span class='fas fa-fw fa-times-circle fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
             </div>";
 
@@ -366,4 +372,32 @@ $('#btnPagoSubmit').click(function(){
                     ').prop('disabled', false);
             });
     }
+});
+
+$(document).on('click','.btnCancelarSolicitud',function(){
+    id = $(this).data('idresult');
+    $.confirm({
+        title: 'Atencion!',
+        content: '¿Cancelar la realización de los estudios?',
+        confirm: function(){
+            $.post("routes/routeResultados.php",{info:id,action:'Cancelar'})
+                .done(function(data){
+                    data =  $.parseJSON(data);
+                    if(data.success){
+                        customAlert("Exito!", data.msg);
+                        $('#bstableResultsPM').bootstrapTable('refresh');
+                        $('#bstableResultsEP').bootstrapTable('refresh');
+                    } else{
+                        customAlert("Error!", data.msg);
+                    }
+                })
+                .fail(function(error){
+                    customAlert("Error!", ajaxError);
+                })
+
+        },
+        cancel: function(){
+            console.log('false');
+        }
+    });
 });

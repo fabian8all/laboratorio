@@ -4,9 +4,21 @@
 
 	Class Cliente extends DBConnection {
 
-        public function getAll(){
+        public function getAll($data){
+            if ($data['mode']=="0"){
+                $idUser = $_SESSION['id'];
+                $andWhere ="AND id = $idUser";
+            }else{
+                $andWhere = "";
+            }
 
-            $sql = "SELECT * FROM usuarios WHERE (perfil = 2 OR perfil = 3) AND eliminado IS NULL;";
+            $sql = "SELECT 
+                        * 
+                    FROM usuarios 
+                    WHERE 
+                        (perfil = 2 OR perfil = 3) 
+                        AND eliminado IS NULL
+                        $andWhere;";
 
             $clientes = self::query_object($sql);
 

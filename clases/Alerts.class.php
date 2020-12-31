@@ -23,7 +23,9 @@
                             WHEN S.estado = 2 THEN 1 ELSE 0
                         END
                     ) as pendientePago 
-                FROM solicitudes S; 
+                FROM solicitudes S
+                WHERE 
+                    S.cancelado IS NULL; 
             ";
             $alerts = self::query_single_object($sql);
             return $alerts;
@@ -45,7 +47,9 @@
                 FROM solicitudes S
                     INNER JOIN pacientes P
                         ON S.id_paciente = P.id
-                WHERE P.referente = $id; 
+                WHERE 
+                    S.cancelado IS NULL
+                    AND P.referente = $id; 
             ";
             $alerts = self::query_single_object($sql);
             $sqlCorte = "

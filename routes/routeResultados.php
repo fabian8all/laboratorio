@@ -17,9 +17,6 @@
 		$info = $_POST['info'];
 
 	switch ($action) {
-		case 'getAll':
-			echo json_encode($Resultados->getAll());
-			break;
 		case 'get':
 			echo json_encode($Resultados->get($info));
 			break;
@@ -57,6 +54,16 @@
 				);
 			}
 			break;
+		case 'Cancelar':
+			if ($permisos->bin[2]=='1') {
+				echo json_encode($Resultados->Cancelar($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
+			break;
+
 	}
 
 ?>

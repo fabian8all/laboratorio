@@ -18,7 +18,8 @@ $action = $_POST['action'];
 
 	switch ($action) {
 		case 'getAll':
-			echo json_encode($Cliente->getAll());
+			$info['mode']=$permisos->verClientes();
+			echo json_encode($Cliente->getAll($info));
 			break;
 		case 'BSTableData':
 			echo json_encode($Cliente->BSTableData($info));

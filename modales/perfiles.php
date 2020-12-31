@@ -65,6 +65,7 @@
                                                     <th>SUBIR RESULTADOS</th>
                                                     <th>DESCARGAR RESULTADOS</th>
                                                     <th>GUARDAR PAGO</th>
+                                                    <th>CANCELAR SOLICITUD</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
                                                     <tr>
@@ -73,6 +74,7 @@
                                                         <td><input type="checkbox" class="chkPermisosResultados" value="4"></td>
                                                         <td><input type="checkbox" class="chkPermisosResultados" value="8"></td>
                                                         <td><input type="checkbox" class="chkPermisosResultados" value="16"></td>
+                                                        <td><input type="checkbox" class="chkPermisosResultados" value="32"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

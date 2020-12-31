@@ -77,7 +77,9 @@
                 FROM solicitudes S
                     INNER JOIN pacientes P
                         ON P.id = S.id_paciente
-                WHERE P.referente = :cid
+                WHERE 
+                    S.cancelado IS NULL
+                    AND P.referente = :cid
                     AND S.solicitud >= :fci
                     AND S.solicitud <= :fcf 
                 ;

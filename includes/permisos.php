@@ -36,6 +36,10 @@
             $permisosPacientes = new permisos(3);
             return ($permisosPacientes->bin[3]);
         }
-        
+        public function verClientes(){
+            $permisosClientes = new permisos(5);
+            return ($permisosClientes->ver());
+        }
+
     }
 ?>

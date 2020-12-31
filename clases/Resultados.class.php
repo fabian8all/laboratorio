@@ -4,27 +4,6 @@
 
 	Class Resultados extends DBConnection {
 
-        public function getAll(){
-
-            $sql = "SELECT 
-                            EP.id as id,
-                            EP.solicitud as fecha,
-                            EP.estado as estado,
-                            P.nombre as paciente 
-                    FROM estudios_paciente EP 
-                        INNER JOIN pacientes P
-                            ON EP.id_paciente = P.id
-                    WHERE paquete = 0;";
-
-            $resultados = self::query_object($sql);
-
-            if ($resultados){
-                return $resultados;
-            }else{
-                return false;
-            }
-
-        }
 
         public function get($id){
             $sql = "
@@ -100,7 +79,9 @@
                             ON S.id_paciente = P.id
                         INNER JOIN usuarios U
                             ON S.analista = U.id
-                    WHERE S.estado = $status
+                    WHERE
+                        S.cancelado IS NULL 
+                        AND S.estado = $status
                         $andWhere
                         ORDER BY $sort $order
                         LIMIT $limit
@@ -113,8 +94,10 @@
                         FROM solicitudes S
                             INNER JOIN pacientes P
                                 ON S.id_paciente = P.id
-                        WHERE S.estado = $status
-                        $andWhere
+                        WHERE 
+                            S.cancelado IS NULL 
+                            AND S.estado = $status
+                            $andWhere
                         ;";
 
             $count = self::query_single_object($sqlCount);
@@ -128,7 +111,7 @@
                 return $estudios;
         }
 
-        function tomarMuestra($id){
+        public function tomarMuestra($id){
             $param = array(':sid'=>$id);
             $fecha = date('Y-m-d H:i:s');
             $sql ="
@@ -148,7 +131,7 @@
             }
         }
 
-        function uploadFile($data){
+        public function uploadFile($data){
             $id =$data['id'];
 
             $param = array(':sid'=>$id);
@@ -186,7 +169,7 @@
 
         }
 
-        function Pagar($data)
+        public function Pagar($data)
         {
             $id =$data['id'];
 
@@ -262,6 +245,24 @@
             }else{
                 return array('success' => false, 'msg' => 'Ocurrió un error al intentar guardar el pago');
 
+            }
+
+        }
+
+        public function Cancelar($idSol){
+            $param = array(
+                ':sid'=>$idSol,
+                ':del'=>date("Y-m-d H:i:s")
+            );
+            $sql = "UPDATE solicitudes 
+                        SET 
+                            cancelado = :del 
+                    WHERE id = :sid;";
+            $query = self::query($sql,$param);
+            if($query){
+                return array('success' => true, 'msg' => "La solicitud de estudios ha sido cancelada");
+            }else{
+                return array('success' => false, 'msg'=> "Ocurrió un error al intentar cancelar la solicitud");
             }
 
         }
