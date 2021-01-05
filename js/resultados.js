@@ -211,7 +211,7 @@ $(document).on('click','.btnTomarMuestra',function(){
                     if(data.success){
                         customAlert("Exito!", data.msg);
                         $('#bstableResultsPM').bootstrapTable('refresh');
-
+                        refreshAlerts();
                     } else{
                         customAlert("Error!", data.msg);
                     }
@@ -269,6 +269,7 @@ function UploadResults(results){
                     $('#modalSubirResultados').modal('hide');
                     $('#bstableResultsEP').bootstrapTable('refresh');
                     customAlert("Exito!", "Los resultados han sido cargados");
+                    refreshAlerts();
                 }else{
 
                 }
@@ -358,6 +359,7 @@ $('#btnPagoSubmit').click(function(){
                     $('#selFormaPago').val('');
                     $('#modAgregarPago').modal('hide');
                     $('#bstableResultsPP').bootstrapTable('refresh');
+                    refreshAlerts();
                 } else {
                     customAlert("Error!", data.msg);
                 }
@@ -387,6 +389,7 @@ $(document).on('click','.btnCancelarSolicitud',function(){
                         customAlert("Exito!", data.msg);
                         $('#bstableResultsPM').bootstrapTable('refresh');
                         $('#bstableResultsEP').bootstrapTable('refresh');
+                        refreshAlerts();
                     } else{
                         customAlert("Error!", data.msg);
                     }

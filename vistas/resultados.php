@@ -10,17 +10,6 @@
 <div class="tab-content" id="nav-tabContent">
     <!-- ------------ PESTAÑA PARA DIAGNOSTICO CLIENTE --------------- -->
     <div class="tab-pane fade show active" id="nav-pendienteMuestra" role="tabpanel" aria-labelledby="nav-pendienteMuestra-tab">
-        <div class="row" style="margin: 10px 0">
-            <div class="col-lg-4 col-md-4 col-12">
-
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 smallMargin">
-<!--                <select name="" id="select_status" class="form-control">
-                    <option value="1">ACTIVOS</option>
-                    <option value="0">INACTIVOS</option>
-                </select>
--->            </div>
-        </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div id="tableContainer" class="table-responsive">
@@ -53,30 +42,6 @@
     </div>
     <!-- ------------ PESTAÑA PARA PRE-DIAGNOSTICO--------------- -->
     <div class="tab-pane fade" id="nav-enProceso" role="tabpanel" aria-labelledby="nav-enProceso-tab">
-        <div class="row" style="margin: 10px 0">
-            <div class="col-lg-4 col-md-4 col-12">
-                <!--<button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#modNewOrdenPre">Agregar orden</button>-->
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <!--<select name="" id="select_statusPre" class="form-control">
-                  <option value="1">ACTIVOS</option>
-                  <option value="0">INACTIVOS</option>
-                  <option value="2">TODOS</option>
-                </select>-->
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <form class="busquedaForm">
-                    <div class="input-group">
-                        <input type="text" id="txt_busquedaPre" class="form-control bg-light border-0 small" style="background-color: white !important" placeholder="Buscar por cliente..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary onlyBig" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div id="tableContainer" class="table-responsive">
@@ -109,29 +74,6 @@
     </div>
     <!-- ------------ PESTAÑA PARA DIAGNOSTICO FINAL --------------- -->
     <div class="tab-pane fade" id="nav-pendientePago" role="tabpanel" aria-labelledby="nav-pendientePago-tab">
-        <div class="row" style="margin: 10px 0">
-            <div class="col-lg-4 col-md-4 col-12">
-                <!--<button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#modNewOrdenPre">Agregar orden</button>-->
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-<!--                <select name="" id="select_statusFin" class="form-control">
-                    <option value="4">ORDENES POR ENTREGAR</option>
-                    <option value="5">ORDENES ENTREGADAS</option>
-                </select>-->
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <form class="busquedaForm">
-                    <div class="input-group">
-                        <input type="text" id="txt_busquedaFin" class="form-control bg-light border-0 small" style="background-color: white !important" placeholder="Buscar por cliente..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary onlyBig" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div id="tableContainer" class="table-responsive">
@@ -163,29 +105,6 @@
     </div>
     <!-- ------------ PESTAÑA PARA ORDEN ENTREGADA NO PAGADA --------------- -->
     <div class="tab-pane fade" id="nav-finalizado" role="tabpanel" aria-labelledby="nav-finalizado-tab">
-        <div class="row" style="margin: 10px 0">
-            <div class="col-lg-4 col-md-4 col-12">
-                <!--<button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#modNewOrdenPre">Agregar orden</button>-->
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-<!--                <select name="" id="select_statusPen" class="form-control">
-                    <option value="6">ORDENES ENTREGADAS PENDIENTES PAGO</option>
-                    <option value="5">ORDENES ENTREGADAS Y PAGADAS</option>
-                </select>
--->            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <form class="busquedaForm">
-                    <div class="input-group">
-                        <input type="text" id="txt_busquedaPen" class="form-control bg-light border-0 small" style="background-color: white !important" placeholder="Buscar por cliente..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary onlyBig" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div id="tableContainer" class="table-responsive">

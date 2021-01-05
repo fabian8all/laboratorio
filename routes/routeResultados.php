@@ -4,10 +4,11 @@
 
 	require_once ('../clases/Resultados.class.php');
 	require_once ('../includes/permisos.php');
-
+	require_once ('../includes/Alerts.class.php');
 
 	$Resultados = new Resultados();
 	$permisos = new Permisos(2);
+	$Alerts = new Alerts();
 	$sin_permisos = "Lo sentimos, usted no cuenta con los permisos necesarios para llevar a cabo esta operación";
 
 
@@ -63,6 +64,10 @@
 				);
 			}
 			break;
+		case 'getAlerts':
+			echo json_encode($Alerts->getDivAlerts());
+			break;
+
 
 	}
 

@@ -94,6 +94,8 @@
                         FROM solicitudes S
                             INNER JOIN pacientes P
                                 ON S.id_paciente = P.id
+                            INNER JOIN usuarios U
+                                ON S.analista = U.id
                         WHERE 
                             S.cancelado IS NULL 
                             AND S.estado = $status

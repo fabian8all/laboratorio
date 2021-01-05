@@ -133,6 +133,7 @@ $permisos = new Permisos((isset($TPL->Permisos)?$TPL->Permisos:0));
         <script src="js/sb-admin-2.min.js"></script>
         <script src="plugins/CustomAlerts/js/jquery-confirm.js"></script>
         <script src="js/customAlerts.js"></script>
+        <script src="js/alerts.js"></script>
 
         <!-- Page Scripts-->
         <?php

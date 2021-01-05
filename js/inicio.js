@@ -364,6 +364,7 @@ function solicitarEstudios(){
                     <span class="fa fa-tasks"></span>\
                     Solicitar Estudios\
                 ').prop('disabled',false);
+            refreshAlerts();
         });
 }
 
