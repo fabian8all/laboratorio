@@ -64,7 +64,7 @@ $permisos = new Permisos((isset($TPL->Permisos)?$TPL->Permisos:0));
         <!--/Page Styles-->
     </head>
 
-    <body id="page-top">
+    <body id="page-top" class="sidebar-toggled">
         <div id="wrapper">
             <!-- Sidebar -->
             <?php include("includes/lab_sidebar.php"); ?>
@@ -134,7 +134,15 @@ $permisos = new Permisos((isset($TPL->Permisos)?$TPL->Permisos:0));
         <script src="plugins/CustomAlerts/js/jquery-confirm.js"></script>
         <script src="js/customAlerts.js"></script>
         <script src="js/alerts.js"></script>
+        <script>
+            function detectMob() {
+                return ( ( window.innerWidth <= 800 ));
+            }
 
+            if (detectMob()){
+                $("#accordionSidebar").addClass('toggled');
+            }
+        </script>
         <!-- Page Scripts-->
         <?php
             if($permisos->ver()) {

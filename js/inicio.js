@@ -90,11 +90,7 @@ function load_data_estudios(){
                 }else{
                     options = "";
                     $(data).each(function(k,v){
-                        if (detectMob()){
-                            nombre = (v.nombre.length > 25)?(v.nombre.substr(1,22)+"..."):v.nombre;
-                        }else{
-                            nombre = (v.nombre.length > 80)?(v.nombre.substr(1,77)+"..."):v.nombre;
-                        }
+                       nombre = v.nombre;
                         options += "<option value='"+v.id+"' title='"+v.nombre+"' data-costo='"+v.costo+"' data-costom='"+v.costo_medico+"' data-costoe='"+v.costo_empresa+"' data-costol4='"+v.costo_lista4+"' data-tiempo='"+v.tiempo+"'>"+v.codigo+" - "+nombre+"</option>";
                     });
                     $("#selREEstudioData").html(options)
@@ -113,9 +109,6 @@ function load_data_estudios(){
         });
 }
 
-function detectMob() {
-    return ( ( window.innerWidth <= 800 ));
-}
 
 $("#btnREAddPaciente").click(function(){
 
@@ -165,7 +158,9 @@ $("#btnREAddPaciente").click(function(){
             });
     });
 $('#btnREEstudioData').click(function(){
-   $('#selREEstudioData').trigger('change');
+    if($('#selREEstudioData').val()) {
+        $('#selREEstudioData').trigger('change');
+    }
 });
 $("#selREEstudioData").change(function (){
     option = $(this).children("option:selected");
@@ -196,7 +191,7 @@ $("#selREEstudioData").change(function (){
 function load_estudios_selected(){
     var tablaRE = ""
     var Total = 0;
-    var costoCliente = 0;
+    var costoCliente = 0.0;
     $(estudiosSelected).each(function(key,val) {
         tablaRE += '\
             <div class="row">\
@@ -247,7 +242,7 @@ function load_estudios_selected(){
     $("#divREListaEstudios").html(tablaRE);
 
     if (costoCliente > 0){
-        lblCostoCliente = '\
+        descuentoRE = '\
                         <hr style="width: 90%; margin:.6rem 0">\
                         <div class="col-lg-2 col-md-2 col-2">\
                             <label><b>Costo Cliente:</b></label>\
@@ -259,9 +254,9 @@ function load_estudios_selected(){
                         </div>\
                         ';
     }else{
-        lblCostoCliente =""
+        descuentoRE =""
     }
-    $("#descuentoRE").html(lblCostoCliente);
+    $("#descuentoRE").html(descuentoRE);
     $("#totalRE").html("$"+parseFloat(Total).toFixed(2))
 }
 
@@ -322,7 +317,8 @@ $('#btnAnticipoSubmit').click(function(){
 
 function solicitarEstudios(){
     total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));
-    totalCliente = Number($("#lblCostoCliente").html().replace(/[^0-9\.]+/g,""));
+    costoCliente = ($("#lblCostoCliente").html())?$("#lblCostoCliente").html():"0.0";
+    totalCliente = Number(costoCliente.replace(/[^0-9\.]+/g,""));
     info = {
         pacienteId  : $("#selREPacienteData").val(),
         descuento   : descuento,

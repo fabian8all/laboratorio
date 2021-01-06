@@ -27,3 +27,9 @@
 .jconfirm-box-container {
   margin: 0 auto;
 }
+
+.bootstrap-select .dropdown-menu {
+  transform: inherit!important;
+  overflow-x: scroll!important;
+  width: 100%!important;
+}

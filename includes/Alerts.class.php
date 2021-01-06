@@ -119,8 +119,21 @@
                         </a>
                     </div>
                 ';
+                $alertsTotal = $alerts->pendienteMuestra + $alerts->enProceso + $alerts->pendientePago;
+                $divAlertsSm = '
+                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Estatus
+                    <span class="btn btn-danger btn-sm">'.$alertsTotal.'</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="resultados.php#nav-pendienteMuestra" class="dropdown-item">Pendiente de muestra <span class="btn btn-danger btn-sm">'.$alerts->pendienteMuestra.'</span></a>
+                    <a href="resultados.php#nav-enProceso" class="dropdown-item">En proceso <span class="btn btn-danger btn-sm">'.$alerts->enProceso.'</span></a>
+                    <a href="resultados.php#nav-pendientePago" class="dropdown-item">Pendiente de pago <span class="btn btn-danger btn-sm">'.$alerts->pendientePago.'</span></a>
+                    
+                </div>
+                ';
             }
-            return $divAlerts;
+            return array("lg"=>$divAlerts,"sm"=>$divAlertsSm);
         }
 	}
 
