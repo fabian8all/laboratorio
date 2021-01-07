@@ -20,7 +20,11 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-12"></div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <button class="btn btn-info w-100" id="btnRetirarEfectivo"> Retirar efectivo</button>
+        </div>
+    </div>
     <div class="col-lg-6 col-md-6 col-12">
         <div class="form-group">
             <div class="input-group">
@@ -71,6 +75,11 @@
             <label for="" class="font-weight-bold"
                    style="display:inline-block;display: flex;align-items: center;">Clientes:&nbsp; </label>
             <label for="" class="" id="lblTotalClientes" style="display:inline-block;display: flex;align-items: center;"></label>
+        </div>
+        <div class="input-group">
+            <label for="" class="font-weight-bold"
+                   style="display:inline-block;display: flex;align-items: center;">Retiros:&nbsp; </label>
+            <label for="" class="" id="lblTotalRetiros" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-12">

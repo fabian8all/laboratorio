@@ -74,27 +74,38 @@ function loadTablaCortes(){
             {
                 data = $.parseJSON(data);
                 total = 0.00;
-                totalClientes  = 0.00;
-                totalPacientes = 0.00;
-                totalEfectivo  = 0.00;
-                totalTarjeta   = 0.00;
-                totalTransfer  = 0.00;
+                totalClientes   = 0.00;
+                totalPacientes  = 0.00;
+                totalRetiros    = 0.00;
+                totalEfectivo   = 0.00;
+                totalTarjeta    = 0.00;
+                totalTransfer   = 0.00;
                 if (!data){
                     tabla += "<tr><td colspan='6'>No hay pagos realizados</td></tr>"
                 }else{
                     $(data).each(function(k,pago){
-                        total += parseFloat(pago.cantidad);
+                        sign = "";
                         if (pago.modulo == "solicitudes"){
+                            total += parseFloat(pago.cantidad);
                             totalPacientes += parseFloat(pago.cantidad);
                             nombre = pago.nombreS;
-                        }else{
+                        }else if(pago.modulo == "cortes"){
+                            total += parseFloat(pago.cantidad);
                             totalClientes += parseFloat(pago.cantidad);
                             nombre = pago.nombreC;
+                        }else if(pago.modulo == "retiros"){
+                            sign ="-";
+                            total -= parseFloat(pago.cantidad);
+                            totalRetiros += parseFloat(pago.cantidad);
+                            nombre = pago.nombreR;
                         }
 
                         switch (pago.tipo){
                             case "Efectivo":
-                                totalEfectivo += parseFloat(pago.cantidad);
+                                if (pago.modulo =="retiros")
+                                    totalEfectivo -= parseFloat(pago.cantidad);
+                                else
+                                    totalEfectivo +=  parseFloat(pago.cantidad);
                                 break;
                             case "Tarjeta":
                                 totalTarjeta +=  parseFloat(pago.cantidad);
@@ -105,10 +116,10 @@ function loadTablaCortes(){
                         }
                        tabla+="\
                                 <tr>\
-                                    <td>"+nombre+"</td>\
-                                    <td> $"+parseFloat(pago.cantidad).toFixed(2)+"</td>\
+                                    <td align='left'>"+nombre+"</td>\
+                                    <td align='right'>"+sign+"$"+parseFloat(pago.cantidad).toFixed(2)+"</td>\
                                     <td>"+pago.tipo+"</td>\
-                                    <td>"+pago.referencia+"</td>\
+                                    <td align='left'>"+pago.referencia+"</td>\
                                     <td>"+pago.modulo+"</td>\
                                     <td>"+pago.creado+"</td>\
                                 </tr>\
@@ -119,6 +130,7 @@ function loadTablaCortes(){
                 $('#lblTotal').html('$'+total.toFixed(2));
                 $('#lblTotalClientes').html('$'+totalClientes.toFixed(2));
                 $('#lblTotalPacientes').html('$'+totalPacientes.toFixed(2));
+                $('#lblTotalRetiros').html('-$'+totalRetiros.toFixed(2));
                 $('#lblTotalEfectivo').html('$'+totalEfectivo.toFixed(2));
                 $('#lblTotalTarjeta').html('$'+totalTarjeta.toFixed(2));
                 $('#lblTotalTransfer').html('$'+totalTransfer.toFixed(2));
@@ -130,31 +142,6 @@ function loadTablaCortes(){
             customAlert("Error!",error);
         })
 }
-
-
-$('#btnPDFCorte').click(function(e){
-    e.preventDefault();
-    info = {
-        fechaIni     : $('#dateCorteInicio').val(),
-        fechaFin     : $('#dateCorteFin').val(),
-        total        : $('#hidTotal').val(),
-        solicitudes  : $('#hidSolicitudes').val()
-    }
-
-    $.post('routes/routeCortes.php',{info:info,action:'getPDF'})
-        .done(function(data)
-        {
-            data = $.parseJSON(data);
-            if (data.success){
-                window.open('resources/corte.pdf',"_blank");
-            }else{
-                customAlert("Error!",data.msg);
-            }
-        })
-        .fail(function(error){
-            customAlert("Error!", error);
-        });
-});
 
 $('#btnXLSCorte').click(function (e){
     e.preventDefault();
@@ -196,6 +183,11 @@ $('#btnXLSCorte').click(function (e){
                         <td><b>Clientes:</b></td>\
                         <td>"+$('#lblTotalClientes').html()+"</td>\
                     </tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Retiros:</b></td>\
+                        <td>"+$('#lblTotalRetiros').html()+"</td>\
+                    </tr>\
                     <tr></tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
@@ -231,4 +223,34 @@ $('#btnXLSCorte').click(function (e){
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+});
+
+$('#btnRetirarEfectivo').click(function(){
+   $("#txtMontoRetirar").val("");
+   $("#txtMotivoRetirar").val("");
+   $("#modRetirarEfectivo").modal("show");
+});
+
+$('#btnAddRetiro').click(function(){
+    info = {
+        monto    : $("#txtMontoRetirar").val(),
+        motivo   : $("#txtMotivoRetirar").val(),
+        user     : userData.id
+    }
+    $.post('routes/routeCortes.php',{info:info,action:'Retirar'})
+        .done(function(data){
+            data = $.parseJSON(data);
+            if (data.success){
+                customAlert('Exito!',data.msg);
+                $("modRetirarEfectivo").modal('hide');
+                loadTablaCortes();
+            }else{
+                customAlert('Error!',data.msg);
+            }
+        })
+        .fail(function(error){
+            customAlert('Error!',error);
+        })
+
+
 });

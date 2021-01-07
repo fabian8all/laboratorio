@@ -101,6 +101,7 @@
                                                 <th>IMPRIMIR</th>
                                                 <th>PAGAR</th>
                                                 <th>VER CORTE INGRESOS</th>
+                                                <th>RETIRAR EFECTIVO</th>
                                                 </thead>
                                                 <tbody id="tbody" class="text-center">
                                                 <tr>
@@ -109,6 +110,7 @@
                                                     <td><input type="checkbox" class="chkPermisosCortes" value="4"></td>
                                                     <td><input type="checkbox" class="chkPermisosCortes" value="8"></td>
                                                     <td><input type="checkbox" class="chkPermisosCortes" value="16"></td>
+                                                    <td><input type="checkbox" class="chkPermisosCortes" value="32"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

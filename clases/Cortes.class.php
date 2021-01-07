@@ -489,6 +489,13 @@
                                 ON U.id = C2.idCliente
                     ) C
                         ON (P.id_ref = C.id AND P.modulo = 'cortes') 
+                    LEFT JOIN (
+                        SELECT 
+                            U2.id as id,
+                            U2.nombre as nombreR
+                        FROM usuarios U2
+                    ) R
+                        ON (P.id_ref = R.id AND P.modulo = 'retiros') 
                 WHERE P.creado >= :ini AND P.creado <= :fin  
 	        ";
 	        $query = self::query_object($sqlPagos,$params);
@@ -496,6 +503,30 @@
 	            return $query;
             else
                 return false;
+        }
+
+        public function Retirar($data){
+	        $params = array(
+                ":cnt"=>$data['monto'],
+                ":rfr"=>$data['motivo'],
+                ":idr"=>$data['user'],
+                ":typ"=>"Efectivo",
+                ":mod"=>"retiros",
+                ":crt"=>date("Y-m-d H:i:s")
+            );
+	        $sql = "
+	            INSERT 
+	                INTO pagos
+                        (cantidad,tipo,referencia,modulo,id_ref,creado)
+                    VALUES
+                        (:cnt,:typ,:rfr,:mod,:idr,:crt); 
+	        ";
+	        $query = self::query($sql,$params);
+	        if($query){
+	            return array("success"=>true, "msg"=>"El retiro de efectivo ha sido registrado");
+            }else{
+                return array("success"=>false, "msg"=>"Ha ocurrido un error al intentar registrar el retiro de efectivo");
+            }
         }
     }
 

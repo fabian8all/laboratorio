@@ -54,7 +54,7 @@ $action = $_POST['action'];
 			echo json_encode($Corte->getInfoById($info));
 			break;
 		case 'Pagar':
-			if ($permisos->bin[5]){
+			if ($permisos->bin[4]){
 				echo json_encode($Corte->Pagar($info));
 			}else{
 				echo json_encode(
@@ -62,6 +62,14 @@ $action = $_POST['action'];
 				);
 			}
 			break;
+		case 'Retirar':
+			if($permisos->bin[2]){
+				echo json_encode($Corte->Retirar($info));
+			}else{
+				echo json_encode(
+					array('success'=>false,'msg'=>$sin_permisos)
+				);
+			}
 	}
 
 ?>
