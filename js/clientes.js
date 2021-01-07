@@ -299,45 +299,34 @@ $(document).on('show.bs.collapse','.histCardCollapse', function (e){
                     html = "";
                     $(data).each(function (k, solicitud) {
                         html += '\
-                                <div class="card shadow mb-4">\
-                                    <div class="card-header">\
-                                        <!-- Card Header - Accordion -->\
-                                        <a href="#" \
-                                            data-target="#listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '" \
-                                            class="d-block card-header py-3"\
-                                            data-toggle="collapse" \
-                                            role="button" \
-                                            aria-expanded="true"\
-                                            aria-controls="listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '">\
-                                            <h6 class="m-0 font-weight-bold text-primary color red">\
-                                                 ' + solicitud.paciente + ' - ' + solicitud.fecha + ' -  $' + solicitud.total + '\
-                                            </h6>\
-                                        </a>\
-                                    </div>\
-                                    <!-- Card Content - Collapse -->\
-                                    <div class="card-body collapse" data-parent="#hCC_' + idCorte + '" id="listaSolicitudesCard_' + idCorte + '_' + solicitud.id + '_' + k + '">\
-                                        <div class="row">\
-                                            <div class="col-lg-8">\
-                                                <label><b>Estudios:</b></label>\
-                                            </div>\
-                                            <div class="col-lg-4">\
-                                                <label><b>Costo:</b></label>\
-                                            </div>\
+                                <table class="table table-striped table-borderless table-condensed table-responsive" style="display: table;">\
+                                    <thead>\
+                                        <tr>\
+                                            <th>' + solicitud.paciente + '</th>\
+                                            <th>' + solicitud.fecha + '</th>\
+                                            <th>$' + parseFloat(solicitud.total).toFixed(2) + '</th>\
+                                        </tr>\
+                                    </thead>\
+                                    <tbody>\
+                                        <tr>\
+                                            <th>&nbsp;</th>\
+                                            <th>Estudios</th>\
+                                            <th>Costo</th>\
+                                        </tr>\
                                                 ';
                         $(solicitud.estudios).each(function (k2, estudio) {
                             html += '\
-                                            <div class="col-lg-8">\
-                                                <label>' + estudio.nombre + '</label>\
-                                            </div>\
-                                            <div class="col-lg-4">\
-                                                <label>$' + parseFloat(estudio.costo).toFixed(2) + '</label>\
-                                            </div>';
+                                <tr>\
+                                    <td>&nbsp;</td>\
+                                    <td>' + estudio.nombre + '</td>\
+                                    <td>$' + parseFloat(estudio.costo).toFixed(2) + '</td>\
+                                </tr>\
+                                ';
                         });
 
                         html += '\
-                                    </div>\
-                                </div>\
-                            </div>\
+                                    </tbody>\
+                                </table>\
                         ';
                     });
                     card.html(html);

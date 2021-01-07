@@ -241,7 +241,8 @@
             $sql = "
                 SELECT * 
                 FROM cortes
-                WHERE idCliente = :cid; 
+                WHERE idCliente = :cid
+                ORDER BY id DESC; 
             ";
             $query = self::query_object($sql,$param);
             return $query;
@@ -358,15 +359,49 @@
         }
 
         public function Pagar($data){
-	        $paramsPago = array(
-	            ":cid"=>$data['id'],
+
+            $param = array(
+                ":cid"=>$data['id']
+            );
+            $sqlCorte = "
+                SELECT 
+                    total,
+                    solicitudes
+                FROM cortes
+                WHERE
+                    id = :cid;
+            ";
+            $sqlSelPagos = "
+                SELECT 
+                    cantidad
+                FROM pagos
+                WHERE
+                    modulo = 'cortes' AND 
+                    id_ref = :cid
+            ";
+            $corte = self::query_single_object($sqlCorte,$param);
+            $pagos = self::query_object($sqlSelPagos,$param);
+
+            $pagado = 0.00;
+            foreach ($pagos as $pago){
+                $pagado += floatval($pago->cantidad);
+            }
+            if ($pagado + floatval($data['pago']) > $corte->total){
+                return array("success"=>false,"msg"=>"El monto del pago es mayor que el total a pagar");
+            }
+
+            $ok = true;
+            $msg = "El pago ha sido guardado con exito";
+
+            $paramsPago = array(
+                ":cid"=>$data['id'],
                 ":cnt"=>$data['pago'],
                 ":typ"=>$data['formaPago'],
                 ":rfr"=>$data['referencia'],
                 ":mod"=>'cortes',
                 ":crt"=>date('Y-m-d H:i:s')
             );
-	        $sqlPago = "
+            $sqlPago = "
 	            INSERT
 	                INTO pagos
 	                    (cantidad,tipo,referencia,modulo,id_ref,creado)
@@ -374,38 +409,11 @@
                         (:cnt,:typ,:rfr,:mod,:cid,:crt); 
 	        ";
 
-	        $queryPagos = self::query($sqlPago,$paramsPago);
+            $queryPagos = self::query($sqlPago,$paramsPago);
 
-	        if ($queryPagos){
-	            $param = array(
-	                ":cid"=>$data['id']
-                );
-	            $sqlCorte = "
-	                SELECT 
-	                    total,
-	                    solicitudes
-                    FROM cortes
-                    WHERE
-                        id = :cid;
-	            ";
-	            $sqlSelPagos = "
-	                SELECT 
-	                    cantidad
-                    FROM pagos
-                    WHERE
-                        modulo = 'cortes' AND 
-                        id_ref = :cid
-	            ";
-	            $corte = self::query_single_object($sqlCorte,$param);
-	            $pagos = self::query_object($sqlSelPagos,$param);
+            if ($queryPagos){
 
-	            $pagado = 0.00;
-	            foreach ($pagos as $pago){
-	                $pagado += floatval($pago->cantidad);
-                }
-	            $ok = true;
-	            $msg = "El pago ha sido guardado con exito";
-	            if($pagado + 0.01 >= $corte->total){
+                if($pagado + floatval($data['pago']) >= $corte->total){
 	                $sqlUpdateCorte = "
 	                    UPDATE
 	                        cortes

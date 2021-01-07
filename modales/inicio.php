@@ -81,6 +81,17 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
+                                <input type="number" class="form-control" id="txtPagaCon" value="" placeholder="Paga con">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><b>Cambio: </b><span id="lblCambio"></span></label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
                                 <select class="form-control" id="selFormaPago" style="padding: 0rem 1rem;height: 3.2rem;">
                                     <option selected disabled value="">Forma de pago</option>
                                     <option value="Efectivo">Efectivo</option>

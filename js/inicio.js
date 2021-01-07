@@ -49,33 +49,42 @@ function load_sel_pacientes(selId = 0){
 
 $("#selREPacienteData").change(function(){
     id = $(this).val();
-    if(id)
-    $.post("routes/routePacientes.php",{info:id,action:"get"})
-        .done(function(data){
-            if(data != null){
-                data = $.parseJSON(data);
-                if (!data){
-                    customAlert("Error!","No se encuentra la información del paciente")
-                }else{
-                    hoy = new Date();
-                    fechaNac = new Date(data.fechaNac);
-                    dayDiff = Math.ceil(hoy - fechaNac) / (1000 * 60 * 60 * 24 * 365);
-                    edad = parseInt(dayDiff);
-                    $("#lblREPacienteNom").html(data.nombre);
-                    $("#lblREPacienteGen").html((data.genero == "M")?"Masculino":"Femenino");
-                    $("#lblREPacienteAge").html(edad+" año"+((edad>1)?"s":""));
-                    $("#lblREPacienteTel").html(data.telefono);
-                    $("#lblREPacienteEmail").html(data.email);
-                    lista = parseInt(data.lista);
-                    load_estudios_selected();
+    if(id) {
+        $.post("routes/routePacientes.php", {info: id, action: "get"})
+            .done(function (data) {
+                if (data != null) {
+                    data = $.parseJSON(data);
+                    if (!data) {
+                        customAlert("Error!", "No se encuentra la información del paciente")
+                    } else {
+                        hoy = new Date();
+                        fechaNac = new Date(data.fechaNac);
+                        dayDiff = Math.ceil(hoy - fechaNac) / (1000 * 60 * 60 * 24 * 365);
+                        edad = parseInt(dayDiff);
+                        $("#lblREPacienteNom").html(data.nombre);
+                        $("#lblREPacienteGen").html((data.genero == "M") ? "Masculino" : "Femenino");
+                        $("#lblREPacienteAge").html(edad + " año" + ((edad > 1) ? "s" : ""));
+                        $("#lblREPacienteTel").html(data.telefono);
+                        $("#lblREPacienteEmail").html(data.email);
+                        lista = parseInt(data.lista);
+                        load_estudios_selected();
+                    }
+                } else {
+                    customAlert("Error!", ajaxError);
                 }
-            } else{
-                customAlert("Error!",ajaxError);
-            }
-        })
-        .fail(function(error){
-            customAlert("Error!",error);
-        });
+            })
+            .fail(function (error) {
+                customAlert("Error!", error);
+            });
+    }else{
+        $("#lblREPacienteNom").html("");
+        $("#lblREPacienteGen").html("");
+        $("#lblREPacienteAge").html("");
+        $("#lblREPacienteTel").html("");
+        $("#lblREPacienteEmail").html("");
+        lista = 0;
+
+    }
 });
 
 
@@ -282,6 +291,8 @@ $("#btnRESolicitar").click(function(){
         confirm: function(){
             $('#txtAnticipo').val('0.00');
             $('#hidAnticipo').val('0.00');
+            $('#txtPagaCon').val('0.00');
+            $('#lblCambio').html('$0.00');
             $('#lblAnticipoTotal').html($('#totalRE').html());
             $('#selFormaPago').val(0);
             $('#txtReferenciaAnticipo').val('');
@@ -300,14 +311,19 @@ $('#modAgregarAnticipo').on('hide.bs.modal',function(){
 
 $('#btnAnticipoSubmit').click(function(){
     anticipo = $('#txtAnticipo').val();
+    total = Number($('#lblAnticipoTotal').html().replace(/[^0-9\.]+/g,""))
     if (parseFloat(anticipo)>0){
-        formaPago = $('#selFormaPago').val();
-        if(formaPago == "" || formaPago == null) {
-            customAlert('Error!','No se ha especificado la forma de pago');
-        }else {
-            $('#hidAnticipo').val(anticipo);
-            $('#hidFormaPago').val(formaPago);
-            $('#modAgregarAnticipo').modal('hide');
+        if (parseFloat(anticipo)>total){
+            customAlert('Error!','El monto del anticipo es mayor que el total a pagar');
+        }else{
+            formaPago = $('#selFormaPago').val();
+            if(formaPago == "" || formaPago == null) {
+                customAlert('Error!','No se ha especificado la forma de pago');
+            }else {
+                $('#hidAnticipo').val(anticipo);
+                $('#hidFormaPago').val(formaPago);
+                $('#modAgregarAnticipo').modal('hide');
+            }
         }
     }else{
         $('#hidAnticipo').val(anticipo);
@@ -343,10 +359,10 @@ function solicitarEstudios(){
             data =  $.parseJSON(data);
             if(data.success){
                 customAlert("Exito!", data.msg);
-                $("#selREPacienteData").val(0);
-                $("#selREPacienteData").trigger('change');
+                $("#selREEstudioData").val(0).selectpicker('refresh');
+                $("#selREPacienteData").val(0).selectpicker('refresh').trigger('change');
+
                 estudiosSelected = [];
-                descuento = 0.00;
                 load_estudios_selected();
             } else{
                 customAlert("Error!", data.msg);
@@ -364,4 +380,39 @@ function solicitarEstudios(){
         });
 }
 
+function getCambio(){
+    aPagar = ($('#txtAnticipo').val())?parseFloat($('#txtAnticipo').val()):0.00;
+    pagaCon = ($('#txtPagaCon').val())?parseFloat($('#txtPagaCon').val()):0.00;
+    Cambio = pagaCon - aPagar;
+    $('#lblCambio').html("$"+Cambio.toFixed(2));
+}
 
+
+var typingTimer;
+var doneTypingInterval = 1000;
+
+$("#txtAnticipo").on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(getCambio, doneTypingInterval);
+});
+
+$("#txtAnticipo").on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+$("#txtAnticipo").on('blur',function(){
+   getCambio();
+});
+
+$("#txtPagaCon").on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(getCambio, doneTypingInterval);
+});
+
+$("#txtPagaCon").on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+$("#txtPagaCon").on('blur',function(){
+    getCambio();
+});

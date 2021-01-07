@@ -316,6 +316,8 @@ $(document).on('click','.btnGuardarPago',function(){
                 $('#lblAnticipo').html("$"+parseFloat(anticipo).toFixed(2));
                 $('#lblTotalAPagar').html("$"+parseFloat(APagar).toFixed(2));
                 $('#txtPago').val('');
+                $('#txtPagaCon').val('0.00');
+                $('#lblCambio').html('$0.00');
                 $('#txtReferenciaAnticipo').val('');
                 $('#hidPagoIdSolicitud').val(id);
                 $('#modAgregarPago').modal('show');
@@ -338,41 +340,46 @@ $('#btnPagoSubmit').click(function(){
         formaPago   : $("#selFormaPago").val(),
         referencia  : $("#txtReferenciaAnticipo").val()
     }
+    total = Number($('#lblTotalAPagar').html().replace(/[^0-9\.]+/g,""))
 
-    if(info.formaPago == "" || info.formaPago == null) {
-        customAlert('Error!','No se ha especificado la forma de pago');
+    if (parseFloat(info.pago)>total){
+        customAlert('Error!','El monto del pago es mayor que el total a pagar');
     }else {
+        if (info.formaPago == "" || info.formaPago == null) {
+            customAlert('Error!', 'No se ha especificado la forma de pago');
+        } else {
 
 
-        $('#btnPagoSubmit').html('\
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
-            Guardando...'
-        ).prop('disabled', true);
+            $('#btnPagoSubmit').html('\
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> \
+                Guardando...'
+            ).prop('disabled', true);
 
-        $.post("routes/routeResultados.php", {info: info, action: "Pagar"})
-            .done(function (data) {
-                data = $.parseJSON(data);
-                if (data.success) {
-                    customAlert("Exito!", data.msg);
-                    $("#txtPago").val('');
-                    $("#hidPagoIdSolicitud").val('');
-                    $('#selFormaPago').val('');
-                    $('#modAgregarPago').modal('hide');
-                    $('#bstableResultsPP').bootstrapTable('refresh');
-                    refreshAlerts();
-                } else {
-                    customAlert("Error!", data.msg);
-                }
-            })
-            .fail(function (error) {
-                customAlert("Error!", ajaxError);
-            })
-            .always(function () {
-                $('#btnPagoSubmit').html('\
-                        <span class="fa fa-money"></span>\
-                        Guardar pago\
-                    ').prop('disabled', false);
-            });
+            $.post("routes/routeResultados.php", {info: info, action: "Pagar"})
+                .done(function (data) {
+                    data = $.parseJSON(data);
+                    if (data.success) {
+                        customAlert("Exito!", data.msg);
+                        $("#txtPago").val('');
+                        $("#hidPagoIdSolicitud").val('');
+                        $('#selFormaPago').val('');
+                        $('#modAgregarPago').modal('hide');
+                        $('#bstableResultsPP').bootstrapTable('refresh');
+                        refreshAlerts();
+                    } else {
+                        customAlert("Error!", data.msg);
+                    }
+                })
+                .fail(function (error) {
+                    customAlert("Error!", ajaxError);
+                })
+                .always(function () {
+                    $('#btnPagoSubmit').html('\
+                            <span class="fa fa-money"></span>\
+                            Guardar pago\
+                        ').prop('disabled', false);
+                });
+        }
     }
 });
 
@@ -403,4 +410,40 @@ $(document).on('click','.btnCancelarSolicitud',function(){
             console.log('false');
         }
     });
+});
+
+function getCambio(){
+    aPagar = ($('#txtPago').val())?parseFloat($('#txtPago').val()):0.00;
+    pagaCon = ($('#txtPagaCon').val())?parseFloat($('#txtPagaCon').val()):0.00;
+    Cambio = pagaCon - aPagar;
+    $('#lblCambio').html("$"+Cambio.toFixed(2));
+}
+
+var typingTimer;
+var doneTypingInterval = 1000;
+
+$("#txtPago").on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(getCambio, doneTypingInterval);
+});
+
+$("#txtPago").on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+$("#txtPago").on('blur',function(){
+    getCambio();
+});
+
+$("#txtPagaCon").on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(getCambio, doneTypingInterval);
+});
+
+$("#txtPagaCon").on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+$("#txtPagaCon").on('blur',function(){
+    getCambio();
 });

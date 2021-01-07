@@ -172,8 +172,11 @@
                 $refAnticipo = $data['refAnticipo'];
                 $aDomicilio =  strtolower($data['aDomicilio']) == 'true' ? true : false;
 
+                if ($anticipo > $total){
+                    return array('success' => false, 'msg'=> "El monto del anticipo es mayor al total a pagar");
+                }
 
-                $pago_completo = ($anticipo>=$total)?true:false;
+                $pago_completo = ($anticipo=$total)?true:false;
 
 
 

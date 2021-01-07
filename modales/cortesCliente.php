@@ -161,10 +161,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <input type="number" class="form-control form-control-user" id="txtPago" value=""
-                                           placeholder="Agregar pago">
+                                           placeholder="Pago">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="txtPagaCon" value="" placeholder="Paga con">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label><b>Cambio: </b><span id="lblCambio"></span></label>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">

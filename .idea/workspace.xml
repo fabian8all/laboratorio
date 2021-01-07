@@ -6,14 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Estudios.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Estudios.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clases/Resultados.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Resultados.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/miEstilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/miEstilo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/Alerts.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/Alerts.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/lab_topbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/lab_topbar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/alerts.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/alerts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/clientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/clientes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/cortesCliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/lab.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/lab.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/cortesCliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/corte.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/corte.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +110,7 @@
       <workItem from="1608244249218" duration="2384000" />
       <workItem from="1608584060465" duration="35213000" />
       <workItem from="1609026988462" duration="16011000" />
-      <workItem from="1609189993584" duration="48369000" />
+      <workItem from="1609189993584" duration="57466000" />
     </task>
     <servers />
   </component>
@@ -142,13 +146,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1609891130763" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1609395500457">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1610004415268">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609395500457" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1609348284284">
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1610004415268" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1609978268276">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1609348284284" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1609978268276" />
   </component>
 </project>

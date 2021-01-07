@@ -201,7 +201,11 @@
                     $totalAnticipo += floatval($cantidad);
                 }
             }
-            $completo = (($pago + $totalAnticipo + 0.01)>=floatval($solicitud->costo))?true:false;
+            if (($pago + $totalAnticipo) > floatval($solicitud->costo)){
+                    return array('success' => false, 'msg'=> "El monto del anticipo es mayor al total a pagar");
+            }
+
+            $completo = (($pago + $totalAnticipo)>=floatval($solicitud->costo))?true:false;
             $status = ($completo)?3:2;
 
             $paramsPago = array(
