@@ -47,7 +47,6 @@
                 ORDER BY id DESC 
                 LIMIT 1 
             ";
-
             $corte = self::query_single_object($sql,$param);
 
             if ($corte){
@@ -82,6 +81,7 @@
                     AND P.referente = :cid
                     AND S.solicitud >= :fci
                     AND S.solicitud <= :fcf 
+                    AND S.statusPago = 0
                 ;
             ";
             $solicitudes = self::query_object($sql,$params);
@@ -413,7 +413,7 @@
 
             if ($queryPagos){
 
-                if($pagado + floatval($data['pago']) >= $corte->total){
+                if(($pagado + floatval($data['pago']) + 0.009) >= $corte->total){
 	                $sqlUpdateCorte = "
 	                    UPDATE
 	                        cortes

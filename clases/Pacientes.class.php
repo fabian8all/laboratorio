@@ -85,12 +85,23 @@
             $sql = "SELECT 
                         P.*,
                         DATE_FORMAT(P.fechaNac,'%Y-%m-%d') AS fechaNacInput,
-                        IF (P.referente = 0, 0, U.lista) AS lista 
+                        IF (P.referente = 0, 0, U.lista) AS lista,
+                        (CASE  
+                            WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 2) THEN U.nombre
+                            WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 3) THEN U.nombre
+                            ELSE  'Ninguno'
+                         END   
+                        ) as referente,
+                        (CASE  
+                            WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 2) THEN TRUE
+                            WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 3) THEN TRUE
+                            ELSE  FALSE
+                         END   
+                        ) as pagaCliente 
                     FROM pacientes P 
                         LEFT JOIN usuarios U 
                             ON U.id = P.referente    
                     WHERE P.id = :eid;";
-
 
             $paciente = self::query_single_object($sql,$param);
 

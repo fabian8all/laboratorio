@@ -73,7 +73,13 @@
                             S.solicitud as fecha,
                             P.nombre as paciente,
                             U.nombre as levanto, 
-                            S.resultados as resultados
+                            S.resultados as resultados, 
+                            (CASE  
+                                WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 2) THEN TRUE
+                                WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 3) THEN TRUE
+                                ELSE  FALSE
+                             END   
+                            ) as pagaCliente
                     FROM solicitudes S 
                         INNER JOIN pacientes P
                             ON S.id_paciente = P.id
@@ -87,7 +93,6 @@
                         LIMIT $limit
                         OFFSET $offset
                         ;";
-
             $rows = self::query_object($sql);
 
             $sqlCount= "SELECT count(*) as total
@@ -205,7 +210,7 @@
                     return array('success' => false, 'msg'=> "El monto del anticipo es mayor al total a pagar");
             }
 
-            $completo = (($pago + $totalAnticipo)>=floatval($solicitud->costo))?true:false;
+            $completo = (($pago + $totalAnticipo + 0.009)>=floatval($solicitud->costo))?true:false;
             $status = ($completo)?3:2;
 
             $paramsPago = array(

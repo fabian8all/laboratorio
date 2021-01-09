@@ -49,6 +49,11 @@
                             <label class="dataLabel"><b>Email:</b></label>
                             <label style="word-wrap: break-word;" id="lblREPacienteEmail"></label>
                         </div>
+                        <div class="col-lg-12">
+                            <label class="dataLabel"><b>Medico/Empresa:</b></label>
+                            <label style="word-wrap: break-word;" id="lblREPacienteReferente"></label>
+                        </div>
+                        <input type="hidden" id="hidPagaCliente" value="">
                     </div>
                 </div>
             </div>

@@ -66,6 +66,8 @@ $("#selREPacienteData").change(function(){
                         $("#lblREPacienteAge").html(edad + " año" + ((edad > 1) ? "s" : ""));
                         $("#lblREPacienteTel").html(data.telefono);
                         $("#lblREPacienteEmail").html(data.email);
+                        $("#lblREPacienteReferente").html(data.referente);
+                        $("#hidPagaCliente").val(data.pagaCliente);
                         lista = parseInt(data.lista);
                         load_estudios_selected();
                     }
@@ -296,7 +298,11 @@ $("#btnRESolicitar").click(function(){
             $('#lblAnticipoTotal').html($('#totalRE').html());
             $('#selFormaPago').val(0);
             $('#txtReferenciaAnticipo').val('');
-            $('#modAgregarAnticipo').modal('show');
+            if($("#hidPagaCliente").val()=="1"){
+                solicitarEstudios();
+            }else{
+                $('#modAgregarAnticipo').modal('show');
+            }
         },
         cancel: function(){
             console.log('false');

@@ -151,12 +151,13 @@ function formatResultsEPOptions(value, row, index){
 }
 
 function formatResultsPPOptions(value, row, index){
+    disabled = (row.pagaCliente == '1') ? "disabled":"";
     var options = "\
             <div class='dropup'> \
                 <button class='btn btn-info btn-sm btnDetalles' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Detalles' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-list fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
-                <button class='btn btn-warning btn-sm btnGuardarPago' data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Guardar pago' aria-haspopup='true' aria-expanded='false'>\
+                <button class='btn btn-warning btn-sm btnGuardarPago' "+disabled+" data-idresult='" + value + "' data-toggle='tooltip' data-placement='top' title='Guardar pago' aria-haspopup='true' aria-expanded='false'>\
                     <span class='fas fa-fw fa-cash-register fa-sm' aria-hidden='true'></span><span class='sr-only'>Opciones</span> <span class='caret'></span>\
                 </button>\
                 <button class='btn btn-primary btn-sm btnDescargarResultados' data-filename='" + row.resultados + "' data-toggle='tooltip' data-placement='top' title='Descargar resultados' aria-haspopup='true' aria-expanded='false'>\
