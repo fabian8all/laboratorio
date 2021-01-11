@@ -200,13 +200,13 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-user" id="txtPago" value=""
+                                    <input type="number" class="form-control form-control-user" id="txtPago" onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" step="0.05" value=""
                                         placeholder="Pago">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="txtPagaCon" value="" placeholder="Paga con">
+                                    <input type="number" class="form-control" id="txtPagaCon" onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" step="0.05" value="" placeholder="Paga con">
                                 </div>
                             </div>
                             <div class="col-lg-12">

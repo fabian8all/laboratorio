@@ -1,6 +1,16 @@
 var ajaxError     = "Ocurrió un error inesperado, intentelo mas tarde o pongase en contaco con el administrador";
 
+var hash = document.location.hash;
+if (hash) {
+    $('.nav-tabs a[href="'+hash+'"]').tab('show');
+}
+
+$('.nav-tabs a').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+});
+
 $(document).ready(function(){
+
     $('#bstableResultsPM').bootstrapTable({
         queryParams: function (p) {
             return {

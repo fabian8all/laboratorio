@@ -74,6 +74,7 @@ function setUltimoCorte(idCliente){
                     $('#lblEstadoCorte').removeClass().addClass('badge').addClass('badge-secondary').html('NO DISPONIBLE');
                     $('#btnPagarCorte').hide();
                     $('#dateCorteInicio').val(hoy()).prop('disabled',false);
+                    $('#dateCorteInicio').trigger('change');
                 }else{
                     $('#lblUltimoCorte').html(data.ultimoCorte);
                     $('#dateCorteInicio').val(data.ultimoCorte).prop('disabled',true);
@@ -88,7 +89,6 @@ function setUltimoCorte(idCliente){
                         $('#btnRealizarCorte').prop('disabled',false);
                     }
                 }
-                loadTablaCortes();
             }else{
                 customAlert("Error!",ajaxError);
             }

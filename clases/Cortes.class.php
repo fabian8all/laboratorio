@@ -113,10 +113,28 @@
                 ";
                 $query = self::query($sql,$params);
                 if($query){
-                    $result = array(
-                        'success'   => true,
-                        'msg'       => 'El corte se ha realizado exitosamente'
-                    );
+                    if (!(floatval($data['total']) > 0)){
+                        $sqlLast = "SELECT id FROM cortes ORDER BY id DESC LIMIT 1;";
+                        $Corte = self::query_single_object($sqlLast);
+                        $pagoInfo = array("id"=>$Corte->id,"pago"=>"0");
+                        $pagar = $this->Pagar($pagoInfo);
+                        if ($pagar['success']) {
+                            $result = array(
+                                'success'   => true,
+                                'msg'       => 'El corte se ha realizado exitosamente'
+                            );
+                        }else{
+                            $result = array(
+                                'success'   => false,
+                                'msg'       => $pagar['msg']
+                            );
+                        }
+                    }else{
+                        $result = array(
+                            'success'   => true,
+                            'msg'       => 'El corte se ha realizado exitosamente'
+                        );
+                    }
                 }else{
                     $result = array(
                         'success'   => false,
@@ -359,7 +377,6 @@
         }
 
         public function Pagar($data){
-
             $param = array(
                 ":cid"=>$data['id']
             );
@@ -393,26 +410,29 @@
             $ok = true;
             $msg = "El pago ha sido guardado con exito";
 
-            $paramsPago = array(
-                ":cid"=>$data['id'],
-                ":cnt"=>$data['pago'],
-                ":typ"=>$data['formaPago'],
-                ":rfr"=>$data['referencia'],
-                ":mod"=>'cortes',
-                ":crt"=>date('Y-m-d H:i:s')
-            );
-            $sqlPago = "
-	            INSERT
-	                INTO pagos
-	                    (cantidad,tipo,referencia,modulo,id_ref,creado)
-                    VALUES
-                        (:cnt,:typ,:rfr,:mod,:cid,:crt); 
-	        ";
+            if ($data['pago']>0) {
 
-            $queryPagos = self::query($sqlPago,$paramsPago);
+                $paramsPago = array(
+                    ":cid" => $data['id'],
+                    ":cnt" => $data['pago'],
+                    ":typ" => $data['formaPago'],
+                    ":rfr" => $data['referencia'],
+                    ":mod" => 'cortes',
+                    ":crt" => date('Y-m-d H:i:s')
+                );
+                $sqlPago = "
+                    INSERT
+                        INTO pagos
+                            (cantidad,tipo,referencia,modulo,id_ref,creado)
+                        VALUES
+                            (:cnt,:typ,:rfr,:mod,:cid,:crt); 
+                ";
 
+                $queryPagos = self::query($sqlPago, $paramsPago);
+            }else{
+                $queryPagos =true;
+            }
             if ($queryPagos){
-
                 if(($pagado + floatval($data['pago']) + 0.009) >= $corte->total){
 	                $sqlUpdateCorte = "
 	                    UPDATE
@@ -425,25 +445,27 @@
 	                $queryUpdateCorte = self::query($sqlUpdateCorte,$param);
 	                if($queryUpdateCorte){
 	                    $solicitudes = json_decode($corte->solicitudes);
-	                    foreach ($solicitudes as $solicitud){
-	                        $paramSolicitud = array(":sid"=>$solicitud);
-	                        $sqlUpdateSolicitud = "
-	                            UPDATE 
-	                                solicitudes
-                                SET statusPago = 1,
-                                    estado = 
-                                        CASE
-                                            WHEN estado = 2 THEN 3
-                                            ELSE estado
-                                        END 
-                                WHERE 
-                                    id = :sid; 
-	                        ";
-	                        $queryUpdateSolicitud = self::query($sqlUpdateSolicitud,$paramSolicitud);
-	                        if(!$queryUpdateSolicitud){
-	                            $ok = false;
-	                            $msg = "Error al intentar actualizar las solicitudes";
-	                            break;
+	                    if( !empty($solicitudes)){
+                            foreach ($solicitudes as $solicitud){
+                                $paramSolicitud = array(":sid"=>$solicitud);
+                                $sqlUpdateSolicitud = "
+                                    UPDATE 
+                                        solicitudes
+                                    SET statusPago = 1,
+                                        estado = 
+                                            CASE
+                                                WHEN estado = 2 THEN 3
+                                                ELSE estado
+                                            END 
+                                    WHERE 
+                                        id = :sid; 
+                                ";
+                                $queryUpdateSolicitud = self::query($sqlUpdateSolicitud,$paramSolicitud);
+                                if(!$queryUpdateSolicitud){
+                                    $ok = false;
+                                    $msg = "Error al intentar actualizar las solicitudes";
+                                    break;
+                                }
                             }
                         }
                     }else{

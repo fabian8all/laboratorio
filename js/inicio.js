@@ -291,9 +291,9 @@ $("#btnRESolicitar").click(function(){
         title: 'Atencion!',
         content: '¿Solicitar estudios?',
         confirm: function(){
-            $('#txtAnticipo').val('0.00');
+            $('#txtAnticipo').val('');
             $('#hidAnticipo').val('0.00');
-            $('#txtPagaCon').val('0.00');
+            $('#txtPagaCon').val('');
             $('#lblCambio').html('$0.00');
             $('#lblAnticipoTotal').html($('#totalRE').html());
             $('#selFormaPago').val(0);
@@ -316,7 +316,7 @@ $('#modAgregarAnticipo').on('hide.bs.modal',function(){
 });
 
 $('#btnAnticipoSubmit').click(function(){
-    anticipo = $('#txtAnticipo').val();
+    anticipo = ($('#txtAnticipo').val()!='')?$('#txtAnticipo').val():'0.00';
     total = Number($('#lblAnticipoTotal').html().replace(/[^0-9\.]+/g,""))
     if (parseFloat(anticipo)>0){
         if (parseFloat(anticipo)>total){

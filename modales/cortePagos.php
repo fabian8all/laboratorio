@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-user" id="txtMontoRetirar" value=""
+                                    <input type="number" class="form-control form-control-user" id="txtMontoRetirar" onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" step="0.05" value=""
                                            placeholder="Monto a retirar">
                                 </div>
                             </div>

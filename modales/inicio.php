@@ -76,12 +76,12 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <input type="number" class="form-control" id="txtAnticipo" value="" placeholder="Anticipo">
+                                <input type="number" class="form-control" id="txtAnticipo" value="" onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" step="0.05" placeholder="Anticipo">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <input type="number" class="form-control" id="txtPagaCon" value="" placeholder="Paga con">
+                                <input type="number" class="form-control" id="txtPagaCon" value="" onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" step="0.05" placeholder="Paga con">
                             </div>
                         </div>
                         <div class="col-lg-12">
