@@ -64,6 +64,7 @@ $("#selREPacienteData").change(function(){
                         $("#lblREPacienteNom").html(data.nombre);
                         $("#lblREPacienteGen").html((data.genero == "M") ? "Masculino" : "Femenino");
                         $("#lblREPacienteAge").html(edad + " año" + ((edad > 1) ? "s" : ""));
+                        $("#lblREPacienteDir").html(data.direccion);
                         $("#lblREPacienteTel").html(data.telefono);
                         $("#lblREPacienteEmail").html(data.email);
                         $("#lblREPacienteReferente").html(data.referente);
@@ -84,6 +85,8 @@ $("#selREPacienteData").change(function(){
         $("#lblREPacienteAge").html("");
         $("#lblREPacienteTel").html("");
         $("#lblREPacienteEmail").html("");
+        $("#lblREPacienteDir").html("");
+        $("#lblREPacienteReferente").html("");
         lista = 0;
 
     }
@@ -296,7 +299,7 @@ $("#btnRESolicitar").click(function(){
             $('#txtPagaCon').val('');
             $('#lblCambio').html('$0.00');
             $('#lblAnticipoTotal').html($('#totalRE').html());
-            $('#selFormaPago').val(0);
+            $('#selFormaPago').val('');
             $('#txtReferenciaAnticipo').val('');
             if($("#hidPagaCliente").val()=="1"){
                 solicitarEstudios();
@@ -329,13 +332,71 @@ $('#btnAnticipoSubmit').click(function(){
                 $('#hidAnticipo').val(anticipo);
                 $('#hidFormaPago').val(formaPago);
                 $('#modAgregarAnticipo').modal('hide');
+                imprimirNotaVenta(total,anticipo);
             }
         }
     }else{
-        $('#hidAnticipo').val(anticipo);
-        $('#modAgregarAnticipo').modal('hide');
+        $.confirm({
+            title: 'Atencion!',
+            content: 'No se ha agregado anticipo ¿Desea continuar?',
+            confirm: function(){
+                $('#hidAnticipo').val(anticipo);
+                $('#modAgregarAnticipo').modal('hide');
+            },
+            cancel: function(){
+                console.log('false');
+            }
+        });
     }
 });
+
+function imprimirNotaVenta(total,anticipo){
+    anticipo = parseFloat(anticipo);
+    info = {
+        paciente:       $('#lblREPacienteNom').html(),
+        doctor:         $('#lblREPacienteReferente').html(),
+        direccion:      $('#lblREPacienteDir').html(),
+        descripcion:    {type:1,data:estudiosSelected},
+        total: '$'+total.toFixed(2),
+        anticipo: '$'+anticipo.toFixed(2),
+        resto: '$'+(total - anticipo).toFixed(2)
+
+    }
+    /*info = {
+        paciente:       "Fabián Ochoa Llamas",
+        doctor:         "Dr. Axel Emiliano Ochoa Espinosa",
+        direccion:      "Palma Kerpis #82, Colinas de Santa Barbara, Colima, Col.",
+        descripcion:    [
+            {
+                costo: 79,
+                costoe: 39.5,
+                costol4: 71.1,
+                costom: 63.2,
+                id: "162",
+                nombre: "BIOMETRIA HEMATICA",
+                tiempo: 1
+            }
+        ],
+        total: 79.00,
+        anticipo: 50.00,
+        resto: 29.00
+    }*/
+
+    $.post('routes/routeCortes.php',{info:info,action:'notaVentaPDF'})
+        .done(function(data)
+        {
+            data = $.parseJSON(data);
+            if (data.success){
+                window.open('resources/notaVenta.pdf',"_blank");
+            }else{
+                customAlert("Error!",data.msg);
+            }
+        })
+        .fail(function(error){
+            customAlert("Error!", error);
+        });
+
+}
 
 function solicitarEstudios(){
     total = Number($("#totalRE").html().replace(/[^0-9\.]+/g,""));

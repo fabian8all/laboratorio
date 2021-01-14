@@ -47,6 +47,17 @@ $action = $_POST['action'];
 				);
 			}
 			break;
+		case 'notaVentaPDF':
+			$permisosC = new permisos(1);
+
+			if ($permisosC->bin[6]){
+				echo json_encode($Corte->notaVentaPDF($info));
+			}else{
+				echo json_encode(
+					array('success'=>false, 'msg' => $sin_permisos)
+				);
+			}
+			break;
 		case 'getHistory':
 			echo json_encode($Corte->getHistory($info));
 			break;

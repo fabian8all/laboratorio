@@ -161,7 +161,7 @@
                         <thead>
                             <tr>
                                 <th rowspan="6">
-                                    <img src="laboratorio\resources\logopdf.jpg" style="width:200px;" alt="">
+                                    <img src="'.PATH.'/resources/logopdf.jpg" style="width:200px;" alt="">
                                 </th>
                             </tr>
                             <tr>
@@ -211,24 +211,32 @@
                                     </th>
                                 </tr>
                 ';
-            foreach($info['info']['solicitudes'] as $solicitud){
-                $html .= "
-                                    <tr style='background: #AAAAAA; font-weight:bolder; ' >
-                                        <td>".$solicitud['paciente']."</td>
-                                        <td>".$solicitud['fecha']."</td>
-                                        <td align='left'> $".number_format($solicitud['total'],2)."</td>
-                                    </tr>
-                ";
-                foreach ($solicitud['estudios'] as $estudio) {
+            if (!empty($info['info']['solicitudes'])) {
+                foreach ($info['info']['solicitudes'] as $solicitud) {
                     $html .= "
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>".$estudio['nombre']."</td>
-                                        <td align='right'>$".number_format($estudio['costo'],2)."</td>
-                                    </tr>
-                ";
+                                        <tr style='background: #AAAAAA; font-weight:bolder; ' >
+                                            <td>" . $solicitud['paciente'] . "</td>
+                                            <td>" . $solicitud['fecha'] . "</td>
+                                            <td align='left'> $" . number_format($solicitud['total'], 2) . "</td>
+                                        </tr>
+                    ";
+                    foreach ($solicitud['estudios'] as $estudio) {
+                        $html .= "
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>" . $estudio['nombre'] . "</td>
+                                            <td align='right'>$" . number_format($estudio['costo'], 2) . "</td>
+                                        </tr>
+                    ";
 
+                    }
                 }
+            }else{
+                $html .= "
+                    <tr>
+                        <td colspan='3'> No hay solicitudes de estudios realizadas</td>
+                    </tr>
+                ";
             }
             $html .= "
                                 </table> 
@@ -238,6 +246,9 @@
             ";
 // instantiate and use the dompdf class
             $dompdf = new Dompdf();
+            $options = $dompdf->getOptions();
+            $options->set(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $dompdf->setOptions($options);
 
             $dompdf->loadHtml($html);
 
@@ -318,8 +329,10 @@
 
 
             $array = array();
-            foreach ($solicitudes as $solicitud) {
-                array_push($array,$solicitud->idSolicitud);
+            if (!empty($solicitudes)) {
+                foreach ($solicitudes as $solicitud) {
+                    array_push($array, $solicitud->idSolicitud);
+                }
             }
             $info = $this->getInfo($array);
             $dataCorte['info'] = $info;
@@ -550,7 +563,230 @@
                 return array("success"=>false, "msg"=>"Ha ocurrido un error al intentar registrar el retiro de efectivo");
             }
         }
-    }
+
+        public function notaVentaPDF($data){
+	        $dia = date('d');
+	        $mes = date('m');
+	        $año = date('Y');
+	        $sqlPago = "SELECT id FROM pagos ORDER BY id DESC LIMIT 1;";
+	        $folio = self::query_single_object($sqlPago);
+            $paciente = $data['paciente'];
+            $doctor = ($data['doctor']=="Ninguno")?"":$data['doctor'];
+            $direccion = $data['direccion'];
+            $total = $data['total'];
+            $anticipo = $data['anticipo'];
+            $resto = $data['resto'];
+            $html = "
+                <html>
+                    <head>
+                        <style>
+                            body{
+                                font-family: sans-serif;
+                            }
+                            .card{
+                                border-radius: 20px;
+                                border: 1px solid #0000cc;
+                                margin: 0 auto;
+                                padding: 0;
+                            }
+                            .card-header{
+                                background: #0000cc;
+                                color: white;
+                                text-align: center;
+                                padding: 0;
+                                margin: 0;
+                                border-radius: 20px 20px 0 0;
+                                font-size: 25px;
+                                font-weight: bold;
+                            }
+                            .card-body{
+                                color: #0000cc;
+                                border: none;
+                                padding-left: 20px;
+                            }
+                            .logo{
+                                width: 100%;
+                                height: 100px;
+                            }
+                            .logo>img{
+                                width: 100%;
+                                height: 100%;
+                            }
+                            .red{
+                                color:#FF0000;
+                            }
+                            .fecha{
+                                text-align: center;
+                            }
+                            .fecha>span {
+                                border-left: 1px solid;
+                            }
+                            .row{
+                                border-bottom: 1px solid;
+                            }
+                            .cuenta{
+                                width: 33%;
+                                margin-left: 66%;
+                            }
+                            .data{
+                                color: #000000;
+                            }
+                            .smaller{
+                                font-size: 10px;
+                            }
+                            .small{
+                                font-size: 15px;
+                            }
+                            .glyphicon{
+                                height: 20px;
+                                width: 20px;
+                            }
+                    
+                        </style>
+                    </head>
+                    <body>
+                    <table border='0' cellpadding='10' width='100%'>
+                        <tr>
+                            <td width='30%' rowspan='2'>
+                                <div class='logo'>
+                                    <img src='".PATH."/resources/logopdf.jpg'>
+                                </div>
+                            </td>
+                            <td width='39%' rowspan='2'>
+                                <center>
+                                    <img class='glyphicon' src='".PATH."/resources/waicon.png'> 
+                                        (312) 160 63 33<br/>
+                                        (312) 130 43 31<br/>
+                                    <img class='glyphicon' src='".PATH."/resources/mailicon.jpg'> 
+                                        laboratoriodml@hotmail.com<br/>
+                                        DULCE MARIA LARIOS RINCON<br/>
+                                </center>
+                            </td>
+                            <td width='30%'>
+                                <div class='card'>
+                                    <div clasS='card-header'>
+                                        FOLIO
+                                    </div>
+                                    <div class='card-body'>
+                                        <center>
+                                            <span class='red'>".str_pad($folio->id,6,0,STR_PAD_LEFT)."</span>
+                                        </center>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width='30%'>
+                                <div class='card'>
+                                    <div clasS='card-header'>
+                                        FECHA
+                                    </div>
+                                    <div class='card-body'>
+                                        <div class='fecha'>
+                                            <span class='data' style='border-left: none;'> $dia </span>
+                                            <span class='data'> $mes </span>
+                                            <span class='data'> $año </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='2'>
+                                <span class='small'>
+                                    RFC: LARD820308417<br/>
+                                    C.U.R.P: LARD820308MCMRNL09
+                                </span>    
+                            </td>
+                            <td>
+                                <span class='smaller'>
+                                    LUGAR DE EXP. COLIMA, COL.<br/>
+                                    EFECTOS FISCALES AL PAGO
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3'>
+                                <span class='small'>
+                                    Blvd Camino Real No.318-5 Planta Alta, Col. Las Viboras. C.P.28040 Colima, Col.
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3'>
+                                <div class='card'>
+                                    <div class='card-body'>
+                                        <div class='row'>
+                                            NOMBRE: <span class='data'>$paciente</span>
+                                        </div>
+                                        <div class='row'>
+                                            DOCTOR: <span class='data'>$doctor</span>
+                                        </div>
+                                        <div class='row' style='border-bottom: none;'>
+                                            DOMICILIO: <span class='data'>$direccion</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3'>
+                                <div class='card'>
+                                    <div class='card-header'>
+                                        DESCRIPCION
+                                    </div>
+                                    <div class='card-body'>";
+            if ($data['descripcion']['type']== 1) {
+                foreach ($data['descripcion']['data'] as $estudio) {
+                    $html .= "                            
+                                            <p class='data' > " . $estudio['nombre'] . " - $" . number_format($estudio['costo'],2) . " </p >
+                    ";
+                }
+            }else{
+
+            }
+                     $html.="
+                                        <div class='cuenta card'>
+                                            <div class='card-body'>
+                                                <div class='row'>
+                                                    TOTAL: <span class='data'> ".$total."</span>
+                                                </div>
+                                                <div class='row'>
+                                                    ANTICIPO: <span class='data'> ".$anticipo."</span>
+                                                </div>
+                                                <div class='row' style='border-bottom: none;'>
+                                                    RESTO: <span class='data'> ".$resto."</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    </body>
+                    </html>
+            ";
+
+            $dompdf = new Dompdf();
+            $options = $dompdf->getOptions();
+            $options->set(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $dompdf->setOptions($options);
+            $dompdf->loadHtml($html);
+
+            $dompdf->setPaper('letter',  'portrait');
+
+            $dompdf->render();
+
+            @file_put_contents("../resources/notaVenta.pdf",$dompdf->output());
+            return array("success"=>true);
+
+        }
+	}
+
 
 
 ?>

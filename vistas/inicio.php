@@ -1,4 +1,5 @@
 <h1 class="h3 mb-2 text-gray-800">Cotización</h1>
+<!--<button class="btn btn-success" onclick="imprimirNotaVenta();">pruebaNotaVenta</button>-->
 <div class="row">
     <div class="col-lg-4 col-md-4 col-12">
     <!-- Collapsable Card Example -->
@@ -40,6 +41,10 @@
                         <div class="col-lg-12">
                             <label><b>Edad:</b></label>
                             <label class="dataLabel" id="lblREPacienteAge"></label>
+                        </div>
+                        <div class="col-lg-12">
+                            <label><b>Dirección:</b></label>
+                            <label class="dataLabel" id="lblREPacienteDir"></label>
                         </div>
                         <div class="col-lg-12">
                             <label><b>Teléfono:</b></label>

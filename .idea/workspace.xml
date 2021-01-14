@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21a0acd8-e924-4443-8ace-0d4a88b46cb3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/notaventa.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dompdf/lib/fonts/Helvetica-Bold.afm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dompdf/lib/fonts/Helvetica.afm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/mailicon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/notaVenta.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/waicon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/Cortes.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/Cortes.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/clases/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/cortesCliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/cortesCliente.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/inicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/inicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resultados.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resultados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/cortePagos.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/cortePagos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/cortesCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/cortesCliente.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modales/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modales/resultados.php" beforeDir="false" afterPath="$PROJECT_DIR$/modales/resultados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/corte.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/corte.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routeCortes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routeCortes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/inicio.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +111,7 @@
       <workItem from="1608244249218" duration="2384000" />
       <workItem from="1608584060465" duration="35213000" />
       <workItem from="1609026988462" duration="16011000" />
-      <workItem from="1609189993584" duration="79259000" />
+      <workItem from="1609189993584" duration="105152000" />
     </task>
     <servers />
   </component>
@@ -139,17 +143,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="404" y="109" width="570" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1605400141716" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1610498207724">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1610498207724" />
     <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1610043557527">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1610043557527" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1610154300662">
+    <state x="339" y="164" key="run.anything.popup" timestamp="1610498188603">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1610154300662" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1610058426446">
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1610498188603" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1610576893006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1610058426446" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1610576893006" />
   </component>
 </project>
