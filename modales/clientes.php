@@ -107,10 +107,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnClientesSave" class="btn btn-success">
-                    <span class="fa fa-save"></span>
-                    Guardar
-                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>

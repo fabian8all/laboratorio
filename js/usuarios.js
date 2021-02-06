@@ -184,3 +184,14 @@ $("#btnUsuariosSave").click(function(){
 		});
 });
 
+$('#btnChangePass').click(function(){
+	if ($("#chkUsuariosChgPass").prop('checked')){
+		$("#chkUsuariosChgPass").prop('checked',false);
+		$("#divUsuariosChgPass").hide();
+		$(this).value="Cambiar contraseña";
+	}else{
+		$("#chkUsuariosChgPass").prop('checked',true);
+		$("#divUsuariosChgPass").show();
+		$(this).value="Misma contraseña";
+	}
+});

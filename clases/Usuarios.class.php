@@ -19,7 +19,7 @@
                             FROM usuarios U 
                                 INNER JOIN perfiles P
                                     ON U.perfil = P.id
-                            WHERE username = :usn AND password = :pwd ;";
+                            WHERE (U.eliminado IS NULL) AND username = :usn AND password = :pwd ;";
 
             $usr = self::query_single_object($fn_username,$array);
             if (!empty($usr)) {
@@ -151,31 +151,70 @@
         }
 
         public function Update($data){
-            $params = array(
-                ':uid'=>$data['id'],
-                ':nom'=>$data['nombre'],
-                ':eml'=>$data['email'],
-                ':prf'=>$data['perfil'],
-            );
+            $chgPass = $data['chkpass'];
+            $ok = true;
+            if ($chgPass == 1){
+                if($data['pass1'] == ""){
+                    $result = array(
+                        "success" =>false,
+                        "msg"=>"El campo contraseña es requerido"
+                    );
+                    $ok = false;
+                }else if($data['pass1']!=$data['pass2']){
+                    $result = array(
+                        "success" =>false,
+                        "msg"=>"Las contraseñas no coinciden"
+                    );
+                    $ok = false;
+                }else {
+                    $params = array(
+                        ':uid' => $data['id'],
+                        ':prf' => $data['perfil'],
+                        ':nom' => $data['nombre'],
+                        ':eml' => $data['email'],
+                        ':pwd' => sha1(md5('-t3CN01oG1a5%C0s173c!' . $data['pass1'])),
+                    );
 
-            $sql = "UPDATE usuarios
+                    $sql = "
+                        UPDATE usuarios
                         SET 
                             nombre = :nom,
                             email = :eml,
-                            perfil = :prf
+                            perfil = :prf,
+                            password = :pwd
                         WHERE 
                             id = :uid";
-            $query = self::query($sql,$params);
-            if ($query){
-                $result = array(
-                    "success" =>true,
-                    "msg"=>"La información se ha guardado con éxito"
+                }
+            }else {
+                $params = array(
+                    ':uid' => $data['id'],
+                    ':nom' => $data['nombre'],
+                    ':eml' => $data['email'],
+                    ':prf' => $data['perfil'],
                 );
-            }else{
-                $result = array(
-                    "success" =>false,
-                    "msg"=>"Ocurrió un error al guardar la información"
-                );
+
+                $sql = "
+                    UPDATE usuarios
+                    SET 
+                        nombre = :nom,
+                        email = :eml,
+                        perfil = :prf
+                    WHERE 
+                        id = :uid";
+            }
+            if ($ok){
+                $query = self::query($sql,$params);
+                if ($query){
+                    $result = array(
+                        "success" =>true,
+                        "msg"=>"La información se ha guardado con éxito"
+                    );
+                }else{
+                    $result = array(
+                        "success" =>false,
+                        "msg"=>"Ocurrió un error al guardar la información"
+                    );
+                }
             }
             return $result;
         }

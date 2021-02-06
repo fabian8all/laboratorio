@@ -176,10 +176,12 @@ $(document).on("click", ".btnClientesDel", function () {
         "routes/routeClientes.php",
         { info: id, action: "Delete" },
         function (data) {
-          if (data == "true")
-            customAlert("Exito!", "El cliente ha sido eliminado");
-          else customAlert("Error!", "Error al intentar eliminar al cliente");
-          load_clientes_data();
+            data = $.parseJSON(data);
+            if (data.success)
+                customAlert("Exito!", data.msg);
+            else
+                customAlert("Error!", data.error);
+            $('#bstableClientes').bootstrapTable('refresh');
         }
       ).fail(function (error) {
         customAlert("Error!", ajaxError);

@@ -38,12 +38,12 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group">
-                                <input type="tel" id="txtPacientesTelefono" class="form-control form-control-user" name="" value="" placeholder="Teléfono">
+                                <input type="tel" onkeyup="validaphone(event)" id="txtPacientesTelefono" class="form-control form-control-user" name="" value="" placeholder="Teléfono">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group">
-                                <input type="email" id="txtPacientesEmail" class="form-control form-control-user" name="" value="" placeholder="Correo electrónico">
+                                <input type="email" onkeyup="validaemail('txtPacientesEmail','btnPacientesSave')" id="txtPacientesEmail" class="form-control form-control-user" name="" value="" placeholder="Correo electrónico">
                             </div>
                         </div>
                     </div>

@@ -255,7 +255,7 @@ $('#btnAddRetiro').click(function(){
             data = $.parseJSON(data);
             if (data.success){
                 customAlert('Exito!',data.msg);
-                $("modRetirarEfectivo").modal('hide');
+                $("#modRetirarEfectivo").modal('hide');
                 loadTablaCortes();
             }else{
                 customAlert('Error!',data.msg);
