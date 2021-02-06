@@ -68,34 +68,34 @@
     <div class="col-lg-3 col-md-3 col-12">
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Pacientes:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Pagos de pacientes:&nbsp; </label>
             <label for="" class="" id="lblTotalPacientes" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Clientes:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Pagos de clientes:&nbsp; </label>
             <label for="" class="" id="lblTotalClientes" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Retiros:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Retiros de efectivo:&nbsp; </label>
             <label for="" class="" id="lblTotalRetiros" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-12">
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Efectivo:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Pago en efectivo:&nbsp; </label>
             <label for="" class="" id="lblTotalEfectivo" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Tarjeta:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Pago con tarjeta:&nbsp; </label>
             <label for="" class="" id="lblTotalTarjeta" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
         <div class="input-group">
             <label for="" class="font-weight-bold"
-                   style="display:inline-block;display: flex;align-items: center;">Transferencia:&nbsp; </label>
+                   style="display:inline-block;display: flex;align-items: center;">Pago por transferencia:&nbsp; </label>
             <label for="" class="" id="lblTotalTransfer" style="display:inline-block;display: flex;align-items: center;"></label>
         </div>
     </div>
@@ -103,7 +103,12 @@
         <div class="form-group">
             <div class="input-group">
                 <label for="" class="font-weight-bold"
-                    style="display:inline-block;display: flex;align-items: center;">Total:&nbsp; </label>
+                       style="display:inline-block;display: flex;align-items: center;">Total en caja:&nbsp; </label>
+                <label for="" class="" id="lblTotalCaja" style="display:inline-block;display: flex;align-items: center;"></label>
+            </div>
+            <div class="input-group">
+                <label for="" class="font-weight-bold"
+                    style="display:inline-block;display: flex;align-items: center;">Total de venta:&nbsp; </label>
                 <label for="" class="" id="lblTotal" style="display:inline-block;display: flex;align-items: center;"></label>
             </div>
         </div>

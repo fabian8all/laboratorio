@@ -126,6 +126,16 @@ $(document).ready(function(){
     });
 });
 
+function formatResultsEstudios(value,row,index){
+    estudios = value.split('||');
+    string = "<ul>";
+    $(estudios).each(function(k,v){
+        string += "<li>"+v+"</li>"
+    });
+    string += "</ul>"
+    return string;
+}
+
 function formatResultsPMOptions(value, row, index){
     var options = "\
             <div class='dropup'> \

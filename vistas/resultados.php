@@ -30,9 +30,10 @@
                         <tr>
                             <th data-field="paciente"  data-sortable="true" data-align="left">PACIENTE</th>
                             <th data-field="fecha"  data-sortable="true" data-align="left">FECHA</th>
+                            <th data-field="estudios" data-formatter="formatResultsEstudios" data-sortable="false" data-align="left">ESTUDIOS</th>
                             <th data-field="levanto" data-sortable="true">LEVANTÓ ORDEN</th>
 <!--                            <th data-field="status" data-formatter="formatEstudiosPrecio" data-sortable="false">ESTATUS</th>-->
-                            <th data-field="id"  data-formatter="formatResultsPMOptions" data-align="center" data-sortable="false">OPCIONES</th>
+                            <th data-field="id"  data-formatter="formatResultsPMOptions" data-align="center" data-sortable="false" data-width="130px;">OPCIONES</th>
                         </tr>
                         </thead>
                     </table>
@@ -62,9 +63,10 @@
                         <tr>
                             <th data-field="paciente"  data-sortable="true" data-align="left">PACIENTE</th>
                             <th data-field="fecha"  data-sortable="true" data-align="left">FECHA</th>
+                            <th data-field="estudios" data-formatter="formatResultsEstudios" data-sortable="false" data-align="left">ESTUDIOS</th>
                             <th data-field="levanto" data-sortable="true">LEVANTÓ ORDEN</th>
 <!--                            <th data-field="status" data-formatter="formatEstudiosPrecio" data-sortable="false">ESTATUS</th>-->
-                            <th data-field="id"  data-formatter="formatResultsEPOptions" data-align="center" data-sortable="false">OPCIONES</th>
+                            <th data-field="id"  data-formatter="formatResultsEPOptions" data-align="center" data-sortable="false" data-width="130px;">OPCIONES</th>
                         </tr>
                         </thead>
                     </table>
@@ -94,9 +96,10 @@
                         <tr>
                             <th data-field="paciente"  data-sortable="true" data-align="left">PACIENTE</th>
                             <th data-field="fecha"  data-sortable="true" data-align="left">FECHA</th>
+                            <th data-field="estudios" data-formatter="formatResultsEstudios" data-sortable="false" data-align="left">ESTUDIOS</th>
                             <th data-field="levanto" data-sortable="true">LEVANTÓ ORDEN</th>
                             <!--                            <th data-field="status" data-formatter="formatEstudiosPrecio" data-sortable="false">ESTATUS</th>-->
-                            <th data-field="id"  data-formatter="formatResultsPPOptions" data-align="center" data-sortable="false">OPCIONES</th>
+                            <th data-field="id"  data-formatter="formatResultsPPOptions" data-align="center" data-sortable="false" data-width="130px;">OPCIONES</th>
                         </tr>
                         </thead>
                     </table>                </div>
@@ -125,9 +128,10 @@
                         <tr>
                             <th data-field="paciente"  data-sortable="true" data-align="left">PACIENTE</th>
                             <th data-field="fecha"  data-sortable="true" data-align="left">FECHA</th>
+                            <th data-field="estudios" data-formatter="formatResultsEstudios" data-sortable="false" data-align="left">ESTUDIOS</th>
                             <th data-field="levanto" data-sortable="true">LEVANTÓ ORDEN</th>
                             <!--                            <th data-field="status" data-formatter="formatEstudiosPrecio" data-sortable="false">ESTATUS</th>-->
-                            <th data-field="id"  data-formatter="formatResultsFOptions" data-align="center" data-sortable="false">OPCIONES</th>
+                            <th data-field="id"  data-formatter="formatResultsFOptions" data-align="center" data-sortable="false" data-width="130px;">OPCIONES</th>
                         </tr>
                         </thead>
                     </table>                </div>

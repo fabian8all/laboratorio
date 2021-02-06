@@ -79,19 +79,25 @@
                                 WHEN ((SELECT perfil FROM usuarios U2 WHERE P.referente = U2.id) = 3) THEN TRUE
                                 ELSE  FALSE
                              END   
-                            ) as pagaCliente
+                            ) as pagaCliente,
+                            GROUP_CONCAT(E.nombre SEPARATOR'||') as estudios
                     FROM solicitudes S 
                         INNER JOIN pacientes P
                             ON S.id_paciente = P.id
                         INNER JOIN usuarios U
                             ON S.analista = U.id
+                        INNER JOIN estudios_paciente EP
+                            ON EP.id_solicitud = S.id
+                        INNER JOIN estudios E 
+                            ON E.id = EP.id_estudio    
                     WHERE
                         S.cancelado IS NULL 
                         AND S.estado = $status
                         $andWhere
-                        ORDER BY $sort $order
-                        LIMIT $limit
-                        OFFSET $offset
+                    GROUP BY S.id                            
+                    ORDER BY $sort $order
+                    LIMIT $limit
+                    OFFSET $offset
                         ;";
             $rows = self::query_object($sql);
 

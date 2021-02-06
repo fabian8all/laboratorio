@@ -8,7 +8,7 @@ $(document).on('click','.btnDetalles',function(){
                 costo = 0;
                 $(data.estudios).each(function(k,v){
                     estudios += "\
-                        <tr><td>"+v.estudio+"</td></tr>\
+                        <tr><td><h6><b><li>"+v.estudio+"</li></b></h6></td></tr>\
                     ";
                 });
                 $('#listaEstudios').html(estudios);

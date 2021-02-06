@@ -19,7 +19,7 @@
                                         <b>Estudios solicitados:</b>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-striped table-responsive">
+                                        <table class="table table-striped " style="width: 100%;">
                                             <tbody id="listaEstudios"></tbody>
                                         </table>
                                     </div>

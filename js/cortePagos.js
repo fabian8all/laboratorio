@@ -78,6 +78,7 @@ function loadTablaCortes(){
                 totalPacientes  = 0.00;
                 totalRetiros    = 0.00;
                 totalEfectivo   = 0.00;
+                totalCaja       = 0.00;
                 totalTarjeta    = 0.00;
                 totalTransfer   = 0.00;
                 if (!data){
@@ -85,27 +86,33 @@ function loadTablaCortes(){
                 }else{
                     $(data).each(function(k,pago){
                         sign = "";
-                        if (pago.modulo == "solicitudes"){
-                            total += parseFloat(pago.cantidad);
-                            totalPacientes += parseFloat(pago.cantidad);
-                            nombre = pago.nombreS;
-                        }else if(pago.modulo == "cortes"){
-                            total += parseFloat(pago.cantidad);
-                            totalClientes += parseFloat(pago.cantidad);
-                            nombre = pago.nombreC;
-                        }else if(pago.modulo == "retiros"){
-                            sign ="-";
-                            total -= parseFloat(pago.cantidad);
-                            totalRetiros += parseFloat(pago.cantidad);
-                            nombre = pago.nombreR;
+                        switch (pago.modulo){
+                            case "solicitudes":
+                                total += parseFloat(pago.cantidad);
+                                totalPacientes += parseFloat(pago.cantidad);
+                                nombre = pago.nombreS;
+                                break;
+                            case "cortes":
+                                total += parseFloat(pago.cantidad);
+                                totalClientes += parseFloat(pago.cantidad);
+                                nombre = pago.nombreC;
+                                break;
+                            case "retiros":
+                                sign ="-";
+                                total -= parseFloat(pago.cantidad);
+                                totalRetiros += parseFloat(pago.cantidad);
+                                nombre = pago.nombreR;
+                                break;
                         }
 
                         switch (pago.tipo){
                             case "Efectivo":
-                                if (pago.modulo =="retiros")
-                                    totalEfectivo -= parseFloat(pago.cantidad);
-                                else
-                                    totalEfectivo +=  parseFloat(pago.cantidad);
+                                if (pago.modulo =="retiros") {
+                                    totalCaja -= parseFloat(pago.cantidad);
+                                }else {
+                                    totalCaja += parseFloat(pago.cantidad);
+                                    totalEfectivo += parseFloat(pago.cantidad);
+                                }
                                 break;
                             case "Tarjeta":
                                 totalTarjeta +=  parseFloat(pago.cantidad);
@@ -132,6 +139,7 @@ function loadTablaCortes(){
                 $('#lblTotalPacientes').html('$'+totalPacientes.toFixed(2));
                 $('#lblTotalRetiros').html('-$'+totalRetiros.toFixed(2));
                 $('#lblTotalEfectivo').html('$'+totalEfectivo.toFixed(2));
+                $('#lblTotalCaja').html('$'+totalCaja.toFixed(2));
                 $('#lblTotalTarjeta').html('$'+totalTarjeta.toFixed(2));
                 $('#lblTotalTransfer').html('$'+totalTransfer.toFixed(2));
             }else{
@@ -175,39 +183,44 @@ $('#btnXLSCorte').click(function (e){
                 <tbody>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Pacientes:</b></td>\
+                        <td><b>Pago de pacientes:</b></td>\
                         <td>"+$('#lblTotalPacientes').html()+"</td>\
                     </tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Clientes:</b></td>\
+                        <td><b>Pago de clientes:</b></td>\
                         <td>"+$('#lblTotalClientes').html()+"</td>\
                     </tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Retiros:</b></td>\
+                        <td><b>Retiros de efectivo:</b></td>\
                         <td>"+$('#lblTotalRetiros').html()+"</td>\
                     </tr>\
                     <tr></tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Efectivo:</b></td>\
+                        <td><b>Pagos en efectivo:</b></td>\
                         <td>"+$('#lblTotalEfectivo').html()+"</td>\
                     </tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Tarjeta:</b></td>\
+                        <td><b>Pagos con tarjeta:</b></td>\
                         <td>"+$('#lblTotalTarjeta').html()+"</td>\
                     </tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Transferencia:</b></td>\
+                        <td><b>Pagos por transferencia:</b></td>\
                         <td>"+$('#lblTotalTransfer').html()+"</td>\
                     </tr>\
                     <tr></tr>\
                     <tr>\
                         <td colspan='6'>&nbsp;</td>\
-                        <td><b>Total:</b></td>\
+                        <td><b>Total en caja:</b></td>\
+                        <td>"+$('#lblTotalCaja').html()+"</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan='6'>&nbsp;</td>\
+                        <td><b>Total de venta:</b></td>\
                         <td>"+$('#lblTotal').html()+"</td>\
                     </tr>\
                 </tbody>\
